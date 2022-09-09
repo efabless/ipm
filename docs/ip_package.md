@@ -1,4 +1,5 @@
-# IP Package Structure
+# IP Package 
+## Folder Structure
 ```
 ├── readme.md
 ├── ip.yaml
