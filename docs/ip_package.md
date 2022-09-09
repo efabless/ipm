@@ -1,5 +1,5 @@
 # IP Package Structure
-
+```
 ├── readme.md
 ├── ip.yaml
 ├── doc\
@@ -13,3 +13,4 @@
 │   ├── src\
 │   └── gl\
 └── verify\
+```
