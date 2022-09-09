@@ -1,2 +1,4 @@
 # ipm
-Open-source IPs package manager
+Open-source IPs Package Manager
+
+ipm is meant to provide a mean for distributing high quality open-source IPs. 
