@@ -1,0 +1,59 @@
+{
+    "analog" : [
+        { 
+            "name" : "xyz_analog",
+            "repo" : "github.com/efabless/xyz_analog",
+            "version" : "0.3.4",
+            "author" : "efabless",
+            "email" : "efabless@efabless.com",
+            "date": "9-21-2022",
+            "type": "hard",
+            "status": "silicon",
+            "width": "0.50",
+            "height": "0.25"
+        }
+    ],
+    "comm" : [
+        {
+            "name" : "x_comm",
+            "repo" : "github.com/shalan/x_comm",
+            "version" : "0.3",
+            "author" : "shalan",
+            "email" : "mshalan@aucegypt.edu",
+            "date": "10-19-2022",
+            "type": "soft",
+            "status": "np",
+            "width": "0.30",
+            "height": "0.22"
+        },
+        {
+            "name" : "y_comm",
+            "repo" : "github.com/shalan/y_comm",
+            "version" : "0.1.2",
+            "author" : "shalan",
+            "email" : "mshalan@aucegypt.edu",
+            "date": "10-19-2022",
+            "type": "hard",
+            "status": "silicon",
+            "width": "0.40",
+            "height": "0.2"
+        }
+    ],
+    "dataconv" : [
+    ],
+    "digital" : [
+        {
+            "name" : "spm_ip",
+            "repo": "github.com/ZeyadZaki/spm_ip",
+            "version" : "0.2",
+            "author" : "ZeyadZaki",
+            "email" : "zeyadzaki@aucegypt.edu",
+            "date": "10-19-2022",
+            "type": "hard",
+            "category": "digital",
+            "status": "silicon",
+            "width": "0.25",
+            "height": "0.2"
+        }
+    ]
+}
