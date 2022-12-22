@@ -190,7 +190,7 @@ def get_ip_info(ip, ipm_iproot, remote):
                 ip_info['status'] = value['status']
                 ip_info['width'] = value['width']
                 ip_info['height'] = value['height']
-    release_url = f"https://{ip_info['repo']}/releases/download/{ip}-{ip_info['version']}/default.tar.gz"  
+    release_url = f"https://{ip_info['repo']}/releases/download/{ip}-{ip_info['version']}/{ip}.tar.gz"  
     ip_info['release_url'] = release_url
     return ip_info  
 
@@ -348,7 +348,7 @@ def check_JSON(console, JSON_path, ip):
 def precheck(console, ipm_iproot, ip, version, gh_repo):
     gh_repo_url = f"https://{gh_repo}"
     release_tag_url = f"{gh_repo_url}/releases/tag/{ip}-{version}"
-    release_tarball_url = f"{gh_repo_url}/releases/download/{ip}-{version}/default.tar.gz"
+    release_tarball_url = f"{gh_repo_url}/releases/download/{ip}-{version}/{ip}.tar.gz"
     IPM_DIR_PATH = os.path.join(ipm_iproot, 'ipm')
     precheck_path=os.path.join(IPM_DIR_PATH, f'{ip}_pre-check')
     ip_path=os.path.join(precheck_path, ip)
@@ -363,10 +363,10 @@ def precheck(console, ipm_iproot, ip, version, gh_repo):
         if release_tag_response.status_code == 404: 
             console.print(f"[red]There is no release tagged {ip}-{version} in the GH repo {gh_repo}")
         elif release_tag_response.status_code == 200: # Release exists, check for tarball 
-            console.print('[magenta][STEP 3]:', f'Checking for the tarball named "default.tar.gz"')
+            console.print('[magenta][STEP 3]:', f'Checking for the tarball named "{ip}.tar.gz"')
             release_tarball_response = requests.get(release_tarball_url, stream=True)
             if release_tarball_response.status_code == 404:
-                console.print(f"[red]The tarball 'default.tar.gz' was not found in the release tagged {ip}-{version} in the GH repo {gh_repo}")  
+                console.print(f"[red]The tarball '{ip}.tar.gz' was not found in the release tagged {ip}-{version} in the GH repo {gh_repo}")  
             elif release_tarball_response.status_code == 200: # Tarball exists under the correct tag name, download it under IPM_Directory/<ip>_pre-check
                 os.mkdir(precheck_path)
                 tarball_path = os.path.join(precheck_path, f"{ip}.tar.gz")
