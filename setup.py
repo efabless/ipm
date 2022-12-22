@@ -10,7 +10,7 @@ setup(
     packages=find_packages(),
     version=__version__,
     description="Open-source IPs Package Manager.",
-    long_description=open("Readme.md").read(),
+    long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     author="Zeyad Zaki",
     author_email="zeyadzaki@aucegypt.edu",
