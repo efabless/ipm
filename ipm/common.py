@@ -218,15 +218,14 @@ def remove_IP_from_JSON(ipm_iproot, ip, ip_info):
 
 
 def install_IP(console: rich.console.Console, ipm_iproot, ip, overwrite):
-    IPM_DIR_PATH = os.path.join(ipm_iproot, 'ipm')
-    ip_path=os.path.join(IPM_DIR_PATH, ip)
+    ip_path=os.path.join(ipm_iproot, ip)
     if os.path.exists(ip_path):
         if len(os.listdir(ip_path)) != 0:
             if not overwrite:
-                console.print(f"There already exists a non-empty folder for the IP [green]{ip}", f"at {IPM_DIR_PATH}, to overwrite it add the option --overwrite")
+                console.print(f"There already exists a non-empty folder for the IP [green]{ip}", f"at {ipm_iproot}, to overwrite it add the option --overwrite")
                 return
             else:
-                console.print(f"Removing exisiting IP {ip} at {IPM_DIR_PATH}")
+                console.print(f"Removing exisiting IP {ip} at {ipm_iproot}")
                 ip_info = get_ip_info(ip, ipm_iproot, remote=False)
                 remove_IP_from_JSON(ipm_iproot, ip, ip_info)
                 shutil.rmtree(ip_path)
