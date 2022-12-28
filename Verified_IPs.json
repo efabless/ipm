@@ -10,7 +10,8 @@
             "type": "hard",
             "status": "silicon",
             "width": "0.50",
-            "height": "0.25"
+            "height": "0.25",
+            "technology": "sky130"
         }
     ],
     "comm" : [
@@ -24,7 +25,8 @@
             "type": "soft",
             "status": "np",
             "width": "0.30",
-            "height": "0.22"
+            "height": "0.22",
+            "technology": "sky130"
         },
         {
             "name" : "y_comm",
@@ -36,7 +38,8 @@
             "type": "hard",
             "status": "silicon",
             "width": "0.40",
-            "height": "0.2"
+            "height": "0.2",
+            "technology": "sky130"
         }
     ],
     "dataconv" : [
@@ -53,12 +56,13 @@
             "category": "digital",
             "status": "silicon",
             "width": "0.25",
-            "height": "0.2"
+            "height": "0.2",
+            "technology": "sky130"
         },
         {
             "name" : "caravel",
-            "repo": "github.com/efabless/caravel",
-            "version" : "mpw-8c",
+            "repo": "github.com/efabless/caravel-lite",
+            "version" : "mpw-8b",
             "author" : "efabless",
             "email" : "efabless@efabless.com",
             "date": "10-19-2022",
@@ -66,7 +70,50 @@
             "category": "digital",
             "status": "silicon",
             "width": "0.25",
-            "height": "0.2"
+            "height": "0.2",
+            "technology": "sky130"
+        },
+        {
+            "name" : "caravel",
+            "repo": "github.com/efabless/caravel-gf180mcu",
+            "version" : "gfmpw-0f",
+            "author" : "efabless",
+            "email" : "efabless@efabless.com",
+            "date": "10-19-2022",
+            "type": "hard",
+            "category": "digital",
+            "status": "silicon",
+            "width": "0.25",
+            "height": "0.2",
+            "technology": "gf180mcu"
+        },
+        {
+            "name" : "caravel_mgmt_soc_litex",
+            "repo": "github.com/efabless/caravel_mgmt_soc_gf180mcu",
+            "version" : "gfmpw-0f",
+            "author" : "efabless",
+            "email" : "efabless@efabless.com",
+            "date": "10-19-2022",
+            "type": "hard",
+            "category": "digital",
+            "status": "silicon",
+            "width": "0.25",
+            "height": "0.2",
+            "technology": "gf180mcu"
+        },
+        {
+            "name" : "caravel_mgmt_soc_litex",
+            "repo": "github.com/efabless/caravel_mgmt_soc_litex",
+            "version" : "gfmpw-0f",
+            "author" : "efabless",
+            "email" : "efabless@efabless.com",
+            "date": "10-19-2022",
+            "type": "hard",
+            "category": "digital",
+            "status": "silicon",
+            "width": "0.25",
+            "height": "0.2",
+            "technology": "sky130"
         }
     ]
     
