@@ -104,7 +104,7 @@
         {
             "name" : "caravel_mgmt_soc_litex",
             "repo": "github.com/efabless/caravel_mgmt_soc_litex",
-            "version" : "gfmpw-0f",
+            "version" : "mpw-8c",
             "author" : "efabless",
             "email" : "efabless@efabless.com",
             "date": "10-19-2022",
