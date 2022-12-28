@@ -42,7 +42,7 @@ def date_from_iso8601(string: str) -> datetime:
 
 # ---
 
-IPM_REPO_OWNER = os.getenv("IPM_REPO_OWNER") or "zeyadzaki"
+IPM_REPO_OWNER = os.getenv("IPM_REPO_OWNER") or "marwaneltoukhy"
 IPM_REPO_NAME = os.getenv("IPM_REPO_NAME") or "ipm"
 IPM_REPO_ID = f"{IPM_REPO_OWNER}/{IPM_REPO_NAME}"
 IPM_REPO_HTTPS = f"https://github.com/{IPM_REPO_ID}"
@@ -50,7 +50,7 @@ IPM_REPO_API = f"https://api.github.com/repos/{IPM_REPO_ID}"
 IPM_DEFAULT_HOME = os.path.join(os.path.expanduser("~"), ".ipm")
 
 LOCAL_JSON_FILE_NAME = "Installed_IPs.json"
-REMOTE_JSON_FILE_NAME = "https://raw.githubusercontent.com/ZeyadZaki/ipm/main/Verified_IPs.json"
+REMOTE_JSON_FILE_NAME = "https://raw.githubusercontent.com/marwaneltoukhy/ipm/main/Verified_IPs.json"
 
 def opt_ipm_iproot(function: Callable):
     function = click.option(

@@ -54,6 +54,20 @@
             "status": "silicon",
             "width": "0.25",
             "height": "0.2"
+        },
+        {
+            "name" : "caravel",
+            "repo": "github.com/efabless/caravel",
+            "version" : "mpw-8c",
+            "author" : "efabless",
+            "email" : "efabless@efabless.com",
+            "date": "10-19-2022",
+            "type": "hard",
+            "category": "digital",
+            "status": "silicon",
+            "width": "0.25",
+            "height": "0.2"
         }
     ]
+    
 }
