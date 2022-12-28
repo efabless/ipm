@@ -97,6 +97,13 @@ def install_cmd(ip, ipm_iproot, overwrite):
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
+        install(ip, ipm_iproot, overwrite)
+
+def install(ip, ipm_iproot, overwrite):
+    """Install one of the verified IPs locally"""
+    console = Console()
+    valid = check_ipm_directory(console, ipm_iproot)
+    if valid:
         IP_list = get_IP_list(ipm_iproot, remote=True)
         if ip not in IP_list:
             print("Please provide a valid IP name, to check all the available IPs invoke 'ipm ls'")
