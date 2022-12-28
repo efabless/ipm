@@ -182,7 +182,7 @@ def get_IP_list(ipm_iproot, remote):
             IP_list.append(value['name'])
     return IP_list
 
-def get_ip_info(ip, ipm_iproot, remote, technology):
+def get_ip_info(ip, ipm_iproot, remote, technology="sky130"):
     ip_info = {}
     IPM_DIR_PATH = os.path.join(ipm_iproot, 'ipm')
     JSON_FILE = ""
@@ -245,7 +245,7 @@ def install_IP(console: rich.console.Console, ipm_iproot, ip, overwrite, technol
                 return
             else:
                 console.print(f"Removing exisiting IP {ip} at {ipm_iproot}")
-                ip_info = get_ip_info(ip, ipm_iproot, remote=False)
+                ip_info = get_ip_info(ip, ipm_iproot, remote=False, technology=technology)
                 remove_IP_from_JSON(ipm_iproot, ip, ip_info)
                 shutil.rmtree(ip_path)
         else:
