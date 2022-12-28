@@ -42,7 +42,8 @@ from .common import (
 @click.command("ls")
 @opt_ipm_iproot
 @click.option('--category', required=False, help='Optionally provide the category (digital, comm, analog, dataconv)')
-def ls_cmd(category, ipm_iproot):
+@click.option('--technology', required=False, help='Optionally provide the technology (sky130, gf180mcu)')
+def ls_cmd(category, ipm_iproot, technology):
     """Lists all verified IPs in ipm main repository"""
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
@@ -53,6 +54,12 @@ def ls_cmd(category, ipm_iproot):
                 list_IPs(console, ipm_iproot, remote=True, category=category)
             else:
                 console.print("You entered a wrong category, invoke ipm ls --help for assistance")
+        elif technology is not None:
+            if technology in ["sky130", "gf180mcu"]:
+                console.print(f"[green]Verified IPs for the {technology} technology:")
+                list_IPs(console, ipm_iproot, remote=True, technology=technology)
+            else:
+                console.print("You entered a wrong technology, invoke ipm ls --help for assistance")
         else:
             console.print("[green]Verified IPs:")
             list_IPs(console, ipm_iproot, remote=True)
@@ -61,7 +68,8 @@ def ls_cmd(category, ipm_iproot):
 @click.command("lls")
 @opt_ipm_iproot
 @click.option('--category', required=False, help='Optionally provide the category (digital, comm, analog, dataconv)')
-def lls_cmd(category, ipm_iproot):
+@click.option('--technology', required=False, help='Optionally provide the technology (sky130, gf180mcu)')
+def lls_cmd(category, ipm_iproot, technology):
     """Lists all locally installed IPs"""
     console = Console()
     IPM_DIR_PATH = os.path.join(ipm_iproot, 'ipm')
@@ -73,6 +81,12 @@ def lls_cmd(category, ipm_iproot):
                 list_IPs(console, ipm_iproot, remote=False, category=category)
             else:
                 console.print("You entered a wrong category, invoke ipm ls --help for assistance")
+        elif technology is not None:
+            if technology in ["sky130", "gf180mcu"]:
+                console.print(f"[green]Installed IPs at {ipm_iproot} for the {technology} technology:")
+                list_IPs(console, ipm_iproot, remote=False, technology=technology)
+            else:
+                console.print("You entered a wrong technology, invoke ipm ls --help for assistance")
         else:
             console.print(f"[green]Installed IPs at {IPM_DIR_PATH}:")
             list_IPs(console, ipm_iproot, remote=False)
@@ -91,15 +105,16 @@ def output_cmd(ipm_iproot):
 @click.command("install")
 @click.argument('ip')
 @click.option('--overwrite', required=False, is_flag=True, help='Updates all installed IPs')
+@click.option('--technology', required=False, help='Install IP based on technology')
 @opt_ipm_iproot
-def install_cmd(ip, ipm_iproot, overwrite):
+def install_cmd(ip, ipm_iproot, overwrite, technology="sky130"):
     """Install one of the verified IPs locally"""
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
-        install(ip, ipm_iproot, overwrite)
+        install(ip, ipm_iproot, overwrite, technology=technology)
 
-def install(ip, ipm_iproot, overwrite):
+def install(ip, ipm_iproot, overwrite, technology="sky130"):
     """Install one of the verified IPs locally"""
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
@@ -109,9 +124,9 @@ def install(ip, ipm_iproot, overwrite):
             print("Please provide a valid IP name, to check all the available IPs invoke 'ipm ls'")
         else:
             if overwrite:
-                install_IP(console, ipm_iproot, ip, overwrite=True)
+                install_IP(console, ipm_iproot, ip, overwrite=True, technology=technology)
             else:
-                install_IP(console, ipm_iproot, ip, overwrite=False)
+                install_IP(console, ipm_iproot, ip, overwrite=False, technology=technology)
             
 
 @click.command("uninstall")
