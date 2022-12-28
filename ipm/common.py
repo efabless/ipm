@@ -190,9 +190,9 @@ def get_ip_info(ip, ipm_iproot, remote):
                 ip_info['status'] = value['status']
                 ip_info['width'] = value['width']
                 ip_info['height'] = value['height']
-    release_url = f"https://{ip_info['repo']}/releases/download/{ip}-{ip_info['version']}/{ip}.tar.gz"  
+    release_url = f"https://{ip_info['repo']}/archive/refs/tags/{ip_info['version']}.tar.gz"  
     ip_info['release_url'] = release_url
-    return ip_info  
+    return ip_info
 
 def add_IP_to_JSON(ipm_iproot, ip, ip_info):
     IPM_DIR_PATH = os.path.join(ipm_iproot, 'ipm')
