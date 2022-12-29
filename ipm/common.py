@@ -67,13 +67,14 @@ def create_local_JSON(file_path):
     "analog": [],
     "comm": [],
     "dataconv": [],    
-    "digital" : []
+    "digital" : [],
+    "technolgy" : []
     }
     with open(file_path, "w") as outfile:
         json.dump(dictionary, outfile)
 
 def check_ipm_directory(console: rich.console.Console, ipm_iproot) -> bool:
-    IPM_DIR_PATH = os.path.join(ipm_iproot, 'ipm')
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
     JSON_FILE_PATH = os.path.join(IPM_DIR_PATH, LOCAL_JSON_FILE_NAME)
 
     if ipm_iproot == IPM_DEFAULT_HOME:
@@ -101,8 +102,8 @@ def check_ipm_directory(console: rich.console.Console, ipm_iproot) -> bool:
                     create_local_JSON(JSON_FILE_PATH)
     return True
 
-def list_IPs(console:rich.console.Console, ipm_iproot, remote, category="all", technology="all"):
-    IPM_DIR_PATH = os.path.join(ipm_iproot, 'ipm')
+def list_IPs(console:rich.console.Console, ipm_iproot, remote, category="all"):
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
 
     JSON_FILE = ""
     if remote:
@@ -128,9 +129,10 @@ def list_IPs(console:rich.console.Console, ipm_iproot, remote, category="all", t
     table.add_column("Technology", style="cyan")
 
     total_IPs = 0
-    if category == "all" and technology == "all":
+    if category == "all":
         for key, values in data.items():
             for value in values:
+                print(value)
                 table.add_row(key, value['name'], value['version'], value['author'], value['date'], value['type'], value['status'], value['width'], value['height'], value['technology'])
             total_IPs = total_IPs + len(values)
         if total_IPs > 0:
@@ -138,28 +140,10 @@ def list_IPs(console:rich.console.Console, ipm_iproot, remote, category="all", t
             console.print(f'Total {total_IPs} IP(s)')
         else:
             console.print('[red]No IPs Found')
-    elif category != "all" and technology == "all": 
+    else: 
         for value in data[category]:
-            table.add_row(key, value['name'], value['version'], value['author'], value['date'], value['type'],  value['status'], value['width'], value['height'])
+            table.add_row(key, value['name'], value['version'], value['author'], value['date'], value['type'],  value['status'], value['width'], value['height'], value['technology'])
         total_IPs = total_IPs + len(data[category])
-        if total_IPs > 0:
-            console.print(table)
-            console.print(f'Total {total_IPs} IP(s)')
-        else:
-            console.print('[red]No IPs Found')
-    elif technology != "all" and category == "all":
-        for value in data[technology]:
-            table.add_row(key, value['name'], value['version'], value['author'], value['date'], value['type'],  value['status'], value['width'], value['height'])
-        total_IPs = total_IPs + len(data[technology])
-        if total_IPs > 0:
-            console.print(table)
-            console.print(f'Total {total_IPs} IP(s)')
-        else:
-            console.print('[red]No IPs Found')
-    else:
-        for value in data[technology] and data[category]:
-            table.add_row(key, value['name'], value['version'], value['author'], value['date'], value['type'],  value['status'], value['width'], value['height'])
-        total_IPs = total_IPs + len(data[technology]) + len(data[category])
         if total_IPs > 0:
             console.print(table)
             console.print(f'Total {total_IPs} IP(s)')
@@ -167,7 +151,7 @@ def list_IPs(console:rich.console.Console, ipm_iproot, remote, category="all", t
             console.print('[red]No IPs Found')
 # Gets a list of all available IP "names"
 def get_IP_list(ipm_iproot, remote):
-    IPM_DIR_PATH = os.path.join(ipm_iproot, 'ipm')
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
     JSON_FILE = ""
     IP_list = [] 
     if remote:
@@ -184,7 +168,7 @@ def get_IP_list(ipm_iproot, remote):
 
 def get_ip_info(ip, ipm_iproot, remote, technology="sky130"):
     ip_info = {}
-    IPM_DIR_PATH = os.path.join(ipm_iproot, 'ipm')
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
     JSON_FILE = ""
 
     if remote:
@@ -214,7 +198,7 @@ def get_ip_info(ip, ipm_iproot, remote, technology="sky130"):
     return ip_info
 
 def add_IP_to_JSON(ipm_iproot, ip, ip_info):
-    IPM_DIR_PATH = os.path.join(ipm_iproot, 'ipm')
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
     JSON_FILE = os.path.join(IPM_DIR_PATH, LOCAL_JSON_FILE_NAME)
     with open(JSON_FILE) as json_file:
         json_decoded = json.load(json_file)
@@ -225,7 +209,7 @@ def add_IP_to_JSON(ipm_iproot, ip, ip_info):
         json.dump(json_decoded, json_file)
 
 def remove_IP_from_JSON(ipm_iproot, ip, ip_info):
-    IPM_DIR_PATH = os.path.join(ipm_iproot, 'ipm')
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
     JSON_FILE = os.path.join(IPM_DIR_PATH, LOCAL_JSON_FILE_NAME)
     with open(JSON_FILE) as json_file:
         json_decoded = json.load(json_file)
@@ -268,7 +252,7 @@ def install_IP(console: rich.console.Console, ipm_iproot, ip, overwrite, technol
         add_IP_to_JSON(ipm_iproot, ip, ip_info)
 
 def uninstall_IP(console: rich.console.Console, ipm_iproot, ip):
-    IPM_DIR_PATH = os.path.join(ipm_iproot, 'ipm')
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
     ip_path=os.path.join(IPM_DIR_PATH, ip)
     ip_info = get_ip_info(ip, ipm_iproot, remote=False)
     if os.path.exists(ip_path):
@@ -367,7 +351,7 @@ def precheck(console, ipm_iproot, ip, version, gh_repo):
     gh_repo_url = f"https://{gh_repo}"
     release_tag_url = f"{gh_repo_url}/releases/tag/{ip}-{version}"
     release_tarball_url = f"{gh_repo_url}/releases/download/{ip}-{version}/{ip}.tar.gz"
-    IPM_DIR_PATH = os.path.join(ipm_iproot, 'ipm')
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
     precheck_path=os.path.join(IPM_DIR_PATH, f'{ip}_pre-check')
     ip_path=os.path.join(precheck_path, ip)
 
