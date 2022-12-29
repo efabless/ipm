@@ -64,12 +64,55 @@ def ls_remote_cmd(category, ipm_iproot, technology):
             console.print("[green]Verified IPs:")
             list_IPs(console, ipm_iproot, remote=True)
 
+def ls_remote(category, ipm_iproot, technology):
+    """Lists all verified IPs in ipm main repository"""
+    console = Console()
+    valid = check_ipm_directory(console, ipm_iproot)
+    if valid:
+        if category is not None:
+            if category in ["digital", "comm", "analog", "dataconv"]:
+                console.print(f"[green]Verified IPs for the {category} category:")
+                list_IPs(console, ipm_iproot, remote=True, category=category)
+            else:
+                console.print("You entered a wrong category, invoke ipm ls --help for assistance")
+        elif technology is not None:
+            if technology in ["sky130", "gf180mcu"]:
+                console.print(f"[green]Verified IPs for the {technology} technology:")
+                list_IPs(console, ipm_iproot, remote=True)
+            else:
+                console.print("You entered a wrong technology, invoke ipm ls --help for assistance")
+        else:
+            console.print("[green]Verified IPs:")
+            list_IPs(console, ipm_iproot, remote=True)
+
 
 @click.command("ls")
 @opt_ipm_iproot
 @click.option('--category', required=False, help='Optionally provide the category (digital, comm, analog, dataconv)')
 @click.option('--technology', required=False, help='Optionally provide the technology (sky130, gf180mcu)')
 def ls_cmd(category, ipm_iproot, technology):
+    """Lists all locally installed IPs"""
+    console = Console()
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
+    valid = check_ipm_directory(console, ipm_iproot)
+    if valid:
+        if category is not None:
+            if category in ["digital", "comm", "analog", "dataconv"]:
+                console.print(f"[green]Installed IPs at {ipm_iproot} for the {category} category:")
+                list_IPs(console, ipm_iproot, remote=False, category=category)
+            else:
+                console.print("You entered a wrong category, invoke ipm ls --help for assistance")
+        elif technology is not None:
+            if technology in ["sky130", "gf180mcu"]:
+                console.print(f"[green]Installed IPs at {ipm_iproot} for the {technology} technology:")
+                list_IPs(console, ipm_iproot, remote=False)
+            else:
+                console.print("You entered a wrong technology, invoke ipm ls --help for assistance")
+        else:
+            console.print(f"[green]Installed IPs at {IPM_DIR_PATH}:")
+            list_IPs(console, ipm_iproot, remote=False)
+
+def ls(category, ipm_iproot, technology):
     """Lists all locally installed IPs"""
     console = Console()
     IPM_DIR_PATH = os.path.join(ipm_iproot)
@@ -101,6 +144,15 @@ def output_cmd(ipm_iproot):
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         print(f'Your IPs will be installed at {IPM_DIR_PATH}')
+
+def output(ipm_iproot):
+    """ (Default) Outputs the current IP installation path 
+    """
+    console = Console()
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
+    valid = check_ipm_directory(console, ipm_iproot)
+    if valid:
+        return IPM_DIR_PATH
 
 @click.command("install")
 @click.argument('ip')
