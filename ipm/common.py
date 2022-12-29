@@ -132,7 +132,6 @@ def list_IPs(console:rich.console.Console, ipm_iproot, remote, category="all"):
     if category == "all":
         for key, values in data.items():
             for value in values:
-                print(value)
                 table.add_row(key, value['name'], value['version'], value['author'], value['date'], value['type'], value['status'], value['width'], value['height'], value['technology'])
             total_IPs = total_IPs + len(values)
         if total_IPs > 0:
