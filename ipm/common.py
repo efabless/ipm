@@ -192,6 +192,7 @@ def get_ip_info(ip, ipm_iproot, remote, technology="sky130"):
                 ip_info['width'] = value['width']
                 ip_info['height'] = value['height']
                 ip_info['technology'] = technology
+                ip_info['ip_root'] = ipm_iproot
     release_url = f"https://{ip_info['repo']}/archive/refs/tags/{ip_info['version']}.tar.gz"  
     ip_info['release_url'] = release_url
     return ip_info
