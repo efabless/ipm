@@ -233,6 +233,24 @@ def update_cmd(ip, all, ipm_iproot):
             else:
                 console.print("Either provide an ip name or to update all installed IPs run 'ipm update --all'")
 
+def update(ip, all, ipm_iproot):
+    """Update all installed IPs to their latest versions or a specific IP."""
+    console = Console()
+    valid = check_ipm_directory(console, ipm_iproot)
+    if valid:
+        IP_list = get_IP_list(ipm_iproot, remote=False)
+        if ip is not None:
+            if ip not in IP_list:
+                print("Please provide a valid IP name, to check all installed IPs invoke 'ipm lls'")
+            else:
+                check_IP(console, ipm_iproot, ip, update=True)
+        else:
+            if all:
+                check_IP(console, ipm_iproot, "all", update=True)
+            else:
+                console.print("Either provide an ip name or to update all installed IPs run 'ipm update --all'")
+
+
 @click.command("pre-check")
 @opt_ipm_iproot
 def precheck_cmd(ipm_iproot):
