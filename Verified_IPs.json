@@ -19,13 +19,13 @@
             "technology": "sky130",
             "release":[
                 {
-                "version" : "mpw-8c",
+                "version" : "mpw-8b",
                 "date": "10-19-2022"
                 },
                 {
-                    "version" : "mpw-9a",
-                    "date": "10-19-2022"
-                    }
+                "version" : "mpw-8c",
+                "date": "10-19-2022"
+                }
             ]
         },
         {
