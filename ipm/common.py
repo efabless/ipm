@@ -119,7 +119,7 @@ def list_IPs(console:rich.console.Console, ipm_iproot, remote, category="all"):
 
     table.add_column("Category", style="cyan")
     table.add_column("IP Name", style="magenta")
-    table.add_column("Version")
+    table.add_column("Release")
     table.add_column("Author")
     table.add_column("Date")
     table.add_column("Type")
@@ -132,7 +132,7 @@ def list_IPs(console:rich.console.Console, ipm_iproot, remote, category="all"):
     if category == "all":
         for key, values in data.items():
             for value in values:
-                table.add_row(key, value['name'], value['version'], value['author'], value['date'], value['type'], value['status'], value['width'], value['height'], value['technology'])
+                table.add_row(key, value['name'], value['release'][-1]['version'], value['author'], value['release'][-1]['date'], value['type'], value['status'], value['width'], value['height'], value['technology'])
             total_IPs = total_IPs + len(values)
         if total_IPs > 0:
             console.print(table)
@@ -141,7 +141,7 @@ def list_IPs(console:rich.console.Console, ipm_iproot, remote, category="all"):
             console.print('[red]No IPs Found')
     else: 
         for value in data[category]:
-            table.add_row(key, value['name'], value['version'], value['author'], value['date'], value['type'],  value['status'], value['width'], value['height'], value['technology'])
+            table.add_row(key, value['name'], value['release'][-1]['version'], value['author'], value['release'][-1]['date'], value['type'],  value['status'], value['width'], value['height'], value['technology'])
         total_IPs = total_IPs + len(data[category])
         if total_IPs > 0:
             console.print(table)
@@ -182,7 +182,7 @@ def get_ip_info(ip, ipm_iproot, remote, technology="sky130"):
             if value['name'] == ip and value['technology'] == technology:
                 ip_info['name'] = ip
                 ip_info['repo'] = value['repo']
-                ip_info['version'] = value['version']
+                ip_info['release'] = value['release']
                 ip_info['author'] = value['author']
                 ip_info['email'] = value['email']
                 ip_info['category'] = key
@@ -193,8 +193,8 @@ def get_ip_info(ip, ipm_iproot, remote, technology="sky130"):
                 ip_info['height'] = value['height']
                 ip_info['technology'] = technology
                 ip_info['ip_root'] = ipm_iproot
-    release_url = f"https://{ip_info['repo']}/archive/refs/tags/{ip_info['version']}.tar.gz"  
-    ip_info['release_url'] = release_url
+    # release_url = f"https://{ip_info['repo']}/archive/refs/tags/{ip_info['version']}.tar.gz"  
+    # ip_info['release_url'] = release_url
     return ip_info
 
 def add_IP_to_JSON(ipm_iproot, ip, ip_info):
@@ -220,7 +220,7 @@ def remove_IP_from_JSON(ipm_iproot, ip, ip_info):
         json.dump(json_decoded, json_file)
 
 
-def install_IP(console: rich.console.Console, ipm_iproot, ip, overwrite, technology):
+def install_IP(console: rich.console.Console, ipm_iproot, ip, overwrite, technology, version):
     ip_path=os.path.join(ipm_iproot, ip)
     if os.path.exists(ip_path):
         if len(os.listdir(ip_path)) != 0:

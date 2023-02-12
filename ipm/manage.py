@@ -261,16 +261,7 @@ def precheck_cmd(ipm_iproot):
         ip = input("Enter IP name: ")
         version = input("Enter IP version: ")
         gh_repo = input('Enter the GH repo of the IP in the form "github.com/<username>/<project_name>": ')
-        # ip = "spm_ip"
-        # version = "0.2"
-        # gh_repo = "github.com/ZeyadZaki/spm_ip"
         precheck(console, ipm_iproot, ip, version, gh_repo)
-
-@click.command("zz")
-@opt_ipm_iproot
-def zz_cmd(ipm_iproot):
-    console = Console()
-    check_JSON(console, "/Users/zeyadzaki/Desktop/ipm/spm_ip_pre-check/spm_ip/spm_ip.json", "spm_ip")
 
         
 

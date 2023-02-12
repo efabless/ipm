@@ -1,119 +1,82 @@
 {
     "analog" : [
-        { 
-            "name" : "xyz_analog",
-            "repo" : "github.com/efabless/xyz_analog",
-            "version" : "0.3.4",
-            "author" : "efabless",
-            "email" : "efabless@efabless.com",
-            "date": "9-21-2022",
-            "type": "hard",
-            "status": "silicon",
-            "width": "0.50",
-            "height": "0.25",
-            "technology": "sky130"
-        }
     ],
     "comm" : [
-        {
-            "name" : "x_comm",
-            "repo" : "github.com/shalan/x_comm",
-            "version" : "0.3",
-            "author" : "shalan",
-            "email" : "mshalan@aucegypt.edu",
-            "date": "10-19-2022",
-            "type": "soft",
-            "status": "np",
-            "width": "0.30",
-            "height": "0.22",
-            "technology": "sky130"
-        },
-        {
-            "name" : "y_comm",
-            "repo" : "github.com/shalan/y_comm",
-            "version" : "0.1.2",
-            "author" : "shalan",
-            "email" : "mshalan@aucegypt.edu",
-            "date": "10-19-2022",
-            "type": "hard",
-            "status": "silicon",
-            "width": "0.40",
-            "height": "0.2",
-            "technology": "sky130"
-        }
     ],
     "dataconv" : [
     ],
     "digital" : [
         {
-            "name" : "spm_ip",
-            "repo": "github.com/ZeyadZaki/spm_ip",
-            "version" : "0.2",
-            "author" : "ZeyadZaki",
-            "email" : "zeyadzaki@aucegypt.edu",
-            "date": "10-19-2022",
-            "type": "hard",
-            "category": "digital",
-            "status": "silicon",
-            "width": "0.25",
-            "height": "0.2",
-            "technology": "sky130"
-        },
-        {
             "name" : "caravel",
             "repo": "github.com/efabless/caravel-lite",
-            "version" : "mpw-8b",
             "author" : "efabless",
             "email" : "efabless@efabless.com",
-            "date": "10-19-2022",
             "type": "hard",
             "category": "digital",
             "status": "silicon",
             "width": "0.25",
             "height": "0.2",
-            "technology": "sky130"
+            "technology": "sky130",
+            "release":[
+                {
+                "version" : "mpw-8c",
+                "date": "10-19-2022"
+                }
+            ]
         },
         {
             "name" : "caravel",
             "repo": "github.com/efabless/caravel-gf180mcu",
-            "version" : "gfmpw-0f",
             "author" : "efabless",
             "email" : "efabless@efabless.com",
-            "date": "10-19-2022",
             "type": "hard",
             "category": "digital",
             "status": "silicon",
             "width": "0.25",
             "height": "0.2",
-            "technology": "gf180mcu"
+            "technology": "gf180mcu",
+            "release":[
+                {
+                "version" : "gfmpw-0f",
+                "date": "10-19-2022"
+                }
+            ]
         },
         {
             "name" : "caravel_mgmt_soc_litex",
             "repo": "github.com/efabless/caravel_mgmt_soc_gf180mcu",
-            "version" : "gfmpw-0f",
             "author" : "efabless",
             "email" : "efabless@efabless.com",
-            "date": "10-19-2022",
             "type": "hard",
             "category": "digital",
             "status": "silicon",
             "width": "0.25",
             "height": "0.2",
-            "technology": "gf180mcu"
+            "technology": "gf180mcu",
+            "release":[
+                {
+                "version" : "gfmpw-0f",
+                "date": "10-19-2022"
+                }
+            ]
         },
         {
             "name" : "caravel_mgmt_soc_litex",
             "repo": "github.com/efabless/caravel_mgmt_soc_litex",
-            "version" : "mpw-8c",
             "author" : "efabless",
             "email" : "efabless@efabless.com",
-            "date": "10-19-2022",
             "type": "hard",
             "category": "digital",
             "status": "silicon",
             "width": "0.25",
             "height": "0.2",
-            "technology": "sky130"
+            "technology": "sky130",
+            "release":[
+                {
+                "version" : "mpw-8c",
+                "date": "10-19-2022"
+                }
+            ]
         }
     ]
     
