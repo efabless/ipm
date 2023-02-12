@@ -13,16 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import os
-import re
 import json
-import pathlib
 import requests
 import shutil
 import tarfile
 from datetime import datetime
-import http.client
-from functools import partial
-from typing import Optional, Callable, List, Dict
+from typing import Callable, List, Dict
 
 import rich
 from rich.table import Table
@@ -142,6 +138,53 @@ def list_IPs(console:rich.console.Console, ipm_iproot, remote, category="all"):
     else: 
         for value in data[category]:
             table.add_row(key, value['name'], value['release'][-1]['version'], value['author'], value['release'][-1]['date'], value['type'],  value['status'], value['width'], value['height'], value['technology'])
+        total_IPs = total_IPs + len(data[category])
+        if total_IPs > 0:
+            console.print(table)
+            console.print(f'Total {total_IPs} IP(s)')
+        else:
+            console.print('[red]No IPs Found')
+
+def list_IPs_local(console:rich.console.Console, ipm_iproot, remote, category="all"):
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
+
+    JSON_FILE = ""
+    if remote:
+        resp = requests.get(REMOTE_JSON_FILE_NAME)
+        data = json.loads(resp.text)
+    else:
+        JSON_FILE = os.path.join(IPM_DIR_PATH, LOCAL_JSON_FILE_NAME)
+        with open(JSON_FILE) as json_file:
+            data = json.load(json_file)
+    
+
+    table = Table()
+
+    table.add_column("Category", style="cyan")
+    table.add_column("IP Name", style="magenta")
+    table.add_column("Release")
+    table.add_column("Author")
+    table.add_column("Date")
+    table.add_column("Type")
+    table.add_column("Status")
+    table.add_column("Width (mm)")
+    table.add_column("Height (mm)")
+    table.add_column("Technology", style="cyan")
+
+    total_IPs = 0
+    if category == "all":
+        for key, values in data.items():
+            for value in values:
+                table.add_row(key, value['name'], value['version'], value['author'], value['date'], value['type'], value['status'], value['width'], value['height'], value['technology'])
+            total_IPs = total_IPs + len(values)
+        if total_IPs > 0:
+            console.print(table)
+            console.print(f'Total {total_IPs} IP(s)')
+        else:
+            console.print('[red]No IPs Found')
+    else: 
+        for value in data[category]:
+            table.add_row(key, value['name'], value['version'], value['author'], value['date'], value['type'],  value['status'], value['width'], value['height'], value['technology'])
         total_IPs = total_IPs + len(data[category])
         if total_IPs > 0:
             console.print(table)

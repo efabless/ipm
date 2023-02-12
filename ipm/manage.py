@@ -29,6 +29,7 @@ from rich.console import Console
 
 from .common import (
     get_IP_history,
+    list_IPs_local,
     opt_ipm_iproot,
     list_IPs,
     install_IP,
@@ -100,18 +101,18 @@ def ls_cmd(category, ipm_iproot, technology):
         if category is not None:
             if category in ["digital", "comm", "analog", "dataconv"]:
                 console.print(f"[green]Installed IPs at {ipm_iproot} for the {category} category:")
-                list_IPs(console, ipm_iproot, remote=False, category=category)
+                list_IPs_local(console, ipm_iproot, remote=False, category=category)
             else:
                 console.print("You entered a wrong category, invoke ipm ls --help for assistance")
         elif technology is not None:
             if technology in ["sky130", "gf180mcu"]:
                 console.print(f"[green]Installed IPs at {ipm_iproot} for the {technology} technology:")
-                list_IPs(console, ipm_iproot, remote=False)
+                list_IPs_local(console, ipm_iproot, remote=False)
             else:
                 console.print("You entered a wrong technology, invoke ipm ls --help for assistance")
         else:
             console.print(f"[green]Installed IPs at {IPM_DIR_PATH}:")
-            list_IPs(console, ipm_iproot, remote=False)
+            list_IPs_local(console, ipm_iproot, remote=False)
 
 def ls(category, ipm_iproot, technology):
     """Lists all locally installed IPs"""
