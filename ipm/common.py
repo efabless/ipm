@@ -165,6 +165,36 @@ def get_IP_list(ipm_iproot, remote):
             IP_list.append(value['name'])
     return IP_list
 
+def get_IP_history(console:rich.console.Console, ipm_iproot, ip, remote):
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
+    JSON_FILE = ""
+    # IP_list = [] 
+    table = Table()
+    table.add_column("Category", style="cyan")
+    table.add_column("IP Name", style="magenta")
+    table.add_column("Release")
+    table.add_column("Author")
+    table.add_column("Date")
+    table.add_column("Type")
+    table.add_column("Status")
+    table.add_column("Width (mm)")
+    table.add_column("Height (mm)")
+    table.add_column("Technology", style="cyan")
+    if remote:
+        resp = requests.get(REMOTE_JSON_FILE_NAME)
+        data = json.loads(resp.text)
+    else:
+        JSON_FILE = os.path.join(IPM_DIR_PATH, LOCAL_JSON_FILE_NAME)
+        with open(JSON_FILE) as json_file:
+            data = json.load(json_file)
+    for key, values in data.items():
+        for value in values:
+            if value['name'] == ip:
+                for i in range(0, len(value['release'])):
+                    table.add_row(key, value['name'], value['release'][i]['version'], value['author'], value['release'][i]['date'], value['type'],  value['status'], value['width'], value['height'], value['technology'])
+                
+    console.print(table)
+
 def get_ip_info(ip, ipm_iproot, remote, technology="sky130"):
     ip_info = {}
     IPM_DIR_PATH = os.path.join(ipm_iproot)
