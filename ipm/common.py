@@ -195,7 +195,7 @@ def get_IP_history(console:rich.console.Console, ipm_iproot, ip, remote):
                 
     console.print(table)
 
-def get_ip_info(ip, ipm_iproot, remote, technology="sky130"):
+def get_ip_info(ip, ipm_iproot, remote, technology="sky130", version=None):
     ip_info = {}
     IPM_DIR_PATH = os.path.join(ipm_iproot)
     JSON_FILE = ""
@@ -213,18 +213,25 @@ def get_ip_info(ip, ipm_iproot, remote, technology="sky130"):
                 ip_info['name'] = ip
                 ip_info['repo'] = value['repo']
                 ip_info['release'] = value['release']
+                if version == None:
+                    ip_info['version'] = value['release'][-1]['version']
+                    ip_info['date'] = value['release'][-1]['date']
+                else:
+                    for v in value['release']:
+                        if v['version'] == version:
+                            ip_info['version'] = v['version']
+                            ip_info['date'] = v['date']
                 ip_info['author'] = value['author']
                 ip_info['email'] = value['email']
                 ip_info['category'] = key
-                ip_info['date'] = value['date']
                 ip_info['type'] = value['type']
                 ip_info['status'] = value['status']
                 ip_info['width'] = value['width']
                 ip_info['height'] = value['height']
                 ip_info['technology'] = technology
                 ip_info['ip_root'] = ipm_iproot
-    # release_url = f"https://{ip_info['repo']}/archive/refs/tags/{ip_info['version']}.tar.gz"  
-    # ip_info['release_url'] = release_url
+    release_url = f"https://{ip_info['repo']}/archive/refs/tags/{ip_info['version']}.tar.gz"  
+    ip_info['release_url'] = release_url
     return ip_info
 
 def add_IP_to_JSON(ipm_iproot, ip, ip_info):
@@ -259,13 +266,13 @@ def install_IP(console: rich.console.Console, ipm_iproot, ip, overwrite, technol
                 return
             else:
                 console.print(f"Removing exisiting IP {ip} at {ipm_iproot}")
-                ip_info = get_ip_info(ip, ipm_iproot, remote=False, technology=technology)
+                ip_info = get_ip_info(ip, ipm_iproot, remote=False, technology=technology, version=version)
                 remove_IP_from_JSON(ipm_iproot, ip, ip_info)
                 shutil.rmtree(ip_path)
         else:
             shutil.rmtree(ip_path)
         
-    ip_info = get_ip_info(ip, ipm_iproot, remote=True, technology=technology)
+    ip_info = get_ip_info(ip, ipm_iproot, remote=True, technology=technology, version=version)
     response = requests.get(ip_info['release_url'], stream=True)
     if response.status_code == 404:
         print(f"The IP {ip} version {ip_info['version']} could not be found remotely")

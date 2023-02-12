@@ -159,15 +159,16 @@ def output(ipm_iproot):
 @click.argument('ip')
 @click.option('--overwrite', required=False, is_flag=True, help='Updates all installed IPs')
 @click.option('--technology', required=False, help='Install IP based on technology')
+@click.option('--version', required=False, help='Install IP with a specific version')
 @opt_ipm_iproot
-def install_cmd(ip, ipm_iproot, overwrite, technology="sky130"):
+def install_cmd(ip, ipm_iproot, overwrite, technology="sky130", version=None):
     """Install one of the verified IPs locally"""
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
-        install(ip, ipm_iproot, overwrite, technology=technology)
+        install(ip, ipm_iproot, overwrite, technology=technology, version=version)
 
-def install(ip, ipm_iproot, overwrite, technology="sky130"):
+def install(ip, ipm_iproot, overwrite, technology="sky130", version=None):
     """Install one of the verified IPs locally"""
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
@@ -177,9 +178,9 @@ def install(ip, ipm_iproot, overwrite, technology="sky130"):
             print("Please provide a valid IP name, to check all the available IPs invoke 'ipm ls'")
         else:
             if overwrite:
-                install_IP(console, ipm_iproot, ip, overwrite=True, technology=technology)
+                install_IP(console, ipm_iproot, ip, overwrite=True, technology=technology, version=version)
             else:
-                install_IP(console, ipm_iproot, ip, overwrite=False, technology=technology)
+                install_IP(console, ipm_iproot, ip, overwrite=False, technology=technology, version=version)
             
 
 @click.command("uninstall")
