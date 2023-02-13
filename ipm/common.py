@@ -105,11 +105,7 @@ def check_ipm_directory(console: rich.console.Console, ipm_iproot) -> bool:
     return True
 
 
-def list_IPs(
-        console: rich.console.Console, 
-        ipm_iproot, 
-        remote, 
-        category="all"):
+def list_IPs(console: rich.console.Console, ipm_iproot, remote, category="all"):
     IPM_DIR_PATH = os.path.join(ipm_iproot)
 
     JSON_FILE = ""
@@ -380,12 +376,7 @@ def remove_IP_from_JSON(ipm_iproot, ip, ip_info):
 
 
 def install_IP(
-    console: rich.console.Console,
-    ipm_iproot,
-    ip,
-    overwrite,
-    technology,
-    version
+    console: rich.console.Console, ipm_iproot, ip, overwrite, technology, version
 ):
     ip_path = os.path.join(ipm_iproot, ip)
     if os.path.exists(ip_path):
@@ -399,11 +390,7 @@ def install_IP(
             else:
                 console.print(f"Removing exisiting IP {ip} at {ipm_iproot}")
                 ip_info = get_ip_info(
-                    ip,
-                    ipm_iproot,
-                    remote=False,
-                    technology=technology,
-                    version=version
+                    ip, ipm_iproot, remote=False, technology=technology, version=version
                 )
                 remove_IP_from_JSON(ipm_iproot, ip, ip_info)
                 shutil.rmtree(ip_path)

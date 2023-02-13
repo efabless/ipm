@@ -22,10 +22,10 @@ from .manage import (
     output_cmd,
     install_cmd,
     uninstall_cmd,
-    check_cmd, 
+    check_cmd,
     update_cmd,
     precheck_cmd,
-    history_cmd
+    history_cmd,
 )
 
 
@@ -48,8 +48,6 @@ cli.add_command(check_cmd)
 cli.add_command(update_cmd)
 cli.add_command(precheck_cmd)
 cli.add_command(history_cmd)
-
-
 
 
 if __name__ == "__main__":
