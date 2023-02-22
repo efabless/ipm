@@ -160,7 +160,7 @@ def ls(category, ipm_iproot, technology):
                 console.print(
                     f"[green]Installed IPs at {ipm_iproot} for the {category} category:"
                 )
-                list_IPs(console, ipm_iproot, remote=False, category=category)
+                list_IPs_local(console, ipm_iproot, remote=False, category=category)
             else:
                 console.print(
                     "You entered a wrong category, invoke ipm ls --help for assistance"
@@ -170,14 +170,14 @@ def ls(category, ipm_iproot, technology):
                 console.print(
                     f"[green]Installed IPs at {ipm_iproot} for the {technology} technology:"
                 )
-                list_IPs(console, ipm_iproot, remote=False)
+                list_IPs_local(console, ipm_iproot, remote=False)
             else:
                 console.print(
                     "You entered a wrong technology, invoke ipm ls --help for assistance"
                 )
         else:
             console.print(f"[green]Installed IPs at {IPM_DIR_PATH}:")
-            list_IPs(console, ipm_iproot, remote=False)
+            list_IPs_local(console, ipm_iproot, remote=False)
 
 
 @click.command("output")
