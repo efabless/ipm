@@ -38,7 +38,7 @@ def date_from_iso8601(string: str) -> datetime:
 
 # ---
 
-IPM_REPO_OWNER = os.getenv("IPM_REPO_OWNER") or "marwaneltoukhy"
+IPM_REPO_OWNER = os.getenv("IPM_REPO_OWNER") or "efabless"
 IPM_REPO_NAME = os.getenv("IPM_REPO_NAME") or "ipm"
 IPM_REPO_ID = f"{IPM_REPO_OWNER}/{IPM_REPO_NAME}"
 IPM_REPO_HTTPS = f"https://github.com/{IPM_REPO_ID}"
@@ -47,7 +47,7 @@ IPM_DEFAULT_HOME = os.path.join(os.path.expanduser("~"), ".ipm")
 
 LOCAL_JSON_FILE_NAME = "Installed_IPs.json"
 REMOTE_JSON_FILE_NAME = (
-    "https://raw.githubusercontent.com/marwaneltoukhy/ipm/main/Verified_IPs.json"
+    "https://raw.githubusercontent.com/efabless/ipm/main/Verified_IPs.json"
 )
 
 
