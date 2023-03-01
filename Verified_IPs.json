@@ -67,7 +67,7 @@
         },
         {
             "name": "caravel_mgmt_soc_litex",
-            "repo": "github.com/marwaneltoukhy/caravel_mgmt_soc_litex.git",
+            "repo": "github.com/marwaneltoukhy/caravel_mgmt_soc_litex",
             "author": "efabless",
             "email": "efabless@efabless.com",
             "type": "hard",
