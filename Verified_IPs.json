@@ -1,87 +1,91 @@
 {
-    "analog" : [
-    ],
-    "comm" : [
-    ],
-    "dataconv" : [
-    ],
-    "digital" : [
+    "analog": [],
+    "comm": [],
+    "dataconv": [],
+    "digital": [
         {
-            "name" : "caravel",
-            "repo": "github.com/efabless/caravel-lite",
-            "author" : "efabless",
-            "email" : "efabless@efabless.com",
+            "name": "caravel",
+            "repo": "github.com/marwaneltoukhy/caravel-1",
+            "author": "efabless",
+            "email": "efabless@efabless.com",
             "type": "hard",
             "category": "digital",
             "status": "silicon",
             "width": "0.25",
             "height": "0.2",
             "technology": "sky130",
-            "release":[
+            "release": [
                 {
-                "version" : "mpw-8b",
-                "date": "10-19-2022"
+                    "version": "mpw-8b",
+                    "date": "10-19-2022"
                 },
                 {
-                "version" : "mpw-8c",
-                "date": "10-19-2022"
+                    "version": "mpw-8c",
+                    "date": "10-19-2022"
+                },
+                {
+                    "version": "chipcraft-test",
+                    "date": "02-28-2022"
                 }
             ]
         },
         {
-            "name" : "caravel",
+            "name": "caravel",
             "repo": "github.com/efabless/caravel-gf180mcu",
-            "author" : "efabless",
-            "email" : "efabless@efabless.com",
+            "author": "efabless",
+            "email": "efabless@efabless.com",
             "type": "hard",
             "category": "digital",
             "status": "silicon",
             "width": "0.25",
             "height": "0.2",
             "technology": "gf180mcu",
-            "release":[
+            "release": [
                 {
-                "version" : "gfmpw-0f",
-                "date": "10-19-2022"
+                    "version": "gfmpw-0f",
+                    "date": "10-19-2022"
                 }
             ]
         },
         {
-            "name" : "caravel_mgmt_soc_litex",
+            "name": "caravel_mgmt_soc_litex",
             "repo": "github.com/efabless/caravel_mgmt_soc_gf180mcu",
-            "author" : "efabless",
-            "email" : "efabless@efabless.com",
+            "author": "efabless",
+            "email": "efabless@efabless.com",
             "type": "hard",
             "category": "digital",
             "status": "silicon",
             "width": "0.25",
             "height": "0.2",
             "technology": "gf180mcu",
-            "release":[
+            "release": [
                 {
-                "version" : "gfmpw-0f",
-                "date": "10-19-2022"
+                    "version": "gfmpw-0f",
+                    "date": "10-19-2022"
                 }
             ]
         },
         {
-            "name" : "caravel_mgmt_soc_litex",
-            "repo": "github.com/efabless/caravel_mgmt_soc_litex",
-            "author" : "efabless",
-            "email" : "efabless@efabless.com",
+            "name": "caravel_mgmt_soc_litex",
+            "repo": "github.com/marwaneltoukhy/caravel_mgmt_soc_litex.git",
+            "author": "efabless",
+            "email": "efabless@efabless.com",
             "type": "hard",
             "category": "digital",
             "status": "silicon",
             "width": "0.25",
             "height": "0.2",
             "technology": "sky130",
-            "release":[
+            "release": [
                 {
-                "version" : "mpw-8c",
-                "date": "10-19-2022"
+                    "version": "mpw-8c",
+                    "date": "10-19-2022"
+                },
+                {
+                    "version": "chipcraft-test",
+                    "date": "02-28-2022"
                 }
             ]
         }
     ]
-    
 }
