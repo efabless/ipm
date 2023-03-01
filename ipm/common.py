@@ -401,7 +401,8 @@ def install_IP(
     )
     response = requests.get(ip_info["release_url"], stream=True)
     if response.status_code == 404:
-        print(f"The IP {ip} version {ip_info['version']} could not be found remotely")
+        console.print(f"[red]The IP {ip} version {ip_info['version']} could not be found remotely")
+        exit(1)
     elif response.status_code == 200:
         os.mkdir(ip_path)
         tarball_path = os.path.join(ip_path, f"{ip}.tar.gz")
