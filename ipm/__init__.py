@@ -13,4 +13,4 @@
 # limitations under the License.
 __version__ = "0.1.0"
 
-from .manage import install, ls, ls_remote, output, update, history
+from .manage import install, ls, ls_remote, output, update, history, check

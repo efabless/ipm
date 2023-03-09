@@ -288,6 +288,23 @@ def check_cmd(ip, ipm_iproot):
             check_IP(console, ipm_iproot, "all", update=False)
 
 
+def check(ip, ipm_iproot, version):
+    """Check for new versions of all installed IPs or a specific IP."""
+    console = Console()
+    valid = check_ipm_directory(console, ipm_iproot)
+    if valid:
+        IP_list = get_IP_list(ipm_iproot, remote=False)
+        if ip is not None:
+            if ip not in IP_list:
+                print(
+                    "Please provide a valid IP name, to check all installed IPs invoke 'ipm lls'"
+                )
+            else:
+                check_IP(console, ipm_iproot, ip, update=True, version=version)
+        else:
+            check_IP(console, ipm_iproot, "all", update=True, version=version)
+
+
 @click.command("update")
 @click.option("--ip", required=False, help="Provide an IP to update")
 @click.option("--all", required=False, is_flag=True, help="Updates all installed IPs")
