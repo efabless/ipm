@@ -288,9 +288,8 @@ def check_cmd(ip, ipm_iproot):
             check_IP(console, ipm_iproot, "all", update=False)
 
 
-def check(ip, ipm_iproot, version):
+def check(console, ip, ipm_iproot, version):
     """Check for new versions of all installed IPs or a specific IP."""
-    console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         IP_list = get_IP_list(ipm_iproot, remote=False)
