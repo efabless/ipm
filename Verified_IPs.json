@@ -5,7 +5,7 @@
     "digital": [
         {
             "name": "caravel",
-            "repo": "github.com/marwaneltoukhy/caravel-1",
+            "repo": "github.com/marwaneltoukhy/caravel",
             "author": "efabless",
             "email": "efabless@efabless.com",
             "type": "hard",
