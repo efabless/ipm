@@ -343,7 +343,7 @@ def get_ip_info(ip, ipm_iproot, remote, technology="sky130", version=None):
                 ip_info["technology"] = technology
                 ip_info["ip_root"] = ipm_iproot
     release_url = (
-        f"https://{ip_info['repo']}/archive/refs/tags/{ip_info['version']}.tar.gz"
+        f"https://{ip_info['repo']}/releases/download/{ip_info['version']}/{ip_info['version']}.tar.gz"
     )
     ip_info["release_url"] = release_url
     return ip_info

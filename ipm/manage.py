@@ -216,9 +216,8 @@ def install_cmd(ip, ipm_iproot, overwrite, technology="sky130", version=None):
         install(ip, ipm_iproot, overwrite, technology=technology, version=version)
 
 
-def install(ip, ipm_iproot, overwrite, technology="sky130", version=None):
+def install(console, ip, ipm_iproot, overwrite, technology="sky130", version=None):
     """Install one of the verified IPs locally"""
-    console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         IP_list = get_IP_list(ipm_iproot, remote=True)
