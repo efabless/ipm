@@ -13,18 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import os
-import sys
-import json
-import tarfile
-import pathlib
-import requests
-import tempfile
-from typing import List
-
-import rich
 import click
-import rich.tree
-import rich.progress
 from rich.console import Console
 
 from .common import (
@@ -38,7 +27,6 @@ from .common import (
     check_IP,
     check_ipm_directory,
     precheck,
-    check_JSON,
 )
 
 
@@ -203,7 +191,11 @@ def output(ipm_iproot):
 @click.command("install")
 @click.argument("ip")
 @click.option(
-    "--overwrite", required=False, is_flag=True, default=False, help="Updates all installed IPs"
+    "--overwrite",
+    required=False,
+    is_flag=True,
+    default=False,
+    help="Updates all installed IPs",
 )
 @click.option("--technology", required=False, help="Install IP based on technology")
 @click.option("--version", required=False, help="Install IP with a specific version")
@@ -213,10 +205,20 @@ def install_cmd(ip, ipm_iproot, overwrite, technology="sky130", version=None):
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
-        install(console, ip, ipm_iproot, overwrite, technology=technology, version=version)
+        install(
+            console, ip, ipm_iproot, overwrite, technology=technology, version=version
+        )
 
 
-def install(console, ip, ipm_iproot, overwrite, technology="sky130", version=None, json_file_loc=None):
+def install(
+    console,
+    ip,
+    ipm_iproot,
+    overwrite,
+    technology="sky130",
+    version=None,
+    json_file_loc=None,
+):
     """Install one of the verified IPs locally"""
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:

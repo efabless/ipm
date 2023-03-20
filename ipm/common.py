@@ -342,9 +342,7 @@ def get_ip_info(ip, ipm_iproot, remote, technology="sky130", version=None):
                 ip_info["height"] = value["height"]
                 ip_info["technology"] = technology
                 ip_info["ip_root"] = ipm_iproot
-    release_url = (
-        f"https://{ip_info['repo']}/releases/download/{ip_info['version']}/{ip_info['version']}.tar.gz"
-    )
+    release_url = f"https://{ip_info['repo']}/releases/download/{ip_info['version']}/{ip_info['version']}.tar.gz"
     ip_info["release_url"] = release_url
     return ip_info
 
@@ -378,7 +376,13 @@ def remove_IP_from_JSON(ipm_iproot, ip, ip_info):
 
 
 def install_IP(
-    console: rich.console.Console, ipm_iproot, ip, overwrite, technology, version, json_file_loc
+    console: rich.console.Console,
+    ipm_iproot,
+    ip,
+    overwrite,
+    technology,
+    version,
+    json_file_loc,
 ):
     ip_path = os.path.join(ipm_iproot, ip)
     if os.path.exists(ip_path):
@@ -403,7 +407,9 @@ def install_IP(
     )
     response = requests.get(ip_info["release_url"], stream=True)
     if response.status_code == 404:
-        console.print(f"[red]The IP {ip} version {ip_info['version']} could not be found remotely")
+        console.print(
+            f"[red]The IP {ip} version {ip_info['version']} could not be found remotely"
+        )
         exit(1)
     elif response.status_code == 200:
         os.mkdir(ip_path)
@@ -481,7 +487,7 @@ def check_IP(console, ipm_iproot, ip, update=False, version=None):
                         f"[red]There are newer versions for {update_counter} IP(s), to update them all run [white]'ipm update --all' "
                     )
             else:
-                console.print(f"[green]All the installed IP(s) are up to date")
+                console.print("[green]All the installed IP(s) are up to date")
 
     else:  # Checks or Updates a single IP
         ip_info_local = get_ip_info(ip, ipm_iproot, remote=False)
@@ -610,14 +616,14 @@ def precheck(console, ipm_iproot, ip, version, gh_repo):
                 file.close
                 os.remove(tarball_path)
                 console.print(
-                    "[magenta][STEP 4]:", f"Checking the hierarchy of the directory"
+                    "[magenta][STEP 4]:", "Checking the hierarchy of the directory"
                 )
                 valid_hierarchy = check_hierarchy(
                     console, ip_path, ip
                 )  # Checks if folder's hierarchy is valid
                 if valid_hierarchy:
                     console.print(
-                        "[magenta][STEP 5]:", f"Checking the JSON file content"
+                        "[magenta][STEP 5]:", "Checking the JSON file content"
                     )
                     JSON_path = os.path.join(ip_path, f"{ip}.json")
                     valid_JSON = check_JSON(console, JSON_path, ip)
