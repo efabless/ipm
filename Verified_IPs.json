@@ -86,6 +86,24 @@
                     "date": "02-28-2022"
                 }
             ]
+        },
+        {
+            "name": "spm_ip",
+            "repo": "github.com/marwaneltoukhy/spm_ip",
+            "author": "efabless",
+            "email": "efabless@efabless.com",
+            "type": "hard",
+            "category": "digital",
+            "status": "np",
+            "width": "0.25",
+            "height": "0.2",
+            "technology": "sky130",
+            "release": [
+                {
+                    "version": "v1.0",
+                    "date": "10-19-2022"
+                }
+            ]
         }
     ]
 }
