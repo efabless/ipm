@@ -349,12 +349,14 @@ def get_ip_info(ip, ipm_iproot, remote, technology="sky130", version=None):
     return ip_info
 
 
-def add_IP_to_JSON(ipm_iproot, ip, ip_info):
+def add_IP_to_JSON(ipm_iproot, ip, ip_info, json_file_loc):
     IPM_DIR_PATH = os.path.join(ipm_iproot)
-    JSON_FILE = os.path.join(IPM_DIR_PATH, LOCAL_JSON_FILE_NAME)
+    if json_file_loc:
+        JSON_FILE = json_file_loc
+    else:
+        JSON_FILE = os.path.join(IPM_DIR_PATH, LOCAL_JSON_FILE_NAME)
     with open(JSON_FILE) as json_file:
         json_decoded = json.load(json_file)
-
     del ip_info["release"]
 
     json_decoded[ip_info["category"]].append(ip_info)
@@ -376,7 +378,7 @@ def remove_IP_from_JSON(ipm_iproot, ip, ip_info):
 
 
 def install_IP(
-    console: rich.console.Console, ipm_iproot, ip, overwrite, technology, version
+    console: rich.console.Console, ipm_iproot, ip, overwrite, technology, version, json_file_loc
 ):
     ip_path = os.path.join(ipm_iproot, ip)
     if os.path.exists(ip_path):
@@ -415,7 +417,7 @@ def install_IP(
         console.print(
             f"[green]Successfully installed {ip} version {ip_info['version']} to the directory {ip_path}"
         )
-        add_IP_to_JSON(ipm_iproot, ip, ip_info)
+        add_IP_to_JSON(ipm_iproot, ip, ip_info, json_file_loc)
 
 
 def uninstall_IP(console: rich.console.Console, ipm_iproot, ip):

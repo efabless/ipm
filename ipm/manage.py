@@ -216,7 +216,7 @@ def install_cmd(ip, ipm_iproot, overwrite, technology="sky130", version=None):
         install(console, ip, ipm_iproot, overwrite, technology=technology, version=version)
 
 
-def install(console, ip, ipm_iproot, overwrite, technology="sky130", version=None):
+def install(console, ip, ipm_iproot, overwrite, technology="sky130", version=None, json_file_loc=None):
     """Install one of the verified IPs locally"""
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
@@ -234,6 +234,7 @@ def install(console, ip, ipm_iproot, overwrite, technology="sky130", version=Non
                     overwrite=True,
                     technology=technology,
                     version=version,
+                    json_file_loc=json_file_loc,
                 )
             else:
                 install_IP(
@@ -243,6 +244,7 @@ def install(console, ip, ipm_iproot, overwrite, technology="sky130", version=Non
                     overwrite=False,
                     technology=technology,
                     version=version,
+                    json_file_loc=json_file_loc,
                 )
 
 
