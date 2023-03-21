@@ -26,6 +26,10 @@
                 {
                     "version": "chipcraft-test",
                     "date": "02-28-2022"
+                },
+                {
+                    "version": "chipcraft-test2",
+                    "date": "02-28-2022"
                 }
             ]
         },
@@ -83,6 +87,10 @@
                 },
                 {
                     "version": "chipcraft-test",
+                    "date": "02-28-2022"
+                },
+                {
+                    "version": "chipcraft-test2",
                     "date": "02-28-2022"
                 }
             ]
