@@ -228,26 +228,15 @@ def install(
                 "Please provide a valid IP name, to check all the available IPs invoke 'ipm ls'"
             )
         else:
-            if overwrite:
-                install_IP(
-                    console,
-                    ipm_iproot,
-                    ip,
-                    overwrite=True,
-                    technology=technology,
-                    version=version,
-                    json_file_loc=json_file_loc,
-                )
-            else:
-                install_IP(
-                    console,
-                    ipm_iproot,
-                    ip,
-                    overwrite=False,
-                    technology=technology,
-                    version=version,
-                    json_file_loc=json_file_loc,
-                )
+            install_IP(
+                console=console,
+                ipm_iproot=ipm_iproot,
+                ip=ip,
+                overwrite=overwrite,
+                technology=technology,
+                version=version,
+                json_file_loc=json_file_loc,
+            )
 
 
 @click.command("uninstall")

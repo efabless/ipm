@@ -442,7 +442,7 @@ def uninstall_IP(console: rich.console.Console, ipm_iproot, ip):
         )
 
 
-def check_IP(console, ipm_iproot, ip, update=False, version=None):
+def check_IP(console, ipm_iproot, ip, update=False, version=None, technology="sky130"):
     update_counter = 0
     if ip == "all":  # Checks or updates all installed IPs
         IP_list = get_IP_list(ipm_iproot, remote=False)
@@ -471,7 +471,15 @@ def check_IP(console, ipm_iproot, ip, update=False, version=None):
                         ):  # If update flag is True it uninstalls the old version and installs the new one
                             console.print(f"Updating {ip}[white]...")
                             uninstall_IP(console, ipm_iproot, ip)
-                            install_IP(console, ipm_iproot, ip)
+                            install_IP(
+                                console=console,
+                                ipm_iproot=ipm_iproot,
+                                ip=ip,
+                                overwrite=True,
+                                technology=technology,
+                                version=ip_info_remote["release"][-1]["version"],
+                                json_file_loc=os.path.join(ipm_iproot, LOCAL_JSON_FILE_NAME),
+                            )
                             update_counter = update_counter + 1
                         else:  # If it only needs a check it prints out a message to the user that there is a newer version
                             console.print(
@@ -492,7 +500,7 @@ def check_IP(console, ipm_iproot, ip, update=False, version=None):
     else:  # Checks or Updates a single IP
         ip_info_local = get_ip_info(ip, ipm_iproot, remote=False)
         ip_info_remote = get_ip_info(ip, ipm_iproot, remote=True)
-        if ip_info_local["version"] == ip_info_remote["version"]:
+        if ip_info_local["version"] == version:
             console.print(
                 f"[white]The IP [magenta]{ip}"
                 f"[white] is up to date; version {ip_info_local['version']}"
@@ -501,7 +509,15 @@ def check_IP(console, ipm_iproot, ip, update=False, version=None):
             if update:
                 console.print(f"Updating {ip}[white]...")
                 uninstall_IP(console, ipm_iproot, ip)
-                install_IP(console, ipm_iproot, ip)
+                install_IP(
+                    console=console,
+                    ipm_iproot=ipm_iproot,
+                    ip=ip,
+                    overwrite=True,
+                    technology=technology,
+                    version=version,
+                    json_file_loc=os.path.join(ipm_iproot, LOCAL_JSON_FILE_NAME),
+                )
             else:
                 console.print(
                     f"[yellow]The IP [magenta]{ip}"
