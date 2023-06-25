@@ -30,7 +30,7 @@ Shows all the verified IPs saved in a json file in the main GH repository of the
 
 ### Listing Installed IPs
 ```bash
-ipm lls
+ipm ls
 ``` 
 Lists all locally installed IPs at the ```IPM_IPROOT```. IPM creates a local json file named ```Installed_IPs.json``` this file is how the manager keeps track of all your installed IPs and their versions so you should not edit that file!
 
@@ -44,7 +44,7 @@ Installs the IP in the IP root. The user must provide a valid ```ip_name```, to 
 ```bash
 ipm uninstall <ip_name>
 ``` 
-Uninstalls a locally installed IP. The user must provide a valid installed ```ip_name```, to check all installed IPs run ```ipm lls```. It is advised to always use this function when you wish to remove an IP, as this function updates the ```Installed_IPs.json``` file as well. If you deleted the folder manually or renamed it this function may face errors
+Uninstalls a locally installed IP. The user must provide a valid installed ```ip_name```, to check all installed IPs run ```ipm ls```. It is advised to always use this function when you wish to remove an IP, as this function updates the ```Installed_IPs.json``` file as well. If you deleted the folder manually or renamed it this function may face errors
 
 ### Checking for Updates
 ```bash

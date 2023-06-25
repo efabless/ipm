@@ -250,7 +250,7 @@ def uninstall_cmd(ip, ipm_iproot):
         IP_list = get_IP_list(ipm_iproot, remote=False)
         if ip not in IP_list:
             print(
-                "Please provide a valid IP name, to check all installed IPs invoke 'ipm lls'"
+                "Please provide a valid IP name, to check all installed IPs invoke 'ipm ls'"
             )
         else:
             uninstall_IP(console, ipm_iproot, ip)
@@ -272,7 +272,7 @@ def check_cmd(ip, ipm_iproot):
         if ip is not None:
             if ip not in IP_list:
                 print(
-                    "Please provide a valid IP name, to check all installed IPs invoke 'ipm lls'"
+                    "Please provide a valid IP name, to check all installed IPs invoke 'ipm ls'"
                 )
             else:
                 check_IP(console, ipm_iproot, ip, update=False)
@@ -288,7 +288,7 @@ def check(console, ip, ipm_iproot, version):
         if ip is not None:
             if ip not in IP_list:
                 print(
-                    "Please provide a valid IP name, to check all installed IPs invoke 'ipm lls'"
+                    "Please provide a valid IP name, to check all installed IPs invoke 'ipm ls'"
                 )
             else:
                 check_IP(console, ipm_iproot, ip, update=True, version=version)
@@ -309,7 +309,7 @@ def update_cmd(ip, all, ipm_iproot):
         if ip is not None:
             if ip not in IP_list:
                 print(
-                    "Please provide a valid IP name, to check all installed IPs invoke 'ipm lls'"
+                    "Please provide a valid IP name, to check all installed IPs invoke 'ipm ls'"
                 )
             else:
                 check_IP(console, ipm_iproot, ip, update=True)
@@ -331,7 +331,7 @@ def update(ip, all, ipm_iproot):
         if ip is not None:
             if ip not in IP_list:
                 print(
-                    "Please provide a valid IP name, to check all installed IPs invoke 'ipm lls'"
+                    "Please provide a valid IP name, to check all installed IPs invoke 'ipm ls'"
                 )
             else:
                 check_IP(console, ipm_iproot, ip, update=True)
