@@ -197,7 +197,7 @@ def output(ipm_iproot):
     default=False,
     help="Updates all installed IPs",
 )
-@click.option("--technology", required=False, help="Install IP based on technology")
+@click.option("--technology", required=False, default="sky130", help="Install IP based on technology")
 @click.option("--version", required=False, help="Install IP with a specific version")
 @opt_ipm_iproot
 def install_cmd(ip, ipm_iproot, overwrite, technology="sky130", version=None):
