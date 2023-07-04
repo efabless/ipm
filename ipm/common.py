@@ -61,6 +61,8 @@ def opt_ipm_iproot(function: Callable):
     )(function)
     return function
 
+def checkdir(path):
+    return os.path.isdir(path)
 
 def create_local_JSON(file_path):
     dictionary = {
@@ -594,6 +596,8 @@ def precheck(console, ipm_iproot, ip, version, gh_repo):
     IPM_DIR_PATH = os.path.join(ipm_iproot)
     precheck_path = os.path.join(IPM_DIR_PATH, f"{ip}_pre-check")
     ip_path = os.path.join(precheck_path, ip)
+    if checkdir(precheck_path):
+        shutil.rmtree(precheck_path)
 
     console.print("[magenta][STEP 1]:", "Checking the GH repo")
     repo_response = requests.get(gh_repo_url, stream=True)
