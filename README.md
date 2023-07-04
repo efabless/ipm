@@ -67,27 +67,27 @@ To add your own IP to our package manager, you should follow these steps:
 
 All IPs must include:
 
-    - `readme.md`
-    - `<ip>.json`
-    - `doc/datasheet.pdf`
-    - `hdl/bus_wrapper`
-    - `fw`
+    - readme.md
+    - <ip>.json
+    - doc/datasheet.pdf
+    - hdl/bus_wrapper
+    - fw
 
 All digital and analog hard IPs must include:
     
-    - `hdl/gl`
-    - `timing/lib`, `timing/sdf`, `timing/spef`
-    - `layout/gds`, `layout/lef`
+    - hdl/gl
+    - timing/lib, timing/sdf, timing/spef
+    - layout/gds, layout/lef
 
 All Analog IPs must include:
 
-    - `spice`
+    - spice
 
 All soft digital IPs must include:
 
-    - `hdl/rtl`
-    - `verify`
-    - `openlane`
+    - hdl/rtl
+    - verify
+    - openlane
 
 Directory structure should look like:
 
@@ -110,6 +110,12 @@ Directory structure should look like:
 ├── fw\
 └── verify\
 ```
+
+**NOTE**
+
+- `verify` directory should include basic unit tests to help the designers build their verification
+- `bus_wrapper` directory contains RTL for IP wrappers to ease system bus connection
+- `fw` directory contains device drivers (`.c` and `.h` files)
 
 2. Your ```<ip>.json``` file should look like:
 
