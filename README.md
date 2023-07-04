@@ -63,7 +63,7 @@ Updates the IP if an update is available, by uninstalling the old version and in
 ## Adding your IP to IPM
 To add your own IP to our package manager, you should follow these steps:
 
-1.	Package your IP with the following folder structure:
+### Package your IP with the following folder structure:
 
 All IPs must include:
 
@@ -76,8 +76,11 @@ All IPs must include:
 All digital and analog hard IPs must include:
     
     - hdl/gl
-    - timing/lib, timing/sdf, timing/spef
-    - layout/gds, layout/lef
+    - timing/lib
+    - timing/sdf
+    - timing/spef
+    - layout/gds
+    - layout/lef
 
 All Analog IPs must include:
 
@@ -117,7 +120,7 @@ Directory structure should look like:
 - `bus_wrapper` directory contains RTL for IP wrappers to ease system bus connection
 - `fw` directory contains device drivers (`.c` and `.h` files)
 
-2. Your ```<ip>.json``` file should look like:
+### Your ```<ip>.json``` file should look like:
 
 **NOTE**
 
@@ -147,15 +150,18 @@ Directory structure should look like:
     "technology": "sky130"
 }
 ```
-NOTE: All the above fields must be included in your file
+**NOTE:** All the above fields must be included in your file
 
-3. Compress your folder into a tarball (tar.gz) with the name ```<version>.tar.gz```, where `version` is the version of your release, you can do that by running:
+### Compress your folder into a tarball (tar.gz) with the name ```<version>.tar.gz```, where `version` is the version of your release, you can do that by running:
 ```bash
 tar czf <version>.tar.gz <structured_IP_folder_name>
 ``` 
-4. Create a new release in your GH repo with the tag ```<version>``` and add the tarball created there to the release's assets
-5. Once you are done you can run a precheck function locally by running ```ipm pre-check``` which checks that you’ve completed the above steps successfully. You are required to fill in the promp with the ```IP name```, ```version``` and the ```GH repo```
-6.	If the pre-check was successful you can submit your IP through the form ......
+### Create release 
+create a new release in your GH repo with the tag ```<version>``` and add the tarball created there to the release's assets
+### IPM precheck
+Once you are done you can run a precheck function locally by running ```ipm pre-check``` which checks that you’ve completed the above steps successfully. You are required to fill in the promp with the ```IP name```, ```version``` and the ```GH repo```
+### Submit
+If the pre-check was successful you can submit your IP through the form ......
 
 IPM team will then perform set of sanity checks to ensure the quality of the submitted IP. This checker shall ensure:
 - That the IP is LVS clean
