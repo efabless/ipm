@@ -589,8 +589,8 @@ def check_JSON(console, JSON_path, ip):
 
 def precheck(console, ipm_iproot, ip, version, gh_repo):
     gh_repo_url = f"https://{gh_repo}"
-    release_tag_url = f"{gh_repo_url}/releases/tag/{ip}-{version}"
-    release_tarball_url = f"{gh_repo_url}/releases/download/{ip}-{version}/{ip}.tar.gz"
+    release_tag_url = f"{gh_repo_url}/releases/tag/{version}"
+    release_tarball_url = f"{gh_repo_url}/releases/download/{version}/{version}.tar.gz"
     IPM_DIR_PATH = os.path.join(ipm_iproot)
     precheck_path = os.path.join(IPM_DIR_PATH, f"{ip}_pre-check")
     ip_path = os.path.join(precheck_path, ip)
@@ -602,29 +602,29 @@ def precheck(console, ipm_iproot, ip, version, gh_repo):
     elif repo_response.status_code == 200:  # The repo exists, check for the release
         console.print(
             "[magenta][STEP 2]:",
-            f"Checking for the release with the tag {ip}-{version}",
+            f"Checking for the release with the tag {version}",
         )
         release_tag_response = requests.get(release_tag_url, stream=True)
         if release_tag_response.status_code == 404:
             console.print(
-                f"[red]There is no release tagged {ip}-{version} in the GH repo {gh_repo}"
+                f"[red]There is no release tagged {version} in the GH repo {gh_repo}"
             )
         elif (
             release_tag_response.status_code == 200
         ):  # Release exists, check for tarball
             console.print(
-                "[magenta][STEP 3]:", f'Checking for the tarball named "{ip}.tar.gz"'
+                "[magenta][STEP 3]:", f'Checking for the tarball named "{version}.tar.gz"'
             )
             release_tarball_response = requests.get(release_tarball_url, stream=True)
             if release_tarball_response.status_code == 404:
                 console.print(
-                    f"[red]The tarball '{ip}.tar.gz' was not found in the release tagged {ip}-{version} in the GH repo {gh_repo}"
+                    f"[red]The tarball '{version}.tar.gz' was not found in the release tagged {version} in the GH repo {gh_repo}"
                 )
             elif (
                 release_tarball_response.status_code == 200
             ):  # Tarball exists under the correct tag name, download it under IPM_Directory/<ip>_pre-check
                 os.mkdir(precheck_path)
-                tarball_path = os.path.join(precheck_path, f"{ip}.tar.gz")
+                tarball_path = os.path.join(precheck_path, f"{version}.tar.gz")
                 with open(tarball_path, "wb") as f:
                     f.write(release_tarball_response.raw.read())
                 file = tarfile.open(tarball_path)
