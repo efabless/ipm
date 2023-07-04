@@ -63,7 +63,7 @@ Updates the IP if an update is available, by uninstalling the old version and in
 ## Adding your IP to IPM
 To add your own IP to our package manager, you should follow these steps:
 
-### Package your IP with the following folder structure:
+### 1. Package your IP with the following folder structure:
 
 All IPs must include:
 
@@ -120,7 +120,9 @@ Directory structure should look like:
 - `bus_wrapper` directory contains RTL for IP wrappers to ease system bus connection
 - `fw` directory contains device drivers (`.c` and `.h` files)
 
-### Your ```<ip>.json``` file should look like:
+### 2. IP metadata file structure
+
+Your ```<ip>.json``` file should look like:
 
 **NOTE**
 
@@ -152,15 +154,16 @@ Directory structure should look like:
 ```
 **NOTE:** All the above fields must be included in your file
 
-### Compress your folder into a tarball (tar.gz) with the name ```<version>.tar.gz```, where `version` is the version of your release, you can do that by running:
+### 3. Create tarball
+Compress your folder into a tarball (tar.gz) with the name ```<version>.tar.gz```, where `version` is the version of your release, you can do that by running:
 ```bash
 tar czf <version>.tar.gz <structured_IP_folder_name>
 ``` 
-### Create release 
+### 4. Create release 
 create a new release in your GH repo with the tag ```<version>``` and add the tarball created there to the release's assets
-### IPM precheck
+### 5. IPM precheck
 Once you are done you can run a precheck function locally by running ```ipm pre-check``` which checks that you’ve completed the above steps successfully. You are required to fill in the promp with the ```IP name```, ```version``` and the ```GH repo```
-### Submit
+### 6. Submit
 If the pre-check was successful you can submit your IP through the form ......
 
 IPM team will then perform set of sanity checks to ensure the quality of the submitted IP. This checker shall ensure:
