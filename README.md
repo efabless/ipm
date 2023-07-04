@@ -90,7 +90,8 @@ All soft digital IPs must include:
 
     - hdl/rtl
     - verify
-    - openlane
+    - openlane/<ip>.json **optional**
+    - openlane/<ip>.sdc **optional**
 
 Directory structure should look like:
 
@@ -111,6 +112,7 @@ Directory structure should look like:
 │   ├── src\
 │   └── gl\
 ├── fw\
+├── openlane\
 └── verify\
 ```
 
@@ -123,18 +125,6 @@ Directory structure should look like:
 ### 2. IP metadata file structure
 
 Your ```<ip>.json``` file should look like:
-
-**NOTE**
-
-`date` should be in the form: `mm-dd-yyyy`
-
-`category` can be `digital, analog, dataconv, comm, rf, ...`
-
-`type` can be `hard/soft`
-
-`status` can be `np (not proven), fpga (proven), silicon (proven)`
-
-`width` and `height` should be in mm
 
 ```
 {
@@ -152,7 +142,19 @@ Your ```<ip>.json``` file should look like:
     "technology": "sky130"
 }
 ```
-**NOTE:** All the above fields must be included in your file
+**NOTE**
+
+`date` should be in the form: `mm-dd-yyyy`
+
+`category` can be `digital, analog, dataconv, comm, rf, ...`
+
+`type` can be `hard/soft`
+
+`status` can be `np (not proven), fpga (proven), silicon (proven)`
+
+`width` and `height` should be in mm
+
+**All the above fields must be included in your file**
 
 ### 3. Create tarball
 Compress your folder into a tarball (tar.gz) with the name ```<version>.tar.gz```, where `version` is the version of your release, you can do that by running:
