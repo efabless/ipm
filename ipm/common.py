@@ -350,11 +350,10 @@ def get_ip_info(ip, ipm_iproot, remote, technology="sky130", version=None):
 
 
 def add_IP_to_JSON(ipm_iproot, ip, ip_info, json_file_loc):
-    IPM_DIR_PATH = os.path.join(ipm_iproot)
     if json_file_loc:
-        JSON_FILE = json_file_loc
+        JSON_FILE = os.path.join(json_file_loc, LOCAL_JSON_FILE_NAME)
     else:
-        JSON_FILE = os.path.join(IPM_DIR_PATH, LOCAL_JSON_FILE_NAME)
+        JSON_FILE = os.path.join(ipm_iproot, LOCAL_JSON_FILE_NAME)
     with open(JSON_FILE) as json_file:
         json_decoded = json.load(json_file)
     del ip_info["release"]

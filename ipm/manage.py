@@ -199,14 +199,15 @@ def output(ipm_iproot):
 )
 @click.option("--technology", required=False, default="sky130", help="Install IP based on technology")
 @click.option("--version", required=False, help="Install IP with a specific version")
+@click.option("--ip-root", required=False, default=os.path.join(os.path.expanduser("~"), ".ipm"), help="IP installation path")
 @opt_ipm_iproot
-def install_cmd(ip, ipm_iproot, overwrite, technology="sky130", version=None):
+def install_cmd(ip, ip_root, ipm_iproot, overwrite, technology="sky130", version=None, ips_config=None):
     """Install one of the verified IPs locally"""
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         install(
-            console, ip, ipm_iproot, overwrite, technology=technology, version=version
+            console, ip, ip_root, overwrite, technology=technology, version=version, json_file_loc=ipm_iproot
         )
 
 
@@ -220,7 +221,10 @@ def install(
     json_file_loc=None,
 ):
     """Install one of the verified IPs locally"""
-    valid = check_ipm_directory(console, ipm_iproot)
+    if json_file_loc:
+        valid = check_ipm_directory(console, json_file_loc)
+    else:
+        valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         IP_list = get_IP_list(ipm_iproot, remote=True)
         if ip not in IP_list:
