@@ -24,7 +24,7 @@ IPM requires an IP Root. This IP root is where all your IPs will be installed an
 
 ### Listing all Verified IPs
 ```bash
-ipm ls
+ipm ls-remote
 ``` 
 Shows all the verified IPs saved in a json file in the main GH repository of the project ```Verified_IPs.json```. The function lists all the IPs in a tabular format sorted by the IP category and gives you all the required information about the IP; name, version, category...etc.
 
@@ -64,7 +64,7 @@ To add your own IP to our package manager, you should follow these steps:
 1.	Package your IP with the following folder structure:
 ```
 ├── readme.md
-├── ip.json
+├── <ip>.json
 ├── doc\
 ├── gds\
 ├── lef\
@@ -78,34 +78,43 @@ To add your own IP to our package manager, you should follow these steps:
 └── verify\
 ```
 2. Your ```<ip>.json``` file should look like:
+
+**NOTE**
+
+`date` should be in the form: `mm-dd-yyyy`
+
+`category` can be `digital, analog, dataconv, comm, rf, ...`
+
+`type` can be `hard/soft`
+
+`status` can be `np (not proven), fpga (proven), silicon (proven)`
+
+`width` and `height` should be in mm
+
 ```
 {
-    "name" : "ADC8_SAR",
+    "name" : "spm",
     "repo": "github.com/shalan/spm",
     "author" : "shalan",
     "email": "mshalan@aucegypt.edu",
     "version" : "0.9",
-    // m-d-y
     "date": "9-21-2022",
-    // digital, analog, dataconv, comm, rf, ...
     "category": "dataconv",
-    // hard/soft
     "type": "hard",
-    // np (not proven), fpga (proven), silicon (proven), 
     "status": "silicon",
-    // width and height in mm
     "width": "0.25",
-    "height": "0.2"
+    "height": "0.2",
+    "technology": "sky130"
 }
 ```
 NOTE: All the above fields must be included in your file
 
-3. Compress your folder into a tarball (tar.gz) with the name ```default.tar.gz``` you can do that by running:
+3. Compress your folder into a tarball (tar.gz) with the name ```<version>.tar.gz```, where `version` is the version of your release, you can do that by running:
 ```bash
-tar czf default.tar.gz <structured_IP_folder_name>
+tar czf <version>.tar.gz <structured_IP_folder_name>
 ``` 
-4. Create a new release in your GH repo with the tag ```<ip_name>-<version>``` and add the tarball created there to the release's assets
-5. Once you are done you can run a precheck function locally by running ```ipm pre-check``` which checks that you’ve completed the above steps successfully. This function will require the ```IP name```, ```version``` and the ```GH repo``` as input from the user
+4. Create a new release in your GH repo with the tag ```<version>``` and add the tarball created there to the release's assets
+5. Once you are done you can run a precheck function locally by running ```ipm pre-check``` which checks that you’ve completed the above steps successfully. You are required to fill in the promp with the ```IP name```, ```version``` and the ```GH repo```
 6.	If the pre-check was successful you can submit your IP through the form ......
 
 IPM team will then perform set of sanity checks to ensure the quality of the submitted IP. This checker shall ensure:
