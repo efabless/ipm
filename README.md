@@ -38,7 +38,10 @@ Lists all locally installed IPs at the ```IPM_IPROOT```. IPM creates a local jso
 ```bash
 ipm install <ip_name> [OPTIONS] --overwrite
 ``` 
-Installs the IP in the IP root. The user must provide a valid ```ip_name```, to check all available IPs run ```ipm ls```. If there exists a non-empty folder of the IP in the IP root, the install function will not work and if the user wishes to overwrite the existing folder he should pass the option     -```--overwrite``` 
+Installs the IP in the IP root. The user must provide a valid ```ip_name```, to check all available IPs run ```ipm ls```. If there exists a non-empty folder of the IP in the IP root, the install function will not work and if the user wishes to overwrite the existing folder he should pass the option     -```--overwrite```
+To install a specific version of the IP you can specify it using
+-```--version <version>``
+**NOTE** you can see all versions of IP using ```ipm ls-history --ip <ip name>```
 
 ### Uninstalling an IP
 ```bash
@@ -62,21 +65,53 @@ Updates the IP if an update is available, by uninstalling the old version and in
 To add your own IP to our package manager, you should follow these steps:
 
 1.	Package your IP with the following folder structure:
+
+All IPs must include:
+
+    - `readme.md`
+    - `<ip>.json`
+    - `doc/datasheet.pdf`
+    - `hdl/bus_wrapper`
+    - `fw`
+
+All digital and analog hard IPs must include:
+    
+    - `hdl/gl`
+    - `timing/lib`, `timing/sdf`, `timing/spef`
+    - `layout/gds`, `layout/lef`
+
+All Analog IPs must include:
+
+    - `spice`
+
+All soft digital IPs must include:
+
+    - `hdl/rtl`
+    - `verify`
+    - `openlane`
+
+Directory structure should look like:
+
 ```
 ├── readme.md
 ├── <ip>.json
 ├── doc\
-├── gds\
-├── lef\
-├── lib\ 
-├── sdf\
-├── spef\
+│   └── datasheet.pdf
+├── layout\
+│   ├── gds\
+│   └── lef\
+├── timing\
+│   ├── lib\
+│   ├── spef\
+│   └── sdf\
 ├── spice\
 ├── hdl\ 
 │   ├── src\
 │   └── gl\
+├── fw\
 └── verify\
 ```
+
 2. Your ```<ip>.json``` file should look like:
 
 **NOTE**
