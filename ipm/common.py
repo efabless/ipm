@@ -654,5 +654,5 @@ def precheck(console, ipm_iproot, ip, version, gh_repo):
                     )  # Checks if folder's hierarchy is valid
                     if valid_hierarchy:
                         console.print(
-                            "[green]IP pre-check was successful you can now submit your IP through...."
+                            "[green]IP pre-check was successful you can now submit your IP"
                         )
