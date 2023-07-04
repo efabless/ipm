@@ -109,7 +109,8 @@ Directory structure should look like:
 │   └── sdf\
 ├── spice\
 ├── hdl\ 
-│   ├── src\
+│   ├── bus_wrapper\
+│   ├── rtl\
 │   └── gl\
 ├── fw\
 ├── openlane\
