@@ -5,7 +5,7 @@ IPM is an open-source IPs Package Manager; it is meant to provide a mean for dis
 
 1.	Clone the IPM GH repository 
 ```bash
-git clone https://github.com/shalan/ipm
+git clone https://github.com/efabless/ipm.git
 ``` 
 2.	Navigate to the cloned directory and install using pip
 ```bash
