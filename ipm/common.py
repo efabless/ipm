@@ -527,40 +527,42 @@ def check_IP(console, ipm_iproot, ip, update=False, version=None, technology="sk
                 )
 
 
-def check_hierarchy(console, ip_path, ip):
+def check_hierarchy(console, ip_path, ip, json_path):
+    common_dirs = ["hdl/bus_wrapper", "fw"]
+    with open(json_path) as json_file:
+        data = json.load(json_file)
     # check the folder hierarchy
-    ipm_dirs = ["sdf", "verify", "spice", "gds", "lef", "lib", "doc", "hdl", "spef"]
-    hdl_path = os.path.join(ip_path, "hdl")
-    hdl_dirs = ["src", "gl"]
-    ipm_files = [f"{ip}.json", "readme.md"]
+    if data["type"] == "hard":
+        ipm_dirs = ["hdl/gl", "timing/lib", "timing/sdf", "timing/spef", "layout/gds", "layout/lef"]
+    elif data["type"] == "soft" and data["category"] == "digital":
+        ipm_dirs = ["hdl/rtl", "verify"]
+    if data["category"] == "analog":
+        ipm_dirs = ["spice"]
+    ipm_dirs = ipm_dirs + common_dirs
+    ipm_files = [f"{ip}.json", "readme.md", "doc/datasheet.pdf"]
     flag = True
-    for root, dirs, files in os.walk(ip_path):
-        if root == ip_path:
-            for f in ipm_files:
-                if f not in files:
-                    console.print(
-                        f"[red]The file {f} cannot be found under {ip_path} please refer to the ipm directory structure"
-                    )
-                    flag = False
-            for d in ipm_dirs:
-                if d not in dirs:
-                    console.print(
-                        f"[red]The directory {d} cannot be found under {ip_path} please refer to the ipm directory structure"
-                    )
-                    flag = False
+    for dirs in ipm_dirs:
+        if not checkdir(os.path.join(ip_path, dirs)):
+            console.print(
+                f"[red]The directory {dirs} cannot be found under {ip_path} please refer to the ipm directory structure"
+            )
+            flag = False
 
-        if root == hdl_path:
-            for d in hdl_dirs:
-                if d not in dirs:
-                    console.print(
-                        f"[red]The directory {d} cannot be found under {hdl_path} please refer to the ipm directory structure"
-                    )
-                    flag = False
-
+    for files in ipm_files:
+        if not os.path.exists(os.path.join(ip_path, files)):
+            console.print(
+                f"[red]The file {files} cannot be found under {ip_path} please refer to the ipm directory structure"
+            )
+            flag = False
     return flag
 
 
 def check_JSON(console, JSON_path, ip):
+    if not os.path.exists(JSON_path):
+        console.print(
+            f"[red]Can't find {JSON_path} please refer to the ipm directory structure"
+        )
+        return False
     json_fields = [
         "name",
         "repo",
@@ -590,7 +592,10 @@ def check_JSON(console, JSON_path, ip):
 
 
 def precheck(console, ipm_iproot, ip, version, gh_repo):
-    gh_repo_url = f"https://{gh_repo}"
+    if gh_repo.startswith("https"):
+        gh_repo_url = gh_repo
+    else:
+        gh_repo_url = f"https://{gh_repo}"
     release_tag_url = f"{gh_repo_url}/releases/tag/{version}"
     release_tarball_url = f"{gh_repo_url}/releases/download/{version}/{version}.tar.gz"
     IPM_DIR_PATH = os.path.join(ipm_iproot)
@@ -636,18 +641,18 @@ def precheck(console, ipm_iproot, ip, version, gh_repo):
                 file.close
                 os.remove(tarball_path)
                 console.print(
-                    "[magenta][STEP 4]:", "Checking the hierarchy of the directory"
+                    "[magenta][STEP 4]:", "Checking the JSON file content"
                 )
-                valid_hierarchy = check_hierarchy(
-                    console, ip_path, ip
-                )  # Checks if folder's hierarchy is valid
-                if valid_hierarchy:
+                json_path = os.path.join(ip_path, f"{ip}.json")
+                valid_JSON = check_JSON(console, json_path, ip)
+                if valid_JSON:
                     console.print(
-                        "[magenta][STEP 5]:", "Checking the JSON file content"
+                        "[magenta][STEP 5]:", "Checking the hierarchy of the directory"
                     )
-                    JSON_path = os.path.join(ip_path, f"{ip}.json")
-                    valid_JSON = check_JSON(console, JSON_path, ip)
-                    if valid_JSON:
+                    valid_hierarchy = check_hierarchy(
+                        console, ip_path, ip, json_path
+                    )  # Checks if folder's hierarchy is valid
+                    if valid_hierarchy:
                         console.print(
                             "[green]IP pre-check was successful you can now submit your IP through...."
                         )
