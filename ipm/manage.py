@@ -18,6 +18,7 @@ from rich.console import Console
 
 from .common import (
     get_IP_history,
+    install_ip_from_manifest,
     list_IPs_local,
     opt_ipm_iproot,
     list_IPs,
@@ -195,19 +196,20 @@ def output(ipm_iproot):
     required=False,
     is_flag=True,
     default=False,
-    help="Updates all installed IPs",
+    help="Overwrite IP",
 )
 @click.option("--technology", required=False, default="sky130", help="Install IP based on technology")
 @click.option("--version", required=False, help="Install IP with a specific version")
 @click.option("--ip-root", required=False, default=os.path.join(os.path.expanduser("~"), ".ipm"), help="IP installation path")
+@click.option("--man-file", required=False, help="manifest file path")
 @opt_ipm_iproot
-def install_cmd(ip, ip_root, ipm_iproot, overwrite, technology="sky130", version=None, ips_config=None):
+def install_cmd(ip, ip_root, ipm_iproot, overwrite, technology="sky130", version=None, man_file=None):
     """Install one of the verified IPs locally"""
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         install(
-            console, ip, ip_root, overwrite, technology=technology, version=version, json_file_loc=ipm_iproot
+            console, ip, ip_root, overwrite, technology=technology, version=version, json_file_loc=ipm_iproot, man_file=man_file
         )
 
 
@@ -219,6 +221,7 @@ def install(
     technology="sky130",
     version=None,
     json_file_loc=None,
+    man_file=None,
 ):
     """Install one of the verified IPs locally"""
     if json_file_loc:
@@ -240,7 +243,53 @@ def install(
                 technology=technology,
                 version=version,
                 json_file_loc=json_file_loc,
+                man_file=man_file
             )
+
+
+@click.command("install-from-manifest")
+@click.option(
+    "--overwrite",
+    required=False,
+    is_flag=True,
+    default=False,
+    help="Overwrite IP",
+)
+@click.option("--ip-root", required=False, default=os.path.join(os.path.expanduser("~"), ".ipm"), help="IP installation path")
+@click.option("--man-file", required=False, help="manifest file path")
+@opt_ipm_iproot
+def install_from_manifest_cmd(ip_root, ipm_iproot, overwrite, man_file=None):
+    """Install one of the verified IPs locally"""
+    console = Console()
+    valid = check_ipm_directory(console, ipm_iproot)
+    if valid:
+        install_from_manifest(
+            console, ip_root, overwrite, json_file_loc=ipm_iproot, man_file=man_file
+        )
+
+
+def install_from_manifest(
+    console,
+    ipm_iproot,
+    overwrite,
+    json_file_loc=None,
+    man_file=None,
+):
+    """Install one of the verified IPs locally"""
+    if json_file_loc:
+        valid = check_ipm_directory(console, json_file_loc)
+    else:
+        valid = check_ipm_directory(console, ipm_iproot)
+    if valid:
+        IP_list = get_IP_list(ipm_iproot, remote=True)
+        install_ip_from_manifest(
+            console=console,
+            ipm_iproot=ipm_iproot,
+            overwrite=overwrite,
+            json_file_loc=json_file_loc,
+            man_file=man_file,
+            IP_list=IP_list
+        )
 
 
 @click.command("uninstall")

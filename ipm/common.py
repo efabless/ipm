@@ -46,6 +46,7 @@ IPM_REPO_API = f"https://api.github.com/repos/{IPM_REPO_ID}"
 IPM_DEFAULT_HOME = os.path.join(os.path.expanduser("~"), ".ipm")
 
 LOCAL_JSON_FILE_NAME = "Installed_IPs.json"
+MANIFEST_FILE_NAME = "manifest.json"
 REMOTE_JSON_FILE_NAME = (
     "https://raw.githubusercontent.com/efabless/ipm/main/Verified_IPs.json"
 )
@@ -363,6 +364,30 @@ def add_IP_to_JSON(ipm_iproot, ip, ip_info, json_file_loc):
     with open(JSON_FILE, "w") as json_file:
         json.dump(json_decoded, json_file)
 
+def create_manifest(ipm_iproot, ip, ip_info, man_file):
+    if man_file:
+        JSON_FILE = os.path.join(man_file, MANIFEST_FILE_NAME)
+    else:
+        JSON_FILE = os.path.join(ipm_iproot, MANIFEST_FILE_NAME)
+
+    if os.path.exists(JSON_FILE):
+        with open(JSON_FILE) as json_file:
+            json_decoded = json.load(json_file)
+    else:
+        json_decoded = {
+            "IP": []
+        }
+
+    tmp_dict = {
+        "name": ip_info["name"],
+        "version": ip_info["version"],
+        "technology": ip_info["technology"]
+    }
+    json_decoded['IP'].append(tmp_dict)
+
+    with open(JSON_FILE, "w") as json_file:
+        json.dump(json_decoded, json_file)
+
 
 def remove_IP_from_JSON(ipm_iproot, ip, ip_info):
     IPM_DIR_PATH = os.path.join(ipm_iproot)
@@ -384,6 +409,7 @@ def install_IP(
     technology,
     version,
     json_file_loc,
+    man_file
 ):
     ip_path = os.path.join(ipm_iproot, ip)
     if os.path.exists(ip_path):
@@ -413,23 +439,90 @@ def install_IP(
         )
         exit(1)
     elif response.status_code == 200:
-        os.mkdir(ip_path)
-        tarball_path = os.path.join(ip_path, f"{ip}.tar.gz")
+        tarball_path = os.path.join(ipm_iproot, f"{ip}.tar.gz")
         with open(tarball_path, "wb") as f:
             f.write(response.raw.read())
         file = tarfile.open(tarball_path)
-        file.extractall(ip_path)
+        file.extractall(ipm_iproot)
         file.close
         os.remove(tarball_path)
         console.print(
             f"[green]Successfully installed {ip} version {ip_info['version']} to the directory {ip_path}"
         )
         add_IP_to_JSON(ipm_iproot, ip, ip_info, json_file_loc)
+        create_manifest(ipm_iproot, ip, ip_info, man_file)
+
+
+def install_ip_from_manifest(
+    console: rich.console.Console,
+    ipm_iproot,
+    overwrite,
+    json_file_loc,
+    man_file,
+    IP_list
+):
+    if man_file:
+        JSON_FILE = os.path.join(man_file, MANIFEST_FILE_NAME)
+    else:
+        JSON_FILE = os.path.join(ipm_iproot, MANIFEST_FILE_NAME)
+
+    if os.path.exists(JSON_FILE):
+        with open(JSON_FILE) as json_file:
+            json_decoded = json.load(json_file)
+    else:
+        console.print(f"[red]ERROR : {JSON_FILE} couldn't be found")
+        exit(1)
+    ips = json_decoded['IP']
+    for ip_obj in ips:
+        ip = ip_obj['name']
+        version = ip_obj['version']
+        technology = ip_obj['technology']
+        if ip not in IP_list:
+            print(f"[red]IP {ip} is not a valid IP")
+            exit(1)
+        ip_path = os.path.join(ipm_iproot, ip)
+        if os.path.exists(ip_path):
+            if len(os.listdir(ip_path)) != 0:
+                if not overwrite:
+                    console.print(
+                        f"There already exists a non-empty folder for the IP [green]{ip}",
+                        f"at {ipm_iproot}, to overwrite it add the option --overwrite",
+                    )
+                    return
+                else:
+                    console.print(f"Removing exisiting IP {ip} at {ipm_iproot}")
+                    ip_info = get_ip_info(
+                        ip, ipm_iproot, remote=False, technology=technology, version=version
+                    )
+                    remove_IP_from_JSON(ipm_iproot, ip, ip_info)
+                    shutil.rmtree(ip_path)
+            else:
+                shutil.rmtree(ip_path)
+        ip_info = get_ip_info(
+            ip, ipm_iproot, remote=True, technology=technology, version=version
+        )
+        response = requests.get(ip_info["release_url"], stream=True)
+        if response.status_code == 404:
+            console.print(
+                f"[red]The IP {ip} version {ip_info['version']} could not be found remotely"
+            )
+            exit(1)
+        elif response.status_code == 200:
+            tarball_path = os.path.join(ipm_iproot, f"{ip}.tar.gz")
+            with open(tarball_path, "wb") as f:
+                f.write(response.raw.read())
+            file = tarfile.open(tarball_path)
+            file.extractall(ipm_iproot)
+            file.close
+            os.remove(tarball_path)
+            console.print(
+                f"[green]Successfully installed {ip} version {ip_info['version']} to the directory {ip_path}"
+            )
+            add_IP_to_JSON(ipm_iproot, ip, ip_info, json_file_loc)
 
 
 def uninstall_IP(console: rich.console.Console, ipm_iproot, ip):
-    IPM_DIR_PATH = os.path.join(ipm_iproot)
-    ip_path = os.path.join(IPM_DIR_PATH, ip)
+    ip_path = os.path.join(ipm_iproot, ip)
     ip_info = get_ip_info(ip, ipm_iproot, remote=False)
     if os.path.exists(ip_path):
         remove_IP_from_JSON(ipm_iproot, ip, ip_info)
@@ -439,7 +532,7 @@ def uninstall_IP(console: rich.console.Console, ipm_iproot, ip):
         )
     else:
         console.print(
-            f"The IP {ip} was not found at the directory {IPM_DIR_PATH}, you may have removed it manually or renamed the folder"
+            f"The IP {ip} was not found at the directory {ipm_iproot}, you may have removed it manually or renamed the folder"
         )
 
 
