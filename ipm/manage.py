@@ -294,8 +294,9 @@ def install_from_manifest(
 
 @click.command("uninstall")
 @click.argument("ip")
+@click.option("--ip-root", required=False, default=os.path.join(os.path.expanduser("~"), ".ipm"), help="IP installation path")
 @opt_ipm_iproot
-def uninstall_cmd(ip, ipm_iproot):
+def uninstall_cmd(ip, ipm_iproot, ip_root):
     """Uninstall one of the IPs installed locally"""
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
@@ -306,7 +307,7 @@ def uninstall_cmd(ip, ipm_iproot):
                 "Please provide a valid IP name, to check all installed IPs invoke 'ipm ls'"
             )
         else:
-            uninstall_IP(console, ipm_iproot, ip)
+            uninstall_IP(console, ipm_iproot, ip, ip_root)
 
 
 @click.command("check")

@@ -389,15 +389,19 @@ def create_manifest(ipm_iproot, ip, ip_info, man_file):
         json.dump(json_decoded, json_file)
 
 
-def remove_IP_from_JSON(ipm_iproot, ip, ip_info):
-    IPM_DIR_PATH = os.path.join(ipm_iproot)
-    JSON_FILE = os.path.join(IPM_DIR_PATH, LOCAL_JSON_FILE_NAME)
-    with open(JSON_FILE) as json_file:
-        json_decoded = json.load(json_file)
+def remove_IP_from_JSON(ipm_iproot, ip_info, ip_root):
+    json_file = os.path.join(ipm_iproot, LOCAL_JSON_FILE_NAME)
+    with open(json_file, 'r') as f:
+        json_decoded = json.load(f)
 
-    json_decoded[ip_info["category"]].remove(ip_info)
+    ip_category = json_decoded[ip_info["category"]]
 
-    with open(JSON_FILE, "w") as json_file:
+    for ips in ip_category:
+        if ips['name'] == ip_info['name'] and ips['version'] == ip_info['version'] and ips['ip_root'] == ip_root:
+            ip_category.remove(ips)
+    json_decoded[ip_info["category"]] = ip_category
+
+    with open(json_file, "w") as json_file:
         json.dump(json_decoded, json_file)
 
 
@@ -425,7 +429,7 @@ def install_IP(
                 ip_info = get_ip_info(
                     ip, ipm_iproot, remote=False, technology=technology, version=version
                 )
-                remove_IP_from_JSON(ipm_iproot, ip, ip_info)
+                remove_IP_from_JSON(json_file_loc, ip_info, ipm_iproot)
                 shutil.rmtree(ip_path)
         else:
             shutil.rmtree(ip_path)
@@ -494,7 +498,7 @@ def install_ip_from_manifest(
                     ip_info = get_ip_info(
                         ip, ipm_iproot, remote=False, technology=technology, version=version
                     )
-                    remove_IP_from_JSON(ipm_iproot, ip, ip_info)
+                    remove_IP_from_JSON(json_file_loc, ip_info, ipm_iproot)
                     shutil.rmtree(ip_path)
             else:
                 shutil.rmtree(ip_path)
@@ -521,18 +525,18 @@ def install_ip_from_manifest(
             add_IP_to_JSON(ipm_iproot, ip, ip_info, json_file_loc)
 
 
-def uninstall_IP(console: rich.console.Console, ipm_iproot, ip):
-    ip_path = os.path.join(ipm_iproot, ip)
+def uninstall_IP(console: rich.console.Console, ipm_iproot, ip, ip_root):
+    ip_path = os.path.join(ip_root, ip)
     ip_info = get_ip_info(ip, ipm_iproot, remote=False)
     if os.path.exists(ip_path):
-        remove_IP_from_JSON(ipm_iproot, ip, ip_info)
+        remove_IP_from_JSON(ipm_iproot, ip_info, ip_root)
         shutil.rmtree(ip_path, ignore_errors=False, onerror=None)
         console.print(
             f'[green]Successfully uninstalled {ip} version {ip_info["version"]}'
         )
     else:
         console.print(
-            f"The IP {ip} was not found at the directory {ipm_iproot}, you may have removed it manually or renamed the folder"
+            f"The IP {ip} was not found at the directory {ip_root}, you may have removed it manually or renamed the folder"
         )
 
 
