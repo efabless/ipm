@@ -306,16 +306,15 @@ def get_IP_history(console: rich.console.Console, ipm_iproot, ip, remote):
     console.print(table)
 
 
-def get_ip_info(ip, ipm_iproot, remote, technology="sky130", version=None):
+def get_ip_info(ip, ipm_iproot, remote, ip_root, technology="sky130", version=None):
     ip_info = {}
-    IPM_DIR_PATH = os.path.join(ipm_iproot)
     JSON_FILE = ""
 
     if remote:
         resp = requests.get(REMOTE_JSON_FILE_NAME)
         data = json.loads(resp.text)
     else:
-        JSON_FILE = os.path.join(IPM_DIR_PATH, LOCAL_JSON_FILE_NAME)
+        JSON_FILE = os.path.join(ipm_iproot, LOCAL_JSON_FILE_NAME)
         with open(JSON_FILE) as json_file:
             data = json.load(json_file)
     for key, values in data.items():
@@ -344,7 +343,7 @@ def get_ip_info(ip, ipm_iproot, remote, technology="sky130", version=None):
                 ip_info["width"] = value["width"]
                 ip_info["height"] = value["height"]
                 ip_info["technology"] = technology
-                ip_info["ip_root"] = ipm_iproot
+                ip_info["ip_root"] = ip_root
     release_url = f"https://{ip_info['repo']}/releases/download/{ip_info['version']}/{ip_info['version']}.tar.gz"
     ip_info["release_url"] = release_url
     return ip_info
@@ -397,7 +396,7 @@ def remove_IP_from_JSON(ipm_iproot, ip_info, ip_root):
     ip_category = json_decoded[ip_info["category"]]
 
     for ips in ip_category:
-        if ips['name'] == ip_info['name'] and ips['version'] == ip_info['version'] and ips['ip_root'] == ip_root:
+        if ips['name'] == ip_info['name'] and ips['ip_root'] == ip_root:
             ip_category.remove(ips)
     json_decoded[ip_info["category"]] = ip_category
 
@@ -427,14 +426,14 @@ def install_IP(
             else:
                 console.print(f"Removing exisiting IP {ip} at {ipm_iproot}")
                 ip_info = get_ip_info(
-                    ip, ipm_iproot, remote=False, technology=technology, version=version
+                    ip, json_file_loc, remote=False, technology=technology, version=version, ip_root=ipm_iproot
                 )
                 remove_IP_from_JSON(json_file_loc, ip_info, ipm_iproot)
                 shutil.rmtree(ip_path)
         else:
             shutil.rmtree(ip_path)
     ip_info = get_ip_info(
-        ip, ipm_iproot, remote=True, technology=technology, version=version
+        ip, json_file_loc, remote=True, technology=technology, version=version, ip_root=ipm_iproot
     )
     response = requests.get(ip_info["release_url"], stream=True)
     if response.status_code == 404:
@@ -496,14 +495,14 @@ def install_ip_from_manifest(
                 else:
                     console.print(f"Removing exisiting IP {ip} at {ipm_iproot}")
                     ip_info = get_ip_info(
-                        ip, ipm_iproot, remote=False, technology=technology, version=version
+                        ip, json_file_loc, remote=False, technology=technology, version=version, ip_root=ipm_iproot
                     )
                     remove_IP_from_JSON(json_file_loc, ip_info, ipm_iproot)
                     shutil.rmtree(ip_path)
             else:
                 shutil.rmtree(ip_path)
         ip_info = get_ip_info(
-            ip, ipm_iproot, remote=True, technology=technology, version=version
+            ip, json_file_loc, remote=True, technology=technology, version=version, ip_root=ipm_iproot
         )
         response = requests.get(ip_info["release_url"], stream=True)
         if response.status_code == 404:
@@ -527,7 +526,7 @@ def install_ip_from_manifest(
 
 def uninstall_IP(console: rich.console.Console, ipm_iproot, ip, ip_root):
     ip_path = os.path.join(ip_root, ip)
-    ip_info = get_ip_info(ip, ipm_iproot, remote=False)
+    ip_info = get_ip_info(ip, ipm_iproot, remote=False, ip_root=ip_root)
     if os.path.exists(ip_path):
         remove_IP_from_JSON(ipm_iproot, ip_info, ip_root)
         shutil.rmtree(ip_path, ignore_errors=False, onerror=None)
