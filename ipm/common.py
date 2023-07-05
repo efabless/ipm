@@ -387,6 +387,23 @@ def create_manifest(ipm_iproot, ip, ip_info, man_file):
     with open(JSON_FILE, "w") as json_file:
         json.dump(json_decoded, json_file)
 
+def remove_IP_from_manifest(ip_info, ip_root, man_file):
+    if man_file:
+        json_file = os.path.join(man_file, MANIFEST_FILE_NAME)
+    else:
+        json_file = os.path.join(ip_root, MANIFEST_FILE_NAME)
+
+    with open(json_file, 'r') as f:
+        json_decoded = json.load(f)
+
+    ip_category = json_decoded["IP"]
+    for ips in ip_category:
+        if ips['name'] == ip_info['name']:
+            ip_category.remove(ips)
+    json_decoded["IP"] = ip_category
+
+    with open(json_file, "w") as json_file:
+        json.dump(json_decoded, json_file)
 
 def remove_IP_from_JSON(ipm_iproot, ip_info, ip_root):
     json_file = os.path.join(ipm_iproot, LOCAL_JSON_FILE_NAME)
@@ -429,6 +446,7 @@ def install_IP(
                     ip, json_file_loc, remote=False, technology=technology, version=version, ip_root=ipm_iproot
                 )
                 remove_IP_from_JSON(json_file_loc, ip_info, ipm_iproot)
+                remove_IP_from_manifest(ip_info, ipm_iproot, man_file)
                 shutil.rmtree(ip_path)
         else:
             shutil.rmtree(ip_path)
@@ -498,6 +516,7 @@ def install_ip_from_manifest(
                         ip, json_file_loc, remote=False, technology=technology, version=version, ip_root=ipm_iproot
                     )
                     remove_IP_from_JSON(json_file_loc, ip_info, ipm_iproot)
+                    remove_IP_from_manifest(ip_info, ipm_iproot, man_file)
                     shutil.rmtree(ip_path)
             else:
                 shutil.rmtree(ip_path)
@@ -529,6 +548,7 @@ def uninstall_IP(console: rich.console.Console, ipm_iproot, ip, ip_root):
     ip_info = get_ip_info(ip, ipm_iproot, remote=False, ip_root=ip_root)
     if os.path.exists(ip_path):
         remove_IP_from_JSON(ipm_iproot, ip_info, ip_root)
+        remove_IP_from_manifest(ip_info, ip_root, None)
         shutil.rmtree(ip_path, ignore_errors=False, onerror=None)
         console.print(
             f'[green]Successfully uninstalled {ip} version {ip_info["version"]}'
