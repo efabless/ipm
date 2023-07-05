@@ -19,7 +19,7 @@ from rich.console import Console
 from .common import (
     get_IP_history,
     list_IPs_local,
-    opt_ip_root,
+    opt_ipm_iproot,
     list_IPs,
     install_IP,
     uninstall_IP,
@@ -31,7 +31,7 @@ from .common import (
 
 
 @click.command("ls-remote")
-@opt_ip_root
+@opt_ipm_iproot
 @click.option(
     "--category",
     required=False,
@@ -42,15 +42,15 @@ from .common import (
     required=False,
     help="Optionally provide the technology (sky130, gf180mcu)",
 )
-def ls_remote_cmd(category, ip_root, technology):
+def ls_remote_cmd(category, ipm_iproot, technology):
     """Lists all verified IPs in ipm main repository"""
     console = Console()
-    valid = check_ipm_directory(console, ip_root)
+    valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         if category is not None:
             if category in ["digital", "comm", "analog", "dataconv"]:
                 console.print(f"[green]Verified IPs for the {category} category:")
-                list_IPs(console, ip_root, remote=True, category=category)
+                list_IPs(console, ipm_iproot, remote=True, category=category)
             else:
                 console.print(
                     "You entered a wrong category, invoke ipm ls --help for assistance"
@@ -58,25 +58,25 @@ def ls_remote_cmd(category, ip_root, technology):
         elif technology is not None:
             if technology in ["sky130", "gf180mcu"]:
                 console.print(f"[green]Verified IPs for the {technology} technology:")
-                list_IPs(console, ip_root, remote=True)
+                list_IPs(console, ipm_iproot, remote=True)
             else:
                 console.print(
                     "You entered a wrong technology, invoke ipm ls --help for assistance"
                 )
         else:
             console.print("[green]Verified IPs:")
-            list_IPs(console, ip_root, remote=True)
+            list_IPs(console, ipm_iproot, remote=True)
 
 
-def ls_remote(category, ip_root, technology):
+def ls_remote(category, ipm_iproot, technology):
     """Lists all verified IPs in ipm main repository"""
     console = Console()
-    valid = check_ipm_directory(console, ip_root)
+    valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         if category is not None:
             if category in ["digital", "comm", "analog", "dataconv"]:
                 console.print(f"[green]Verified IPs for the {category} category:")
-                list_IPs(console, ip_root, remote=True, category=category)
+                list_IPs(console, ipm_iproot, remote=True, category=category)
             else:
                 console.print(
                     "You entered a wrong category, invoke ipm ls --help for assistance"
@@ -84,18 +84,18 @@ def ls_remote(category, ip_root, technology):
         elif technology is not None:
             if technology in ["sky130", "gf180mcu"]:
                 console.print(f"[green]Verified IPs for the {technology} technology:")
-                list_IPs(console, ip_root, remote=True)
+                list_IPs(console, ipm_iproot, remote=True)
             else:
                 console.print(
                     "You entered a wrong technology, invoke ipm ls --help for assistance"
                 )
         else:
             console.print("[green]Verified IPs:")
-            list_IPs(console, ip_root, remote=True)
+            list_IPs(console, ipm_iproot, remote=True)
 
 
 @click.command("ls")
-@opt_ip_root
+@opt_ipm_iproot
 @click.option(
     "--category",
     required=False,
@@ -106,18 +106,18 @@ def ls_remote(category, ip_root, technology):
     required=False,
     help="Optionally provide the technology (sky130, gf180mcu)",
 )
-def ls_cmd(category, ip_root, technology):
+def ls_cmd(category, ipm_iproot, technology):
     """Lists all locally installed IPs"""
     console = Console()
-    IPM_DIR_PATH = os.path.join(ip_root)
-    valid = check_ipm_directory(console, ip_root)
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
+    valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         if category is not None:
             if category in ["digital", "comm", "analog", "dataconv"]:
                 console.print(
-                    f"[green]Installed IPs at {ip_root} for the {category} category:"
+                    f"[green]Installed IPs at {ipm_iproot} for the {category} category:"
                 )
-                list_IPs_local(console, ip_root, remote=False, category=category)
+                list_IPs_local(console, ipm_iproot, remote=False, category=category)
             else:
                 console.print(
                     "You entered a wrong category, invoke ipm ls --help for assistance"
@@ -125,30 +125,30 @@ def ls_cmd(category, ip_root, technology):
         elif technology is not None:
             if technology in ["sky130", "gf180mcu"]:
                 console.print(
-                    f"[green]Installed IPs at {ip_root} for the {technology} technology:"
+                    f"[green]Installed IPs at {ipm_iproot} for the {technology} technology:"
                 )
-                list_IPs_local(console, ip_root, remote=False)
+                list_IPs_local(console, ipm_iproot, remote=False)
             else:
                 console.print(
                     "You entered a wrong technology, invoke ipm ls --help for assistance"
                 )
         else:
             console.print(f"[green]Installed IPs at {IPM_DIR_PATH}:")
-            list_IPs_local(console, ip_root, remote=False)
+            list_IPs_local(console, ipm_iproot, remote=False)
 
 
-def ls(category, ip_root, technology):
+def ls(category, ipm_iproot, technology):
     """Lists all locally installed IPs"""
     console = Console()
-    IPM_DIR_PATH = os.path.join(ip_root)
-    valid = check_ipm_directory(console, ip_root)
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
+    valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         if category is not None:
             if category in ["digital", "comm", "analog", "dataconv"]:
                 console.print(
-                    f"[green]Installed IPs at {ip_root} for the {category} category:"
+                    f"[green]Installed IPs at {ipm_iproot} for the {category} category:"
                 )
-                list_IPs_local(console, ip_root, remote=False, category=category)
+                list_IPs_local(console, ipm_iproot, remote=False, category=category)
             else:
                 console.print(
                     "You entered a wrong category, invoke ipm ls --help for assistance"
@@ -156,34 +156,34 @@ def ls(category, ip_root, technology):
         elif technology is not None:
             if technology in ["sky130", "gf180mcu"]:
                 console.print(
-                    f"[green]Installed IPs at {ip_root} for the {technology} technology:"
+                    f"[green]Installed IPs at {ipm_iproot} for the {technology} technology:"
                 )
-                list_IPs_local(console, ip_root, remote=False)
+                list_IPs_local(console, ipm_iproot, remote=False)
             else:
                 console.print(
                     "You entered a wrong technology, invoke ipm ls --help for assistance"
                 )
         else:
             console.print(f"[green]Installed IPs at {IPM_DIR_PATH}:")
-            list_IPs_local(console, ip_root, remote=False)
+            list_IPs_local(console, ipm_iproot, remote=False)
 
 
 @click.command("output")
-@opt_ip_root
-def output_cmd(ip_root):
+@opt_ipm_iproot
+def output_cmd(ipm_iproot):
     """(Default) Outputs the current IP installation path"""
     console = Console()
-    IPM_DIR_PATH = os.path.join(ip_root)
-    valid = check_ipm_directory(console, ip_root)
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
+    valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         print(f"Your IPs will be installed at {IPM_DIR_PATH}")
 
 
-def output(ip_root):
+def output(ipm_iproot):
     """(Default) Outputs the current IP installation path"""
     console = Console()
-    IPM_DIR_PATH = os.path.join(ip_root)
-    valid = check_ipm_directory(console, ip_root)
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
+    valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         return IPM_DIR_PATH
 
@@ -199,22 +199,22 @@ def output(ip_root):
 )
 @click.option("--technology", required=False, default="sky130", help="Install IP based on technology")
 @click.option("--version", required=False, help="Install IP with a specific version")
-# @click.option("--ip-root", required=False, default=os.path.join(os.path.expanduser("~"), ".ipm"), help="IP installation path")
-@opt_ip_root
-def install_cmd(ip, ip_root, overwrite, technology="sky130", version=None):
+@click.option("--ip-root", required=False, default=os.path.join(os.path.expanduser("~"), ".ipm"), help="IP installation path")
+@opt_ipm_iproot
+def install_cmd(ip, ip_root, ipm_iproot, overwrite, technology="sky130", version=None, ips_config=None):
     """Install one of the verified IPs locally"""
     console = Console()
-    valid = check_ipm_directory(console, ip_root)
+    valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         install(
-            console, ip, ip_root, overwrite, technology=technology, version=version
+            console, ip, ip_root, overwrite, technology=technology, version=version, json_file_loc=ipm_iproot
         )
 
 
 def install(
     console,
     ip,
-    ip_root,
+    ipm_iproot,
     overwrite,
     technology="sky130",
     version=None,
@@ -224,9 +224,9 @@ def install(
     if json_file_loc:
         valid = check_ipm_directory(console, json_file_loc)
     else:
-        valid = check_ipm_directory(console, ip_root)
+        valid = check_ipm_directory(console, ipm_iproot)
     if valid:
-        IP_list = get_IP_list(ip_root, remote=True)
+        IP_list = get_IP_list(ipm_iproot, remote=True)
         if ip not in IP_list:
             print(
                 "Please provide a valid IP name, to check all the available IPs invoke 'ipm ls'"
@@ -234,7 +234,7 @@ def install(
         else:
             install_IP(
                 console=console,
-                ip_root=ip_root,
+                ipm_iproot=ipm_iproot,
                 ip=ip,
                 overwrite=overwrite,
                 technology=technology,
@@ -245,19 +245,19 @@ def install(
 
 @click.command("uninstall")
 @click.argument("ip")
-@opt_ip_root
-def uninstall_cmd(ip, ip_root):
+@opt_ipm_iproot
+def uninstall_cmd(ip, ipm_iproot):
     """Uninstall one of the IPs installed locally"""
     console = Console()
-    valid = check_ipm_directory(console, ip_root)
+    valid = check_ipm_directory(console, ipm_iproot)
     if valid:
-        IP_list = get_IP_list(ip_root, remote=False)
+        IP_list = get_IP_list(ipm_iproot, remote=False)
         if ip not in IP_list:
             print(
                 "Please provide a valid IP name, to check all installed IPs invoke 'ipm ls'"
             )
         else:
-            uninstall_IP(console, ip_root, ip)
+            uninstall_IP(console, ipm_iproot, ip)
 
 
 @click.command("check")
@@ -266,82 +266,82 @@ def uninstall_cmd(ip, ip_root):
     required=False,
     help="Optionally provide an IP to check for its newer version",
 )
-@opt_ip_root
-def check_cmd(ip, ip_root):
+@opt_ipm_iproot
+def check_cmd(ip, ipm_iproot):
     """Check for new versions of all installed IPs or a specific IP."""
     console = Console()
-    valid = check_ipm_directory(console, ip_root)
+    valid = check_ipm_directory(console, ipm_iproot)
     if valid:
-        IP_list = get_IP_list(ip_root, remote=False)
+        IP_list = get_IP_list(ipm_iproot, remote=False)
         if ip is not None:
             if ip not in IP_list:
                 print(
                     "Please provide a valid IP name, to check all installed IPs invoke 'ipm ls'"
                 )
             else:
-                check_IP(console, ip_root, ip, update=False)
+                check_IP(console, ipm_iproot, ip, update=False)
         else:
-            check_IP(console, ip_root, "all", update=False)
+            check_IP(console, ipm_iproot, "all", update=False)
 
 
-def check(console, ip, ip_root, version):
+def check(console, ip, ipm_iproot, version):
     """Check for new versions of all installed IPs or a specific IP."""
-    valid = check_ipm_directory(console, ip_root)
+    valid = check_ipm_directory(console, ipm_iproot)
     if valid:
-        IP_list = get_IP_list(ip_root, remote=False)
+        IP_list = get_IP_list(ipm_iproot, remote=False)
         if ip is not None:
             if ip not in IP_list:
                 print(
                     "Please provide a valid IP name, to check all installed IPs invoke 'ipm ls'"
                 )
             else:
-                check_IP(console, ip_root, ip, update=True, version=version)
+                check_IP(console, ipm_iproot, ip, update=True, version=version)
         else:
-            check_IP(console, ip_root, "all", update=True, version=version)
+            check_IP(console, ipm_iproot, "all", update=True, version=version)
 
 
 @click.command("update")
 @click.option("--ip", required=False, help="Provide an IP to update")
 @click.option("--all", required=False, is_flag=True, help="Updates all installed IPs")
-@opt_ip_root
-def update_cmd(ip, all, ip_root):
+@opt_ipm_iproot
+def update_cmd(ip, all, ipm_iproot):
     """Update all installed IPs to their latest versions or a specific IP."""
     console = Console()
-    valid = check_ipm_directory(console, ip_root)
+    valid = check_ipm_directory(console, ipm_iproot)
     if valid:
-        IP_list = get_IP_list(ip_root, remote=False)
+        IP_list = get_IP_list(ipm_iproot, remote=False)
         if ip is not None:
             if ip not in IP_list:
                 print(
                     "Please provide a valid IP name, to check all installed IPs invoke 'ipm ls'"
                 )
             else:
-                check_IP(console, ip_root, ip, update=True)
+                check_IP(console, ipm_iproot, ip, update=True)
         else:
             if all:
-                check_IP(console, ip_root, "all", update=True)
+                check_IP(console, ipm_iproot, "all", update=True)
             else:
                 console.print(
                     "Either provide an ip name or to update all installed IPs run 'ipm update --all'"
                 )
 
 
-def update(ip, all, ip_root):
+def update(ip, all, ipm_iproot):
     """Update all installed IPs to their latest versions or a specific IP."""
     console = Console()
-    valid = check_ipm_directory(console, ip_root)
+    valid = check_ipm_directory(console, ipm_iproot)
     if valid:
-        IP_list = get_IP_list(ip_root, remote=False)
+        IP_list = get_IP_list(ipm_iproot, remote=False)
         if ip is not None:
             if ip not in IP_list:
                 print(
                     "Please provide a valid IP name, to check all installed IPs invoke 'ipm ls'"
                 )
             else:
-                check_IP(console, ip_root, ip, update=True)
+                check_IP(console, ipm_iproot, ip, update=True)
         else:
             if all:
-                check_IP(console, ip_root, "all", update=True)
+                check_IP(console, ipm_iproot, "all", update=True)
             else:
                 console.print(
                     "Either provide an ip name or to update all installed IPs run 'ipm update --all'"
@@ -349,34 +349,34 @@ def update(ip, all, ip_root):
 
 
 @click.command("pre-check")
-@opt_ip_root
-def precheck_cmd(ip_root):
+@opt_ipm_iproot
+def precheck_cmd(ipm_iproot):
     """Update all installed IPs to their latest versions or a specific IP."""
     console = Console()
-    valid = check_ipm_directory(console, ip_root)
+    valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         ip = input("Enter IP name: ")
         version = input("Enter IP version: ")
         gh_repo = input(
             'Enter the GH repo of the IP in the form "github.com/<username>/<project_name>": '
         )
-        precheck(console, ip_root, ip, version, gh_repo)
+        precheck(console, ipm_iproot, ip, version, gh_repo)
 
 
 @click.command("ls-history")
 @click.option("--ip", required=True, help="ip to get history of versions")
-@opt_ip_root
-def history_cmd(ip_root, ip):
+@opt_ipm_iproot
+def history_cmd(ipm_iproot, ip):
     """list all versions of the IP"""
     console = Console()
-    valid = check_ipm_directory(console, ip_root)
+    valid = check_ipm_directory(console, ipm_iproot)
     if valid:
-        get_IP_history(console, ip_root, ip, remote=True)
+        get_IP_history(console, ipm_iproot, ip, remote=True)
 
 
-def history(ip_root, ip):
+def history(ipm_iproot, ip):
     """list all versions of the IP"""
     console = Console()
-    valid = check_ipm_directory(console, ip_root)
+    valid = check_ipm_directory(console, ipm_iproot)
     if valid:
-        get_IP_history(console, ip_root, ip, remote=True)
+        get_IP_history(console, ipm_iproot, ip, remote=True)

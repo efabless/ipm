@@ -51,11 +51,11 @@ REMOTE_JSON_FILE_NAME = (
 )
 
 
-def opt_ip_root(function: Callable):
+def opt_ipm_iproot(function: Callable):
     function = click.option(
-        "--ip-root",
+        "--ipm-iproot",
         required=False,
-        default=os.getenv("IP_ROOT") or IPM_DEFAULT_HOME,
+        default=os.getenv("IPM_IPROOT") or IPM_DEFAULT_HOME,
         help="Path to the IPM root where the IPs will reside",
         show_default=True,
     )(function)
@@ -76,13 +76,13 @@ def create_local_JSON(file_path):
         json.dump(dictionary, outfile)
 
 
-def check_ipm_directory(console: rich.console.Console, ip_root) -> bool:
-    IPM_DIR_PATH = os.path.join(ip_root)
+def check_ipm_directory(console: rich.console.Console, ipm_iproot) -> bool:
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
     JSON_FILE_PATH = os.path.join(IPM_DIR_PATH, LOCAL_JSON_FILE_NAME)
 
-    if ip_root == IPM_DEFAULT_HOME:
-        if not os.path.exists(ip_root):
-            os.mkdir(ip_root)
+    if ipm_iproot == IPM_DEFAULT_HOME:
+        if not os.path.exists(ipm_iproot):
+            os.mkdir(ipm_iproot)
             create_local_JSON(JSON_FILE_PATH)
         else:  # .ipm folder exists
             if not os.path.exists(IPM_DIR_PATH):
@@ -92,23 +92,23 @@ def check_ipm_directory(console: rich.console.Console, ip_root) -> bool:
                 if not os.path.exists(JSON_FILE_PATH):
                     create_local_JSON(JSON_FILE_PATH)
     else:
-        if not os.path.exists(ip_root):
+        if not os.path.exists(ipm_iproot):
             console.print(
-                "[red]The IP_ROOT does not exist, please specify a correct IP_ROOT to continue"
+                "[red]The IPM_IPROOT does not exist, please specify a correct IPM_IPROOT to continue"
             )
             return False
         else:
             if not os.path.exists(IPM_DIR_PATH):
                 os.mkdir(IPM_DIR_PATH)
                 create_local_JSON(JSON_FILE_PATH)
-            else:  # <ip_root>/ipm folder exists
+            else:  # <ipm_iproot>/ipm folder exists
                 if not os.path.exists(JSON_FILE_PATH):
                     create_local_JSON(JSON_FILE_PATH)
     return True
 
 
-def list_IPs(console: rich.console.Console, ip_root, remote, category="all"):
-    IPM_DIR_PATH = os.path.join(ip_root)
+def list_IPs(console: rich.console.Console, ipm_iproot, remote, category="all"):
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
 
     JSON_FILE = ""
     if remote:
@@ -176,8 +176,8 @@ def list_IPs(console: rich.console.Console, ip_root, remote, category="all"):
             console.print("[red]No IPs Found")
 
 
-def list_IPs_local(console: rich.console.Console, ip_root, remote, category="all"):
-    IPM_DIR_PATH = os.path.join(ip_root)
+def list_IPs_local(console: rich.console.Console, ipm_iproot, remote, category="all"):
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
 
     JSON_FILE = ""
     if remote:
@@ -246,8 +246,8 @@ def list_IPs_local(console: rich.console.Console, ip_root, remote, category="all
 
 
 # Gets a list of all available IP "names"
-def get_IP_list(ip_root, remote):
-    IPM_DIR_PATH = os.path.join(ip_root)
+def get_IP_list(ipm_iproot, remote):
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
     JSON_FILE = ""
     IP_list = []
     if remote:
@@ -263,8 +263,8 @@ def get_IP_list(ip_root, remote):
     return IP_list
 
 
-def get_IP_history(console: rich.console.Console, ip_root, ip, remote):
-    IPM_DIR_PATH = os.path.join(ip_root)
+def get_IP_history(console: rich.console.Console, ipm_iproot, ip, remote):
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
     JSON_FILE = ""
     # IP_list = []
     table = Table()
@@ -305,9 +305,9 @@ def get_IP_history(console: rich.console.Console, ip_root, ip, remote):
     console.print(table)
 
 
-def get_ip_info(ip, ip_root, remote, technology="sky130", version=None):
+def get_ip_info(ip, ipm_iproot, remote, technology="sky130", version=None):
     ip_info = {}
-    IPM_DIR_PATH = os.path.join(ip_root)
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
     JSON_FILE = ""
 
     if remote:
@@ -343,17 +343,17 @@ def get_ip_info(ip, ip_root, remote, technology="sky130", version=None):
                 ip_info["width"] = value["width"]
                 ip_info["height"] = value["height"]
                 ip_info["technology"] = technology
-                ip_info["ip_root"] = ip_root
+                ip_info["ip_root"] = ipm_iproot
     release_url = f"https://{ip_info['repo']}/releases/download/{ip_info['version']}/{ip_info['version']}.tar.gz"
     ip_info["release_url"] = release_url
     return ip_info
 
 
-def add_IP_to_JSON(ip_root, ip, ip_info, json_file_loc):
+def add_IP_to_JSON(ipm_iproot, ip, ip_info, json_file_loc):
     if json_file_loc:
         JSON_FILE = os.path.join(json_file_loc, LOCAL_JSON_FILE_NAME)
     else:
-        JSON_FILE = os.path.join(ip_root, LOCAL_JSON_FILE_NAME)
+        JSON_FILE = os.path.join(ipm_iproot, LOCAL_JSON_FILE_NAME)
     with open(JSON_FILE) as json_file:
         json_decoded = json.load(json_file)
     del ip_info["release"]
@@ -364,8 +364,8 @@ def add_IP_to_JSON(ip_root, ip, ip_info, json_file_loc):
         json.dump(json_decoded, json_file)
 
 
-def remove_IP_from_JSON(ip_root, ip, ip_info):
-    IPM_DIR_PATH = os.path.join(ip_root)
+def remove_IP_from_JSON(ipm_iproot, ip, ip_info):
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
     JSON_FILE = os.path.join(IPM_DIR_PATH, LOCAL_JSON_FILE_NAME)
     with open(JSON_FILE) as json_file:
         json_decoded = json.load(json_file)
@@ -378,33 +378,33 @@ def remove_IP_from_JSON(ip_root, ip, ip_info):
 
 def install_IP(
     console: rich.console.Console,
-    ip_root,
+    ipm_iproot,
     ip,
     overwrite,
     technology,
     version,
     json_file_loc,
 ):
-    ip_path = os.path.join(ip_root, ip)
+    ip_path = os.path.join(ipm_iproot, ip)
     if os.path.exists(ip_path):
         if len(os.listdir(ip_path)) != 0:
             if not overwrite:
                 console.print(
                     f"There already exists a non-empty folder for the IP [green]{ip}",
-                    f"at {ip_root}, to overwrite it add the option --overwrite",
+                    f"at {ipm_iproot}, to overwrite it add the option --overwrite",
                 )
                 return
             else:
-                console.print(f"Removing exisiting IP {ip} at {ip_root}")
+                console.print(f"Removing exisiting IP {ip} at {ipm_iproot}")
                 ip_info = get_ip_info(
-                    ip, ip_root, remote=False, technology=technology, version=version
+                    ip, ipm_iproot, remote=False, technology=technology, version=version
                 )
-                remove_IP_from_JSON(ip_root, ip, ip_info)
+                remove_IP_from_JSON(ipm_iproot, ip, ip_info)
                 shutil.rmtree(ip_path)
         else:
             shutil.rmtree(ip_path)
     ip_info = get_ip_info(
-        ip, ip_root, remote=True, technology=technology, version=version
+        ip, ipm_iproot, remote=True, technology=technology, version=version
     )
     response = requests.get(ip_info["release_url"], stream=True)
     if response.status_code == 404:
@@ -424,15 +424,15 @@ def install_IP(
         console.print(
             f"[green]Successfully installed {ip} version {ip_info['version']} to the directory {ip_path}"
         )
-        add_IP_to_JSON(ip_root, ip, ip_info, json_file_loc)
+        add_IP_to_JSON(ipm_iproot, ip, ip_info, json_file_loc)
 
 
-def uninstall_IP(console: rich.console.Console, ip_root, ip):
-    IPM_DIR_PATH = os.path.join(ip_root)
+def uninstall_IP(console: rich.console.Console, ipm_iproot, ip):
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
     ip_path = os.path.join(IPM_DIR_PATH, ip)
-    ip_info = get_ip_info(ip, ip_root, remote=False)
+    ip_info = get_ip_info(ip, ipm_iproot, remote=False)
     if os.path.exists(ip_path):
-        remove_IP_from_JSON(ip_root, ip, ip_info)
+        remove_IP_from_JSON(ipm_iproot, ip, ip_info)
         shutil.rmtree(ip_path, ignore_errors=False, onerror=None)
         console.print(
             f'[green]Successfully uninstalled {ip} version {ip_info["version"]}'
@@ -443,10 +443,10 @@ def uninstall_IP(console: rich.console.Console, ip_root, ip):
         )
 
 
-def check_IP(console, ip_root, ip, update=False, version=None, technology="sky130"):
+def check_IP(console, ipm_iproot, ip, update=False, version=None, technology="sky130"):
     update_counter = 0
     if ip == "all":  # Checks or updates all installed IPs
-        IP_list = get_IP_list(ip_root, remote=False)
+        IP_list = get_IP_list(ipm_iproot, remote=False)
         if len(IP_list) == 0:  # No installed IPs
             if update:
                 console.print("[red]No installed IPs to update")
@@ -455,8 +455,8 @@ def check_IP(console, ip_root, ip, update=False, version=None, technology="sky13
         else:  # There are installed IPs
             console.print("Checking all Installed IP(s) for updates")
             for ip in IP_list:  # Loops on all available IPs
-                ip_info_local = get_ip_info(ip, ip_root, remote=False)
-                ip_info_remote = get_ip_info(ip, ip_root, remote=True)
+                ip_info_local = get_ip_info(ip, ipm_iproot, remote=False)
+                ip_info_remote = get_ip_info(ip, ipm_iproot, remote=True)
                 if version is None:
                     if (
                         ip_info_local["version"]
@@ -471,15 +471,15 @@ def check_IP(console, ip_root, ip, update=False, version=None, technology="sky13
                             update
                         ):  # If update flag is True it uninstalls the old version and installs the new one
                             console.print(f"Updating {ip}[white]...")
-                            uninstall_IP(console, ip_root, ip)
+                            uninstall_IP(console, ipm_iproot, ip)
                             install_IP(
                                 console=console,
-                                ip_root=ip_root,
+                                ipm_iproot=ipm_iproot,
                                 ip=ip,
                                 overwrite=True,
                                 technology=technology,
                                 version=ip_info_remote["release"][-1]["version"],
-                                json_file_loc=os.path.join(ip_root, LOCAL_JSON_FILE_NAME),
+                                json_file_loc=os.path.join(ipm_iproot, LOCAL_JSON_FILE_NAME),
                             )
                             update_counter = update_counter + 1
                         else:  # If it only needs a check it prints out a message to the user that there is a newer version
@@ -499,8 +499,8 @@ def check_IP(console, ip_root, ip, update=False, version=None, technology="sky13
                 console.print("[green]All the installed IP(s) are up to date")
 
     else:  # Checks or Updates a single IP
-        ip_info_local = get_ip_info(ip, ip_root, remote=False)
-        ip_info_remote = get_ip_info(ip, ip_root, remote=True)
+        ip_info_local = get_ip_info(ip, ipm_iproot, remote=False)
+        ip_info_remote = get_ip_info(ip, ipm_iproot, remote=True)
         if ip_info_local["version"] == version:
             console.print(
                 f"[white]The IP [magenta]{ip}"
@@ -509,15 +509,15 @@ def check_IP(console, ip_root, ip, update=False, version=None, technology="sky13
         else:
             if update:
                 console.print(f"Updating {ip}[white]...")
-                uninstall_IP(console, ip_root, ip)
+                uninstall_IP(console, ipm_iproot, ip)
                 install_IP(
                     console=console,
-                    ip_root=ip_root,
+                    ipm_iproot=ipm_iproot,
                     ip=ip,
                     overwrite=True,
                     technology=technology,
                     version=version,
-                    json_file_loc=os.path.join(ip_root, LOCAL_JSON_FILE_NAME),
+                    json_file_loc=os.path.join(ipm_iproot, LOCAL_JSON_FILE_NAME),
                 )
             else:
                 console.print(
@@ -590,14 +590,14 @@ def check_JSON(console, JSON_path, ip):
     return flag
 
 
-def precheck(console, ip_root, ip, version, gh_repo):
+def precheck(console, ipm_iproot, ip, version, gh_repo):
     if gh_repo.startswith("https"):
         gh_repo_url = gh_repo
     else:
         gh_repo_url = f"https://{gh_repo}"
     release_tag_url = f"{gh_repo_url}/releases/tag/{version}"
     release_tarball_url = f"{gh_repo_url}/releases/download/{version}/{version}.tar.gz"
-    IPM_DIR_PATH = os.path.join(ip_root)
+    IPM_DIR_PATH = os.path.join(ipm_iproot)
     precheck_path = os.path.join(IPM_DIR_PATH, f"{ip}_pre-check")
     ip_path = os.path.join(precheck_path, ip)
     if checkdir(precheck_path):
