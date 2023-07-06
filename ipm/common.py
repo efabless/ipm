@@ -141,7 +141,6 @@ def list_IPs(console: rich.console.Console, ipm_iproot, remote, category="all"):
     if category == "all":
         for key, values in data.items():
             for value in values:
-                print(value)
                 table.add_row(
                     key,
                     value["name"],
