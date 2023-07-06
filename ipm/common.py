@@ -680,14 +680,14 @@ def check_IP(console, ipm_iproot, ip, update=False, version=None, technology="sk
 
 
 def check_hierarchy(console, ip_path, ip, json_path):
-    common_dirs = ["hdl/bus_wrapper", "fw"]
+    common_dirs = ["verify/beh_model", "fw", "hdl/rtl/bus_wrapper"]
     with open(json_path) as json_file:
         data = json.load(json_file)
     # check the folder hierarchy
     if data["type"] == "hard":
         ipm_dirs = ["hdl/gl", "timing/lib", "timing/sdf", "timing/spef", "layout/gds", "layout/lef"]
     elif data["type"] == "soft" and data["category"] == "digital":
-        ipm_dirs = ["hdl/rtl", "verify"]
+        ipm_dirs = ["hdl/rtl/design", "verify/utb", "pnr"]
     if data["category"] == "analog":
         ipm_dirs = ["spice"]
     ipm_dirs = ipm_dirs + common_dirs
@@ -728,6 +728,10 @@ def check_JSON(console, JSON_path, ip):
         "width",
         "height",
         "technology",
+        "tag",
+        "cell_count",
+        "clk_freq",
+        "license"
     ]
     flag = True
     with open(JSON_path) as json_file:
