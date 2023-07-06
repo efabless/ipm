@@ -25,7 +25,7 @@ from .manage import (
     check_cmd,
     update_cmd,
     precheck_cmd,
-    history_cmd,
+    info_cmd,
     install_deps_cmd
 )
 
@@ -48,7 +48,7 @@ cli.add_command(uninstall_cmd)
 cli.add_command(check_cmd)
 cli.add_command(update_cmd)
 cli.add_command(precheck_cmd)
-cli.add_command(history_cmd)
+cli.add_command(info_cmd)
 cli.add_command(install_deps_cmd)
 
 

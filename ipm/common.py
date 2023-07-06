@@ -126,14 +126,14 @@ def list_IPs(console: rich.console.Console, ipm_iproot, remote, category="all"):
     table.add_column("IP Name", style="magenta")
     table.add_column("Version")
     table.add_column("Author")
-    table.add_column("Date")
+    # table.add_column("Date")
     table.add_column("Type")
     table.add_column("Tag")
-    table.add_column("Cell count")
-    table.add_column("Clk freq (MHz)")
+    # table.add_column("Cell count")
+    # table.add_column("Clk freq (MHz)")
     table.add_column("Status")
-    table.add_column("Width (um)")
-    table.add_column("Height (um)")
+    # table.add_column("Width (um)")
+    # table.add_column("Height (um)")
     table.add_column("Technology", style="cyan")
     table.add_column("License", style="magenta")
 
@@ -146,14 +146,14 @@ def list_IPs(console: rich.console.Console, ipm_iproot, remote, category="all"):
                     value["name"],
                     value["release"][-1]["version"],
                     value["author"],
-                    value["release"][-1]["date"],
+                    # value["release"][-1]["date"],
                     value["type"],
                     ",".join(value["tag"]),
-                    value["cell_count"],
-                    value["clk_freq"],
+                    # value["cell_count"],
+                    # value["clk_freq"],
                     value["status"],
-                    value["width"],
-                    value["height"],
+                    # value["width"],
+                    # value["height"],
                     value["technology"],
                     value["license"],
                 )
@@ -170,14 +170,14 @@ def list_IPs(console: rich.console.Console, ipm_iproot, remote, category="all"):
                 value["name"],
                 value["release"][-1]["version"],
                 value["author"],
-                value["release"][-1]["date"],
+                # value["release"][-1]["date"],
                 value["type"],
                 ",".join(value["tag"]),
-                value["cell_count"],
-                value["clk_freq"],
+                # value["cell_count"],
+                # value["clk_freq"],
                 value["status"],
-                value["width"],
-                value["height"],
+                # value["width"],
+                # value["height"],
                 value["technology"],
                 value["license"],
             )
@@ -207,16 +207,17 @@ def list_IPs_local(console: rich.console.Console, ipm_iproot, remote, category="
     table.add_column("IP Name", style="magenta")
     table.add_column("Version")
     table.add_column("Author")
-    table.add_column("Date")
+    # table.add_column("Date")
     table.add_column("Type")
     table.add_column("Tag")
-    table.add_column("Cell count")
-    table.add_column("Clk freq (MHz)")
+    # table.add_column("Cell count")
+    # table.add_column("Clk freq (MHz)")
     table.add_column("Status")
-    table.add_column("Width (um)")
-    table.add_column("Height (um)")
+    # table.add_column("Width (um)")
+    # table.add_column("Height (um)")
     table.add_column("Technology", style="cyan")
     table.add_column("License", style="magenta")
+    table.add_column("IP path")
 
     total_IPs = 0
     if category == "all":
@@ -227,16 +228,17 @@ def list_IPs_local(console: rich.console.Console, ipm_iproot, remote, category="
                     value["name"],
                     value["version"],
                     value["author"],
-                    value["date"],
+                    # value["date"],
                     value["type"],
                     ",".join(value["tag"]),
-                    value["cell_count"],
-                    value["clk_freq"],
+                    # value["cell_count"],
+                    # value["clk_freq"],
                     value["status"],
-                    value["width"],
-                    value["height"],
+                    # value["width"],
+                    # value["height"],
                     value["technology"],
                     value["license"],
+                    value["ip_root"]
                 )
             total_IPs = total_IPs + len(values)
         if total_IPs > 0:
@@ -251,16 +253,17 @@ def list_IPs_local(console: rich.console.Console, ipm_iproot, remote, category="
                 value["name"],
                 value["version"],
                 value["author"],
-                value["date"],
+                # value["date"],
                 value["type"],
                 ",".join(value["tag"]),
-                value["cell_count"],
-                value["clk_freq"],
+                # value["cell_count"],
+                # value["clk_freq"],
                 value["status"],
-                value["width"],
-                value["height"],
+                # value["width"],
+                # value["height"],
                 value["technology"],
                 value["license"],
+                value["ip_root"]
             )
         total_IPs = total_IPs + len(data[category])
         if total_IPs > 0:
@@ -288,7 +291,7 @@ def get_IP_list(ipm_iproot, remote):
     return IP_list
 
 
-def get_IP_history(console: rich.console.Console, ipm_iproot, ip, remote):
+def get_IP_info(console: rich.console.Console, ipm_iproot, ip, remote):
     IPM_DIR_PATH = os.path.join(ipm_iproot)
     JSON_FILE = ""
     # IP_list = []

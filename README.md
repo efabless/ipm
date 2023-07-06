@@ -40,7 +40,7 @@ ipm install <ip_name> [OPTIONS] --overwrite
 ``` 
 Installs the IP in the IP root. The user must provide a valid `ip_name`, to check all available IPs run `ipm ls`. If there exists a non-empty folder of the IP in the IP root, the install function will not work and if the user wishes to overwrite the existing folder he should pass the option `--overwrite`
 To install a specific version of the IP you can specify it using `--version <version>`
-**NOTE** you can see all versions of IP using `ipm ls-history --ip <ip name>`
+**NOTE** you can see all versions of IP using `ipm ls-info --ip <ip name>`
 
 ### Installing IPs from dependencies file
 ```bash

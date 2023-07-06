@@ -17,7 +17,7 @@ import click
 from rich.console import Console
 
 from .common import (
-    get_IP_history,
+    get_IP_info,
     install_deps_ip,
     list_IPs_local,
     opt_ipm_iproot,
@@ -413,20 +413,20 @@ def precheck_cmd(ipm_iproot):
         precheck(console, ipm_iproot, ip, version, gh_repo)
 
 
-@click.command("ls-history")
-@click.option("--ip", required=True, help="ip to get history of versions")
+@click.command("info")
+@click.option("--ip", required=True, help="ip to get info of versions")
 @opt_ipm_iproot
-def history_cmd(ipm_iproot, ip):
+def info_cmd(ipm_iproot, ip):
     """list all versions of the IP"""
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
-        get_IP_history(console, ipm_iproot, ip, remote=True)
+        get_IP_info(console, ipm_iproot, ip, remote=True)
 
 
-def history(ipm_iproot, ip):
+def info(ipm_iproot, ip):
     """list all versions of the IP"""
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
-        get_IP_history(console, ipm_iproot, ip, remote=True)
+        get_IP_info(console, ipm_iproot, ip, remote=True)
