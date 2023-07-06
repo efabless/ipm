@@ -70,8 +70,9 @@ All IPs must include:
     - readme.md
     - <ip>.json
     - doc/datasheet.pdf
-    - hdl/bus_wrapper
+    - hdl/rtl/bus_wrapper **optional**
     - fw
+    - verify/beh_model
 
 All digital and analog hard IPs must include:
     
@@ -88,10 +89,10 @@ All Analog IPs must include:
 
 All soft digital IPs must include:
 
-    - hdl/rtl
+    - hdl/rtl/design
     - verify
-    - openlane/<ip>.json **optional**
-    - openlane/<ip>.sdc **optional**
+    - pnr **optional**
+    - verify/utb
 
 Directory structure should look like:
 
@@ -109,12 +110,15 @@ Directory structure should look like:
 │   └── sdf\
 ├── spice\
 ├── hdl\ 
-│   ├── bus_wrapper\
 │   ├── rtl\
+│   │   ├── bus_wrapper\
+│   │   └── design\
 │   └── gl\
 ├── fw\
-├── openlane\
-└── verify\
+├── verify\
+│   ├── utb\
+│   └── beh_model\
+└── pnr\
 ```
 
 **NOTE**
@@ -135,25 +139,41 @@ Your ```<ip>.json``` file should look like:
     "email": "mshalan@aucegypt.edu",
     "version" : "0.9",
     "date": "9-21-2022",
-    "category": "dataconv",
+    "category": "digital",
+    "tag": ["BUS"],
     "type": "hard",
-    "status": "silicon",
+    "status": "SI_validated",
     "width": "0.25",
     "height": "0.2",
-    "technology": "sky130"
+    "technology": "sky130",
+    "cell_count": 200,
+    "clk_freq": 10,
+    "license": "public"
 }
 ```
 **NOTE**
 
 `date` should be in the form: `mm-dd-yyyy`
 
-`category` can be `digital, analog, dataconv, comm, rf, ...`
+`category` can be `digital, analog, AMS`
+
+`tag` for `digital` can be a combination of `processor, comm, memory, BUS, acceleration, ... `
+
+`tag` for `analog` can be a combination of `clocking, power, dataconv, sensor, sigcond, rf, ... `
+
+`tag` for `other` can be a combination of `peripheral, graphics, security, automotive, AI, ... `
+
+*You can use any combination of tags*
 
 `type` can be `hard/soft`
 
-`status` can be `np (not proven), fpga (proven), silicon (proven)`
+`status` can be `verified, FPGA_validated, SI_validated, production_ready`
 
-`width` and `height` should be in mm
+`width` and `height` should be in `um`
+
+`clk_freq` should be in `MHz`
+
+`license` can be `pulic/private`
 
 **All the above fields must be included in your file**
 
