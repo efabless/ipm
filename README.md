@@ -42,6 +42,12 @@ Installs the IP in the IP root. The user must provide a valid `ip_name`, to chec
 To install a specific version of the IP you can specify it using `--version <version>`
 **NOTE** you can see all versions of IP using `ipm ls-history --ip <ip name>`
 
+### Installing IPs from dependencies file
+```bash
+ipm install-dep <ip_name> [OPTIONS] --overwrite
+``` 
+There has to be a dependencies file that should be provided in the `--ip-root` path
+
 ### Uninstalling an IP
 ```bash
 ipm uninstall <ip_name>

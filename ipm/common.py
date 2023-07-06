@@ -46,7 +46,7 @@ IPM_REPO_API = f"https://api.github.com/repos/{IPM_REPO_ID}"
 IPM_DEFAULT_HOME = os.path.join(os.path.expanduser("~"), ".ipm")
 
 LOCAL_JSON_FILE_NAME = "Installed_IPs.json"
-MANIFEST_FILE_NAME = "manifest.json"
+DEPENDENCIES_FILE_NAME = "dependencies.json"
 REMOTE_JSON_FILE_NAME = (
     "https://raw.githubusercontent.com/efabless/ipm/main/Verified_IPs.json"
 )
@@ -173,7 +173,7 @@ def list_IPs(console: rich.console.Console, ipm_iproot, remote, category="all"):
                 value["author"],
                 value["release"][-1]["date"],
                 value["type"],
-                value["tag"],
+                ",".join(value["tag"]),
                 value["cell_count"],
                 value["clk_freq"],
                 value["status"],
@@ -230,7 +230,7 @@ def list_IPs_local(console: rich.console.Console, ipm_iproot, remote, category="
                     value["author"],
                     value["date"],
                     value["type"],
-                    value["tag"],
+                    ",".join(value["tag"]),
                     value["cell_count"],
                     value["clk_freq"],
                     value["status"],
@@ -254,7 +254,7 @@ def list_IPs_local(console: rich.console.Console, ipm_iproot, remote, category="
                 value["author"],
                 value["date"],
                 value["type"],
-                value["tag"],
+                ",".join(value["tag"]),
                 value["cell_count"],
                 value["clk_freq"],
                 value["status"],
@@ -326,7 +326,7 @@ def get_IP_history(console: rich.console.Console, ipm_iproot, ip, remote):
                         value["author"],
                         value["release"][i]["date"],
                         value["type"],
-                        value["tag"],
+                        ",".join(value["tag"]),
                         value["cell_count"],
                         value["clk_freq"],
                         value["status"],
@@ -400,11 +400,11 @@ def add_IP_to_JSON(ipm_iproot, ip, ip_info, json_file_loc):
     with open(JSON_FILE, "w") as json_file:
         json.dump(json_decoded, json_file)
 
-def create_manifest(ipm_iproot, ip, ip_info, man_file):
-    if man_file:
-        JSON_FILE = os.path.join(man_file, MANIFEST_FILE_NAME)
+def create_deps(ipm_iproot, ip, ip_info, deps_file):
+    if deps_file:
+        JSON_FILE = os.path.join(deps_file, DEPENDENCIES_FILE_NAME)
     else:
-        JSON_FILE = os.path.join(ipm_iproot, MANIFEST_FILE_NAME)
+        JSON_FILE = os.path.join(ipm_iproot, DEPENDENCIES_FILE_NAME)
 
     if os.path.exists(JSON_FILE):
         with open(JSON_FILE) as json_file:
@@ -424,11 +424,11 @@ def create_manifest(ipm_iproot, ip, ip_info, man_file):
     with open(JSON_FILE, "w") as json_file:
         json.dump(json_decoded, json_file)
 
-def remove_IP_from_manifest(ip_info, ip_root, man_file):
-    if man_file:
-        json_file = os.path.join(man_file, MANIFEST_FILE_NAME)
+def remove_from_deps(ip_info, ip_root, deps_file):
+    if deps_file:
+        json_file = os.path.join(deps_file, DEPENDENCIES_FILE_NAME)
     else:
-        json_file = os.path.join(ip_root, MANIFEST_FILE_NAME)
+        json_file = os.path.join(ip_root, DEPENDENCIES_FILE_NAME)
 
     with open(json_file, 'r') as f:
         json_decoded = json.load(f)
@@ -466,7 +466,7 @@ def install_IP(
     technology,
     version,
     json_file_loc,
-    man_file
+    deps_file
 ):
     ip_path = os.path.join(ipm_iproot, ip)
     if os.path.exists(ip_path):
@@ -483,7 +483,7 @@ def install_IP(
                     ip, json_file_loc, remote=False, technology=technology, version=version, ip_root=ipm_iproot
                 )
                 remove_IP_from_JSON(json_file_loc, ip_info, ipm_iproot)
-                remove_IP_from_manifest(ip_info, ipm_iproot, man_file)
+                remove_from_deps(ip_info, ipm_iproot, deps_file)
                 shutil.rmtree(ip_path)
         else:
             shutil.rmtree(ip_path)
@@ -508,21 +508,21 @@ def install_IP(
             f"[green]Successfully installed {ip} version {ip_info['version']} to the directory {ip_path}"
         )
         add_IP_to_JSON(ipm_iproot, ip, ip_info, json_file_loc)
-        create_manifest(ipm_iproot, ip, ip_info, man_file)
+        create_deps(ipm_iproot, ip, ip_info, deps_file)
 
 
-def install_ip_from_manifest(
+def install_deps_ip(
     console: rich.console.Console,
     ipm_iproot,
     overwrite,
     json_file_loc,
-    man_file,
+    deps_file,
     IP_list
 ):
-    if man_file:
-        JSON_FILE = os.path.join(man_file, MANIFEST_FILE_NAME)
+    if deps_file:
+        JSON_FILE = os.path.join(deps_file, DEPENDENCIES_FILE_NAME)
     else:
-        JSON_FILE = os.path.join(ipm_iproot, MANIFEST_FILE_NAME)
+        JSON_FILE = os.path.join(ipm_iproot, DEPENDENCIES_FILE_NAME)
 
     if os.path.exists(JSON_FILE):
         with open(JSON_FILE) as json_file:
@@ -553,7 +553,7 @@ def install_ip_from_manifest(
                         ip, json_file_loc, remote=False, technology=technology, version=version, ip_root=ipm_iproot
                     )
                     remove_IP_from_JSON(json_file_loc, ip_info, ipm_iproot)
-                    remove_IP_from_manifest(ip_info, ipm_iproot, man_file)
+                    remove_from_deps(ip_info, ipm_iproot, deps_file)
                     shutil.rmtree(ip_path)
             else:
                 shutil.rmtree(ip_path)
@@ -585,7 +585,7 @@ def uninstall_IP(console: rich.console.Console, ipm_iproot, ip, ip_root):
     ip_info = get_ip_info(ip, ipm_iproot, remote=False, ip_root=ip_root)
     if os.path.exists(ip_path):
         remove_IP_from_JSON(ipm_iproot, ip_info, ip_root)
-        remove_IP_from_manifest(ip_info, ip_root, None)
+        remove_from_deps(ip_info, ip_root, None)
         shutil.rmtree(ip_path, ignore_errors=False, onerror=None)
         console.print(
             f'[green]Successfully uninstalled {ip} version {ip_info["version"]}'

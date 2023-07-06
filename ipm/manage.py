@@ -18,7 +18,7 @@ from rich.console import Console
 
 from .common import (
     get_IP_history,
-    install_ip_from_manifest,
+    install_deps_ip,
     list_IPs_local,
     opt_ipm_iproot,
     list_IPs,
@@ -201,15 +201,15 @@ def output(ipm_iproot):
 @click.option("--technology", required=False, default="sky130", help="Install IP based on technology")
 @click.option("--version", required=False, help="Install IP with a specific version")
 @click.option("--ip-root", required=False, default=os.path.join(os.path.expanduser("~"), ".ipm"), help="IP installation path")
-@click.option("--man-file", required=False, help="manifest file path")
+@click.option("--deps-file", required=False, help="dependencies file path")
 @opt_ipm_iproot
-def install_cmd(ip, ip_root, ipm_iproot, overwrite, technology="sky130", version=None, man_file=None):
+def install_cmd(ip, ip_root, ipm_iproot, overwrite, technology="sky130", version=None, deps_file=None):
     """Install one of the verified IPs locally"""
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         install(
-            console, ip, ip_root, overwrite, technology=technology, version=version, json_file_loc=ipm_iproot, man_file=man_file
+            console, ip, ip_root, overwrite, technology=technology, version=version, json_file_loc=ipm_iproot, deps_file=deps_file
         )
 
 
@@ -221,7 +221,7 @@ def install(
     technology="sky130",
     version=None,
     json_file_loc=None,
-    man_file=None,
+    deps_file=None,
 ):
     """Install one of the verified IPs locally"""
     if json_file_loc:
@@ -243,11 +243,11 @@ def install(
                 technology=technology,
                 version=version,
                 json_file_loc=json_file_loc,
-                man_file=man_file
+                deps_file=deps_file
             )
 
 
-@click.command("install-from-manifest")
+@click.command("install-dep")
 @click.option(
     "--overwrite",
     required=False,
@@ -256,24 +256,24 @@ def install(
     help="Overwrite IP",
 )
 @click.option("--ip-root", required=False, default=os.path.join(os.path.expanduser("~"), ".ipm"), help="IP installation path")
-@click.option("--man-file", required=False, help="manifest file path")
+@click.option("--dep-file", required=False, help="dependencies file path")
 @opt_ipm_iproot
-def install_from_manifest_cmd(ip_root, ipm_iproot, overwrite, man_file=None):
+def install_deps_cmd(ip_root, ipm_iproot, overwrite, dep_file=None):
     """Install one of the verified IPs locally"""
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
-        install_from_manifest(
-            console, ip_root, overwrite, json_file_loc=ipm_iproot, man_file=man_file
+        install_deps(
+            console, ip_root, overwrite, json_file_loc=ipm_iproot, deps_file=dep_file
         )
 
 
-def install_from_manifest(
+def install_deps(
     console,
     ipm_iproot,
     overwrite,
     json_file_loc=None,
-    man_file=None,
+    deps_file=None,
 ):
     """Install one of the verified IPs locally"""
     if json_file_loc:
@@ -282,12 +282,12 @@ def install_from_manifest(
         valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         IP_list = get_IP_list(ipm_iproot, remote=True)
-        install_ip_from_manifest(
+        install_deps_ip(
             console=console,
             ipm_iproot=ipm_iproot,
             overwrite=overwrite,
             json_file_loc=json_file_loc,
-            man_file=man_file,
+            deps_file=deps_file,
             IP_list=IP_list
         )
 
