@@ -39,6 +39,10 @@
                 {
                     "name": "dummy_ip",
                     "version": "v1.0"
+                },
+                {
+                    "name": "dummy_ip2",
+                    "version": "v1.0"
                 }
             ]
         },
