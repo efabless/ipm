@@ -17,6 +17,7 @@ import click
 from rich.console import Console
 
 from .common import (
+    check_ip_root_dir,
     get_IP_info,
     install_deps_ip,
     list_IPs_local,
@@ -206,8 +207,9 @@ def output(ipm_iproot):
 def install_cmd(ip, ip_root, ipm_iproot, overwrite, technology="sky130", version=None, deps_file=None):
     """Install one of the verified IPs locally"""
     console = Console()
-    valid = check_ipm_directory(console, ipm_iproot)
-    if valid:
+    valid_ipm_dir = check_ipm_directory(console, ipm_iproot)
+    valid_ip_dir = check_ip_root_dir(console, ip_root)
+    if valid_ipm_dir and valid_ip_dir:
         install(
             console, ip, ipm_iproot, overwrite, technology=technology, version=version, ip_root=ip_root, deps_file=deps_file
         )
@@ -258,8 +260,9 @@ def install(
 def install_deps_cmd(ip_root, ipm_iproot, overwrite, dep_file=None):
     """Install verified IPs from dependencies json file"""
     console = Console()
-    valid = check_ipm_directory(console, ipm_iproot)
-    if valid:
+    valid_ipm_dir = check_ipm_directory(console, ipm_iproot)
+    valid_ip_dir = check_ip_root_dir(console, ip_root)
+    if valid_ipm_dir and valid_ip_dir:
         install_deps(
             console, ipm_iproot, overwrite, ip_root=ip_root, deps_file=dep_file
         )
@@ -294,8 +297,9 @@ def install_deps(
 def uninstall_cmd(ip, ipm_iproot, ip_root, dep_file):
     """Uninstall one of the IPs installed locally"""
     console = Console()
-    valid = check_ipm_directory(console, ipm_iproot)
-    if valid:
+    valid_ipm_dir = check_ipm_directory(console, ipm_iproot)
+    valid_ip_dir = check_ip_root_dir(console, ip_root)
+    if valid_ipm_dir and valid_ip_dir:
         IP_list = get_IP_list(ipm_iproot, remote=False)
         if ip not in IP_list:
             print(
@@ -407,7 +411,7 @@ def package_check_cmd(ipm_iproot, name, version, url):
 
 
 @click.command("info")
-@click.option("--ip", required=True, help="ip to get info of versions")
+@click.argument("ip")
 @opt_ipm_iproot
 def info_cmd(ipm_iproot, ip):
     """list all versions and info of the IP"""

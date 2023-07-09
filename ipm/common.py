@@ -280,6 +280,13 @@ def check_ipm_directory(console: rich.console.Console, ipm_iproot) -> bool:
                     create_local_JSON(JSON_FILE_PATH)
     return True
 
+def check_ip_root_dir(console: rich.console.Console, ip_root) -> bool:
+    if not os.path.isdir(ip_root):
+        console.print(f"[red] ip-root {ip_root} can't be found")
+        return False
+    else:
+        return True
+
 
 def list_IPs(console: rich.console.Console, ipm_iproot, remote, category="all"):
     if remote:
@@ -539,6 +546,7 @@ def install_ip(
     remote_ip = RemoteIP(ip)
     local_ip = LocalIP(ip, ipm_iproot)
     remote_ip.get_info(technology=technology, version=version)
+    console.print(f"[green] IP {ip} is getting installed at {ip_path}")
     response = requests.get(remote_ip.release_url, stream=True)
     if response.status_code == 404:
         console.print(
