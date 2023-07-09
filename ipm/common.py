@@ -48,7 +48,7 @@ IPM_DEFAULT_HOME = os.path.join(os.path.expanduser("~"), ".ipm")
 LOCAL_JSON_FILE_NAME = "Installed_IPs.json"
 DEPENDENCIES_FILE_NAME = "dependencies.json"
 REMOTE_JSON_FILE_NAME = (
-    "https://raw.githubusercontent.com/efabless/ipm/main/Verified_IPs.json"
+    "https://raw.githubusercontent.com/efabless/ipm/ip_dependencies/Verified_IPs.json"
 )
 
 class LocalIP:
@@ -576,7 +576,8 @@ def install_ip(
     technology,
     version,
     ip_root,
-    deps_file
+    deps_file,
+    dependencies
 ):
     install(
         console,
@@ -591,11 +592,14 @@ def install_ip(
     local_ip = LocalIP(ip, ipm_iproot)
     local_ip.get_info(technology=technology, version=version)
     if local_ip.dependencies:
-        dep = local_ip.dependencies.pop()
-        print(dep)
-        dep_path = os.path.join(f"{ip_root}/{ip}" , "IP")
-        os.mkdir(dep_path)
-        install_ip(console, ipm_iproot, dep["name"], False, technology, dep["version"], dep_path, dep_path)
+        for d in local_ip.dependencies:
+            d['path'] = os.path.join(f"{ip_root}/{ip}" , "IP")
+            dependencies.append(d)
+    if dependencies:
+        dep = dependencies.pop()
+        if not checkdir(dep['path']):
+            os.mkdir(dep['path'])
+        install_ip(console, ipm_iproot, dep["name"], False, technology, dep["version"], dep['path'], dep['path'], dependencies)
 
 
 def install(

@@ -242,7 +242,8 @@ def install(
                 technology=technology,
                 version=version,
                 ip_root=ip_root,
-                deps_file=deps_file
+                deps_file=deps_file,
+                dependencies=[]
             )
 
 
