@@ -48,7 +48,7 @@ IPM_DEFAULT_HOME = os.path.join(os.path.expanduser("~"), ".ipm")
 LOCAL_JSON_FILE_NAME = "Installed_IPs.json"
 DEPENDENCIES_FILE_NAME = "dependencies.json"
 REMOTE_JSON_FILE_NAME = (
-    "https://raw.githubusercontent.com/efabless/ipm/ip_dependencies/Verified_IPs.json"
+    "https://raw.githubusercontent.com/efabless/ipm/main/Verified_IPs.json"
 )
 
 class LocalIP:
