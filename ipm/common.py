@@ -193,7 +193,16 @@ class RemoteIP:
         self.ip = ip
 
     def get_info(self, technology="sky130", version=None):
-        resp = requests.get(REMOTE_JSON_FILE_NAME)
+        if os.environ['GITHUB_TOKEN']:
+            headers = {"Authorization": f"token {os.environ['GITHUB_TOKEN']}"}
+        else:
+            print("Can't find GITHUB_TOKEN in environment, please export your github token")
+            print("THIS IS A TEMP WORKAROUND")
+            exit(1)
+        resp = requests.get(REMOTE_JSON_FILE_NAME, headers=headers)
+        if resp.status_code == 404:
+            print("Can't find remote file, you don't have access to IPM private repo, or GITHUB_TOKEN is wrong")
+            exit(1)
         data = json.loads(resp.text)
         for key, values in data.items():
             for value in values:
@@ -290,7 +299,16 @@ def check_ip_root_dir(console: rich.console.Console, ip_root) -> bool:
 
 def list_IPs(console: rich.console.Console, ipm_iproot, remote, category="all"):
     if remote:
-        resp = requests.get(REMOTE_JSON_FILE_NAME)
+        if os.environ['GITHUB_TOKEN']:
+            headers = {"Authorization": f"token {os.environ['GITHUB_TOKEN']}"}
+        else:
+            console.print("[red]Can't find GITHUB_TOKEN in environment, please export your github token")
+            console.print("[red]THIS IS A TEMP WORKAROUND")
+            exit(1)
+        resp = requests.get(REMOTE_JSON_FILE_NAME, headers=headers)
+        if resp.status_code == 404:
+            console.print("[red]Can't find remote file, you don't have access to IPM private repo, or GITHUB_TOKEN is wrong")
+            exit(1)
         data = json.loads(resp.text)
     else:
         JSON_FILE = os.path.join(ipm_iproot, LOCAL_JSON_FILE_NAME)
@@ -368,7 +386,16 @@ def list_IPs(console: rich.console.Console, ipm_iproot, remote, category="all"):
 
 def list_IPs_local(console: rich.console.Console, ipm_iproot, remote, category="all"):
     if remote:
-        resp = requests.get(REMOTE_JSON_FILE_NAME)
+        if os.environ['GITHUB_TOKEN']:
+            headers = {"Authorization": f"token {os.environ['GITHUB_TOKEN']}"}
+        else:
+            console.print("[red]Can't find GITHUB_TOKEN in environment, please export your github token")
+            console.print("[red]THIS IS A TEMP WORKAROUND")
+            exit(1)
+        resp = requests.get(REMOTE_JSON_FILE_NAME, headers=headers)
+        if resp.status_code == 404:
+            console.print("[red]Can't find remote file, you don't have access to IPM private repo, or GITHUB_TOKEN is wrong")
+            exit(1)
         data = json.loads(resp.text)
     else:
         JSON_FILE = os.path.join(ipm_iproot, LOCAL_JSON_FILE_NAME)
@@ -448,12 +475,21 @@ def list_IPs_local(console: rich.console.Console, ipm_iproot, remote, category="
 
 
 # Gets a list of all available IP "names"
-def get_IP_list(ipm_iproot, remote):
+def get_IP_list(console, ipm_iproot, remote):
     IPM_DIR_PATH = os.path.join(ipm_iproot)
     JSON_FILE = ""
     IP_list = []
     if remote:
-        resp = requests.get(REMOTE_JSON_FILE_NAME)
+        if os.environ['GITHUB_TOKEN']:
+            headers = {"Authorization": f"token {os.environ['GITHUB_TOKEN']}"}
+        else:
+            console.print("[red]Can't find GITHUB_TOKEN in environment, please export your github token")
+            console.print("[red]THIS IS A TEMP WORKAROUND")
+            exit(1)
+        resp = requests.get(REMOTE_JSON_FILE_NAME, headers=headers)
+        if resp.status_code == 404:
+            console.print("[red]Can't find remote file, you don't have access to IPM private repo, or GITHUB_TOKEN is wrong")
+            exit(1)
         data = json.loads(resp.text)
     else:
         JSON_FILE = os.path.join(IPM_DIR_PATH, LOCAL_JSON_FILE_NAME)
@@ -485,7 +521,16 @@ def get_IP_info(console: rich.console.Console, ipm_iproot, ip, remote):
     table.add_column("Technology", style="cyan")
     table.add_column("License", style="magenta")
     if remote:
-        resp = requests.get(REMOTE_JSON_FILE_NAME)
+        if os.environ['GITHUB_TOKEN']:
+            headers = {"Authorization": f"token {os.environ['GITHUB_TOKEN']}"}
+        else:
+            console.print("[red]Can't find GITHUB_TOKEN in environment, please export your github token")
+            console.print("[red]THIS IS A TEMP WORKAROUND")
+            exit(1)
+        resp = requests.get(REMOTE_JSON_FILE_NAME, headers=headers)
+        if resp.status_code == 404:
+            console.print("[red]Can't find remote file, you don't have access to IPM private repo, or GITHUB_TOKEN is wrong")
+            exit(1)
         data = json.loads(resp.text)
     else:
         JSON_FILE = os.path.join(IPM_DIR_PATH, LOCAL_JSON_FILE_NAME)
@@ -654,7 +699,7 @@ def uninstall_ip(console: rich.console.Console, ipm_iproot, ip, ip_root, deps_fi
 def check_IP(console, ipm_iproot, ip, update=False, version=None, technology="sky130", ip_root=None):
     update_counter = 0
     if ip == "all":  # Checks or updates all installed IPs
-        IP_list = get_IP_list(ipm_iproot, remote=False)
+        IP_list = get_IP_list(console, ipm_iproot, remote=False)
         if len(IP_list) == 0:  # No installed IPs
             if update:
                 console.print("[red]No installed IPs to update")
