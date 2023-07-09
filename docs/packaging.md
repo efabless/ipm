@@ -1,7 +1,5 @@
 # Packing IPs for disstribution
 Each IP shall have its own public GH repo for development. The repo shall have a CI that creates a compressed tarball after the structure outlined [here](ip_package.md) and added to the releases.
-- The release's tag should be named as followed:
-```<ip_name>-<version>```
 - The tarball in the release should be named:
 ```default.tar.gz```
 
@@ -39,6 +37,6 @@ Note: Internally the repo url is used as an IP ID.
     "width": "0.25",
     "height": "0.2"
 }
-  
+
 ```
 
