@@ -228,7 +228,7 @@ def install(
     """Install one of the verified IPs locally"""
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
-        IP_list = get_IP_list(ipm_iproot, remote=True)
+        IP_list = get_IP_list(console, ipm_iproot, remote=True)
         if ip not in IP_list:
             print(
                 "Please provide a valid IP name, to check all the available IPs invoke 'ipm ls'"
@@ -278,7 +278,7 @@ def install_deps(
     """Install verified IPs from dependencies json file"""
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
-        IP_list = get_IP_list(ipm_iproot, remote=True)
+        IP_list = get_IP_list(console, ipm_iproot, remote=True)
         install_deps_ip(
             console=console,
             ipm_iproot=ipm_iproot,
@@ -300,7 +300,7 @@ def uninstall_cmd(ip, ipm_iproot, ip_root, dep_file):
     valid_ipm_dir = check_ipm_directory(console, ipm_iproot)
     valid_ip_dir = check_ip_root_dir(console, ip_root)
     if valid_ipm_dir and valid_ip_dir:
-        IP_list = get_IP_list(ipm_iproot, remote=False)
+        IP_list = get_IP_list(console, ipm_iproot, remote=False)
         if ip not in IP_list:
             print(
                 "Please provide a valid IP name, to check all installed IPs invoke 'ipm ls'"
@@ -321,7 +321,7 @@ def check_cmd(ip, ipm_iproot):
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
-        IP_list = get_IP_list(ipm_iproot, remote=False)
+        IP_list = get_IP_list(console, ipm_iproot, remote=False)
         if ip is not None:
             if ip not in IP_list:
                 print(
@@ -337,7 +337,7 @@ def check(console, ip, ipm_iproot, version):
     """Check for new versions of all installed IPs or a specific IP."""
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
-        IP_list = get_IP_list(ipm_iproot, remote=False)
+        IP_list = get_IP_list(console, ipm_iproot, remote=False)
         if ip is not None:
             if ip not in IP_list:
                 print(
@@ -358,7 +358,7 @@ def update_cmd(ip, all, ipm_iproot):
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
-        IP_list = get_IP_list(ipm_iproot, remote=False)
+        IP_list = get_IP_list(console, ipm_iproot, remote=False)
         if ip is not None:
             if ip not in IP_list:
                 print(
@@ -380,7 +380,7 @@ def update(ip, all, ipm_iproot):
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
-        IP_list = get_IP_list(ipm_iproot, remote=False)
+        IP_list = get_IP_list(console, ipm_iproot, remote=False)
         if ip is not None:
             if ip not in IP_list:
                 print(
