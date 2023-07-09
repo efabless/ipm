@@ -18,7 +18,9 @@ from rich.console import Console
 
 from .common import (
     check_ip_root_dir,
+    check_deps_file,
     get_IP_info,
+    get_deps_from_json,
     install_deps_ip,
     list_IPs_local,
     opt_ipm_iproot,
@@ -261,12 +263,30 @@ def install(
 def install_deps_cmd(ip_root, ipm_iproot, overwrite, dep_file=None):
     """Install verified IPs from dependencies json file"""
     console = Console()
+    default = os.path.join(os.path.expanduser("~"), ".ipm")
     valid_ipm_dir = check_ipm_directory(console, ipm_iproot)
     valid_ip_dir = check_ip_root_dir(console, ip_root)
+    valid_dep_file = check_deps_file()
     if valid_ipm_dir and valid_ip_dir:
-        install_deps(
-            console, ipm_iproot, overwrite, ip_root=ip_root, deps_file=dep_file
+        if valid_dep_file and ip_root == default:
+            ip_root = valid_dep_file
+        else:
+            ip_root = ip_root
+        deps = get_deps_from_json(console, ip_root)
+        install_ip(
+            console=console,
+            ipm_iproot=ipm_iproot,
+            ip=None,
+            overwrite=overwrite,
+            technology=None,
+            version=None,
+            ip_root=ip_root,
+            deps_file=dep_file,
+            dependencies=deps
         )
+        # install_ip(
+        #     console, ipm_iproot, overwrite, ip_root=ip_root, deps_file=dep_file, dependencies=deps
+        # )
 
 
 def install_deps(

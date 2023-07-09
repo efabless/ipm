@@ -187,7 +187,9 @@ class LocalIP:
             "version": ip_info_dict["version"],
             "technology": ip_info_dict["technology"]
         }
-        json_decoded['IP'].append(tmp_dict)
+        for ips in json_decoded['IP']:
+            if not ips['name'] == ip_info_dict["name"]:
+                json_decoded['IP'].append(tmp_dict)
 
         with open(local_json_file, "w") as json_file:
             json.dump(json_decoded, json_file)
@@ -579,27 +581,32 @@ def install_ip(
     deps_file,
     dependencies
 ):
-    install(
-        console,
-        ipm_iproot,
-        ip,
-        overwrite,
-        technology,
-        version,
-        ip_root,
-        deps_file
-    )
-    local_ip = LocalIP(ip, ipm_iproot)
-    local_ip.get_info(technology=technology, version=version)
-    if local_ip.dependencies:
-        for d in local_ip.dependencies:
-            d['path'] = os.path.join(f"{ip_root}/{ip}" , "IP")
-            dependencies.append(d)
+    if ip and technology and version:
+        install(
+            console,
+            ipm_iproot,
+            ip,
+            overwrite,
+            technology,
+            version,
+            ip_root,
+            deps_file
+        )
+        local_ip = LocalIP(ip, ipm_iproot)
+        local_ip.get_info(technology=technology, version=version)
+        if local_ip.dependencies:
+            for d in local_ip.dependencies:
+                d['path'] = os.path.join(f"{ip_root}/{ip}" , "ip")
+                d['technology'] = technology
+                dependencies.append(d)
+    else:
+        for d in dependencies:
+            d['path'] = ip_root
     if dependencies:
         dep = dependencies.pop()
         if not checkdir(dep['path']):
             os.mkdir(dep['path'])
-        install_ip(console, ipm_iproot, dep["name"], False, technology, dep["version"], dep['path'], dep['path'], dependencies)
+        install_ip(console, ipm_iproot, dep["name"], False, dep['technology'], dep["version"], dep['path'], dep['path'], dependencies)
 
 
 def install(
@@ -654,73 +661,16 @@ def install(
         local_ip.add_ip_to_json(remote_ip, ip_root)
         local_ip.create_deps(remote_ip, deps_file)
 
+def get_deps_from_json(console, deps_file):
+    local_json_file = os.path.join(deps_file, DEPENDENCIES_FILE_NAME)
 
-def install_deps_ip(
-    console: rich.console.Console,
-    ipm_iproot,
-    overwrite,
-    ip_root,
-    deps_file,
-    IP_list
-):
-    if deps_file:
-        JSON_FILE = os.path.join(deps_file, DEPENDENCIES_FILE_NAME)
-    else:
-        JSON_FILE = os.path.join(ip_root, DEPENDENCIES_FILE_NAME)
-
-    if os.path.exists(JSON_FILE):
-        with open(JSON_FILE) as json_file:
+    if os.path.exists(local_json_file):
+        with open(local_json_file) as json_file:
             json_decoded = json.load(json_file)
     else:
-        console.print(f"[red]ERROR : {JSON_FILE} couldn't be found")
+        console.print(f"[red]ERROR : {local_json_file} couldn't be found")
         exit(1)
-    ips = json_decoded['IP']
-    for ip_obj in ips:
-        ip = ip_obj['name']
-        version = ip_obj['version']
-        technology = ip_obj['technology']
-        if ip not in IP_list:
-            print(f"[red]IP {ip} is not a valid IP")
-            exit(1)
-        ip_path = os.path.join(ip_root, ip)
-        if os.path.exists(ip_path):
-            if len(os.listdir(ip_path)) != 0:
-                if not overwrite:
-                    console.print(
-                        f"There already exists a non-empty folder for the IP [green]{ip}",
-                        f"at {ip_root}, to overwrite it add the option --overwrite",
-                    )
-                    return
-                else:
-                    console.print(f"Removing exisiting IP {ip} at {ip_root}")
-                    local_ip = LocalIP(ip, ipm_iproot)
-                    local_ip.remove_ip_from_json()
-                    local_ip.remove_from_deps(deps_file)
-                    shutil.rmtree(ip_path)
-            else:
-                shutil.rmtree(ip_path)
-        remote_ip = RemoteIP(ip)
-        local_ip = LocalIP(ip, ipm_iproot)
-        remote_ip.get_info(console, technology=technology, version=version)
-        response = requests.get(remote_ip.release_url, stream=True)
-        if response.status_code == 404:
-            console.print(
-                f"[red]The IP {ip} version {remote_ip.version} could not be found remotely"
-            )
-            exit(1)
-        elif response.status_code == 200:
-            tarball_path = os.path.join(ip_root, f"{ip}.tar.gz")
-            with open(tarball_path, "wb") as f:
-                f.write(response.raw.read())
-            file = tarfile.open(tarball_path)
-            file.extractall(ip_root)
-            file.close
-            os.remove(tarball_path)
-            console.print(
-                f"[green]Successfully installed {ip} version {remote_ip.version} to the directory {ip_path}"
-            )
-            local_ip.add_ip_to_json(remote_ip, ip_root)
-
+    return json_decoded['IP']
 
 def uninstall_ip(console: rich.console.Console, ipm_iproot, ip, ip_root, deps_file):
     ip_path = os.path.join(ip_root, ip)
@@ -826,6 +776,14 @@ def check_IP(console, ipm_iproot, ip, update=False, version=None, technology="sk
                     f"[yellow] has a newer version {remote_ip.version} to update the IP run [white]'ipm update --ip {ip}'"
                 )
 
+
+def check_deps_file():
+    pwd = os.getcwd()
+    dep_file = f"{pwd}/ip/dependencies.json"
+    if os.path.isfile(dep_file):
+        return f"{pwd}/ip/"
+    else:
+        return None
 
 def check_hierarchy(console, ip_path, ip, json_path):
     common_dirs = ["verify/beh_model", "fw", "hdl/rtl/bus_wrapper"]
