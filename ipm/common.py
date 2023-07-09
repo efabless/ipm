@@ -196,23 +196,19 @@ class RemoteIP:
     def __init__(self, ip):
         self.ip = ip
 
-    def get_info(self, technology="sky130", version=None):
+    def get_info(self, console, technology="sky130", version=None):
         if os.environ['GITHUB_TOKEN']:
             headers = {"Authorization": f"token {os.environ['GITHUB_TOKEN']}"}
         else:
-            print("Can't find GITHUB_TOKEN in environment, please export your github token")
-            print("THIS IS A TEMP WORKAROUND")
+            console.print("[red]Can't find GITHUB_TOKEN in environment, please export your github token")
+            console.print("[red]THIS IS A TEMP WORKAROUND")
             exit(1)
         resp = requests.get(REMOTE_JSON_FILE_NAME, headers=headers)
         if resp.status_code == 404:
-            print("Can't find remote file, you don't have access to IPM private repo, or GITHUB_TOKEN is wrong")
+            console.print("[red]Can't find remote file, you don't have access to IPM private repo, or GITHUB_TOKEN is wrong")
             exit(1)
         data = json.loads(resp.text)
         for key, values in data.items():
-            print(key)
-            if self.ip not in values:
-                console.print(f"[red]Can't find {self.ip} with technology {technology} in verified IPs catalog, please make sure to choose IP from verified IP")
-                exit(1)
             for value in values:
                 if value["name"] == self.ip and value["technology"] == technology:
                     self.name = self.ip
@@ -580,7 +576,8 @@ def install_ip(
     technology,
     version,
     ip_root,
-    deps_file
+    deps_file,
+    dependencies
 ):
     install(
         console,
@@ -595,11 +592,14 @@ def install_ip(
     local_ip = LocalIP(ip, ipm_iproot)
     local_ip.get_info(technology=technology, version=version)
     if local_ip.dependencies:
-        dep = local_ip.dependencies.pop()
-        print(dep)
-        dep_path = os.path.join(f"{ip_root}/{ip}" , "IP")
-        os.mkdir(dep_path)
-        install_ip(console, ipm_iproot, dep["name"], False, technology, dep["version"], dep_path, dep_path)
+        for d in local_ip.dependencies:
+            d['path'] = os.path.join(f"{ip_root}/{ip}" , "IP")
+            dependencies.append(d)
+    if dependencies:
+        dep = dependencies.pop()
+        if not checkdir(dep['path']):
+            os.mkdir(dep['path'])
+        install_ip(console, ipm_iproot, dep["name"], False, technology, dep["version"], dep['path'], dep['path'], dependencies)
 
 
 def install(
