@@ -51,6 +51,179 @@ REMOTE_JSON_FILE_NAME = (
     "https://raw.githubusercontent.com/efabless/ipm/main/Verified_IPs.json"
 )
 
+class LocalIP:
+    def __init__(self, ip, ipm_iproot):
+        self.ip = ip
+        self.ipm_iproot = ipm_iproot
+
+    def init_info(self, ip_root, technology="sky130", version=None):
+        self.ip_root = ip_root
+        local_json_file = os.path.join(self.ipm_iproot, LOCAL_JSON_FILE_NAME)
+        with open(local_json_file) as json_file:
+            data = json.load(json_file)
+        for key, values in data.items():
+            for value in values:
+                if value["name"] == self.ip and value["technology"] == technology:
+                    self.name = self.ip
+                    self.repo = value["repo"]
+                    self.version = value["version"]
+                    self.date = value["date"]
+                    self.author = value["author"]
+                    self.email = value["email"]
+                    self.category = key
+                    self.type = value["type"]
+                    self.status = value["status"]
+                    self.width = value["width"]
+                    self.height = value["height"]
+                    self.technology = technology
+                    self.tag = value["tag"]
+                    self.cell_count = value["cell_count"]
+                    self.clk_freq = value["clk_freq"]
+                    self.license = value["license"]
+        release_url = f"https://{self.repo}/releases/download/{self.version}/{self.version}.tar.gz"
+        self.release_url = release_url
+
+    def get_info(self, technology="sky130", version=None):
+        local_json_file = os.path.join(self.ipm_iproot, LOCAL_JSON_FILE_NAME)
+        with open(local_json_file) as json_file:
+            data = json.load(json_file)
+        for key, values in data.items():
+            for value in values:
+                if value["name"] == self.ip and value["technology"] == technology:
+                    self.name = self.ip
+                    self.repo = value["repo"]
+                    self.version = value["version"]
+                    self.date = value["date"]
+                    self.author = value["author"]
+                    self.email = value["email"]
+                    self.category = key
+                    self.type = value["type"]
+                    self.status = value["status"]
+                    self.width = value["width"]
+                    self.height = value["height"]
+                    self.technology = technology
+                    self.tag = value["tag"]
+                    self.cell_count = value["cell_count"]
+                    self.clk_freq = value["clk_freq"]
+                    self.license = value["license"]
+                    self.ip_root = value["ip_root"]
+        release_url = f"https://{self.repo}/releases/download/{self.version}/{self.version}.tar.gz"
+        self.release_url = release_url
+
+    def get_info_from_atr(self, ip_info):
+        ip_info_dict = {}
+        for attribute in ip_info.__dict__:
+            ip_info_dict[attribute] = getattr(ip_info, attribute)
+        return ip_info_dict
+
+    def add_ip_to_json(self, ip_info, ip_root):
+        local_json_file = os.path.join(self.ipm_iproot, LOCAL_JSON_FILE_NAME)
+        with open(local_json_file) as json_file:
+            json_decoded = json.load(json_file)
+        ip_info_dict = self.get_info_from_atr(ip_info)
+        del ip_info_dict["release"]
+        self.ip_root = os.path.abspath(ip_root)
+        ip_info_dict["ip_root"] = self.ip_root
+
+        json_decoded[ip_info_dict["category"]].append(ip_info_dict)
+
+        with open(local_json_file, "w") as json_file:
+            json.dump(json_decoded, json_file)
+
+    def remove_ip_from_json(self):
+        json_file = os.path.join(self.ipm_iproot, LOCAL_JSON_FILE_NAME)
+        with open(json_file, 'r') as f:
+            json_decoded = json.load(f)
+        self.get_info()
+        ip_info_dict = self.get_info_from_atr(self)
+        ip_category = json_decoded[ip_info_dict["category"]]
+
+        for ips in ip_category:
+            if ips['name'] == ip_info_dict['name'] and ips['ip_root'] == self.ip_root:
+                ip_category.remove(ips)
+        json_decoded[ip_info_dict["category"]] = ip_category
+
+        with open(json_file, "w") as json_file:
+            json.dump(json_decoded, json_file)
+
+    def remove_from_deps(self, deps_file):
+        if deps_file:
+            json_file = os.path.join(deps_file, DEPENDENCIES_FILE_NAME)
+        else:
+            json_file = os.path.join(self.ip_root, DEPENDENCIES_FILE_NAME)
+
+        with open(json_file, 'r') as f:
+            json_decoded = json.load(f)
+        ip_info_dict = self.get_info_from_atr(self)
+        ip_category = json_decoded["IP"]
+        for ips in ip_category:
+            if ips['name'] == ip_info_dict['name']:
+                ip_category.remove(ips)
+        json_decoded["IP"] = ip_category
+
+        with open(json_file, "w") as json_file:
+            json.dump(json_decoded, json_file)
+
+    def create_deps(self, ip_info, deps_file):
+        if deps_file:
+            local_json_file = os.path.join(deps_file, DEPENDENCIES_FILE_NAME)
+        else:
+            local_json_file = os.path.join(self.ip_root, DEPENDENCIES_FILE_NAME)
+
+        if os.path.exists(local_json_file):
+            with open(local_json_file) as json_file:
+                json_decoded = json.load(json_file)
+        else:
+            json_decoded = {
+                "IP": []
+            }
+        ip_info_dict = self.get_info_from_atr(ip_info)
+        tmp_dict = {
+            "name": ip_info_dict["name"],
+            "version": ip_info_dict["version"],
+            "technology": ip_info_dict["technology"]
+        }
+        json_decoded['IP'].append(tmp_dict)
+
+        with open(local_json_file, "w") as json_file:
+            json.dump(json_decoded, json_file)
+
+class RemoteIP:
+    def __init__(self, ip):
+        self.ip = ip
+
+    def get_info(self, technology="sky130", version=None):
+        resp = requests.get(REMOTE_JSON_FILE_NAME)
+        data = json.loads(resp.text)
+        for key, values in data.items():
+            for value in values:
+                if value["name"] == self.ip and value["technology"] == technology:
+                    self.name = self.ip
+                    self.repo = value["repo"]
+                    self.release = value["release"]
+                    if version is None:
+                        self.version = value["release"][-1]["version"]
+                        self.date = value["release"][-1]["date"]
+                    else:
+                        for v in value["release"]:
+                            if v["version"] == version:
+                                self.version = v["version"]
+                                self.date = v["date"]
+                    self.author = value["author"]
+                    self.email = value["email"]
+                    self.category = key
+                    self.type = value["type"]
+                    self.status = value["status"]
+                    self.width = value["width"]
+                    self.height = value["height"]
+                    self.technology = technology
+                    self.tag = value["tag"]
+                    self.cell_count = value["cell_count"]
+                    self.clk_freq = value["clk_freq"]
+                    self.license = value["license"]
+        release_url = f"https://{self.repo}/releases/download/{self.version}/{self.version}.tar.gz"
+        self.release_url = release_url
+
 
 def opt_ipm_iproot(function: Callable):
     function = click.option(
@@ -109,14 +282,11 @@ def check_ipm_directory(console: rich.console.Console, ipm_iproot) -> bool:
 
 
 def list_IPs(console: rich.console.Console, ipm_iproot, remote, category="all"):
-    IPM_DIR_PATH = os.path.join(ipm_iproot)
-
-    JSON_FILE = ""
     if remote:
         resp = requests.get(REMOTE_JSON_FILE_NAME)
         data = json.loads(resp.text)
     else:
-        JSON_FILE = os.path.join(IPM_DIR_PATH, LOCAL_JSON_FILE_NAME)
+        JSON_FILE = os.path.join(ipm_iproot, LOCAL_JSON_FILE_NAME)
         with open(JSON_FILE) as json_file:
             data = json.load(json_file)
 
@@ -190,14 +360,11 @@ def list_IPs(console: rich.console.Console, ipm_iproot, remote, category="all"):
 
 
 def list_IPs_local(console: rich.console.Console, ipm_iproot, remote, category="all"):
-    IPM_DIR_PATH = os.path.join(ipm_iproot)
-
-    JSON_FILE = ""
     if remote:
         resp = requests.get(REMOTE_JSON_FILE_NAME)
         data = json.loads(resp.text)
     else:
-        JSON_FILE = os.path.join(IPM_DIR_PATH, LOCAL_JSON_FILE_NAME)
+        JSON_FILE = os.path.join(ipm_iproot, LOCAL_JSON_FILE_NAME)
         with open(JSON_FILE) as json_file:
             data = json.load(json_file)
 
@@ -238,7 +405,7 @@ def list_IPs_local(console: rich.console.Console, ipm_iproot, remote, category="
                     # value["height"],
                     value["technology"],
                     value["license"],
-                    value["ip_root"]
+                    value["ip_root"] + "/" + value["name"]
                 )
             total_IPs = total_IPs + len(values)
         if total_IPs > 0:
@@ -263,7 +430,7 @@ def list_IPs_local(console: rich.console.Console, ipm_iproot, remote, category="
                 # value["height"],
                 value["technology"],
                 value["license"],
-                value["ip_root"]
+                value["ip_root"] + "/" + value["name"]
             )
         total_IPs = total_IPs + len(data[category])
         if total_IPs > 0:
@@ -341,190 +508,70 @@ def get_IP_info(console: rich.console.Console, ipm_iproot, ip, remote):
     console.print(table)
 
 
-def get_ip_info(ip, ipm_iproot, remote, ip_root, technology="sky130", version=None):
-    ip_info = {}
-    JSON_FILE = ""
-
-    if remote:
-        resp = requests.get(REMOTE_JSON_FILE_NAME)
-        data = json.loads(resp.text)
-    else:
-        JSON_FILE = os.path.join(ipm_iproot, LOCAL_JSON_FILE_NAME)
-        with open(JSON_FILE) as json_file:
-            data = json.load(json_file)
-    for key, values in data.items():
-        for value in values:
-            if value["name"] == ip and value["technology"] == technology:
-                ip_info["name"] = ip
-                ip_info["repo"] = value["repo"]
-                if remote:
-                    ip_info["release"] = value["release"]
-                if version is None and remote:
-                    ip_info["version"] = value["release"][-1]["version"]
-                    ip_info["date"] = value["release"][-1]["date"]
-                elif remote:
-                    for v in value["release"]:
-                        if v["version"] == version:
-                            ip_info["version"] = v["version"]
-                            ip_info["date"] = v["date"]
-                else:
-                    ip_info["version"] = value["version"]
-                    ip_info["date"] = value["date"]
-                ip_info["author"] = value["author"]
-                ip_info["email"] = value["email"]
-                ip_info["category"] = key
-                ip_info["type"] = value["type"]
-                ip_info["status"] = value["status"]
-                ip_info["width"] = value["width"]
-                ip_info["height"] = value["height"]
-                ip_info["technology"] = technology
-                ip_info["ip_root"] = ip_root
-                ip_info["tag"] = value["tag"]
-                ip_info["cell_count"] = value["cell_count"]
-                ip_info["clk_freq"] = value["clk_freq"]
-                ip_info["license"] = value["license"]
-    release_url = f"https://{ip_info['repo']}/releases/download/{ip_info['version']}/{ip_info['version']}.tar.gz"
-    ip_info["release_url"] = release_url
-    return ip_info
-
-
-def add_IP_to_JSON(ipm_iproot, ip, ip_info, json_file_loc):
-    if json_file_loc:
-        JSON_FILE = os.path.join(json_file_loc, LOCAL_JSON_FILE_NAME)
-    else:
-        JSON_FILE = os.path.join(ipm_iproot, LOCAL_JSON_FILE_NAME)
-    with open(JSON_FILE) as json_file:
-        json_decoded = json.load(json_file)
-    del ip_info["release"]
-
-    json_decoded[ip_info["category"]].append(ip_info)
-
-    with open(JSON_FILE, "w") as json_file:
-        json.dump(json_decoded, json_file)
-
-def create_deps(ipm_iproot, ip, ip_info, deps_file):
-    if deps_file:
-        JSON_FILE = os.path.join(deps_file, DEPENDENCIES_FILE_NAME)
-    else:
-        JSON_FILE = os.path.join(ipm_iproot, DEPENDENCIES_FILE_NAME)
-
-    if os.path.exists(JSON_FILE):
-        with open(JSON_FILE) as json_file:
-            json_decoded = json.load(json_file)
-    else:
-        json_decoded = {
-            "IP": []
-        }
-
-    tmp_dict = {
-        "name": ip_info["name"],
-        "version": ip_info["version"],
-        "technology": ip_info["technology"]
-    }
-    json_decoded['IP'].append(tmp_dict)
-
-    with open(JSON_FILE, "w") as json_file:
-        json.dump(json_decoded, json_file)
-
-def remove_from_deps(ip_info, ip_root, deps_file):
-    if deps_file:
-        json_file = os.path.join(deps_file, DEPENDENCIES_FILE_NAME)
-    else:
-        json_file = os.path.join(ip_root, DEPENDENCIES_FILE_NAME)
-
-    with open(json_file, 'r') as f:
-        json_decoded = json.load(f)
-
-    ip_category = json_decoded["IP"]
-    for ips in ip_category:
-        if ips['name'] == ip_info['name']:
-            ip_category.remove(ips)
-    json_decoded["IP"] = ip_category
-
-    with open(json_file, "w") as json_file:
-        json.dump(json_decoded, json_file)
-
-def remove_IP_from_JSON(ipm_iproot, ip_info, ip_root):
-    json_file = os.path.join(ipm_iproot, LOCAL_JSON_FILE_NAME)
-    with open(json_file, 'r') as f:
-        json_decoded = json.load(f)
-
-    ip_category = json_decoded[ip_info["category"]]
-
-    for ips in ip_category:
-        if ips['name'] == ip_info['name'] and ips['ip_root'] == ip_root:
-            ip_category.remove(ips)
-    json_decoded[ip_info["category"]] = ip_category
-
-    with open(json_file, "w") as json_file:
-        json.dump(json_decoded, json_file)
-
-
-def install_IP(
+def install_ip(
     console: rich.console.Console,
     ipm_iproot,
     ip,
     overwrite,
     technology,
     version,
-    json_file_loc,
+    ip_root,
     deps_file
 ):
-    ip_path = os.path.join(ipm_iproot, ip)
+    ip_path = os.path.join(ip_root, ip)
     if os.path.exists(ip_path):
         if len(os.listdir(ip_path)) != 0:
             if not overwrite:
                 console.print(
                     f"There already exists a non-empty folder for the IP [green]{ip}",
-                    f"at {ipm_iproot}, to overwrite it add the option --overwrite",
+                    f"at {ip_root}, to overwrite it add the option --overwrite",
                 )
                 return
             else:
-                console.print(f"Removing exisiting IP {ip} at {ipm_iproot}")
-                ip_info = get_ip_info(
-                    ip, json_file_loc, remote=False, technology=technology, version=version, ip_root=ipm_iproot
-                )
-                remove_IP_from_JSON(json_file_loc, ip_info, ipm_iproot)
-                remove_from_deps(ip_info, ipm_iproot, deps_file)
+                console.print(f"Removing exisiting IP {ip} at {ip_root}")
+                local_ip = LocalIP(ip, ipm_iproot)
+                local_ip.remove_ip_from_json()
+                local_ip.remove_from_deps(deps_file)
                 shutil.rmtree(ip_path)
         else:
             shutil.rmtree(ip_path)
-    ip_info = get_ip_info(
-        ip, json_file_loc, remote=True, technology=technology, version=version, ip_root=ipm_iproot
-    )
-    response = requests.get(ip_info["release_url"], stream=True)
+
+    remote_ip = RemoteIP(ip)
+    local_ip = LocalIP(ip, ipm_iproot)
+    remote_ip.get_info(technology=technology, version=version)
+    response = requests.get(remote_ip.release_url, stream=True)
     if response.status_code == 404:
         console.print(
-            f"[red]The IP {ip} version {ip_info['version']} could not be found remotely"
+            f"[red]The IP {ip} version {remote_ip.version} could not be found remotely"
         )
         exit(1)
     elif response.status_code == 200:
-        tarball_path = os.path.join(ipm_iproot, f"{ip}.tar.gz")
+        tarball_path = os.path.join(ip_root, f"{ip}.tar.gz")
         with open(tarball_path, "wb") as f:
             f.write(response.raw.read())
         file = tarfile.open(tarball_path)
-        file.extractall(ipm_iproot)
+        file.extractall(ip_root)
         file.close
         os.remove(tarball_path)
         console.print(
-            f"[green]Successfully installed {ip} version {ip_info['version']} to the directory {ip_path}"
+            f"[green]Successfully installed {ip} version {remote_ip.version} to the directory {ip_path}"
         )
-        add_IP_to_JSON(ipm_iproot, ip, ip_info, json_file_loc)
-        create_deps(ipm_iproot, ip, ip_info, deps_file)
+        local_ip.add_ip_to_json(remote_ip, ip_root)
+        local_ip.create_deps(remote_ip, deps_file)
 
 
 def install_deps_ip(
     console: rich.console.Console,
     ipm_iproot,
     overwrite,
-    json_file_loc,
+    ip_root,
     deps_file,
     IP_list
 ):
     if deps_file:
         JSON_FILE = os.path.join(deps_file, DEPENDENCIES_FILE_NAME)
     else:
-        JSON_FILE = os.path.join(ipm_iproot, DEPENDENCIES_FILE_NAME)
+        JSON_FILE = os.path.join(ip_root, DEPENDENCIES_FILE_NAME)
 
     if os.path.exists(JSON_FILE):
         with open(JSON_FILE) as json_file:
@@ -540,57 +587,55 @@ def install_deps_ip(
         if ip not in IP_list:
             print(f"[red]IP {ip} is not a valid IP")
             exit(1)
-        ip_path = os.path.join(ipm_iproot, ip)
+        ip_path = os.path.join(ip_root, ip)
         if os.path.exists(ip_path):
             if len(os.listdir(ip_path)) != 0:
                 if not overwrite:
                     console.print(
                         f"There already exists a non-empty folder for the IP [green]{ip}",
-                        f"at {ipm_iproot}, to overwrite it add the option --overwrite",
+                        f"at {ip_root}, to overwrite it add the option --overwrite",
                     )
                     return
                 else:
-                    console.print(f"Removing exisiting IP {ip} at {ipm_iproot}")
-                    ip_info = get_ip_info(
-                        ip, json_file_loc, remote=False, technology=technology, version=version, ip_root=ipm_iproot
-                    )
-                    remove_IP_from_JSON(json_file_loc, ip_info, ipm_iproot)
-                    remove_from_deps(ip_info, ipm_iproot, deps_file)
+                    console.print(f"Removing exisiting IP {ip} at {ip_root}")
+                    local_ip = LocalIP(ip, ipm_iproot)
+                    local_ip.remove_ip_from_json()
+                    local_ip.remove_from_deps(deps_file)
                     shutil.rmtree(ip_path)
             else:
                 shutil.rmtree(ip_path)
-        ip_info = get_ip_info(
-            ip, json_file_loc, remote=True, technology=technology, version=version, ip_root=ipm_iproot
-        )
-        response = requests.get(ip_info["release_url"], stream=True)
+        remote_ip = RemoteIP(ip)
+        local_ip = LocalIP(ip, ipm_iproot)
+        remote_ip.get_info(technology=technology, version=version)
+        response = requests.get(remote_ip.release_url, stream=True)
         if response.status_code == 404:
             console.print(
-                f"[red]The IP {ip} version {ip_info['version']} could not be found remotely"
+                f"[red]The IP {ip} version {remote_ip.version} could not be found remotely"
             )
             exit(1)
         elif response.status_code == 200:
-            tarball_path = os.path.join(ipm_iproot, f"{ip}.tar.gz")
+            tarball_path = os.path.join(ip_root, f"{ip}.tar.gz")
             with open(tarball_path, "wb") as f:
                 f.write(response.raw.read())
             file = tarfile.open(tarball_path)
-            file.extractall(ipm_iproot)
+            file.extractall(ip_root)
             file.close
             os.remove(tarball_path)
             console.print(
-                f"[green]Successfully installed {ip} version {ip_info['version']} to the directory {ip_path}"
+                f"[green]Successfully installed {ip} version {remote_ip.version} to the directory {ip_path}"
             )
-            add_IP_to_JSON(ipm_iproot, ip, ip_info, json_file_loc)
+            local_ip.add_ip_to_json(remote_ip, ip_root)
 
 
-def uninstall_IP(console: rich.console.Console, ipm_iproot, ip, ip_root):
+def uninstall_ip(console: rich.console.Console, ipm_iproot, ip, ip_root, deps_file):
     ip_path = os.path.join(ip_root, ip)
-    ip_info = get_ip_info(ip, ipm_iproot, remote=False, ip_root=ip_root)
+    local_ip = LocalIP(ip, ipm_iproot)
     if os.path.exists(ip_path):
-        remove_IP_from_JSON(ipm_iproot, ip_info, ip_root)
-        remove_from_deps(ip_info, ip_root, None)
+        local_ip.remove_ip_from_json()
+        local_ip.remove_from_deps(deps_file)
         shutil.rmtree(ip_path, ignore_errors=False, onerror=None)
         console.print(
-            f'[green]Successfully uninstalled {ip} version {ip_info["version"]}'
+            f'[green]Successfully uninstalled {ip} version {local_ip.version}'
         )
     else:
         console.print(
@@ -598,7 +643,7 @@ def uninstall_IP(console: rich.console.Console, ipm_iproot, ip, ip_root):
         )
 
 
-def check_IP(console, ipm_iproot, ip, update=False, version=None, technology="sky130"):
+def check_IP(console, ipm_iproot, ip, update=False, version=None, technology="sky130", ip_root=None):
     update_counter = 0
     if ip == "all":  # Checks or updates all installed IPs
         IP_list = get_IP_list(ipm_iproot, remote=False)
@@ -610,37 +655,40 @@ def check_IP(console, ipm_iproot, ip, update=False, version=None, technology="sk
         else:  # There are installed IPs
             console.print("Checking all Installed IP(s) for updates")
             for ip in IP_list:  # Loops on all available IPs
-                ip_info_local = get_ip_info(ip, ipm_iproot, remote=False)
-                ip_info_remote = get_ip_info(ip, ipm_iproot, remote=True)
+                local_ip = LocalIP(ip, ipm_iproot)
+                local_ip.get_info(technology=technology, version=version)
+                remote_ip = RemoteIP(ip)
+                remote_ip.get_info(technology=technology, version=version)
                 if version is None:
                     if (
-                        ip_info_local["version"]
-                        == ip_info_remote["release"][-1]["version"]
+                        local_ip.version
+                        == remote_ip.version
                     ):  # IP is up to date
                         console.print(
                             f"[white]The IP [magenta]{ip}"
-                            f"[white] is up to date; version {ip_info_local['version']}"
+                            f"[white] is up to date; version {local_ip.version}"
                         )
                     else:
                         if (
                             update
                         ):  # If update flag is True it uninstalls the old version and installs the new one
                             console.print(f"Updating {ip}[white]...")
-                            uninstall_IP(console, ipm_iproot, ip)
-                            install_IP(
+                            uninstall_ip(console, ipm_iproot, ip, local_ip.ip_root, deps_file=local_ip.ip_root)
+                            install_ip(
                                 console=console,
                                 ipm_iproot=ipm_iproot,
                                 ip=ip,
                                 overwrite=True,
                                 technology=technology,
-                                version=ip_info_remote["release"][-1]["version"],
-                                json_file_loc=os.path.join(ipm_iproot, LOCAL_JSON_FILE_NAME),
+                                version=remote_ip.version,
+                                ip_root=local_ip.ip_root,
+                                deps_file=local_ip.ip_root
                             )
                             update_counter = update_counter + 1
                         else:  # If it only needs a check it prints out a message to the user that there is a newer version
                             console.print(
                                 f"[yellow]The IP [magenta]{ip}"
-                                f"[yellow] has a newer version {ip_info_remote['version']} to update the IP run [white]'ipm update --ip {ip}'"
+                                f"[yellow] has a newer version {remote_ip.version} to update the IP run [white]'ipm update --ip {ip}'"
                             )
                             update_counter = update_counter + 1
             if update_counter > 0:  # There were one or more out dated IP
@@ -654,30 +702,33 @@ def check_IP(console, ipm_iproot, ip, update=False, version=None, technology="sk
                 console.print("[green]All the installed IP(s) are up to date")
 
     else:  # Checks or Updates a single IP
-        ip_info_local = get_ip_info(ip, ipm_iproot, remote=False)
-        ip_info_remote = get_ip_info(ip, ipm_iproot, remote=True)
-        if ip_info_local["version"] == version:
+        local_ip = LocalIP(ip, ipm_iproot)
+        local_ip.get_info(technology=technology, version=version)
+        remote_ip = RemoteIP(ip)
+        remote_ip.get_info(technology=technology, version=version)
+        if local_ip.version == version:
             console.print(
                 f"[white]The IP [magenta]{ip}"
-                f"[white] is up to date; version {ip_info_local['version']}"
+                f"[white] is up to date; version {local_ip.version}"
             )
         else:
             if update:
                 console.print(f"Updating {ip}[white]...")
-                uninstall_IP(console, ipm_iproot, ip)
-                install_IP(
+                uninstall_ip(console, ipm_iproot, ip, local_ip.ip_root, deps_file=local_ip.ip_root)
+                install_ip(
                     console=console,
                     ipm_iproot=ipm_iproot,
                     ip=ip,
                     overwrite=True,
                     technology=technology,
                     version=version,
-                    json_file_loc=os.path.join(ipm_iproot, LOCAL_JSON_FILE_NAME),
+                    ip_root=local_ip.ip_root,
+                    deps_file=local_ip.ip_root
                 )
             else:
                 console.print(
                     f"[yellow]The IP [magenta]{ip}"
-                    f"[yellow] has a newer version {ip_info_remote['version']} to update the IP run [white]'ipm update --ip {ip}'"
+                    f"[yellow] has a newer version {remote_ip.version} to update the IP run [white]'ipm update --ip {ip}'"
                 )
 
 

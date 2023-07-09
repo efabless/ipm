@@ -22,8 +22,8 @@ from .common import (
     list_IPs_local,
     opt_ipm_iproot,
     list_IPs,
-    install_IP,
-    uninstall_IP,
+    install_ip,
+    uninstall_ip,
     get_IP_list,
     check_IP,
     check_ipm_directory,
@@ -209,7 +209,7 @@ def install_cmd(ip, ip_root, ipm_iproot, overwrite, technology="sky130", version
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         install(
-            console, ip, ip_root, overwrite, technology=technology, version=version, json_file_loc=ipm_iproot, deps_file=deps_file
+            console, ip, ipm_iproot, overwrite, technology=technology, version=version, ip_root=ip_root, deps_file=deps_file
         )
 
 
@@ -220,14 +220,11 @@ def install(
     overwrite,
     technology="sky130",
     version=None,
-    json_file_loc=None,
+    ip_root=None,
     deps_file=None,
 ):
     """Install one of the verified IPs locally"""
-    if json_file_loc:
-        valid = check_ipm_directory(console, json_file_loc)
-    else:
-        valid = check_ipm_directory(console, ipm_iproot)
+    valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         IP_list = get_IP_list(ipm_iproot, remote=True)
         if ip not in IP_list:
@@ -235,14 +232,14 @@ def install(
                 "Please provide a valid IP name, to check all the available IPs invoke 'ipm ls'"
             )
         else:
-            install_IP(
+            install_ip(
                 console=console,
                 ipm_iproot=ipm_iproot,
                 ip=ip,
                 overwrite=overwrite,
                 technology=technology,
                 version=version,
-                json_file_loc=json_file_loc,
+                ip_root=ip_root,
                 deps_file=deps_file
             )
 
@@ -264,7 +261,7 @@ def install_deps_cmd(ip_root, ipm_iproot, overwrite, dep_file=None):
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         install_deps(
-            console, ip_root, overwrite, json_file_loc=ipm_iproot, deps_file=dep_file
+            console, ipm_iproot, overwrite, ip_root=ip_root, deps_file=dep_file
         )
 
 
@@ -272,21 +269,18 @@ def install_deps(
     console,
     ipm_iproot,
     overwrite,
-    json_file_loc=None,
+    ip_root=None,
     deps_file=None,
 ):
     """Install one of the verified IPs locally"""
-    if json_file_loc:
-        valid = check_ipm_directory(console, json_file_loc)
-    else:
-        valid = check_ipm_directory(console, ipm_iproot)
+    valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         IP_list = get_IP_list(ipm_iproot, remote=True)
         install_deps_ip(
             console=console,
             ipm_iproot=ipm_iproot,
             overwrite=overwrite,
-            json_file_loc=json_file_loc,
+            ip_root=ip_root,
             deps_file=deps_file,
             IP_list=IP_list
         )
@@ -295,8 +289,9 @@ def install_deps(
 @click.command("uninstall")
 @click.argument("ip")
 @click.option("--ip-root", required=False, default=os.path.join(os.path.expanduser("~"), ".ipm"), help="IP installation path")
+@click.option("--dep-file", required=False, help="dependencies file path")
 @opt_ipm_iproot
-def uninstall_cmd(ip, ipm_iproot, ip_root):
+def uninstall_cmd(ip, ipm_iproot, ip_root, dep_file):
     """Uninstall one of the IPs installed locally"""
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
@@ -307,7 +302,7 @@ def uninstall_cmd(ip, ipm_iproot, ip_root):
                 "Please provide a valid IP name, to check all installed IPs invoke 'ipm ls'"
             )
         else:
-            uninstall_IP(console, ipm_iproot, ip, ip_root)
+            uninstall_ip(console, ipm_iproot, ip, ip_root, dep_file)
 
 
 @click.command("check")
