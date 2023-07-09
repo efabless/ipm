@@ -44,7 +44,7 @@ from .common import (
     help="Optionally provide the technology (sky130, gf180mcu)",
 )
 def ls_remote_cmd(category, ipm_iproot, technology):
-    """Lists all verified IPs in ipm main repository"""
+    """Lists all verified IPs in ipm's database"""
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
@@ -70,7 +70,7 @@ def ls_remote_cmd(category, ipm_iproot, technology):
 
 
 def ls_remote(category, ipm_iproot, technology):
-    """Lists all verified IPs in ipm main repository"""
+    """Lists all verified IPs in ipm's database"""
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
@@ -256,7 +256,7 @@ def install(
 @click.option("--dep-file", required=False, help="dependencies file path")
 @opt_ipm_iproot
 def install_deps_cmd(ip_root, ipm_iproot, overwrite, dep_file=None):
-    """Install one of the verified IPs locally"""
+    """Install verified IPs from dependencies json file"""
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
@@ -272,7 +272,7 @@ def install_deps(
     ip_root=None,
     deps_file=None,
 ):
-    """Install one of the verified IPs locally"""
+    """Install verified IPs from dependencies json file"""
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         IP_list = get_IP_list(ipm_iproot, remote=True)
@@ -399,7 +399,7 @@ def update(ip, all, ipm_iproot):
 @click.option("--url", required=True, help="Provide IP url")
 @opt_ipm_iproot
 def package_check_cmd(ipm_iproot, name, version, url):
-    """Update all installed IPs to their latest versions or a specific IP."""
+    """Check packaged IP."""
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
@@ -410,7 +410,7 @@ def package_check_cmd(ipm_iproot, name, version, url):
 @click.option("--ip", required=True, help="ip to get info of versions")
 @opt_ipm_iproot
 def info_cmd(ipm_iproot, ip):
-    """list all versions of the IP"""
+    """list all versions and info of the IP"""
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
@@ -418,7 +418,7 @@ def info_cmd(ipm_iproot, ip):
 
 
 def info(ipm_iproot, ip):
-    """list all versions of the IP"""
+    """list all versions and info of the IP"""
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
