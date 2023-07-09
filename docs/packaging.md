@@ -1,5 +1,7 @@
 # Packing IPs for disstribution
 Each IP shall have its own public GH repo for development. The repo shall have a CI that creates a compressed tarball after the structure outlined [here](ip_package.md) and added to the releases.
+- The tarball in the release should be named:
+```default.tar.gz```
 
 A cli will be developed to enable anyone to submit an IP for distribution.
 
@@ -15,25 +17,26 @@ Note: Internally the repo url is used as an IP ID.
 - That the IP is LVS clean
 - That the IP is DRC clean
 
-## new_ip.yaml
-
+## new_ip.json
 ```
-ADC8_SAR:
-  repo: github.com/shalan/spm
-  author: shalan
-  email: mshalan@aucegypt.edu
-  ver: 0.9
-  # m-d-y
-  date: 10-19-2022
-  # hard/soft
-  type: hard
-  # digital, analog, dataconv, comm, rf, ...
-  category: dataconv
-  # np (not proven), fpga (proven), silicon (proven), 
-  status: silicon
-  # width and height in mm
-  width: 0.25
-  height: 0.2
-  
+{
+    "name" : "ADC8_SAR",
+    "repo": "github.com/shalan/spm",
+    "author" : "shalan",
+    "email": "mshalan@aucegypt.edu",
+    "version" : "0.9",
+    // m-d-y
+    "date": "9-21-2022",
+    // digital, analog, dataconv, comm, rf, ...
+    "category": "dataconv",
+    // hard/soft
+    "type": "hard",
+    // np (not proven), fpga (proven), silicon (proven), 
+    "status": "silicon",
+    // width and height in mm
+    "width": "0.25",
+    "height": "0.2"
+}
+
 ```
 
