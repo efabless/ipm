@@ -1,59 +1,75 @@
 {
-    "analog" : [
-        { 
-            "name" : "xyz_analog",
-            "repo" : "github.com/efabless/xyz_analog",
-            "version" : "0.3.4",
-            "author" : "efabless",
-            "email" : "efabless@efabless.com",
-            "date": "9-21-2022",
-            "type": "hard",
-            "status": "silicon",
-            "width": "0.50",
-            "height": "0.25"
-        }
-    ],
-    "comm" : [
+    "analog": [],
+    "comm": [],
+    "dataconv": [],
+    "digital": [
         {
-            "name" : "x_comm",
-            "repo" : "github.com/shalan/x_comm",
-            "version" : "0.3",
-            "author" : "shalan",
-            "email" : "mshalan@aucegypt.edu",
-            "date": "10-19-2022",
-            "type": "soft",
-            "status": "np",
-            "width": "0.30",
-            "height": "0.22"
-        },
-        {
-            "name" : "y_comm",
-            "repo" : "github.com/shalan/y_comm",
-            "version" : "0.1.2",
-            "author" : "shalan",
-            "email" : "mshalan@aucegypt.edu",
-            "date": "10-19-2022",
-            "type": "hard",
-            "status": "silicon",
-            "width": "0.40",
-            "height": "0.2"
-        }
-    ],
-    "dataconv" : [
-    ],
-    "digital" : [
-        {
-            "name" : "spm_ip",
-            "repo": "github.com/ZeyadZaki/spm_ip",
-            "version" : "0.2",
-            "author" : "ZeyadZaki",
-            "email" : "zeyadzaki@aucegypt.edu",
-            "date": "10-19-2022",
+            "name": "spm_ip",
+            "repo": "github.com/marwaneltoukhy/spm_ip",
+            "author": "efabless",
+            "email": "efabless@efabless.com",
             "type": "hard",
             "category": "digital",
-            "status": "silicon",
+            "tag": [
+                "BUS",
+                "periphery"
+            ],
+            "status": "SI_validated",
             "width": "0.25",
-            "height": "0.2"
+            "height": "0.2",
+            "technology": "sky130",
+            "cell_count": "200",
+            "clk_freq": "10",
+            "license": "public",
+            "release": [
+                {
+                    "version": "v1.0",
+                    "date": "10-19-2022"
+                },
+                {
+                    "version": "v1.1",
+                    "date": "10-19-2022"
+                },
+                {
+                    "version": "v1.2",
+                    "date": "10-19-2022"
+                }
+            ],
+            "dependencies": [
+                {
+                    "name": "dummy_ip",
+                    "version": "v1.0"
+                },
+                {
+                    "name": "dummy_ip2",
+                    "version": "v1.0"
+                }
+            ]
+        },
+        {
+            "name": "dummy_ip",
+            "repo": "github.com/marwaneltoukhy/dummy_ip",
+            "author": "efabless",
+            "email": "efabless@efabless.com",
+            "type": "hard",
+            "category": "digital",
+            "tag": [
+                "BUS",
+                "periphery"
+            ],
+            "status": "SI_validated",
+            "width": "0.25",
+            "height": "0.2",
+            "technology": "sky130",
+            "cell_count": "200",
+            "clk_freq": "10",
+            "license": "private",
+            "release": [
+                {
+                    "version": "v1.0",
+                    "date": "10-19-2022"
+                }
+            ]
         }
     ]
 }

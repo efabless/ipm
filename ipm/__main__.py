@@ -17,14 +17,16 @@ from click_default_group import DefaultGroup
 
 from . import __version__
 from .manage import (
+    ls_remote_cmd,
     ls_cmd,
-    lls_cmd,
     output_cmd,
     install_cmd,
     uninstall_cmd,
-    check_cmd, 
+    check_cmd,
     update_cmd,
-    precheck_cmd
+    package_check_cmd,
+    info_cmd,
+    install_deps_cmd
 )
 
 
@@ -39,15 +41,15 @@ def cli():
 
 
 cli.add_command(output_cmd)
+cli.add_command(ls_remote_cmd)
 cli.add_command(ls_cmd)
-cli.add_command(lls_cmd)
 cli.add_command(install_cmd)
 cli.add_command(uninstall_cmd)
 cli.add_command(check_cmd)
 cli.add_command(update_cmd)
-cli.add_command(precheck_cmd)
-
-
+cli.add_command(package_check_cmd)
+cli.add_command(info_cmd)
+cli.add_command(install_deps_cmd)
 
 
 if __name__ == "__main__":
