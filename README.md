@@ -190,8 +190,8 @@ tar czf <version>.tar.gz <structured_IP_folder_name>
 ``` 
 ### 4. Create release 
 create a new release in your GH repo with the tag ```<version>``` and add the tarball created there to the release's assets
-### 5. IPM precheck
-Once you are done you can run a precheck function locally by running ```ipm pre-check``` which checks that you’ve completed the above steps successfully. You are required to fill in the promp with the ```IP name```, ```version``` and the ```GH repo```
+### 5. IPM package_check
+Once you are done you can run a package_check function locally by running ```ipm package-check``` which checks that you’ve completed the above steps successfully. Options for ```IP name```, ```version``` and the ```GH repo``` are required
 ### 6. Submit
 If the pre-check was successful you can submit your IP through the form ......
 

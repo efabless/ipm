@@ -23,11 +23,11 @@ from .common import (
     opt_ipm_iproot,
     list_IPs,
     install_ip,
+    package_check,
     uninstall_ip,
     get_IP_list,
     check_IP,
     check_ipm_directory,
-    precheck,
 )
 
 
@@ -393,19 +393,17 @@ def update(ip, all, ipm_iproot):
                 )
 
 
-@click.command("pre-check")
+@click.command("package-check")
+@click.option("--name", required=True, help="Provide IP name")
+@click.option("--version", required=True, help="Provide IP version")
+@click.option("--url", required=True, help="Provide IP url")
 @opt_ipm_iproot
-def precheck_cmd(ipm_iproot):
+def package_check_cmd(ipm_iproot, name, version, url):
     """Update all installed IPs to their latest versions or a specific IP."""
     console = Console()
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
-        ip = input("Enter IP name: ")
-        version = input("Enter IP version: ")
-        gh_repo = input(
-            'Enter the GH repo of the IP in the form "github.com/<username>/<project_name>": '
-        )
-        precheck(console, ipm_iproot, ip, version, gh_repo)
+        package_check(console, ipm_iproot, name, version, url)
 
 
 @click.command("info")

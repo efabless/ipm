@@ -765,7 +765,7 @@ def check_hierarchy(console, ip_path, ip, json_path):
 def check_JSON(console, JSON_path, ip):
     if not os.path.exists(JSON_path):
         console.print(
-            f"[red]Can't find {JSON_path} please refer to the ipm directory structure"
+            f"[red]Can't find {JSON_path} please refer to the ipm directory structure (IP name {ip} might be wrong)"
         )
         return False
     json_fields = [
@@ -790,6 +790,10 @@ def check_JSON(console, JSON_path, ip):
     with open(JSON_path) as json_file:
         json_decoded = json.load(json_file)
 
+    if ip is not json_decoded["name"]:
+        console.print(f"[red]The given IP name {ip} is not the same as the one in json file")
+        flag = False
+
     for field in json_fields:
         if field not in json_decoded.keys():
             console.print(
@@ -800,7 +804,7 @@ def check_JSON(console, JSON_path, ip):
     return flag
 
 
-def precheck(console, ipm_iproot, ip, version, gh_repo):
+def package_check(console, ipm_iproot, ip, version, gh_repo):
     if gh_repo.startswith("https"):
         gh_repo_url = gh_repo
     else:
@@ -808,10 +812,10 @@ def precheck(console, ipm_iproot, ip, version, gh_repo):
     release_tag_url = f"{gh_repo_url}/releases/tag/{version}"
     release_tarball_url = f"{gh_repo_url}/releases/download/{version}/{version}.tar.gz"
     IPM_DIR_PATH = os.path.join(ipm_iproot)
-    precheck_path = os.path.join(IPM_DIR_PATH, f"{ip}_pre-check")
-    ip_path = os.path.join(precheck_path, ip)
-    if checkdir(precheck_path):
-        shutil.rmtree(precheck_path)
+    package_check_path = os.path.join(IPM_DIR_PATH, f"{ip}_pre-check")
+    ip_path = os.path.join(package_check_path, ip)
+    if checkdir(package_check_path):
+        shutil.rmtree(package_check_path)
 
     console.print("[magenta][STEP 1]:", "Checking the GH repo")
     repo_response = requests.get(gh_repo_url, stream=True)
@@ -841,12 +845,12 @@ def precheck(console, ipm_iproot, ip, version, gh_repo):
             elif (
                 release_tarball_response.status_code == 200
             ):  # Tarball exists under the correct tag name, download it under IPM_Directory/<ip>_pre-check
-                os.mkdir(precheck_path)
-                tarball_path = os.path.join(precheck_path, f"{version}.tar.gz")
+                os.mkdir(package_check_path)
+                tarball_path = os.path.join(package_check_path, f"{version}.tar.gz")
                 with open(tarball_path, "wb") as f:
                     f.write(release_tarball_response.raw.read())
                 file = tarfile.open(tarball_path)
-                file.extractall(precheck_path)
+                file.extractall(package_check_path)
                 file.close
                 os.remove(tarball_path)
                 console.print(
@@ -865,3 +869,4 @@ def precheck(console, ipm_iproot, ip, version, gh_repo):
                         console.print(
                             "[green]IP pre-check was successful you can now submit your IP"
                         )
+                shutil.rmtree(package_check_path)
