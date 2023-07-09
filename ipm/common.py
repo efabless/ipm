@@ -107,6 +107,10 @@ class LocalIP:
                     self.clk_freq = value["clk_freq"]
                     self.license = value["license"]
                     self.ip_root = value["ip_root"]
+                    if "dependencies" in value:
+                        self.dependencies = value["dependencies"]
+                    else:
+                        self.dependencies = None
         release_url = f"https://{self.repo}/releases/download/{self.version}/{self.version}.tar.gz"
         self.release_url = release_url
 
@@ -192,10 +196,14 @@ class RemoteIP:
     def __init__(self, ip):
         self.ip = ip
 
-    def get_info(self, technology="sky130", version=None):
+    def get_info(self, console, technology="sky130", version=None):
         resp = requests.get(REMOTE_JSON_FILE_NAME)
         data = json.loads(resp.text)
         for key, values in data.items():
+            print(key)
+            if self.ip not in values:
+                console.print(f"[red]Can't find {self.ip} with technology {technology} in verified IPs catalog, please make sure to choose IP from verified IP")
+                exit(1)
             for value in values:
                 if value["name"] == self.ip and value["technology"] == technology:
                     self.name = self.ip
@@ -221,6 +229,10 @@ class RemoteIP:
                     self.cell_count = value["cell_count"]
                     self.clk_freq = value["clk_freq"]
                     self.license = value["license"]
+                    if "dependencies" in value:
+                        self.dependencies = value["dependencies"]
+                    else:
+                        self.dependencies = None
         release_url = f"https://{self.repo}/releases/download/{self.version}/{self.version}.tar.gz"
         self.release_url = release_url
 
@@ -516,7 +528,37 @@ def get_IP_info(console: rich.console.Console, ipm_iproot, ip, remote):
 
 
 def install_ip(
-    console: rich.console.Console,
+    console,
+    ipm_iproot,
+    ip,
+    overwrite,
+    technology,
+    version,
+    ip_root,
+    deps_file
+):
+    install(
+        console,
+        ipm_iproot,
+        ip,
+        overwrite,
+        technology,
+        version,
+        ip_root,
+        deps_file
+    )
+    local_ip = LocalIP(ip, ipm_iproot)
+    local_ip.get_info(technology=technology, version=version)
+    if local_ip.dependencies:
+        dep = local_ip.dependencies.pop()
+        print(dep)
+        dep_path = os.path.join(f"{ip_root}/{ip}" , "IP")
+        os.mkdir(dep_path)
+        install_ip(console, ipm_iproot, dep["name"], False, technology, dep["version"], dep_path, dep_path)
+
+
+def install(
+    console,
     ipm_iproot,
     ip,
     overwrite,
@@ -545,8 +587,8 @@ def install_ip(
 
     remote_ip = RemoteIP(ip)
     local_ip = LocalIP(ip, ipm_iproot)
-    remote_ip.get_info(technology=technology, version=version)
-    console.print(f"[green] IP {ip} is getting installed at {ip_path}")
+    remote_ip.get_info(console, technology=technology, version=version)
+    console.print(f"IP {ip} is getting installed at {ip_path}")
     response = requests.get(remote_ip.release_url, stream=True)
     if response.status_code == 404:
         console.print(
@@ -614,7 +656,7 @@ def install_deps_ip(
                 shutil.rmtree(ip_path)
         remote_ip = RemoteIP(ip)
         local_ip = LocalIP(ip, ipm_iproot)
-        remote_ip.get_info(technology=technology, version=version)
+        remote_ip.get_info(console, technology=technology, version=version)
         response = requests.get(remote_ip.release_url, stream=True)
         if response.status_code == 404:
             console.print(
@@ -666,7 +708,7 @@ def check_IP(console, ipm_iproot, ip, update=False, version=None, technology="sk
                 local_ip = LocalIP(ip, ipm_iproot)
                 local_ip.get_info(technology=technology, version=version)
                 remote_ip = RemoteIP(ip)
-                remote_ip.get_info(technology=technology, version=version)
+                remote_ip.get_info(console, technology=technology, version=version)
                 if version is None:
                     if (
                         local_ip.version
@@ -713,7 +755,7 @@ def check_IP(console, ipm_iproot, ip, update=False, version=None, technology="sk
         local_ip = LocalIP(ip, ipm_iproot)
         local_ip.get_info(technology=technology, version=version)
         remote_ip = RemoteIP(ip)
-        remote_ip.get_info(technology=technology, version=version)
+        remote_ip.get_info(console, technology=technology, version=version)
         if local_ip.version == version:
             console.print(
                 f"[white]The IP [magenta]{ip}"
