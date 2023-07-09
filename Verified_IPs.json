@@ -34,6 +34,12 @@
                     "version": "v1.2",
                     "date": "10-19-2022"
                 }
+            ],
+            "dependencies": [
+                {
+                    "name": "dummy_ip",
+                    "version": "v1.0"
+                }
             ]
         },
         {
