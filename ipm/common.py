@@ -675,7 +675,15 @@ def get_deps_from_json(console, deps_file):
 def uninstall_ip(console: rich.console.Console, ipm_iproot, ip, ip_root, deps_file):
     ip_path = os.path.join(ip_root, ip)
     local_ip = LocalIP(ip, ipm_iproot)
+    local_ip.get_info()
     if os.path.exists(ip_path):
+        if local_ip.dependencies:
+            for dep in local_ip.dependencies:
+                dep_obj = LocalIP(dep['name'], ipm_iproot)
+                dep_obj.get_info()
+                dep_path = f"{ip_path}/ip/{dep_obj.name}"
+                if os.path.exists(dep_path):
+                    dep_obj.remove_ip_from_json()
         local_ip.remove_ip_from_json()
         local_ip.remove_from_deps(deps_file)
         shutil.rmtree(ip_path, ignore_errors=False, onerror=None)
