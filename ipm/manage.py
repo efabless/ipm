@@ -21,7 +21,6 @@ from .common import (
     check_deps_file,
     get_IP_info,
     get_deps_from_json,
-    install_deps_ip,
     list_IPs_local,
     opt_ipm_iproot,
     list_IPs,
@@ -136,7 +135,7 @@ def ls_cmd(category, ipm_iproot, technology):
                     "You entered a wrong technology, invoke ipm ls --help for assistance"
                 )
         else:
-            console.print("[green]Locally installed IPs at:")
+            console.print("[green]Locally installed IPs:")
             list_IPs_local(console, ipm_iproot, remote=False)
 
 
@@ -166,7 +165,7 @@ def ls(category, ipm_iproot, technology):
                     "You entered a wrong technology, invoke ipm ls --help for assistance"
                 )
         else:
-            console.print("[green]Locally installed IPs at:")
+            console.print("[green]Locally installed IPs:")
             list_IPs_local(console, ipm_iproot, remote=False)
 
 
