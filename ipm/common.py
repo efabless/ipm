@@ -187,9 +187,12 @@ class LocalIP:
             "version": ip_info_dict["version"],
             "technology": ip_info_dict["technology"]
         }
-        for ips in json_decoded['IP']:
-            if not ips['name'] == ip_info_dict["name"]:
-                json_decoded['IP'].append(tmp_dict)
+        if len(json_decoded['IP']) > 0:
+            for ips in json_decoded['IP']:
+                if not ips['name'] == ip_info_dict["name"]:
+                    json_decoded['IP'].append(tmp_dict)
+        else:
+            json_decoded['IP'].append(tmp_dict)
 
         with open(local_json_file, "w") as json_file:
             json.dump(json_decoded, json_file)
@@ -581,7 +584,7 @@ def install_ip(
     deps_file,
     dependencies
 ):
-    if ip and technology and version:
+    if ip and technology:
         install(
             console,
             ipm_iproot,
