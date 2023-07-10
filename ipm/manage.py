@@ -113,13 +113,12 @@ def ls_remote(category, ipm_iproot, technology):
 def ls_cmd(category, ipm_iproot, technology):
     """Lists all locally installed IPs"""
     console = Console()
-    IPM_DIR_PATH = os.path.join(ipm_iproot)
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         if category is not None:
             if category in ["digital", "comm", "analog", "dataconv"]:
                 console.print(
-                    f"[green]Installed IPs at {ipm_iproot} for the {category} category:"
+                    f"[green]Locally installed IPs at for the {category} category:"
                 )
                 list_IPs_local(console, ipm_iproot, remote=False, category=category)
             else:
@@ -129,7 +128,7 @@ def ls_cmd(category, ipm_iproot, technology):
         elif technology is not None:
             if technology in ["sky130", "gf180mcu"]:
                 console.print(
-                    f"[green]Installed IPs at {ipm_iproot} for the {technology} technology:"
+                    f"[green]Locally installed IPs at for the {technology} technology:"
                 )
                 list_IPs_local(console, ipm_iproot, remote=False)
             else:
@@ -137,20 +136,19 @@ def ls_cmd(category, ipm_iproot, technology):
                     "You entered a wrong technology, invoke ipm ls --help for assistance"
                 )
         else:
-            console.print(f"[green]Installed IPs at {IPM_DIR_PATH}:")
+            console.print("[green]Locally installed IPs at:")
             list_IPs_local(console, ipm_iproot, remote=False)
 
 
 def ls(category, ipm_iproot, technology):
     """Lists all locally installed IPs"""
     console = Console()
-    IPM_DIR_PATH = os.path.join(ipm_iproot)
     valid = check_ipm_directory(console, ipm_iproot)
     if valid:
         if category is not None:
             if category in ["digital", "comm", "analog", "dataconv"]:
                 console.print(
-                    f"[green]Installed IPs at {ipm_iproot} for the {category} category:"
+                    f"[green]Locally installed IPs at for the {category} category:"
                 )
                 list_IPs_local(console, ipm_iproot, remote=False, category=category)
             else:
@@ -160,7 +158,7 @@ def ls(category, ipm_iproot, technology):
         elif technology is not None:
             if technology in ["sky130", "gf180mcu"]:
                 console.print(
-                    f"[green]Installed IPs at {ipm_iproot} for the {technology} technology:"
+                    f"[green]Locally installed IPs at for the {technology} technology:"
                 )
                 list_IPs_local(console, ipm_iproot, remote=False)
             else:
@@ -168,7 +166,7 @@ def ls(category, ipm_iproot, technology):
                     "You entered a wrong technology, invoke ipm ls --help for assistance"
                 )
         else:
-            console.print(f"[green]Installed IPs at {IPM_DIR_PATH}:")
+            console.print("[green]Locally installed IPs at:")
             list_IPs_local(console, ipm_iproot, remote=False)
 
 
