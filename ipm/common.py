@@ -135,9 +135,18 @@ def create_dependencies_file(ip_name, version, ip_root):
     with open(dependencies_file_path, "w") as json_file:
         json.dump(json_decoded, json_file)
 
+def get_latest_version(data):
+    last_key = None
+    for key, value in data.items():
+        last_key = key
+
+    return last_key
+
 def install_ip(ip_name, version, ip_root, ipm_root):
     logger = Logger()
     ip_info = IPInfo().get_verified_ip_info(ip_name)
+    if not version:
+        version = get_latest_version(ip_info['release'])
     ip = IP(ip_name, ip_root, ipm_root, version)
     if ip.check_install_root():
         ip_install_root = f"{ipm_root}/{ip_name}/{version}"
