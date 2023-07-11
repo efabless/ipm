@@ -168,8 +168,10 @@ def install_ip(ip_name, version, ip_root, ipm_root):
 
     else:
         logger.print_info(f"Found IP {ip_name} locally")
+    if os.path.exists(f"{ip_root}/{ip_name}"):
+        os.unlink(f"{ip_root}/{ip_name}")
     os.symlink(f"{ipm_root}/{ip_name}/{version}", f"{ip_root}/{ip_name}")
-    logger.print_success(f"Created simlink to {ip_name} IP at {ipm_root}")
+    logger.print_success(f"Created simlink to {ip_name} IP at {ip_root}")
 
 def check_ipm_directory(ipm_root) -> bool:
     logger = Logger()
