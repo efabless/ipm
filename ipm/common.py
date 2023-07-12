@@ -148,6 +148,59 @@ class IP:
         with open(dependencies_file_path, "w") as json_file:
             json.dump(json_decoded, json_file)
 
+    def create_table(self, ip_list, version=None, extended=False):
+        table = Table()
+        logger = Logger()
+        console = Console()
+
+        table.add_column("IP Name", style="magenta")
+        table.add_column("Category", style="cyan")
+        table.add_column("Version")
+        table.add_column("Author")
+        table.add_column("Type")
+        table.add_column("Tag")
+        table.add_column("Status")
+        if extended:
+            table.add_column("Cell count")
+            table.add_column("Clk freq (MHz)")
+            table.add_column("Width (um)")
+            table.add_column("Height (um)")
+        table.add_column("Technology", style="cyan")
+        table.add_column("License", style="magenta")
+
+        for ips in ip_list:
+            for key, value in ips.items():
+                version_list = []
+                table_list = []
+                if not version:
+                    version_list.append(get_latest_version(value['release']))
+                else:
+                    for versions, data in value['release'].items():
+                        version_list.append(versions)
+                for versions in version_list:
+                    table_list.append(key)
+                    table_list.append(value['category'])
+                    table_list.append(versions)
+                    table_list.append(value["author"])
+                    table_list.append(value['release'][versions]["type"])
+                    table_list.append(",".join(value["tag"]))
+                    table_list.append(value['release'][versions]["status"])
+                    if extended:
+                        table_list.append(value['release'][versions]["cell_count"])
+                        table_list.append(value['release'][versions]["clk_freq"])
+                        table_list.append(value['release'][versions]["width"])
+                        table_list.append(value['release'][versions]["height"])
+                    table_list.append(value["technology"])
+                    table_list.append(value["license"])
+                    table.add_row(*table_list)
+                    table_list = []
+
+        if len(ip_list) > 0:
+            console.print(table)
+            logger.print_info(f"Total number of IPs: {len(ip_list)}")
+        else:
+            logger.print_err("No IPs found")
+
 def get_latest_version(data):
     last_key = None
     for key, value in data.items():
@@ -218,8 +271,7 @@ def check_ip_root_dir(ip_root) -> bool:
 
 def list_verified_ips(category=None, technology=None):
     ip_info = IPInfo()
-    logger = Logger()
-    console = Console()
+    ip = IP()
     verified_ips = ip_info.get_verified_ip_info()
     ip_list = []
     for ip_name, ip_data in verified_ips.items():
@@ -235,35 +287,12 @@ def list_verified_ips(category=None, technology=None):
         else:
             ip_list.append({ip_name: ip_data})
 
-    table = Table()
+    ip.create_table(ip_list)
 
-    table.add_column("IP Name", style="magenta")
-    table.add_column("Category", style="cyan")
-    table.add_column("Version")
-    table.add_column("Author")
-    table.add_column("Type")
-    table.add_column("Tag")
-    table.add_column("Status")
-    table.add_column("Technology", style="cyan")
-    table.add_column("License", style="magenta")
-
-    for ips in ip_list:
-        for key, value in ips.items():
-            latest_version = get_latest_version(value['release'])
-            table.add_row(
-                key,
-                value['category'],
-                latest_version,
-                value["author"],
-                value['release'][latest_version]["type"],
-                ",".join(value["tag"]),
-                value['release'][latest_version]["status"],
-                value["technology"],
-                value["license"],
-            )
-
-    if len(ip_list) > 0:
-        console.print(table)
-        logger.print_info(f"Total number of IPs: {len(ip_list)}")
-    else:
-        logger.print_err("No IPs found")
+def list_ip_info(ip_name):
+    ip_info = IPInfo()
+    ip = IP(ip_name)
+    ip_data = ip_info.get_verified_ip_info(ip_name)
+    ip_list = []
+    ip_list.append({ip_name: ip_data})
+    ip.create_table(ip_list, "all", True)

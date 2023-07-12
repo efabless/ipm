@@ -25,7 +25,7 @@ from .manage import (
     # check_cmd,
     # update_cmd,
     # package_check_cmd,
-    # info_cmd,
+    info_cmd,
     # install_deps_cmd
 )
 
@@ -48,7 +48,7 @@ cli.add_command(install_cmd)
 # cli.add_command(check_cmd)
 # cli.add_command(update_cmd)
 # cli.add_command(package_check_cmd)
-# cli.add_command(info_cmd)
+cli.add_command(info_cmd)
 # cli.add_command(install_deps_cmd)
 
 

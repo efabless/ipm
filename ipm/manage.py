@@ -20,6 +20,7 @@ from .common import (
     check_ip_root_dir,
     check_ipm_directory,
     install_ip,
+    list_ip_info,
     list_verified_ips,
     opt_ipm_root
 )
@@ -72,3 +73,14 @@ def ls_remote_cmd(category, technology):
 def ls_remote(category, technology):
     """Lists all verified IPs in ipm's database"""
     list_verified_ips(category, technology)
+
+@click.command("info")
+@click.argument("ip")
+def info_cmd(ip):
+    """list all versions and info of the IP"""
+    info(ip)
+
+
+def info(ip):
+    """list all versions and info of the IP"""
+    list_ip_info(ip)
