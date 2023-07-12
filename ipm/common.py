@@ -19,6 +19,7 @@ from typing import Callable
 import click
 import requests
 from rich.console import Console
+from rich.table import Table
 
 GITHUB_TOKEN = os.environ['GITHUB_TOKEN']
 VERIFIED_JSON_FILE_URL = (
@@ -59,7 +60,7 @@ class IPInfo:
     def __init__(self):
         pass
 
-    def get_verified_ip_info(self, ip_name):
+    def get_verified_ip_info(self, ip_name=None):
         logger = Logger()
         if GITHUB_TOKEN:
             headers = {"Authorization": f"token {GITHUB_TOKEN}"}
@@ -73,7 +74,11 @@ class IPInfo:
             exit(1)
         data = json.loads(resp.text)
         if ip_name:
-            return data[ip_name]
+            if ip_name in data:
+                return data[ip_name]
+            else:
+                logger.print_err(f"Please provide a valid IP, {ip_name} is not a verified IP")
+                exit(1)
         else:
             return data
 
@@ -117,27 +122,31 @@ class IP:
         else:
             return False
 
-def create_dependencies_file(ip_name, version, ip_root):
-    dependencies_file_path = os.path.join(ip_root, DEPENDENCIES_FILE_NAME)
-    if os.path.exists(dependencies_file_path):
-        with open(dependencies_file_path) as json_file:
-            json_decoded = json.load(json_file)
-    else:
-        json_decoded = {
-            "IP": []
+    def create_dependencies_file(self):
+        dependencies_file_path = os.path.join(self.ip_root, DEPENDENCIES_FILE_NAME)
+        if os.path.exists(dependencies_file_path):
+            with open(dependencies_file_path) as json_file:
+                json_decoded = json.load(json_file)
+        else:
+            json_decoded = {
+                "IP": []
+            }
+        tmp_dict = {
+            self.ip_name: self.version
         }
-    tmp_dict = {
-        ip_name: version
-    }
-    if len(json_decoded['IP']) > 0:
-        for ips in json_decoded['IP']:
-            if not ips['name'] == ip_name:
+        flag = True
+        if len(json_decoded['IP']) > 0:
+            for ips in json_decoded['IP']:
+                for name, version in ips.items():
+                    if name == self.ip_name:
+                        flag = False
+            if flag:
                 json_decoded['IP'].append(tmp_dict)
-    else:
-        json_decoded['IP'].append(tmp_dict)
+        else:
+            json_decoded['IP'].append(tmp_dict)
 
-    with open(dependencies_file_path, "w") as json_file:
-        json.dump(json_decoded, json_file)
+        with open(dependencies_file_path, "w") as json_file:
+            json.dump(json_decoded, json_file)
 
 def get_latest_version(data):
     last_key = None
@@ -182,6 +191,7 @@ def install_ip(ip_name, version, ip_root, ipm_root):
                 os.unlink(f"{ip_root}/{ip_name}")
             os.symlink(f"{ipm_root}/{ip_name}/{version}", f"{ip_root}/{ip_name}")
             logger.print_success(f"Created simlink to {ip_name} IP at {ip_root}")
+            ip.create_dependencies_file()
 
 def check_ipm_directory(ipm_root) -> bool:
     logger = Logger()
@@ -205,3 +215,55 @@ def check_ip_root_dir(ip_root) -> bool:
         return False
     else:
         return True
+
+def list_verified_ips(category=None, technology=None):
+    ip_info = IPInfo()
+    logger = Logger()
+    console = Console()
+    verified_ips = ip_info.get_verified_ip_info()
+    ip_list = []
+    for ip_name, ip_data in verified_ips.items():
+        if category and not technology:
+            if ip_data['category'] == category:
+                ip_list.append({ip_name: ip_data})
+        elif technology and not category:
+            if ip_data['technology'] == technology:
+                ip_list.append({ip_name: ip_data})
+        elif technology and category:
+            if ip_data['category'] == category and ip_data['technology'] == technology:
+                ip_list.append({ip_name: ip_data})
+        else:
+            ip_list.append({ip_name: ip_data})
+
+    table = Table()
+
+    table.add_column("IP Name", style="magenta")
+    table.add_column("Category", style="cyan")
+    table.add_column("Version")
+    table.add_column("Author")
+    table.add_column("Type")
+    table.add_column("Tag")
+    table.add_column("Status")
+    table.add_column("Technology", style="cyan")
+    table.add_column("License", style="magenta")
+
+    for ips in ip_list:
+        for key, value in ips.items():
+            latest_version = get_latest_version(value['release'])
+            table.add_row(
+                key,
+                value['category'],
+                latest_version,
+                value["author"],
+                value['release'][latest_version]["type"],
+                ",".join(value["tag"]),
+                value['release'][latest_version]["status"],
+                value["technology"],
+                value["license"],
+            )
+
+    if len(ip_list) > 0:
+        console.print(table)
+        logger.print_info(f"Total number of IPs: {len(ip_list)}")
+    else:
+        logger.print_err("No IPs found")

@@ -20,6 +20,7 @@ from .common import (
     check_ip_root_dir,
     check_ipm_directory,
     install_ip,
+    list_verified_ips,
     opt_ipm_root
 )
 
@@ -46,15 +47,28 @@ def install(
     valid = check_ipm_directory(ipm_root)
     valid_ip_dir = check_ip_root_dir(ip_root)
     if valid and valid_ip_dir:
-        # IP_list = get_IP_list(console, ipm_root, remote=True)
-        # if ip not in IP_list:
-        #     console.print(
-        #         "[red]Please provide a valid IP name, to check all the available IPs invoke 'ipm ls'"
-        #     )
-        # else:
         install_ip(
             ipm_root=ipm_root,
             ip_name=ip,
             ip_root=ip_root,
             version=version
         )
+
+@click.command("ls-remote")
+@click.option(
+    "--category",
+    required=False,
+    help="Optionally provide the category (digital, comm, analog, dataconv)",
+)
+@click.option(
+    "--technology",
+    required=False,
+    help="Optionally provide the technology (sky130, gf180mcu)",
+)
+def ls_remote_cmd(category, technology):
+    """Lists all verified IPs in ipm's database"""
+    ls_remote(category, technology)
+
+def ls_remote(category, technology):
+    """Lists all verified IPs in ipm's database"""
+    list_verified_ips(category, technology)
