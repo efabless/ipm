@@ -89,6 +89,18 @@ class IPInfo:
         else:
             return data
 
+    def get_dependencies(self, ip_name, version, dependencies_list):
+        ip_info = self.get_verified_ip_info(ip_name)
+        release = ip_info['release'][version]
+        if "dependencies" in release:
+            dependencies = ip_info['release'][version]['dependencies']
+            for dep_name, dep_version in dependencies.items():
+                if {dep_name, dep_version} not in dependencies_list:
+                    dependencies_list.append({dep_name: dep_version})
+                    self.get_dependencies(dep_name, dep_version, dependencies_list)
+        else:
+            return {ip_name, version}
+
 class IP:
     def __init__(self, ip_name=None, ip_root=None, ipm_root=None, version=None):
         self.ip_name = ip_name
@@ -104,14 +116,6 @@ class IP:
             return True
         else:
             return False
-
-def get_dependencies(ip_name, technology, version, dependencies):
-    ip_info = IPInfo().get_verified_ip_info(ip_name)
-    ip_dependencies = ip_info['release'][version]['dependencies']
-    if ip_dependencies:
-        for dep_name, version in ip_dependencies:
-            dependencies.append({dep_name, version})
-        get_dependencies(dep_name, technology, version, dependencies)
 
 def create_dependencies_file(ip_name, version, ip_root):
     dependencies_file_path = os.path.join(ip_root, DEPENDENCIES_FILE_NAME)
@@ -144,34 +148,40 @@ def get_latest_version(data):
 
 def install_ip(ip_name, version, ip_root, ipm_root):
     logger = Logger()
-    ip_info = IPInfo().get_verified_ip_info(ip_name)
-    if not version:
-        version = get_latest_version(ip_info['release'])
-    ip = IP(ip_name, ip_root, ipm_root, version)
-    if ip.check_install_root():
-        ip_install_root = f"{ipm_root}/{ip_name}/{version}"
-        logger.print_info(f"Installing IP {ip_name} at {ipm_root} and creating simlink to {ip_root}")
-        release_url = f"https://{ip_info['repo']}/releases/download/{version}/{version}.tar.gz"
-        response = requests.get(release_url, stream=True)
-        if response.status_code == 404:
-            logger.print_err(f"The IP {ip_name} version {version} could not be found remotely")
-            exit(1)
-        elif response.status_code == 200:
-            tarball_path = os.path.join(ip_install_root, f"{version}.tar.gz")
-            with open(tarball_path, "wb") as f:
-                f.write(response.raw.read())
-            file = tarfile.open(tarball_path)
-            file.extractall(ip_install_root)
-            file.close
-            os.remove(tarball_path)
-            logger.print_success(f"Successfully installed {ip_name} version {version}")
+    ip_info = IPInfo()
+    dependencies_list = []
+    ip_info.get_dependencies(ip_name, version, dependencies_list)
+    dependencies_list.append({ip_name: version})
+    for dep in dependencies_list:
+        for ip_name, version in dep.items():
+            verified_ip_info = ip_info.get_verified_ip_info(ip_name)
+            if not version:
+                version = get_latest_version(verified_ip_info['release'])
+            ip = IP(ip_name, ip_root, ipm_root, version)
+            if ip.check_install_root():
+                ip_install_root = f"{ipm_root}/{ip_name}/{version}"
+                logger.print_info(f"Installing IP {ip_name} at {ipm_root} and creating simlink to {ip_root}")
+                release_url = f"https://{verified_ip_info['repo']}/releases/download/{version}/{version}.tar.gz"
+                response = requests.get(release_url, stream=True)
+                if response.status_code == 404:
+                    logger.print_err(f"The IP {ip_name} version {version} could not be found remotely")
+                    exit(1)
+                elif response.status_code == 200:
+                    tarball_path = os.path.join(ip_install_root, f"{version}.tar.gz")
+                    with open(tarball_path, "wb") as f:
+                        f.write(response.raw.read())
+                    file = tarfile.open(tarball_path)
+                    file.extractall(ip_install_root)
+                    file.close
+                    os.remove(tarball_path)
+                    logger.print_success(f"Successfully installed {ip_name} version {version}")
 
-    else:
-        logger.print_info(f"Found IP {ip_name} locally")
-    if os.path.exists(f"{ip_root}/{ip_name}"):
-        os.unlink(f"{ip_root}/{ip_name}")
-    os.symlink(f"{ipm_root}/{ip_name}/{version}", f"{ip_root}/{ip_name}")
-    logger.print_success(f"Created simlink to {ip_name} IP at {ip_root}")
+            else:
+                logger.print_info(f"Found IP {ip_name} locally")
+            if os.path.exists(f"{ip_root}/{ip_name}"):
+                os.unlink(f"{ip_root}/{ip_name}")
+            os.symlink(f"{ipm_root}/{ip_name}/{version}", f"{ip_root}/{ip_name}")
+            logger.print_success(f"Created simlink to {ip_name} IP at {ip_root}")
 
 def check_ipm_directory(ipm_root) -> bool:
     logger = Logger()
