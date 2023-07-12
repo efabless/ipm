@@ -9,6 +9,7 @@
             "periphery"
         ],
         "license": "public",
+        "technology": "sky130",
         "release": {
             "v1.0": {
                 "date": "10-19-2022",
@@ -16,7 +17,6 @@
                 "type": "hard",
                 "width": "0.25",
                 "height": "0.2",
-                "technology": "sky130",
                 "cell_count": "200",
                 "clk_freq": "10"
             },
@@ -26,7 +26,6 @@
                 "type": "hard",
                 "width": "0.3",
                 "height": "0.4",
-                "technology": "sky130",
                 "cell_count": "300",
                 "clk_freq": "10"
             },
@@ -36,7 +35,6 @@
                 "type": "hard",
                 "width": "0.4",
                 "height": "0.5",
-                "technology": "sky130",
                 "cell_count": "400",
                 "clk_freq": "10",
                 "dependencies": {
@@ -50,6 +48,7 @@
         "author": "efabless",
         "email": "efabless@efabless.com",
         "category": "digital",
+        "technology": "sky130",
         "tag": [
             "BUS",
             "periphery"
@@ -62,7 +61,6 @@
                 "type": "hard",
                 "width": "0.25",
                 "height": "0.2",
-                "technology": "sky130",
                 "cell_count": "200",
                 "clk_freq": "10",
                 "dependencies": {
@@ -75,7 +73,6 @@
                 "type": "hard",
                 "width": "0.25",
                 "height": "0.2",
-                "technology": "gf180mcu",
                 "cell_count": "200",
                 "clk_freq": "10"
             }
@@ -86,6 +83,7 @@
         "author": "efabless",
         "email": "efabless@efabless.com",
         "category": "analog",
+        "technology": "gf180mcu",
         "tag": [
             "BUS",
             "periphery"
@@ -98,7 +96,6 @@
                 "type": "hard",
                 "width": "0.25",
                 "height": "0.2",
-                "technology": "sky130",
                 "cell_count": "200",
                 "clk_freq": "10"
             }
