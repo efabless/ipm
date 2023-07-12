@@ -40,7 +40,7 @@
                 "cell_count": "400",
                 "clk_freq": "10",
                 "dependencies": {
-                    "dummy_ip": "v1.1"
+                    "dummy_ip": "v1.0"
                 }
             }
         }
@@ -64,7 +64,10 @@
                 "height": "0.2",
                 "technology": "sky130",
                 "cell_count": "200",
-                "clk_freq": "10"
+                "clk_freq": "10",
+                "dependencies": {
+                    "dummy_ip2": "v1.0"
+                }
             },
             "v1.1": {
                 "date": "10-19-2022",
@@ -74,10 +77,7 @@
                 "height": "0.2",
                 "technology": "sky130",
                 "cell_count": "200",
-                "clk_freq": "10",
-                "dependencies": {
-                    "dummy_ip2": "v1.0"
-                }
+                "clk_freq": "10"
             }
         }
     },
