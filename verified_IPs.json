@@ -75,7 +75,7 @@
                 "type": "hard",
                 "width": "0.25",
                 "height": "0.2",
-                "technology": "sky130",
+                "technology": "gf180mcu",
                 "cell_count": "200",
                 "clk_freq": "10"
             }
@@ -85,7 +85,7 @@
         "repo": "github.com/marwaneltoukhy/dummy_ip2",
         "author": "efabless",
         "email": "efabless@efabless.com",
-        "category": "digital",
+        "category": "analog",
         "tag": [
             "BUS",
             "periphery"
