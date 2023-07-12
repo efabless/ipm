@@ -20,6 +20,7 @@ from .common import (
     check_ip_root_dir,
     check_ipm_directory,
     install_ip,
+    install_using_dep_file,
     list_installed_ips,
     list_ip_info,
     list_verified_ips,
@@ -97,3 +98,17 @@ def ls(ipm_root):
     valid = check_ipm_directory(ipm_root)
     if valid:
         list_installed_ips(ipm_root)
+
+@click.command("install-dep")
+@click.option("--ip-root", required=False, default=os.path.join(os.path.expanduser("~"), ".ipm"), help="IP installation path")
+@opt_ipm_root
+def install_deps_cmd(ip_root, ipm_root):
+    """Install verified IPs from dependencies json file"""
+    install_deps(ip_root, ipm_root)
+
+def install_deps(ip_root, ipm_root):
+    """Install verified IPs from dependencies json file"""
+    valid = check_ipm_directory(ipm_root)
+    valid_ip_dir = check_ip_root_dir(ip_root)
+    if valid and valid_ip_dir:
+        install_using_dep_file(ip_root, ipm_root)

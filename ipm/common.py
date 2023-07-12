@@ -270,6 +270,20 @@ def install_ip(ip_name, version, ip_root, ipm_root):
             logger.print_success(f"Created simlink to {ip_name} IP at {ip_root}")
             ip.create_dependencies_file()
 
+def install_using_dep_file(ip_root, ipm_root):
+    logger = Logger()
+    json_file = f"{ip_root}/{DEPENDENCIES_FILE_NAME}"
+    if os.path.exists(json_file):
+        logger.print_info(f"using {json_file} to download IPs")
+        with open(json_file) as f:
+            data = json.load(f)
+        for ips in data['IP']:
+            for ip_name, ip_version in ips.items():
+                install_ip(ip_name, ip_version, ip_root, ipm_root)
+    else:
+        logger.print_err(f"Can't find {DEPENDENCIES_FILE_NAME} file in {ip_root}")
+        exit(1)
+
 def check_ipm_directory(ipm_root) -> bool:
     logger = Logger()
     if ipm_root == IPM_DEFAULT_HOME:
