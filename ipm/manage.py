@@ -24,7 +24,8 @@ from .common import (
     list_installed_ips,
     list_ip_info,
     list_verified_ips,
-    opt_ipm_root
+    opt_ipm_root,
+    uninstall_ip
 )
 
 @click.command("install")
@@ -34,7 +35,6 @@ from .common import (
 @opt_ipm_root
 def install_cmd(ip, ip_root, ipm_root, version=None):
     """Install one of the verified IPs locally"""
-    # console = Console()
     install(
         ip, ipm_root, version=version, ip_root=ip_root
     )
@@ -54,6 +54,31 @@ def install(
             ipm_root=ipm_root,
             ip_name=ip,
             ip_root=ip_root,
+            version=version
+        )
+
+@click.command("uninstall")
+@click.argument("ip")
+@click.option("--version", required=False, help="Install IP with a specific version")
+@opt_ipm_root
+def uninstall_cmd(ip, ipm_root, version=None):
+    """Uninstall local IP"""
+    uninstall(
+        ip, ipm_root, version=version
+    )
+
+
+def uninstall(
+    ip,
+    ipm_root,
+    version=None,
+):
+    """Uninstall local IP"""
+    valid = check_ipm_directory(ipm_root)
+    if valid:
+        uninstall_ip(
+            ipm_root=ipm_root,
+            ip_name=ip,
             version=version
         )
 

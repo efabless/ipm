@@ -21,7 +21,7 @@ from .manage import (
     ls_cmd,
     # output_cmd,
     install_cmd,
-    # uninstall_cmd,
+    uninstall_cmd,
     # check_cmd,
     # update_cmd,
     # package_check_cmd,
@@ -44,7 +44,7 @@ def cli():
 cli.add_command(ls_remote_cmd)
 cli.add_command(ls_cmd)
 cli.add_command(install_cmd)
-# cli.add_command(uninstall_cmd)
+cli.add_command(uninstall_cmd)
 # cli.add_command(check_cmd)
 # cli.add_command(update_cmd)
 # cli.add_command(package_check_cmd)

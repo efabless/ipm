@@ -14,6 +14,8 @@
 # limitations under the License.
 import json
 import os
+import shutil
+import sys
 import tarfile
 from typing import Callable
 import click
@@ -225,6 +227,37 @@ class IP:
         else:
             logger.print_err("No IPs found")
 
+def query_yes_no(question, default="yes"):
+    # from https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input
+    """Ask a yes/no question via raw_input() and return their answer.
+
+    "question" is a string that is presented to the user.
+    "default" is the presumed answer if the user just hits <Enter>.
+            It must be "yes" (the default), "no" or None (meaning
+            an answer is required of the user).
+
+    The "answer" return value is True for "yes" or False for "no".
+    """
+    valid = {"yes": True, "y": True, "ye": True, "no": False, "n": False}
+    if default is None:
+        prompt = " [y/n] "
+    elif default == "yes":
+        prompt = " [Y/n] "
+    elif default == "no":
+        prompt = " [y/N] "
+    else:
+        raise ValueError("invalid default answer: '%s'" % default)
+
+    while True:
+        sys.stdout.write(question + prompt)
+        choice = input().lower()
+        if default is not None and choice == "":
+            return valid[default]
+        elif choice in valid:
+            return valid[choice]
+        else:
+            sys.stdout.write("Please respond with 'yes' or 'no' " "(or 'y' or 'n').\n")
+
 def get_latest_version(data):
     last_key = None
     for key, value in data.items():
@@ -236,21 +269,24 @@ def install_ip(ip_name, version, ip_root, ipm_root):
     logger = Logger()
     ip_info = IPInfo()
     dependencies_list = []
+    verified_ip_info = ip_info.get_verified_ip_info(ip_name)
+    if not version:
+        version = get_latest_version(verified_ip_info['release'])
     ip_info.get_dependencies(ip_name, version, dependencies_list)
     dependencies_list.append({ip_name: version})
     for dep in dependencies_list:
-        for ip_name, version in dep.items():
-            verified_ip_info = ip_info.get_verified_ip_info(ip_name)
+        for dep_name, version in dep.items():
+            verified_ip_info = ip_info.get_verified_ip_info(dep_name)
             if not version:
                 version = get_latest_version(verified_ip_info['release'])
-            ip = IP(ip_name, ip_root, ipm_root, version)
+            ip = IP(dep_name, ip_root, ipm_root, version)
             if ip.check_install_root():
-                ip_install_root = f"{ipm_root}/{ip_name}/{version}"
-                logger.print_info(f"Installing IP {ip_name} at {ipm_root} and creating simlink to {ip_root}")
+                ip_install_root = f"{ipm_root}/{dep_name}/{version}"
+                logger.print_info(f"Installing IP {dep_name} at {ipm_root} and creating simlink to {ip_root}")
                 release_url = f"https://{verified_ip_info['repo']}/releases/download/{version}/{version}.tar.gz"
                 response = requests.get(release_url, stream=True)
                 if response.status_code == 404:
-                    logger.print_err(f"The IP {ip_name} version {version} could not be found remotely")
+                    logger.print_err(f"The IP {dep_name} version {version} could not be found remotely")
                     exit(1)
                 elif response.status_code == 200:
                     tarball_path = os.path.join(ip_install_root, f"{version}.tar.gz")
@@ -260,15 +296,33 @@ def install_ip(ip_name, version, ip_root, ipm_root):
                     file.extractall(ip_install_root)
                     file.close
                     os.remove(tarball_path)
-                    logger.print_success(f"Successfully installed {ip_name} version {version}")
+                    logger.print_success(f"Successfully installed {dep_name} version {version}")
 
             else:
-                logger.print_info(f"Found IP {ip_name} locally")
-            if os.path.exists(f"{ip_root}/{ip_name}"):
-                os.unlink(f"{ip_root}/{ip_name}")
-            os.symlink(f"{ipm_root}/{ip_name}/{version}", f"{ip_root}/{ip_name}")
-            logger.print_success(f"Created simlink to {ip_name} IP at {ip_root}")
-            ip.create_dependencies_file()
+                logger.print_info(f"Found IP {dep_name} locally")
+            if os.path.exists(f"{ip_root}/{dep_name}"):
+                os.unlink(f"{ip_root}/{dep_name}")
+            os.symlink(f"{ipm_root}/{dep_name}/{version}", f"{ip_root}/{dep_name}")
+            logger.print_success(f"Created simlink to {dep_name} IP at {ip_root}")
+            if dep_name == ip_name:
+                ip.create_dependencies_file()
+
+def uninstall_ip(ip_name, version, ipm_root):
+    logger = Logger()
+    ip_info = IPInfo()
+    dependencies_list = []
+    verified_ip_info = ip_info.get_verified_ip_info(ip_name)
+    if not version:
+        version = get_latest_version(verified_ip_info['release'])
+    ip_info.get_dependencies(ip_name, version, dependencies_list)
+    dependencies_list.append({ip_name: version})
+    if query_yes_no(f"uninstalling {ip_name} will end up with broken simlinks if used in any project, and will uninstall all dependencies of IP"):
+        for dep in dependencies_list:
+            for dep_name, version in dep.items():
+                ip_root = f"{ipm_root}/{dep_name}"
+                if os.path.exists(ip_root):
+                    shutil.rmtree(ip_root)
+        logger.print_success(f"Successfully uninstalled {ip_name}")
 
 def install_using_dep_file(ip_root, ipm_root):
     logger = Logger()
