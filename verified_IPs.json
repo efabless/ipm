@@ -40,7 +40,7 @@
                 "cell_count": "400",
                 "clk_freq": "10",
                 "dependencies": {
-                    "dummy_ip": "v1.0"
+                    "dummy_ip": "v1.1"
                 }
             }
         }
