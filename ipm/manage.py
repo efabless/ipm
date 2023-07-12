@@ -20,6 +20,7 @@ from .common import (
     check_ip_root_dir,
     check_ipm_directory,
     install_ip,
+    list_installed_ips,
     list_ip_info,
     list_verified_ips,
     opt_ipm_root
@@ -84,3 +85,15 @@ def info_cmd(ip):
 def info(ip):
     """list all versions and info of the IP"""
     list_ip_info(ip)
+
+@click.command("ls")
+@opt_ipm_root
+def ls_cmd(ipm_root):
+    """Lists all locally installed IPs"""
+    ls(ipm_root)
+
+def ls(ipm_root):
+    """Lists all locally installed IPs"""
+    valid = check_ipm_directory(ipm_root)
+    if valid:
+        list_installed_ips(ipm_root)

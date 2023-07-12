@@ -18,7 +18,7 @@ from click_default_group import DefaultGroup
 from . import __version__
 from .manage import (
     ls_remote_cmd,
-    # ls_cmd,
+    ls_cmd,
     # output_cmd,
     install_cmd,
     # uninstall_cmd,
@@ -42,7 +42,7 @@ def cli():
 
 # cli.add_command(output_cmd)
 cli.add_command(ls_remote_cmd)
-# cli.add_command(ls_cmd)
+cli.add_command(ls_cmd)
 cli.add_command(install_cmd)
 # cli.add_command(uninstall_cmd)
 # cli.add_command(check_cmd)

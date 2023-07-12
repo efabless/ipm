@@ -82,17 +82,28 @@ class IPInfo:
         else:
             return data
 
-    def get_installed_ip_info(self, ip_name, ipm_root):
-        logger = Logger()
-        local_json_file = os.path.join(ipm_root, LOCAL_JSON_FILE_NAME)
-        if not os.path.exists(local_json_file):
-            logger.print_err(f"Can't find {local_json_file}")
-        with open(local_json_file) as json_file:
-            data = json.load(json_file)
-        if ip_name:
-            return data[ip_name]
-        else:
-            return data
+    def get_installed_ips(self, ipm_root):
+        installed_ips = []
+        for root, directories, files in os.walk(ipm_root):
+            ip_names = directories
+            break
+        for ips in ip_names:
+            for root, directories, files in os.walk(os.path.join(ipm_root, ips)):
+                installed_ips.append({ips: directories})
+                break
+        return installed_ips
+
+    def get_installed_ip_info(self, ipm_root):
+        installed_ips = self.get_installed_ips(ipm_root)
+        installed_ips_arr = []
+        for ips in installed_ips:
+            for ip_name, ip_version in ips.items():
+                for version in ip_version:
+                    json_file = f"{ipm_root}/{ip_name}/{version}/{ip_name}.json"
+                    with open(json_file) as f:
+                        data = json.load(f)
+                    installed_ips_arr.append({data['name']: data})
+        return installed_ips_arr
 
     def get_dependencies(self, ip_name, version, dependencies_list):
         ip_info = self.get_verified_ip_info(ip_name)
@@ -148,7 +159,7 @@ class IP:
         with open(dependencies_file_path, "w") as json_file:
             json.dump(json_decoded, json_file)
 
-    def create_table(self, ip_list, version=None, extended=False):
+    def create_table(self, ip_list, version=None, extended=False, local=False):
         table = Table()
         logger = Logger()
         console = Console()
@@ -172,24 +183,37 @@ class IP:
             for key, value in ips.items():
                 version_list = []
                 table_list = []
-                if not version:
-                    version_list.append(get_latest_version(value['release']))
+                if not local:
+                    if not version:
+                        version_list.append(get_latest_version(value['release']))
+                    else:
+                        for versions, data in value['release'].items():
+                            version_list.append(versions)
                 else:
-                    for versions, data in value['release'].items():
-                        version_list.append(versions)
+                    version_list.append(value['version'])
                 for versions in version_list:
                     table_list.append(key)
                     table_list.append(value['category'])
                     table_list.append(versions)
                     table_list.append(value["author"])
-                    table_list.append(value['release'][versions]["type"])
-                    table_list.append(",".join(value["tag"]))
-                    table_list.append(value['release'][versions]["status"])
-                    if extended:
-                        table_list.append(value['release'][versions]["cell_count"])
-                        table_list.append(value['release'][versions]["clk_freq"])
-                        table_list.append(value['release'][versions]["width"])
-                        table_list.append(value['release'][versions]["height"])
+                    if not local:
+                        table_list.append(value['release'][versions]["type"])
+                        table_list.append(",".join(value["tag"]))
+                        table_list.append(value['release'][versions]["status"])
+                        if extended:
+                            table_list.append(value['release'][versions]["cell_count"])
+                            table_list.append(value['release'][versions]["clk_freq"])
+                            table_list.append(value['release'][versions]["width"])
+                            table_list.append(value['release'][versions]["height"])
+                    if local:
+                        table_list.append(value["type"])
+                        table_list.append(",".join(value["tag"]))
+                        table_list.append(value["status"])
+                        if extended:
+                            table_list.append(value["cell_count"])
+                            table_list.append(value["clk_freq"])
+                            table_list.append(value["width"])
+                            table_list.append(value["height"])
                     table_list.append(value["technology"])
                     table_list.append(value["license"])
                     table.add_row(*table_list)
@@ -293,6 +317,11 @@ def list_ip_info(ip_name):
     ip_info = IPInfo()
     ip = IP(ip_name)
     ip_data = ip_info.get_verified_ip_info(ip_name)
-    ip_list = []
-    ip_list.append({ip_name: ip_data})
+    ip_list = [{ip_name: ip_data}]
     ip.create_table(ip_list, "all", True)
+
+def list_installed_ips(ipm_root):
+    ip_info = IPInfo()
+    ip = IP()
+    ip_data = ip_info.get_installed_ip_info(ipm_root)
+    ip.create_table(ip_data, local=True, extended=True)
