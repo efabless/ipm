@@ -19,6 +19,7 @@ from rich.console import Console
 from .common import (
     check_ip_root_dir,
     check_ipm_directory,
+    check_ips,
     install_ip,
     install_using_dep_file,
     list_installed_ips,
@@ -151,3 +152,21 @@ def rm(ip_root, ip):
     valid_ip_dir = check_ip_root_dir(ip_root)
     if valid_ip_dir:
         rm_ip_from_project(ip, ip_root)
+
+@click.command("check")
+@opt_ipm_root
+def check_cmd(ipm_root):
+    """Check for new versions of all installed IPs or a specific IP."""
+    valid = check_ipm_directory(ipm_root)
+    if valid:
+        check_ips(ipm_root)
+
+@click.command("update")
+@opt_ipm_root
+@click.option("--ip-root", required=False, default=os.path.join(os.path.expanduser("~"), ".ipm"), help="IP installation path")
+def update_cmd(ipm_root, ip_root):
+    """Check for new versions of all installed IPs or a specific IP."""
+    valid = check_ipm_directory(ipm_root)
+    valid_ip_dir = check_ip_root_dir(ip_root)
+    if valid and valid_ip_dir:
+        check_ips(ipm_root, update=True, ip_root=ip_root)

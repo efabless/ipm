@@ -438,3 +438,17 @@ def list_installed_ips(ipm_root):
     ip = IP()
     ip_data = ip_info.get_installed_ip_info(ipm_root)
     ip.create_table(ip_data, local=True, extended=True)
+
+def check_ips(ipm_root, update=False, ip_root=None):
+    ip_info = IPInfo()
+    logger = Logger()
+    installed_ips = ip_info.get_installed_ips(ipm_root)
+    for ips in installed_ips:
+        for ip_name, ip_version in ips.items():
+            verified_ip_info = ip_info.get_verified_ip_info(ip_name)
+            version = get_latest_version(verified_ip_info['release'])
+            if version not in ip_version:
+                if update:
+                    install_ip(ip_name, version, ip_root, ipm_root)
+                else:
+                    logger.print_info(f"IP {ip_name} has a newer version [magenta]{version}[/magenta], to update use command ipm update")
