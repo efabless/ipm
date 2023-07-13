@@ -316,6 +316,7 @@ def install_ip(ip_name, version, ip_root, ipm_root):
                 response = requests.get(release_url, stream=True)
                 if response.status_code == 404:
                     logger.print_err(f"The IP {dep_name} version {version} could not be found remotely")
+                    shutil.rmtree(ip_install_root)
                     exit(1)
                 elif response.status_code == 200:
                     tarball_path = os.path.join(ip_install_root, f"{version}.tar.gz")
