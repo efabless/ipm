@@ -107,6 +107,17 @@ class IPInfo:
                     installed_ips_arr.append({data['name']: data})
         return installed_ips_arr
 
+    def get_installed_ip_info_from_simlink(self, ip_root, ip_name):
+        logger = Logger()
+        json_file = f"{ip_root}/{ip_name}/{ip_name}.json"
+        if os.path.exists(json_file):
+            with open(json_file) as f:
+                data = json.load(f)
+            return {data['name']: data}
+        else:
+            logger.print_err(f"Couldn't find {json_file}")
+            exit(1)
+
     def get_dependencies(self, ip_name, version, dependencies_list):
         ip_info = self.get_verified_ip_info(ip_name)
         release = ip_info['release'][version]
@@ -160,6 +171,24 @@ class IP:
 
         with open(dependencies_file_path, "w") as json_file:
             json.dump(json_decoded, json_file)
+
+    def remove_from_dependencies_file(self):
+        logger = Logger()
+        dependencies_file_path = os.path.join(self.ip_root, DEPENDENCIES_FILE_NAME)
+        if os.path.exists(dependencies_file_path):
+            with open(dependencies_file_path) as json_file:
+                json_decoded = json.load(json_file)
+            ip_category = json_decoded["IP"]
+            for ips in ip_category:
+                for ips_name, ip_version in ips.items():
+                    if ips_name == self.ip_name:
+                        ip_category.remove({ips_name: ip_version})
+                json_decoded["IP"] = ip_category
+
+            with open(dependencies_file_path, "w") as json_file:
+                json.dump(json_decoded, json_file)
+        else:
+            logger.print_err(f"Couldn't find {DEPENDENCIES_FILE_NAME} file")
 
     def create_table(self, ip_list, version=None, extended=False, local=False):
         table = Table()
@@ -323,6 +352,22 @@ def uninstall_ip(ip_name, version, ipm_root):
                 if os.path.exists(ip_root):
                     shutil.rmtree(ip_root)
         logger.print_success(f"Successfully uninstalled {ip_name}")
+
+def rm_ip_from_project(ip_name, ip_root):
+    ip = IP(ip_name, ip_root)
+    ip_info = IPInfo()
+    logger = Logger()
+    installed_ip_info = ip_info.get_installed_ip_info_from_simlink(ip_root, ip_name)
+    dep_arr = []
+    ip_info = ip_info.get_dependencies(ip_name, installed_ip_info[ip_name]['version'], dep_arr)
+    dep_arr.append({ip_name: installed_ip_info[ip_name]['version']})
+    for d in dep_arr:
+        for dep_name, dep_version in d.items():
+            uninstall_ip_root = f"{ip_root}/{dep_name}"
+            if os.path.exists(uninstall_ip_root):
+                os.unlink(uninstall_ip_root)
+    ip.remove_from_dependencies_file()
+    logger.print_success(f"removed IP {ip_name} and dependencies from project")
 
 def install_using_dep_file(ip_root, ipm_root):
     logger = Logger()

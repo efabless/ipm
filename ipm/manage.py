@@ -25,6 +25,7 @@ from .common import (
     list_ip_info,
     list_verified_ips,
     opt_ipm_root,
+    rm_ip_from_project,
     uninstall_ip
 )
 
@@ -137,3 +138,16 @@ def install_deps(ip_root, ipm_root):
     valid_ip_dir = check_ip_root_dir(ip_root)
     if valid and valid_ip_dir:
         install_using_dep_file(ip_root, ipm_root)
+
+@click.command("rm")
+@click.argument("ip")
+@click.option("--ip-root", required=False, default=os.path.join(os.path.expanduser("~"), ".ipm"), help="IP installation path")
+def rm_cmd(ip_root, ip):
+    """remove IP from project"""
+    rm(ip_root, ip)
+
+def rm(ip_root, ip):
+    """remove IP from project"""
+    valid_ip_dir = check_ip_root_dir(ip_root)
+    if valid_ip_dir:
+        rm_ip_from_project(ip, ip_root)
