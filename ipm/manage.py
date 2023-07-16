@@ -33,7 +33,7 @@ from .common import (
 @click.command("install")
 @click.argument("ip")
 @click.option("--version", required=False, help="Install IP with a specific version")
-@click.option("--ip-root", required=False, default=os.path.join(os.path.expanduser("~"), ".ipm"), help="IP installation path")
+@click.option("--ip-root", required=False, default=os.path.join(os.getcwd(), "ip"), help="IP installation path")
 @opt_ipm_root
 def install_cmd(ip, ip_root, ipm_root, version=None):
     """Install one of the verified IPs locally"""
@@ -127,7 +127,7 @@ def ls(ipm_root):
         list_installed_ips(ipm_root)
 
 @click.command("install-dep")
-@click.option("--ip-root", required=False, default=os.path.join(os.path.expanduser("~"), ".ipm"), help="IP installation path")
+@click.option("--ip-root", required=False, default=os.path.join(os.getcwd(), "ip"), help="IP path")
 @opt_ipm_root
 def install_deps_cmd(ip_root, ipm_root):
     """Install verified IPs from dependencies json file"""
@@ -142,7 +142,7 @@ def install_deps(ip_root, ipm_root):
 
 @click.command("rm")
 @click.argument("ip")
-@click.option("--ip-root", required=False, default=os.path.join(os.path.expanduser("~"), ".ipm"), help="IP installation path")
+@click.option("--ip-root", required=False, default=os.path.join(os.getcwd(), "ip"), help="IP path")
 def rm_cmd(ip_root, ip):
     """remove IP from project"""
     rm(ip_root, ip)
@@ -163,7 +163,7 @@ def check_cmd(ipm_root):
 
 @click.command("update")
 @opt_ipm_root
-@click.option("--ip-root", required=False, default=os.path.join(os.path.expanduser("~"), ".ipm"), help="IP installation path")
+@click.option("--ip-root", required=False, default=os.path.join(os.getcwd(), "ip"), help="IP path")
 def update_cmd(ipm_root, ip_root):
     """Check for new versions of all installed IPs or a specific IP."""
     valid = check_ipm_directory(ipm_root)

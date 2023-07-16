@@ -346,7 +346,7 @@ def uninstall_ip(ip_name, version, ipm_root):
         version = get_latest_version(verified_ip_info['release'])
     ip_info.get_dependencies(ip_name, version, dependencies_list)
     dependencies_list.append({ip_name: version})
-    if query_yes_no(f"uninstalling {ip_name} will end up with broken simlinks if used in any project, and will uninstall all dependencies of IP"):
+    if query_yes_no(f"uninstalling {ip_name} might end up with broken simlinks if used in any project, and will uninstall all dependencies of IP"):
         for dep in dependencies_list:
             for dep_name, version in dep.items():
                 ip_root = f"{ipm_root}/{dep_name}"
@@ -402,8 +402,9 @@ def check_ipm_directory(ipm_root) -> bool:
 def check_ip_root_dir(ip_root) -> bool:
     logger = Logger()
     if not os.path.isdir(ip_root):
-        logger.print_err(f"[red] ip-root {ip_root} can't be found")
-        return False
+        logger.print_info(f"ip-root {ip_root} can't be found, will create ip directory")
+        os.mkdir(ip_root)
+        return True
     else:
         return True
 
