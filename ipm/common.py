@@ -256,6 +256,20 @@ class IP:
         else:
             logger.print_err("No IPs found")
 
+def change_dir_to_readonly(dir):
+    """Recursively checks a directory and its subdirectories for files that should be readonly, and then changes any non-readonly files to readonly.
+
+    Args:
+        directory_name: The name of the directory to check.
+    """
+    for file_name in os.listdir(dir):
+        file_path = os.path.join(dir, file_name)
+        if os.path.isfile(file_path):
+            if os.access(file_path, os.W_OK):
+                os.chmod(file_path, 0o400)
+        else:
+            change_dir_to_readonly(file_path)
+
 def query_yes_no(question, default="yes"):
     # from https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input
     """Ask a yes/no question via raw_input() and return their answer.
@@ -336,6 +350,7 @@ def install_ip(ip_name, version, ip_root, ipm_root):
             logger.print_success(f"Created simlink to {dep_name} IP at {ip_root}")
             if dep_name == ip_name:
                 ip.create_dependencies_file()
+    change_dir_to_readonly(ipm_root)
 
 def uninstall_ip(ip_name, version, ipm_root):
     logger = Logger()
@@ -380,6 +395,7 @@ def install_using_dep_file(ip_root, ipm_root):
         for ips in data['IP']:
             for ip_name, ip_version in ips.items():
                 install_ip(ip_name, ip_version, ip_root, ipm_root)
+        change_dir_to_readonly(ipm_root)
     else:
         logger.print_err(f"Can't find {DEPENDENCIES_FILE_NAME} file in {ip_root}")
         exit(1)
