@@ -27,7 +27,6 @@ GITHUB_TOKEN = os.environ['GITHUB_TOKEN']
 VERIFIED_JSON_FILE_URL = (
     "https://raw.githubusercontent.com/efabless/ipm/refactor_code/verified_IPs.json"
 )
-LOCAL_JSON_FILE_NAME = "Installed_IPs.json"
 DEPENDENCIES_FILE_NAME = "dependencies.json"
 IPM_DEFAULT_HOME = os.path.join(os.path.expanduser("~"), ".ipm")
 
@@ -56,6 +55,9 @@ class Logger:
 
     def print_success(self, info_string):
         self.console.print(f"[green]{info_string}")
+
+    def print_step(self, info_string):
+        self.console.print(f"[magenta]{info_string}")
 
 
 class IPInfo:
@@ -256,6 +258,124 @@ class IP:
         else:
             logger.print_err("No IPs found")
 
+    def download_tarball(self, release_url, dest_path):
+        response = requests.get(release_url, stream=True)
+        if response.status_code == 404:
+            shutil.rmtree(dest_path)
+            return False
+        elif response.status_code == 200:
+            tarball_path = os.path.join(dest_path, f"{self.version}.tar.gz")
+            with open(tarball_path, "wb") as f:
+                f.write(response.raw.read())
+            file = tarfile.open(tarball_path)
+            file.extractall(dest_path)
+            file.close
+            os.remove(tarball_path)
+            return True
+
+class Checks:
+    def __init__(self, ipm_root, ip_name, version, gh_url) -> None:
+        if gh_url.startswith("https"):
+            self.gh_url = gh_url
+        else:
+            self.gh_url = f"https://{gh_url}"
+        self.release_tag_url = f"{self.gh_url}/releases/tag/{version}"
+        self.release_tarball_url = f"{self.gh_url}/releases/download/{version}/{version}.tar.gz"
+        self.package_check_path = os.path.join(ipm_root, f"{ip_name}_pre-check")
+        if os.path.exists(self.package_check_path):
+            shutil.rmtree(self.package_check_path)
+        self.version = version
+        self.ipm_root = ipm_root
+        self.ip_name = ip_name
+
+    def check_url(self, url):
+        repo_response = requests.get(url, stream=True)
+        if repo_response.status_code == 404:
+            return False
+        elif repo_response.status_code == 200:
+            return True
+
+    def download_check_tarball(self):
+        ip = IP(self.ip_name, ipm_root=self.ipm_root, version=self.version)
+        os.mkdir(self.package_check_path)
+        ip.download_tarball(self.release_tarball_url, self.package_check_path)
+
+    def check_json(self):
+        logger = Logger()
+        json_path = f"{self.package_check_path}/{self.ip_name}.json"
+        if not os.path.exists(json_path):
+            logger.print_err(
+                f"Can't find {json_path} please refer to the ipm directory structure (IP name {self.ip_name} might be wrong)"
+            )
+            return False
+        json_fields = [
+            "name",
+            "repo",
+            "version",
+            "author",
+            "email",
+            "date",
+            "type",
+            "category",
+            "status",
+            "width",
+            "height",
+            "technology",
+            "tag",
+            "cell_count",
+            "clk_freq",
+            "license"
+        ]
+        flag = True
+        with open(json_path) as json_file:
+            json_decoded = json.load(json_file)
+
+        if self.ip_name != json_decoded["name"]:
+            print(type(json_decoded["name"]), type(self.ip_name))
+            logger.print_err(f"The given IP name {self.ip_name} is not the same as the one in json file")
+            flag = False
+
+        for field in json_fields:
+            if field not in json_decoded.keys():
+                logger.print_err(
+                    f"The field '{field}' was not included in the {self.ip_name}.json file"
+                )
+                flag = False
+
+        return flag
+
+    def check_hierarchy(self):
+        logger = Logger()
+        json_path = f"{self.package_check_path}/{self.ip_name}.json"
+        ip_path = f"{self.package_check_path}"
+        common_dirs = ["verify/beh_model", "fw", "hdl/rtl/bus_wrapper"]
+        with open(json_path) as json_file:
+            data = json.load(json_file)
+        # check the folder hierarchy
+        if data["type"] == "hard":
+            ipm_dirs = ["hdl/gl", "timing/lib", "timing/sdf", "timing/spef", "layout/gds", "layout/lef"]
+        elif data["type"] == "soft" and data["category"] == "digital":
+            ipm_dirs = ["hdl/rtl/design", "verify/utb", "pnr"]
+        if data["category"] == "analog":
+            ipm_dirs = ["spice"]
+        ipm_dirs = ipm_dirs + common_dirs
+        ipm_files = [f"{self.ip_name}.json", "readme.md", "doc/datasheet.pdf"]
+        flag = True
+        for dirs in ipm_dirs:
+            if not os.path.exists(os.path.join(ip_path, dirs)):
+                logger.print_err(
+                    f"The directory {dirs} cannot be found under {ip_path} please refer to the ipm directory structure"
+                )
+                flag = False
+
+        for files in ipm_files:
+            if not os.path.exists(os.path.join(ip_path, files)):
+                logger.print_err(
+                    f"The file {files} cannot be found under {ip_path} please refer to the ipm directory structure"
+                )
+                flag = False
+        return flag
+
 def change_dir_to_readonly(dir):
     """Recursively checks a directory and its subdirectories for files that should be readonly, and then changes any non-readonly files to readonly.
 
@@ -327,21 +447,7 @@ def install_ip(ip_name, version, ip_root, ipm_root):
                 ip_install_root = f"{ipm_root}/{dep_name}/{version}"
                 logger.print_info(f"Installing IP {dep_name} at {ipm_root} and creating simlink to {ip_root}")
                 release_url = f"https://{verified_ip_info['repo']}/releases/download/{version}/{version}.tar.gz"
-                response = requests.get(release_url, stream=True)
-                if response.status_code == 404:
-                    logger.print_err(f"The IP {dep_name} version {version} could not be found remotely")
-                    shutil.rmtree(ip_install_root)
-                    exit(1)
-                elif response.status_code == 200:
-                    tarball_path = os.path.join(ip_install_root, f"{version}.tar.gz")
-                    with open(tarball_path, "wb") as f:
-                        f.write(response.raw.read())
-                    file = tarfile.open(tarball_path)
-                    file.extractall(ip_install_root)
-                    file.close
-                    os.remove(tarball_path)
-                    logger.print_success(f"Successfully installed {dep_name} version {version}")
-
+                ip.download_tarball(release_url, ip_install_root)
             else:
                 logger.print_info(f"Found IP {dep_name} locally")
             if os.path.exists(f"{ip_root}/{dep_name}"):
@@ -470,3 +576,34 @@ def check_ips(ipm_root, update=False, ip_root=None):
                     install_ip(ip_name, version, ip_root, ipm_root)
                 else:
                     logger.print_info(f"IP {ip_name} has a newer version [magenta]{version}[/magenta], to update use command ipm update")
+
+def package_check(ipm_root, ip, version, gh_repo):
+    checker = Checks(ipm_root, ip, version, gh_repo)
+    logger = Logger()
+
+    logger.print_step("[STEP 1]: Checking the Github repo")
+    if not checker.check_url(checker.gh_url):
+        logger.print_err(f"Github repo {gh_repo} does not exist")
+        exit(1)
+
+    logger.print_step(f"[STEP 2]: Checking for the release with the tag {version}")
+    if not checker.check_url(checker.release_tag_url):
+        logger.print_err(f"There is no release tagged {version} in the Github repo {gh_repo}")
+        exit(1)
+
+    logger.print_step(f"[STEP 3]: Checking Checking for the tarball named {version}.tar.gz")
+    if not checker.check_url(checker.release_tarball_url):
+        logger.print_err(f"The tarball '{version}.tar.gz' was not found in the release tagged {version} in the GH repo {gh_repo}")
+        exit(1)
+
+    checker.download_check_tarball()
+    logger.print_step("[STEP 4]: Checking the JSON file content")
+    if not checker.check_json():
+        exit(1)
+
+    logger.print_step("[STEP 5]: Checking the hierarchy of the directory")
+    if not checker.check_hierarchy():
+        exit(1)
+
+    logger.print_success("IP pre-check was successful you can now submit your IP")
+    shutil.rmtree(checker.package_check_path)

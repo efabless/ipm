@@ -14,7 +14,6 @@
 # limitations under the License.
 import os
 import click
-from rich.console import Console
 
 from .common import (
     check_ip_root_dir,
@@ -26,6 +25,7 @@ from .common import (
     list_ip_info,
     list_verified_ips,
     opt_ipm_root,
+    package_check,
     rm_ip_from_project,
     uninstall_ip
 )
@@ -170,3 +170,14 @@ def update_cmd(ipm_root, ip_root):
     valid_ip_dir = check_ip_root_dir(ip_root)
     if valid and valid_ip_dir:
         check_ips(ipm_root, update=True, ip_root=ip_root)
+
+@click.command("package-check")
+@click.option("--name", required=True, help="Provide IP name")
+@click.option("--version", required=True, help="Provide IP version")
+@click.option("--url", required=True, help="Provide IP url")
+@opt_ipm_root
+def package_check_cmd(ipm_root, name, version, url):
+    """Check packaged IP."""
+    valid = check_ipm_directory(ipm_root)
+    if valid:
+        package_check(ipm_root, name, version, url)
