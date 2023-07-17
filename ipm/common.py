@@ -23,12 +23,13 @@ import requests
 from rich.console import Console
 from rich.table import Table
 
-GITHUB_TOKEN = os.environ['GITHUB_TOKEN']
+GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
 VERIFIED_JSON_FILE_URL = (
     "https://raw.githubusercontent.com/efabless/ipm/refactor_code/verified_IPs.json"
 )
 DEPENDENCIES_FILE_NAME = "dependencies.json"
 IPM_DEFAULT_HOME = os.path.join(os.path.expanduser("~"), ".ipm")
+
 
 def opt_ipm_root(function: Callable):
     function = click.option(
@@ -39,6 +40,7 @@ def opt_ipm_root(function: Callable):
         show_default=True,
     )(function)
     return function
+
 
 class Logger:
     def __init__(self) -> None:
@@ -69,19 +71,25 @@ class IPInfo:
         if GITHUB_TOKEN:
             headers = {"Authorization": f"token {GITHUB_TOKEN}"}
         else:
-            logger.print_err("Can't find GITHUB_TOKEN in environment, please export your github token")
+            logger.print_err(
+                "Can't find GITHUB_TOKEN in environment, please export your github token"
+            )
             logger.print_err("THIS IS A TEMP WORKAROUND")
             exit(1)
         resp = requests.get(VERIFIED_JSON_FILE_URL, headers=headers)
         if resp.status_code == 404:
-            logger.print_err("Can't find remote file, you don't have access to IPM private repo, or GITHUB_TOKEN is wrong")
+            logger.print_err(
+                "Can't find remote file, you don't have access to IPM private repo, or GITHUB_TOKEN is wrong"
+            )
             exit(1)
         data = json.loads(resp.text)
         if ip_name:
             if ip_name in data:
                 return data[ip_name]
             else:
-                logger.print_err(f"Please provide a valid IP, {ip_name} is not a verified IP")
+                logger.print_err(
+                    f"Please provide a valid IP, {ip_name} is not a verified IP"
+                )
                 exit(1)
         else:
             return data
@@ -106,7 +114,7 @@ class IPInfo:
                     json_file = f"{ipm_root}/{ip_name}/{version}/{ip_name}.json"
                     with open(json_file) as f:
                         data = json.load(f)
-                    installed_ips_arr.append({data['name']: data})
+                    installed_ips_arr.append({data["name"]: data})
         return installed_ips_arr
 
     def get_installed_ip_info_from_simlink(self, ip_root, ip_name):
@@ -115,22 +123,23 @@ class IPInfo:
         if os.path.exists(json_file):
             with open(json_file) as f:
                 data = json.load(f)
-            return {data['name']: data}
+            return {data["name"]: data}
         else:
             logger.print_err(f"Couldn't find {json_file}")
             exit(1)
 
     def get_dependencies(self, ip_name, version, dependencies_list):
         ip_info = self.get_verified_ip_info(ip_name)
-        release = ip_info['release'][version]
+        release = ip_info["release"][version]
         if "dependencies" in release:
-            dependencies = ip_info['release'][version]['dependencies']
+            dependencies = ip_info["release"][version]["dependencies"]
             for dep_name, dep_version in dependencies.items():
                 if {dep_name, dep_version} not in dependencies_list:
                     dependencies_list.append({dep_name: dep_version})
                     self.get_dependencies(dep_name, dep_version, dependencies_list)
         else:
             return {ip_name, version}
+
 
 class IP:
     def __init__(self, ip_name=None, ip_root=None, ipm_root=None, version=None):
@@ -154,22 +163,18 @@ class IP:
             with open(dependencies_file_path) as json_file:
                 json_decoded = json.load(json_file)
         else:
-            json_decoded = {
-                "IP": []
-            }
-        tmp_dict = {
-            self.ip_name: self.version
-        }
+            json_decoded = {"IP": []}
+        tmp_dict = {self.ip_name: self.version}
         flag = True
-        if len(json_decoded['IP']) > 0:
-            for ips in json_decoded['IP']:
+        if len(json_decoded["IP"]) > 0:
+            for ips in json_decoded["IP"]:
                 for name, version in ips.items():
                     if name == self.ip_name:
                         flag = False
             if flag:
-                json_decoded['IP'].append(tmp_dict)
+                json_decoded["IP"].append(tmp_dict)
         else:
-            json_decoded['IP'].append(tmp_dict)
+            json_decoded["IP"].append(tmp_dict)
 
         with open(dependencies_file_path, "w") as json_file:
             json.dump(json_decoded, json_file)
@@ -218,26 +223,26 @@ class IP:
                 table_list = []
                 if not local:
                     if not version:
-                        version_list.append(get_latest_version(value['release']))
+                        version_list.append(get_latest_version(value["release"]))
                     else:
-                        for versions, data in value['release'].items():
+                        for versions, data in value["release"].items():
                             version_list.append(versions)
                 else:
-                    version_list.append(value['version'])
+                    version_list.append(value["version"])
                 for versions in version_list:
                     table_list.append(key)
-                    table_list.append(value['category'])
+                    table_list.append(value["category"])
                     table_list.append(versions)
                     table_list.append(value["author"])
                     if not local:
-                        table_list.append(value['release'][versions]["type"])
+                        table_list.append(value["release"][versions]["type"])
                         table_list.append(",".join(value["tag"]))
-                        table_list.append(value['release'][versions]["status"])
+                        table_list.append(value["release"][versions]["status"])
                         if extended:
-                            table_list.append(value['release'][versions]["cell_count"])
-                            table_list.append(value['release'][versions]["clk_freq"])
-                            table_list.append(value['release'][versions]["width"])
-                            table_list.append(value['release'][versions]["height"])
+                            table_list.append(value["release"][versions]["cell_count"])
+                            table_list.append(value["release"][versions]["clk_freq"])
+                            table_list.append(value["release"][versions]["width"])
+                            table_list.append(value["release"][versions]["height"])
                     if local:
                         table_list.append(value["type"])
                         table_list.append(",".join(value["tag"]))
@@ -273,6 +278,7 @@ class IP:
             os.remove(tarball_path)
             return True
 
+
 class Checks:
     def __init__(self, ipm_root, ip_name, version, gh_url) -> None:
         if gh_url.startswith("https"):
@@ -280,7 +286,9 @@ class Checks:
         else:
             self.gh_url = f"https://{gh_url}"
         self.release_tag_url = f"{self.gh_url}/releases/tag/{version}"
-        self.release_tarball_url = f"{self.gh_url}/releases/download/{version}/{version}.tar.gz"
+        self.release_tarball_url = (
+            f"{self.gh_url}/releases/download/{version}/{version}.tar.gz"
+        )
         self.package_check_path = os.path.join(ipm_root, f"{ip_name}_pre-check")
         if os.path.exists(self.package_check_path):
             shutil.rmtree(self.package_check_path)
@@ -324,7 +332,7 @@ class Checks:
             "tag",
             "cell_count",
             "clk_freq",
-            "license"
+            "license",
         ]
         flag = True
         with open(json_path) as json_file:
@@ -332,7 +340,9 @@ class Checks:
 
         if self.ip_name != json_decoded["name"]:
             print(type(json_decoded["name"]), type(self.ip_name))
-            logger.print_err(f"The given IP name {self.ip_name} is not the same as the one in json file")
+            logger.print_err(
+                f"The given IP name {self.ip_name} is not the same as the one in json file"
+            )
             flag = False
 
         for field in json_fields:
@@ -353,7 +363,14 @@ class Checks:
             data = json.load(json_file)
         # check the folder hierarchy
         if data["type"] == "hard":
-            ipm_dirs = ["hdl/gl", "timing/lib", "timing/sdf", "timing/spef", "layout/gds", "layout/lef"]
+            ipm_dirs = [
+                "hdl/gl",
+                "timing/lib",
+                "timing/sdf",
+                "timing/spef",
+                "layout/gds",
+                "layout/lef",
+            ]
         elif data["type"] == "soft" and data["category"] == "digital":
             ipm_dirs = ["hdl/rtl/design", "verify/utb", "pnr"]
         if data["category"] == "analog":
@@ -376,6 +393,7 @@ class Checks:
                 flag = False
         return flag
 
+
 def change_dir_to_readonly(dir):
     """Recursively checks a directory and its subdirectories for files that should be readonly, and then changes any non-readonly files to readonly.
 
@@ -389,6 +407,7 @@ def change_dir_to_readonly(dir):
                 os.chmod(file_path, 0o400)
         else:
             change_dir_to_readonly(file_path)
+
 
 def query_yes_no(question, default="yes"):
     # from https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input
@@ -421,6 +440,7 @@ def query_yes_no(question, default="yes"):
         else:
             sys.stdout.write("Please respond with 'yes' or 'no' " "(or 'y' or 'n').\n")
 
+
 def get_latest_version(data):
     last_key = None
     for key, value in data.items():
@@ -428,24 +448,27 @@ def get_latest_version(data):
 
     return last_key
 
+
 def install_ip(ip_name, version, ip_root, ipm_root):
     logger = Logger()
     ip_info = IPInfo()
     dependencies_list = []
     verified_ip_info = ip_info.get_verified_ip_info(ip_name)
     if not version:
-        version = get_latest_version(verified_ip_info['release'])
+        version = get_latest_version(verified_ip_info["release"])
     ip_info.get_dependencies(ip_name, version, dependencies_list)
     dependencies_list.append({ip_name: version})
     for dep in dependencies_list:
         for dep_name, version in dep.items():
             verified_ip_info = ip_info.get_verified_ip_info(dep_name)
             if not version:
-                version = get_latest_version(verified_ip_info['release'])
+                version = get_latest_version(verified_ip_info["release"])
             ip = IP(dep_name, ip_root, ipm_root, version)
             if ip.check_install_root():
                 ip_install_root = f"{ipm_root}/{dep_name}/{version}"
-                logger.print_info(f"Installing IP {dep_name} at {ipm_root} and creating simlink to {ip_root}")
+                logger.print_info(
+                    f"Installing IP {dep_name} at {ipm_root} and creating simlink to {ip_root}"
+                )
                 release_url = f"https://{verified_ip_info['repo']}/releases/download/{version}/{version}.tar.gz"
                 ip.download_tarball(release_url, ip_install_root)
             else:
@@ -458,16 +481,19 @@ def install_ip(ip_name, version, ip_root, ipm_root):
                 ip.create_dependencies_file()
     change_dir_to_readonly(ipm_root)
 
+
 def uninstall_ip(ip_name, version, ipm_root):
     logger = Logger()
     ip_info = IPInfo()
     dependencies_list = []
     verified_ip_info = ip_info.get_verified_ip_info(ip_name)
     if not version:
-        version = get_latest_version(verified_ip_info['release'])
+        version = get_latest_version(verified_ip_info["release"])
     ip_info.get_dependencies(ip_name, version, dependencies_list)
     dependencies_list.append({ip_name: version})
-    if query_yes_no(f"uninstalling {ip_name} might end up with broken simlinks if used in any project, and will uninstall all dependencies of IP"):
+    if query_yes_no(
+        f"uninstalling {ip_name} might end up with broken simlinks if used in any project, and will uninstall all dependencies of IP"
+    ):
         for dep in dependencies_list:
             for dep_name, version in dep.items():
                 ip_root = f"{ipm_root}/{dep_name}"
@@ -475,14 +501,17 @@ def uninstall_ip(ip_name, version, ipm_root):
                     shutil.rmtree(ip_root)
         logger.print_success(f"Successfully uninstalled {ip_name}")
 
+
 def rm_ip_from_project(ip_name, ip_root):
     ip = IP(ip_name, ip_root)
     ip_info = IPInfo()
     logger = Logger()
     installed_ip_info = ip_info.get_installed_ip_info_from_simlink(ip_root, ip_name)
     dep_arr = []
-    ip_info = ip_info.get_dependencies(ip_name, installed_ip_info[ip_name]['version'], dep_arr)
-    dep_arr.append({ip_name: installed_ip_info[ip_name]['version']})
+    ip_info = ip_info.get_dependencies(
+        ip_name, installed_ip_info[ip_name]["version"], dep_arr
+    )
+    dep_arr.append({ip_name: installed_ip_info[ip_name]["version"]})
     for d in dep_arr:
         for dep_name, dep_version in d.items():
             uninstall_ip_root = f"{ip_root}/{dep_name}"
@@ -491,6 +520,7 @@ def rm_ip_from_project(ip_name, ip_root):
     ip.remove_from_dependencies_file()
     logger.print_success(f"removed IP {ip_name} and dependencies from project")
 
+
 def install_using_dep_file(ip_root, ipm_root):
     logger = Logger()
     json_file = f"{ip_root}/{DEPENDENCIES_FILE_NAME}"
@@ -498,13 +528,14 @@ def install_using_dep_file(ip_root, ipm_root):
         logger.print_info(f"using {json_file} to download IPs")
         with open(json_file) as f:
             data = json.load(f)
-        for ips in data['IP']:
+        for ips in data["IP"]:
             for ip_name, ip_version in ips.items():
                 install_ip(ip_name, ip_version, ip_root, ipm_root)
         change_dir_to_readonly(ipm_root)
     else:
         logger.print_err(f"Can't find {DEPENDENCIES_FILE_NAME} file in {ip_root}")
         exit(1)
+
 
 def check_ipm_directory(ipm_root) -> bool:
     logger = Logger()
@@ -518,8 +549,11 @@ def check_ipm_directory(ipm_root) -> bool:
         if os.path.isdir(ipm_root):
             return True
         else:
-            logger.print_err(f"Can't find directory {ipm_root}, please specify a correct IPM_ROOT to continue")
+            logger.print_err(
+                f"Can't find directory {ipm_root}, please specify a correct IPM_ROOT to continue"
+            )
             return False
+
 
 def check_ip_root_dir(ip_root) -> bool:
     logger = Logger()
@@ -530,6 +564,7 @@ def check_ip_root_dir(ip_root) -> bool:
     else:
         return True
 
+
 def list_verified_ips(category=None, technology=None):
     ip_info = IPInfo()
     ip = IP()
@@ -537,18 +572,19 @@ def list_verified_ips(category=None, technology=None):
     ip_list = []
     for ip_name, ip_data in verified_ips.items():
         if category and not technology:
-            if ip_data['category'] == category:
+            if ip_data["category"] == category:
                 ip_list.append({ip_name: ip_data})
         elif technology and not category:
-            if ip_data['technology'] == technology:
+            if ip_data["technology"] == technology:
                 ip_list.append({ip_name: ip_data})
         elif technology and category:
-            if ip_data['category'] == category and ip_data['technology'] == technology:
+            if ip_data["category"] == category and ip_data["technology"] == technology:
                 ip_list.append({ip_name: ip_data})
         else:
             ip_list.append({ip_name: ip_data})
 
     ip.create_table(ip_list)
+
 
 def list_ip_info(ip_name):
     ip_info = IPInfo()
@@ -557,11 +593,13 @@ def list_ip_info(ip_name):
     ip_list = [{ip_name: ip_data}]
     ip.create_table(ip_list, "all", True)
 
+
 def list_installed_ips(ipm_root):
     ip_info = IPInfo()
     ip = IP()
     ip_data = ip_info.get_installed_ip_info(ipm_root)
     ip.create_table(ip_data, local=True, extended=True)
+
 
 def check_ips(ipm_root, update=False, ip_root=None):
     ip_info = IPInfo()
@@ -570,12 +608,15 @@ def check_ips(ipm_root, update=False, ip_root=None):
     for ips in installed_ips:
         for ip_name, ip_version in ips.items():
             verified_ip_info = ip_info.get_verified_ip_info(ip_name)
-            version = get_latest_version(verified_ip_info['release'])
+            version = get_latest_version(verified_ip_info["release"])
             if version not in ip_version:
                 if update:
                     install_ip(ip_name, version, ip_root, ipm_root)
                 else:
-                    logger.print_info(f"IP {ip_name} has a newer version [magenta]{version}[/magenta], to update use command ipm update")
+                    logger.print_info(
+                        f"IP {ip_name} has a newer version [magenta]{version}[/magenta], to update use command ipm update"
+                    )
+
 
 def package_check(ipm_root, ip, version, gh_repo):
     checker = Checks(ipm_root, ip, version, gh_repo)
@@ -588,12 +629,18 @@ def package_check(ipm_root, ip, version, gh_repo):
 
     logger.print_step(f"[STEP 2]: Checking for the release with the tag {version}")
     if not checker.check_url(checker.release_tag_url):
-        logger.print_err(f"There is no release tagged {version} in the Github repo {gh_repo}")
+        logger.print_err(
+            f"There is no release tagged {version} in the Github repo {gh_repo}"
+        )
         exit(1)
 
-    logger.print_step(f"[STEP 3]: Checking Checking for the tarball named {version}.tar.gz")
+    logger.print_step(
+        f"[STEP 3]: Checking Checking for the tarball named {version}.tar.gz"
+    )
     if not checker.check_url(checker.release_tarball_url):
-        logger.print_err(f"The tarball '{version}.tar.gz' was not found in the release tagged {version} in the GH repo {gh_repo}")
+        logger.print_err(
+            f"The tarball '{version}.tar.gz' was not found in the release tagged {version} in the GH repo {gh_repo}"
+        )
         exit(1)
 
     checker.download_check_tarball()

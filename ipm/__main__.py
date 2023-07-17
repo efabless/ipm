@@ -27,7 +27,7 @@ from .manage import (
     update_cmd,
     package_check_cmd,
     info_cmd,
-    install_deps_cmd
+    install_deps_cmd,
 )
 
 
