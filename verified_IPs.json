@@ -115,6 +115,7 @@
             "v1.0.0": {
                 "date": "6-1-2023",
                 "status": "np",
+                "type": "hard",
                 "width": "0.315",
                 "height": "0.152",
                 "cell_count": "n/a",
