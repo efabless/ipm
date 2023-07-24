@@ -100,5 +100,26 @@
                 "clk_freq": "10"
             }
         }
+    },
+    "EF_LDOR1V8E": {
+        "repo": "github.com/efabless/EF_LDOR1V8E",
+        "author": "efabless",
+        "email": "efabless@efabless.com",
+        "category": "analog",
+        "technology": "sky130",
+        "license": "private",
+        "tag": [
+            "BUS"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "6-1-2023",
+                "status": "np",
+                "width": "0.315",
+                "height": "0.152",
+                "cell_count": "n/a",
+                "clk_freq": "n/a"
+            }
+        }
     }
 }

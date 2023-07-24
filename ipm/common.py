@@ -333,7 +333,8 @@ class IP:
         Returns:
             bool: True if downloaded, False if failed to download
         """
-        response = requests.get(release_url, stream=True)
+        headers = {"Authorization": f"token {GITHUB_TOKEN}"}
+        response = requests.get(release_url, stream=True, headers=headers)
         if response.status_code == 404:
             shutil.rmtree(dest_path)
             return False
