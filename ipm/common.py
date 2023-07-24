@@ -323,7 +323,7 @@ class IP:
         else:
             logger.print_err("No IPs found")
 
-    def download_tarball(self, release_url, dest_path):
+    def download_tarball(self, verified_ip, dest_path, ip_name, version):
         """downloads the release tarball
 
         Args:
@@ -333,11 +333,24 @@ class IP:
         Returns:
             bool: True if downloaded, False if failed to download
         """
-        headers = {"Authorization": f"token {GITHUB_TOKEN}"}
+        logger = Logger()
+        headers = {"Authorization": f"Bearer {GITHUB_TOKEN}",
+                   "Accept": "application/vnd.github+json"}
+        release_url = f"https://api.github.com/repos/{verified_ip['author']}/{ip_name}/releases"
+        response = requests.get(release_url, stream=True, headers=headers)
+        release_data = response.json()
+        for assets in release_data[0]['assets']:
+            for asset_name, asset_value in assets.items():
+                if asset_name == "name" and asset_value == f"{version}.tar.gz":
+                    asset_id = assets["id"]
+        headers = {"Authorization": f"Bearer {GITHUB_TOKEN}",
+                   "Accept": "application/octet-stream"}
+        release_url = f"https://api.github.com/repos/{verified_ip['author']}/{ip_name}/releases/assets/{asset_id}"
         response = requests.get(release_url, stream=True, headers=headers)
         if response.status_code == 404:
             shutil.rmtree(dest_path)
-            return False
+            logger.print_err("Couldn't download IP, make sure you have access to the repo and you have GITHUB_TOKEN exported")
+            exit(1)
         elif response.status_code == 200:
             tarball_path = os.path.join(dest_path, f"{self.version}.tar.gz")
             with open(tarball_path, "wb") as f:
@@ -386,7 +399,7 @@ class Checks:
         """
         ip = IP(self.ip_name, ipm_root=self.ipm_root, version=self.version)
         os.mkdir(self.package_check_path)
-        ip.download_tarball(self.release_tarball_url, self.package_check_path)
+        ip.download_tarball(self.release_tarball_url, self.package_check_path, self.ip_name, self.version)
 
     def check_json(self):
         """checks the json if it has all the variables needed
@@ -575,8 +588,7 @@ def install_ip(ip_name, version, ip_root, ipm_root):
                 logger.print_info(
                     f"Installing IP {dep_name} at {ipm_root} and creating simlink to {ip_root}"
                 )
-                release_url = f"https://{verified_ip_info['repo']}/releases/download/{version}/{version}.tar.gz"
-                ip.download_tarball(release_url, ip_install_root)
+                ip.download_tarball(verified_ip_info, ip_install_root, ip_name, version)
             else:
                 logger.print_info(f"Found IP {dep_name} locally")
             if os.path.exists(f"{ip_root}/{dep_name}"):
