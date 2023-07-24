@@ -82,8 +82,8 @@
         "repo": "github.com/marwaneltoukhy/dummy_ip2",
         "author": "efabless",
         "email": "efabless@efabless.com",
-        "category": "analog",
-        "technology": "gf180mcu",
+        "category": "digital",
+        "technology": "sky130",
         "tag": [
             "BUS",
             "periphery"
@@ -118,6 +118,138 @@
                 "type": "hard",
                 "width": "0.315",
                 "height": "0.152",
+                "cell_count": "n/a",
+                "clk_freq": "n/a"
+            }
+        }
+    },
+    "EF_ADCS0801": {
+        "repo": "github.com/efabless/EF_ADCS0801",
+        "author": "efabless",
+        "email": "efabless@efabless.com",
+        "category": "analog",
+        "technology": "sky130",
+        "license": "private",
+        "tag": [
+            "BUS"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "5-1-2023",
+                "status": "np",
+                "type": "hard",
+                "width": "0.235",
+                "height": "0.28",
+                "cell_count": "n/a",
+                "clk_freq": "n/a"
+            }
+        }
+    },
+    "EF_ADCS0808": {
+        "repo": "github.com/efabless/EF_ADCS0808",
+        "author": "efabless",
+        "email": "efabless@efabless.com",
+        "category": "analog",
+        "technology": "sky130",
+        "license": "private",
+        "tag": [
+            "BUS"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "5-1-2023",
+                "status": "np",
+                "type": "hard",
+                "width": "0.492",
+                "height": "0.28",
+                "cell_count": "n/a",
+                "clk_freq": "n/a"
+            }
+        }
+    },
+    "EF_DACR0801": {
+        "repo": "github.com/efabless/EF_DACR0801",
+        "author": "efabless",
+        "email": "efabless@efabless.com",
+        "category": "analog",
+        "technology": "sky130",
+        "license": "private",
+        "tag": [
+            "BUS"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "5-1-2023",
+                "status": "np",
+                "type": "hard",
+                "width": "0.167",
+                "height": "0.176",
+                "cell_count": "n/a",
+                "clk_freq": "n/a"
+            }
+        }
+    },
+    "EF_BUF3V3": {
+        "repo": "github.com/efabless/EF_BUF3V3",
+        "author": "efabless",
+        "email": "efabless@efabless.com",
+        "category": "analog",
+        "technology": "sky130",
+        "license": "private",
+        "tag": [
+            "BUS"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "5-1-2023",
+                "status": "np",
+                "type": "hard",
+                "width": "0.037",
+                "height": "0.035",
+                "cell_count": "n/a",
+                "clk_freq": "n/a"
+            }
+        }
+    },
+    "EF_AMUX0801": {
+        "repo": "github.com/efabless/EF_AMUX0801",
+        "author": "efabless",
+        "email": "efabless@efabless.com",
+        "category": "analog",
+        "technology": "sky130",
+        "license": "private",
+        "tag": [
+            "BUS"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "5-1-2023",
+                "status": "np",
+                "type": "hard",
+                "width": "0.190",
+                "height": "0.045",
+                "cell_count": "n/a",
+                "clk_freq": "n/a"
+            }
+        }
+    },
+    "EF_R2RVC": {
+        "repo": "github.com/efabless/EF_R2RVC",
+        "author": "efabless",
+        "email": "efabless@efabless.com",
+        "category": "analog",
+        "technology": "sky130",
+        "license": "private",
+        "tag": [
+            "BUS"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "5-1-2023",
+                "status": "np",
+                "type": "hard",
+                "width": "0.062",
+                "height": "0.053",
                 "cell_count": "n/a",
                 "clk_freq": "n/a"
             }
