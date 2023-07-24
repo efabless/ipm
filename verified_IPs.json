@@ -102,8 +102,8 @@
         }
     },
     "EF_LDOR1V8E": {
-        "repo": "github.com/marwaneltoukhy/EF_IPs",
-        "author": "marwaneltoukhy",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "efabless",
         "email": "efabless@efabless.com",
         "category": "analog",
         "technology": "sky130",
@@ -124,7 +124,7 @@
         }
     },
     "EF_ADCS0801": {
-        "repo": "github.com/efabless/EF_ADCS0801",
+        "repo": "github.com/efabless/EF_IPs",
         "author": "efabless",
         "email": "efabless@efabless.com",
         "category": "analog",
@@ -146,7 +146,7 @@
         }
     },
     "EF_ADCS0808": {
-        "repo": "github.com/efabless/EF_ADCS0808",
+        "repo": "github.com/efabless/EF_IPs",
         "author": "efabless",
         "email": "efabless@efabless.com",
         "category": "analog",
@@ -168,7 +168,7 @@
         }
     },
     "EF_DACR0801": {
-        "repo": "github.com/efabless/EF_DACR0801",
+        "repo": "github.com/efabless/EF_IPs",
         "author": "efabless",
         "email": "efabless@efabless.com",
         "category": "analog",
@@ -190,7 +190,7 @@
         }
     },
     "EF_BUF3V3": {
-        "repo": "github.com/efabless/EF_BUF3V3",
+        "repo": "github.com/efabless/EF_IPs",
         "author": "efabless",
         "email": "efabless@efabless.com",
         "category": "analog",
@@ -212,7 +212,7 @@
         }
     },
     "EF_AMUX0801": {
-        "repo": "github.com/efabless/EF_AMUX0801",
+        "repo": "github.com/efabless/EF_IPs",
         "author": "efabless",
         "email": "efabless@efabless.com",
         "category": "analog",
@@ -234,7 +234,7 @@
         }
     },
     "EF_R2RVC": {
-        "repo": "github.com/efabless/EF_R2RVC",
+        "repo": "github.com/efabless/EF_IPs",
         "author": "efabless",
         "email": "efabless@efabless.com",
         "category": "analog",

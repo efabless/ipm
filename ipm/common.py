@@ -336,16 +336,16 @@ class IP:
         logger = Logger()
         headers = {"Authorization": f"Bearer {GITHUB_TOKEN}",
                    "Accept": "application/vnd.github+json"}
-        release_url = f"https://api.github.com/repos/{verified_ip['author']}/{ip_name}/releases"
+        release_url = f"https://api.github.com/repos/{verified_ip['author']}/EF_IPs/releases"
         response = requests.get(release_url, stream=True, headers=headers)
         release_data = response.json()
         for assets in release_data[0]['assets']:
             for asset_name, asset_value in assets.items():
-                if asset_name == "name" and asset_value == f"{version}.tar.gz":
+                if asset_name == "name" and asset_value == f"{ip_name}-{version}.tar.gz":
                     asset_id = assets["id"]
         headers = {"Authorization": f"Bearer {GITHUB_TOKEN}",
                    "Accept": "application/octet-stream"}
-        release_url = f"https://api.github.com/repos/{verified_ip['author']}/{ip_name}/releases/assets/{asset_id}"
+        release_url = f"https://api.github.com/repos/{verified_ip['author']}/EF_IPs/releases/assets/{asset_id}"
         response = requests.get(release_url, stream=True, headers=headers)
         if response.status_code == 404:
             shutil.rmtree(dest_path)
