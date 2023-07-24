@@ -102,8 +102,8 @@
         }
     },
     "EF_LDOR1V8E": {
-        "repo": "github.com/efabless/EF_LDOR1V8E",
-        "author": "efabless",
+        "repo": "github.com/marwaneltoukhy/EF_IPs",
+        "author": "marwaneltoukhy",
         "email": "efabless@efabless.com",
         "category": "analog",
         "technology": "sky130",
