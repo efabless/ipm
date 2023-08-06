@@ -145,6 +145,28 @@
             }
         }
     },
+    "EF_ADCS0801NC": {
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "efabless",
+        "email": "efabless@efabless.com",
+        "category": "analog",
+        "technology": "sky130",
+        "license": "private",
+        "tag": [
+            "BUS"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "6-1-2023",
+                "status": "np",
+                "type": "hard",
+                "width": "0.235",
+                "height": "0.283",
+                "cell_count": "n/a",
+                "clk_freq": "n/a"
+            }
+        }
+    },
     "EF_ADCS0808": {
         "repo": "github.com/efabless/EF_IPs",
         "author": "efabless",
@@ -162,6 +184,28 @@
                 "type": "hard",
                 "width": "0.492",
                 "height": "0.28",
+                "cell_count": "n/a",
+                "clk_freq": "n/a"
+            }
+        }
+    },
+    "EF_ADCS0808NC": {
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "efabless",
+        "email": "efabless@efabless.com",
+        "category": "analog",
+        "technology": "sky130",
+        "license": "private",
+        "tag": [
+            "BUS"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "6-1-2023",
+                "status": "np",
+                "type": "hard",
+                "width": "0.235",
+                "height": "0.331",
                 "cell_count": "n/a",
                 "clk_freq": "n/a"
             }
@@ -250,6 +294,28 @@
                 "type": "hard",
                 "width": "0.062",
                 "height": "0.053",
+                "cell_count": "n/a",
+                "clk_freq": "n/a"
+            }
+        }
+    },
+    "EF_R2RVC02": {
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "efabless",
+        "email": "efabless@efabless.com",
+        "category": "analog",
+        "technology": "sky130",
+        "license": "private",
+        "tag": [
+            "BUS"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "7-1-2023",
+                "status": "np",
+                "type": "hard",
+                "width": "0.076",
+                "height": "0.096",
                 "cell_count": "n/a",
                 "clk_freq": "n/a"
             }
