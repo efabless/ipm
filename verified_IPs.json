@@ -1,106 +1,4 @@
 {
-    "spm_ip": {
-        "repo": "github.com/marwaneltoukhy/spm_ip",
-        "author": "efabless",
-        "email": "efabless@efabless.com",
-        "category": "digital",
-        "tag": [
-            "BUS",
-            "periphery"
-        ],
-        "license": "public",
-        "technology": "sky130",
-        "release": {
-            "v1.0": {
-                "date": "10-19-2022",
-                "status": "Verified",
-                "type": "hard",
-                "width": "0.25",
-                "height": "0.2",
-                "cell_count": "200",
-                "clk_freq": "10"
-            },
-            "v1.1": {
-                "date": "10-19-2022",
-                "status": "SI_validated",
-                "type": "hard",
-                "width": "0.3",
-                "height": "0.4",
-                "cell_count": "300",
-                "clk_freq": "10"
-            },
-            "v1.2": {
-                "date": "10-19-2022",
-                "status": "SI_validated",
-                "type": "hard",
-                "width": "0.4",
-                "height": "0.5",
-                "cell_count": "400",
-                "clk_freq": "10",
-                "dependencies": {
-                    "dummy_ip": "v1.0"
-                }
-            }
-        }
-    },
-    "dummy_ip": {
-        "repo": "github.com/marwaneltoukhy/dummy_ip",
-        "author": "efabless",
-        "email": "efabless@efabless.com",
-        "category": "digital",
-        "technology": "sky130",
-        "tag": [
-            "BUS",
-            "periphery"
-        ],
-        "license": "private",
-        "release": {
-            "v1.0": {
-                "date": "10-19-2022",
-                "status": "SI_validated",
-                "type": "hard",
-                "width": "0.25",
-                "height": "0.2",
-                "cell_count": "200",
-                "clk_freq": "10",
-                "dependencies": {
-                    "dummy_ip2": "v1.0"
-                }
-            },
-            "v1.1": {
-                "date": "10-19-2022",
-                "status": "SI_validated",
-                "type": "hard",
-                "width": "0.25",
-                "height": "0.2",
-                "cell_count": "200",
-                "clk_freq": "10"
-            }
-        }
-    },
-    "dummy_ip2": {
-        "repo": "github.com/marwaneltoukhy/dummy_ip2",
-        "author": "efabless",
-        "email": "efabless@efabless.com",
-        "category": "digital",
-        "technology": "sky130",
-        "tag": [
-            "BUS",
-            "periphery"
-        ],
-        "license": "private",
-        "release": {
-            "v1.0": {
-                "date": "10-19-2022",
-                "status": "SI_validated",
-                "type": "hard",
-                "width": "0.25",
-                "height": "0.2",
-                "cell_count": "200",
-                "clk_freq": "10"
-            }
-        }
-    },
     "EF_LDOR1V8E": {
         "repo": "github.com/efabless/EF_IPs",
         "author": "efabless",
@@ -383,6 +281,28 @@
                 "width": "0",
                 "height": "0",
                 "cell_count": "1057",
+                "clk_freq": "n/a"
+            }
+        }
+    },
+    "EF_PWM32": {
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "efabless",
+        "email": "efabless@efabless.com",
+        "category": "digital",
+        "technology": "sky130",
+        "license": "APACHE 2.0",
+        "tag": [
+            "N/A"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "7-29-2023",
+                "status": "np",
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "730",
                 "clk_freq": "n/a"
             }
         }
