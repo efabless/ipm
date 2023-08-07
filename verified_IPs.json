@@ -320,5 +320,71 @@
                 "clk_freq": "n/a"
             }
         }
+    },
+    "EF_TMR32": {
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "efabless",
+        "email": "efabless@efabless.com",
+        "category": "digital",
+        "technology": "sky130",
+        "license": "MIT",
+        "tag": [
+            "N/A"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "3-18-2023",
+                "status": "np",
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "690",
+                "clk_freq": "n/a"
+            }
+        }
+    },
+    "EF_PSRAM_CTRL": {
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "efabless",
+        "email": "efabless@efabless.com",
+        "category": "digital",
+        "technology": "sky130",
+        "license": "MIT",
+        "tag": [
+            "N/A"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "4-01-2023",
+                "status": "np",
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "550",
+                "clk_freq": "n/a"
+            }
+        }
+    },
+    "EF_UART": {
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "efabless",
+        "email": "efabless@efabless.com",
+        "category": "digital",
+        "technology": "sky130",
+        "license": "APACHE 2.0",
+        "tag": [
+            "N/A"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "3-18-2023",
+                "status": "np",
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "1057",
+                "clk_freq": "n/a"
+            }
+        }
     }
 }
