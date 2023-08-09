@@ -6,7 +6,7 @@
         "category": "analog",
         "technology": "sky130",
         "license": "APACHE 2.0",
-        "tag": [
+        "tags": [
             "Data Converter"
         ],
         "release": {
@@ -35,7 +35,7 @@
         "category": "digital",
         "technology": "n/a",
         "license": "MIT",
-        "tag": [
+        "tags": [
             "mem"
         ],
         "release": {
@@ -63,7 +63,7 @@
         "category": "digital",
         "technology": "n/a",
         "license": "APACHE 2.0",
-        "tag": [
+        "tags": [
             "peripheral",
             "comm"
         ],
@@ -92,7 +92,7 @@
         "category": "digital",
         "technology": "n/a",
         "license": "APACHE 2.0",
-        "tag": [
+        "tags": [
             "PWM",
             "control"
         ],
@@ -121,7 +121,7 @@
         "category": "digital",
         "technology": "n/a",
         "license": "MIT",
-        "tag": [
+        "tags": [
             "peripheral",
             "time",
             "counter",
