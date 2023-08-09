@@ -161,7 +161,7 @@ class IPInfo:
         if os.path.exists(json_file):
             with open(json_file) as f:
                 data = json.load(f)
-            return {data["name"]: data}
+            return {data["info"]["name"]: data}
         else:
             logger.print_err(f"Couldn't find {json_file}")
             exit(1)
@@ -690,9 +690,9 @@ def rm_ip_from_project(ip_name, ip_root):
     installed_ip_info = ip_info.get_installed_ip_info_from_simlink(ip_root, ip_name)
     dep_arr = []
     ip_info = ip_info.get_dependencies(
-        ip_name, installed_ip_info[ip_name]["version"], dep_arr
+        ip_name, installed_ip_info[ip_name]['info']["version"], dep_arr
     )
-    dep_arr.append({ip_name: installed_ip_info[ip_name]["version"]})
+    dep_arr.append({ip_name: installed_ip_info[ip_name]['info']["version"]})
     for d in dep_arr:
         for dep_name, dep_version in d.items():
             uninstall_ip_root = f"{ip_root}/{dep_name}"
