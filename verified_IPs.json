@@ -1,113 +1,18 @@
 {
-    "EF_LDOR1V8E": {
-        "repo": "github.com/efabless/EF_IPs",
-        "author": "efabless",
-        "email": "efabless@efabless.com",
-        "category": "analog",
-        "technology": "sky130",
-        "license": "private",
-        "tag": [
-            "BUS"
-        ],
-        "release": {
-            "v1.0.0": {
-                "date": "6-1-2023",
-                "status": "np",
-                "type": "hard",
-                "width": "0.315",
-                "height": "0.152",
-                "cell_count": "n/a",
-                "clk_freq": "n/a"
-            }
-        }
-    },
-    "EF_ADCS0801": {
-        "repo": "github.com/efabless/EF_IPs",
-        "author": "efabless",
-        "email": "efabless@efabless.com",
-        "category": "analog",
-        "technology": "sky130",
-        "license": "private",
-        "tag": [
-            "BUS"
-        ],
-        "release": {
-            "v1.0.0": {
-                "date": "5-1-2023",
-                "status": "np",
-                "type": "hard",
-                "width": "0.235",
-                "height": "0.28",
-                "cell_count": "n/a",
-                "clk_freq": "n/a"
-            }
-        }
-    },
-    "EF_ADCS0801NC": {
-        "repo": "github.com/efabless/EF_IPs",
-        "author": "efabless",
-        "email": "efabless@efabless.com",
-        "category": "analog",
-        "technology": "sky130",
-        "license": "private",
-        "tag": [
-            "BUS"
-        ],
-        "release": {
-            "v1.0.0": {
-                "date": "6-1-2023",
-                "status": "np",
-                "type": "hard",
-                "width": "0.235",
-                "height": "0.283",
-                "cell_count": "n/a",
-                "clk_freq": "n/a"
-            }
-        }
-    },
-    "EF_ADCS0808": {
-        "repo": "github.com/efabless/EF_IPs",
-        "author": "efabless",
-        "email": "efabless@efabless.com",
-        "category": "analog",
-        "technology": "sky130",
-        "license": "private",
-        "tag": [
-            "Data Converter"
-        ],
-        "release": {
-            "v1.0.0": {
-                "date": "7-1-2023",
-                "status": "validated",
-                "bus": [
-                    "genertic"
-                ],
-                "type": "hard",
-                "width": "0.492",
-                "height": "0.28",
-                "cell_count": "n/a",
-                "clock_freq_mhz": "1",
-                "supply_voltage": [
-                    "3.3",
-                    "1.8"
-                ]
-            }
-        }
-    },
     "EF_ADCS0808NC": {
         "repo": "github.com/efabless/EF_IPs",
         "author": "efabless",
         "email": "efabless@efabless.com",
         "category": "analog",
         "technology": "sky130",
-        "license": "private",
+        "license": "APACHE 2.0",
         "tag": [
             "Data Converter"
         ],
         "release": {
             "v1.0.0": {
                 "date": "7-1-2023",
-                "status": "validated",
+                "status": "verified",
                 "bus": [
                     "genertic"
                 ],
@@ -123,157 +28,31 @@
             }
         }
     },
-    "EF_DACR0801": {
-        "repo": "github.com/efabless/EF_IPs",
-        "author": "efabless",
-        "email": "efabless@efabless.com",
-        "category": "analog",
-        "technology": "sky130",
-        "license": "private",
-        "tag": [
-            "BUS"
-        ],
-        "release": {
-            "v1.0.0": {
-                "date": "5-1-2023",
-                "status": "np",
-                "type": "hard",
-                "width": "0.167",
-                "height": "0.176",
-                "cell_count": "n/a",
-                "clk_freq": "n/a"
-            }
-        }
-    },
-    "EF_BUF3V3": {
-        "repo": "github.com/efabless/EF_IPs",
-        "author": "efabless",
-        "email": "efabless@efabless.com",
-        "category": "analog",
-        "technology": "sky130",
-        "license": "private",
-        "tag": [
-            "BUS"
-        ],
-        "release": {
-            "v1.0.0": {
-                "date": "5-1-2023",
-                "status": "np",
-                "type": "hard",
-                "width": "0.037",
-                "height": "0.035",
-                "cell_count": "n/a",
-                "clk_freq": "n/a"
-            }
-        }
-    },
-    "EF_AMUX0801": {
-        "repo": "github.com/efabless/EF_IPs",
-        "author": "efabless",
-        "email": "efabless@efabless.com",
-        "category": "analog",
-        "technology": "sky130",
-        "license": "private",
-        "tag": [
-            "BUS"
-        ],
-        "release": {
-            "v1.0.0": {
-                "date": "5-1-2023",
-                "status": "np",
-                "type": "hard",
-                "width": "0.190",
-                "height": "0.045",
-                "cell_count": "n/a",
-                "clk_freq": "n/a"
-            }
-        }
-    },
-    "EF_R2RVC": {
-        "repo": "github.com/efabless/EF_IPs",
-        "author": "efabless",
-        "email": "efabless@efabless.com",
-        "category": "analog",
-        "technology": "sky130",
-        "license": "private",
-        "tag": [
-            "BUS"
-        ],
-        "release": {
-            "v1.0.0": {
-                "date": "5-1-2023",
-                "status": "np",
-                "type": "hard",
-                "width": "0.062",
-                "height": "0.053",
-                "cell_count": "n/a",
-                "clk_freq": "n/a"
-            }
-        }
-    },
-    "EF_R2RVC02": {
-        "repo": "github.com/efabless/EF_IPs",
-        "author": "efabless",
-        "email": "efabless@efabless.com",
-        "category": "analog",
-        "technology": "sky130",
-        "license": "private",
-        "tag": [
-            "BUS"
-        ],
-        "release": {
-            "v1.0.0": {
-                "date": "7-1-2023",
-                "status": "np",
-                "type": "hard",
-                "width": "0.076",
-                "height": "0.096",
-                "cell_count": "n/a",
-                "clk_freq": "n/a"
-            }
-        }
-    },
-    "EF_TMR32": {
-        "repo": "github.com/efabless/EF_IPs",
-        "author": "efabless",
-        "email": "efabless@efabless.com",
-        "category": "digital",
-        "technology": "sky130",
-        "license": "MIT",
-        "tag": [
-            "N/A"
-        ],
-        "release": {
-            "v1.0.0": {
-                "date": "3-18-2023",
-                "status": "np",
-                "type": "soft",
-                "width": "0",
-                "height": "0",
-                "cell_count": "690",
-                "clk_freq": "n/a"
-            }
-        }
-    },
     "EF_PSRAM_CTRL": {
         "repo": "github.com/efabless/EF_IPs",
         "author": "efabless",
         "email": "efabless@efabless.com",
         "category": "digital",
-        "technology": "sky130",
+        "technology": "n/a",
         "license": "MIT",
         "tag": [
-            "N/A"
+            "mem"
         ],
         "release": {
             "v1.0.0": {
                 "date": "4-01-2023",
-                "status": "np",
+                "status": "verified",
+                "bus": [
+                    "AHBL"
+                ],
                 "type": "soft",
                 "width": "0",
                 "height": "0",
                 "cell_count": "550",
-                "clk_freq": "n/a"
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "n/a"
+                ]
             }
         }
     },
@@ -282,20 +61,27 @@
         "author": "efabless",
         "email": "efabless@efabless.com",
         "category": "digital",
-        "technology": "sky130",
+        "technology": "n/a",
         "license": "APACHE 2.0",
         "tag": [
-            "N/A"
+            "peripheral",
+            "comm"
         ],
         "release": {
             "v1.0.0": {
                 "date": "3-18-2023",
-                "status": "np",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
                 "type": "soft",
                 "width": "0",
                 "height": "0",
                 "cell_count": "1057",
-                "clk_freq": "n/a"
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "n/a"
+                ]
             }
         }
     },
@@ -304,20 +90,58 @@
         "author": "efabless",
         "email": "efabless@efabless.com",
         "category": "digital",
-        "technology": "sky130",
+        "technology": "n/a",
         "license": "APACHE 2.0",
         "tag": [
-            "N/A"
+            "PWM",
+            "control"
         ],
         "release": {
             "v1.0.0": {
-                "date": "7-29-2023",
-                "status": "np",
+                "date": "3-18-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
                 "type": "soft",
                 "width": "0",
                 "height": "0",
                 "cell_count": "730",
-                "clk_freq": "n/a"
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            }
+        }
+    },
+    "EF_TMR32": {
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "efabless",
+        "email": "efabless@efabless.com",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "MIT",
+        "tag": [
+            "peripheral",
+            "time",
+            "counter",
+            "PWM"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "3-18-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "690",
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "n/a"
+                ]
             }
         }
     }
