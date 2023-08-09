@@ -102,17 +102,24 @@
         "technology": "sky130",
         "license": "private",
         "tag": [
-            "BUS"
+            "Data Converter"
         ],
         "release": {
             "v1.0.0": {
-                "date": "6-1-2023",
-                "status": "np",
+                "date": "7-1-2023",
+                "status": "validated",
+                "bus": [
+                    "genertic"
+                ],
                 "type": "hard",
                 "width": "0.235",
                 "height": "0.331",
                 "cell_count": "n/a",
-                "clk_freq": "n/a"
+                "clock_freq_mhz": "1",
+                "supply_voltage": [
+                    "3.3",
+                    "1.8"
+                ]
             }
         }
     },
