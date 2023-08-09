@@ -19,7 +19,6 @@ from . import __version__
 from .manage import (
     ls_remote_cmd,
     ls_cmd,
-    # output_cmd,
     install_cmd,
     uninstall_cmd,
     rm_cmd,
@@ -41,7 +40,6 @@ def cli():
     pass
 
 
-# cli.add_command(output_cmd)
 cli.add_command(ls_remote_cmd)
 cli.add_command(ls_cmd)
 cli.add_command(install_cmd)
