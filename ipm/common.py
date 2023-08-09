@@ -23,11 +23,14 @@ import requests
 from rich.console import Console
 from rich.table import Table
 import bus_wrapper_gen
+
 try:
     GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
 except KeyError:
     console = Console()
-    console.print("[red]Can't find GITHUB_TOKEN in environment, please export your github token")
+    console.print(
+        "[red]Can't find GITHUB_TOKEN in environment, please export your github token"
+    )
     exit(1)
 VERIFIED_JSON_FILE_URL = (
     "https://raw.githubusercontent.com/efabless/ipm/refactor_code/verified_IPs.json"
@@ -211,8 +214,7 @@ class IP:
             return False
 
     def create_dependencies_file(self):
-        """creates a json file that has all the dependencies of the project
-        """
+        """creates a json file that has all the dependencies of the project"""
         dependencies_file_path = os.path.join(self.ip_root, DEPENDENCIES_FILE_NAME)
         if os.path.exists(dependencies_file_path):
             with open(dependencies_file_path) as json_file:
@@ -235,8 +237,7 @@ class IP:
             json.dump(json_decoded, json_file)
 
     def remove_from_dependencies_file(self):
-        """removes the ip from the dependencies file of the project
-        """
+        """removes the ip from the dependencies file of the project"""
         logger = Logger()
         dependencies_file_path = os.path.join(self.ip_root, DEPENDENCIES_FILE_NAME)
         if os.path.exists(dependencies_file_path):
@@ -306,12 +307,18 @@ class IP:
                         table_list.append(",".join(value["tags"]))
                         table_list.append(value["release"][versions]["status"])
                         if extended:
-                            table_list.append(",".join(value["release"][versions]["bus"]))
+                            table_list.append(
+                                ",".join(value["release"][versions]["bus"])
+                            )
                             table_list.append(value["release"][versions]["cell_count"])
-                            table_list.append(value["release"][versions]["clock_freq_mhz"])
+                            table_list.append(
+                                value["release"][versions]["clock_freq_mhz"]
+                            )
                             table_list.append(value["release"][versions]["width"])
                             table_list.append(value["release"][versions]["height"])
-                            table_list.append(",".join(value["release"][versions]["supply_voltage"]))
+                            table_list.append(
+                                ",".join(value["release"][versions]["supply_voltage"])
+                            )
                         table_list.append(value["technology"])
                         table_list.append(value["license"])
                     if local:
@@ -351,28 +358,36 @@ class IP:
             bool: True if downloaded, False if failed to download
         """
         logger = Logger()
-        headers = {"Authorization": f"Bearer {GITHUB_TOKEN}",
-                   "Accept": "application/vnd.github+json"}
-        release_url = f"https://api.github.com/repos/{verified_ip['author']}/EF_IPs/releases"
+        headers = {
+            "Authorization": f"Bearer {GITHUB_TOKEN}",
+            "Accept": "application/vnd.github+json",
+        }
+        release_url = (
+            f"https://api.github.com/repos/{verified_ip['author']}/EF_IPs/releases"
+        )
         response = requests.get(release_url, stream=True, headers=headers)
         release_data = response.json()
         for data in release_data:
-            if ip_name in data['tarball_url'].split('/')[-1]:
-                for assets in data['assets']:
+            if ip_name in data["tarball_url"].split("/")[-1]:
+                for assets in data["assets"]:
                     for asset_name, asset_value in assets.items():
                         if asset_name == "name" and asset_value == f"{version}.tar.gz":
                             asset_id = assets["id"]
-        headers = {"Authorization": f"Bearer {GITHUB_TOKEN}",
-                   "Accept": "application/octet-stream"}
+        headers = {
+            "Authorization": f"Bearer {GITHUB_TOKEN}",
+            "Accept": "application/octet-stream",
+        }
         try:
             release_url = f"https://api.github.com/repos/{verified_ip['author']}/EF_IPs/releases/assets/{asset_id}"
         except NameError:
-            logger.print_err('Could not find asset')
+            logger.print_err("Could not find asset")
             exit(1)
         response = requests.get(release_url, stream=True, headers=headers)
         if response.status_code == 404:
             shutil.rmtree(dest_path)
-            logger.print_err("Couldn't download IP, make sure you have access to the repo and you have GITHUB_TOKEN exported")
+            logger.print_err(
+                "Couldn't download IP, make sure you have access to the repo and you have GITHUB_TOKEN exported"
+            )
             exit(1)
         elif response.status_code == 200:
             tarball_path = os.path.join(dest_path, f"{self.version}.tar.gz")
@@ -391,7 +406,9 @@ class IP:
             fw_dir = f"{ip_install_root}/fw"
             os.makedirs(bus_wrapper_dir, exist_ok=True)
             os.makedirs(fw_dir, exist_ok=True)
-            bus_wrapper_ip = bus_wrapper_gen.IP(f"{ip_install_root}/{self.ip_name}.json")
+            bus_wrapper_ip = bus_wrapper_gen.IP(
+                f"{ip_install_root}/{self.ip_name}.json"
+            )
             org_stdout = sys.stdout
             with open(f"{bus_wrapper_dir}/{self.ip_name}_wb.v", "w") as f:
                 sys.stdout = f
@@ -444,11 +461,15 @@ class Checks:
             return True
 
     def download_check_tarball(self):
-        """downloads the tarball of package checker
-        """
+        """downloads the tarball of package checker"""
         ip = IP(self.ip_name, ipm_root=self.ipm_root, version=self.version)
         os.mkdir(self.package_check_path)
-        ip.download_tarball(self.release_tarball_url, self.package_check_path, self.ip_name, self.version)
+        ip.download_tarball(
+            self.release_tarball_url,
+            self.package_check_path,
+            self.ip_name,
+            self.version,
+        )
 
     def check_json(self):
         """checks the json if it has all the variables needed
@@ -690,9 +711,9 @@ def rm_ip_from_project(ip_name, ip_root):
     installed_ip_info = ip_info.get_installed_ip_info_from_simlink(ip_root, ip_name)
     dep_arr = []
     ip_info = ip_info.get_dependencies(
-        ip_name, installed_ip_info[ip_name]['info']["version"], dep_arr
+        ip_name, installed_ip_info[ip_name]["info"]["version"], dep_arr
     )
-    dep_arr.append({ip_name: installed_ip_info[ip_name]['info']["version"]})
+    dep_arr.append({ip_name: installed_ip_info[ip_name]["info"]["version"]})
     for d in dep_arr:
         for dep_name, dep_version in d.items():
             uninstall_ip_root = f"{ip_root}/{dep_name}"
@@ -787,7 +808,9 @@ def list_verified_ips(category=None, technology=None):
             if ip_data["technology"] == technology or ip_data["technology"] == "n/a":
                 ip_list.append({ip_name: ip_data})
         elif technology and category:
-            if ip_data["category"] == category and (ip_data["technology"] == technology or ip_data["technology"] == "n/a"):
+            if ip_data["category"] == category and (
+                ip_data["technology"] == technology or ip_data["technology"] == "n/a"
+            ):
                 ip_list.append({ip_name: ip_data})
         else:
             ip_list.append({ip_name: ip_data})
