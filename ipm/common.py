@@ -23,8 +23,12 @@ import requests
 from rich.console import Console
 from rich.table import Table
 import bus_wrapper_gen
-
-GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
+try:
+    GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
+except KeyError:
+    console = Console()
+    console.print("[red]Can't find GITHUB_TOKEN in environment, please export your github token")
+    exit(1)
 VERIFIED_JSON_FILE_URL = (
     "https://raw.githubusercontent.com/efabless/ipm/refactor_code/verified_IPs.json"
 )
@@ -139,7 +143,7 @@ class IPInfo:
                     json_file = f"{ipm_root}/{ip_name}/{version}/{ip_name}.json"
                     with open(json_file) as f:
                         data = json.load(f)
-                    installed_ips_arr.append({data["name"]: data})
+                    installed_ips_arr.append({data["info"]["name"]: data})
         return installed_ips_arr
 
     def get_installed_ip_info_from_simlink(self, ip_root, ip_name):
@@ -268,13 +272,15 @@ class IP:
         table.add_column("Version")
         table.add_column("Author")
         table.add_column("Type")
-        table.add_column("Tag")
+        table.add_column("Tags")
         table.add_column("Status")
         if extended:
+            table.add_column("Bus")
             table.add_column("Cell count")
             table.add_column("Clk freq (MHz)")
             table.add_column("Width (um)")
             table.add_column("Height (um)")
+            table.add_column("Voltage (v)")
         table.add_column("Technology", style="cyan")
         table.add_column("License", style="magenta")
 
@@ -289,32 +295,42 @@ class IP:
                         for versions, data in value["release"].items():
                             version_list.append(versions)
                 else:
-                    version_list.append(value["version"])
+                    version_list.append(value["info"]["version"])
                 for versions in version_list:
-                    table_list.append(key)
-                    table_list.append(value["category"])
-                    table_list.append(versions)
-                    table_list.append(value["author"])
                     if not local:
+                        table_list.append(key)
+                        table_list.append(value["category"])
+                        table_list.append(versions)
+                        table_list.append(value["author"])
                         table_list.append(value["release"][versions]["type"])
-                        table_list.append(",".join(value["tag"]))
+                        table_list.append(",".join(value["tags"]))
                         table_list.append(value["release"][versions]["status"])
                         if extended:
+                            table_list.append(",".join(value["release"][versions]["bus"]))
                             table_list.append(value["release"][versions]["cell_count"])
-                            table_list.append(value["release"][versions]["clk_freq"])
+                            table_list.append(value["release"][versions]["clock_freq_mhz"])
                             table_list.append(value["release"][versions]["width"])
                             table_list.append(value["release"][versions]["height"])
+                            table_list.append(",".join(value["release"][versions]["supply_voltage"]))
+                        table_list.append(value["technology"])
+                        table_list.append(value["license"])
                     if local:
-                        table_list.append(value["type"])
-                        table_list.append(",".join(value["tag"]))
-                        table_list.append(value["status"])
+                        table_list.append(key)
+                        table_list.append(value["info"]["category"])
+                        table_list.append(versions)
+                        table_list.append(value["info"]["author"])
+                        table_list.append(value["info"]["type"])
+                        table_list.append(",".join(value["info"]["tags"]))
+                        table_list.append(value["info"]["status"])
                         if extended:
-                            table_list.append(value["cell_count"])
-                            table_list.append(value["clk_freq"])
-                            table_list.append(value["width"])
-                            table_list.append(value["height"])
-                    table_list.append(value["technology"])
-                    table_list.append(value["license"])
+                            table_list.append(",".join(value["info"]["bus"]))
+                            table_list.append(value["info"]["cell_count"])
+                            table_list.append(value["info"]["clock_freq_mhz"])
+                            table_list.append(value["info"]["width"])
+                            table_list.append(value["info"]["height"])
+                            table_list.append(",".join(value["info"]["supply_voltage"]))
+                        table_list.append(value["info"]["technology"])
+                        table_list.append(value["info"]["license"])
                     table.add_row(*table_list)
                     table_list = []
 
@@ -460,9 +476,9 @@ class Checks:
             "width",
             "height",
             "technology",
-            "tag",
+            "tags",
             "cell_count",
-            "clk_freq",
+            "clock_freq_mhz",
             "license",
         ]
         flag = True
@@ -768,10 +784,10 @@ def list_verified_ips(category=None, technology=None):
             if ip_data["category"] == category:
                 ip_list.append({ip_name: ip_data})
         elif technology and not category:
-            if ip_data["technology"] == technology:
+            if ip_data["technology"] == technology or ip_data["technology"] == "n/a":
                 ip_list.append({ip_name: ip_data})
         elif technology and category:
-            if ip_data["category"] == category and ip_data["technology"] == technology:
+            if ip_data["category"] == category and (ip_data["technology"] == technology or ip_data["technology"] == "n/a"):
                 ip_list.append({ip_name: ip_data})
         else:
             ip_list.append({ip_name: ip_data})
