@@ -74,7 +74,8 @@ class IPInfo:
     def __init__(self):
         pass
 
-    def get_verified_ip_info(self, ip_name=None):
+    @staticmethod
+    def get_verified_ip_info(ip_name=None):
         """get ip info from remote verified backend
 
         Args:
@@ -110,7 +111,8 @@ class IPInfo:
         else:
             return data
 
-    def get_installed_ips(self, ipm_root):
+    @staticmethod
+    def get_installed_ips(ipm_root):
         """gets all installed ips under ipm_root
 
         Args:
@@ -129,7 +131,8 @@ class IPInfo:
                 break
         return installed_ips
 
-    def get_installed_ip_info(self, ipm_root):
+    @staticmethod
+    def get_installed_ip_info(ipm_root):
         """gets the info of the installed ips from <ip>.json
 
         Args:
@@ -138,7 +141,7 @@ class IPInfo:
         Returns:
             list: list of dicts of all installed ips and their data
         """
-        installed_ips = self.get_installed_ips(ipm_root)
+        installed_ips = IPInfo.get_installed_ips(ipm_root)
         installed_ips_arr = []
         for ips in installed_ips:
             for ip_name, ip_version in ips.items():
@@ -149,7 +152,8 @@ class IPInfo:
                     installed_ips_arr.append({data["info"]["name"]: data})
         return installed_ips_arr
 
-    def get_installed_ip_info_from_simlink(self, ip_root, ip_name):
+    @staticmethod
+    def get_installed_ip_info_from_simlink(ip_root, ip_name):
         """gets info of a specific ip from <ip>.json
 
         Args:
@@ -169,7 +173,8 @@ class IPInfo:
             logger.print_err(f"Couldn't find {json_file}")
             exit(1)
 
-    def get_dependencies(self, ip_name, version, dependencies_list):
+    @staticmethod
+    def get_dependencies(ip_name, version, dependencies_list):
         """gets the dependencies of ip from the remote database using recurrsion
 
         Args:
@@ -180,14 +185,14 @@ class IPInfo:
         Returns:
             dict: name and version of each dependency
         """
-        ip_info = self.get_verified_ip_info(ip_name)
+        ip_info = IPInfo.get_verified_ip_info(ip_name)
         release = ip_info["release"][version]
         if "dependencies" in release:
             dependencies = ip_info["release"][version]["dependencies"]
             for dep_name, dep_version in dependencies.items():
                 if {dep_name, dep_version} not in dependencies_list:
                     dependencies_list.append({dep_name: dep_version})
-                    self.get_dependencies(dep_name, dep_version, dependencies_list)
+                    IPInfo.get_dependencies(dep_name, dep_version, dependencies_list)
         else:
             return {ip_name, version}
 
@@ -213,7 +218,7 @@ class IP:
         else:
             return False
 
-    def create_dependencies_file(self):
+    def update_dependencies_file(self):
         """creates a json file that has all the dependencies of the project"""
         dependencies_file_path = os.path.join(self.ip_root, DEPENDENCIES_FILE_NAME)
         if os.path.exists(dependencies_file_path):
@@ -255,7 +260,8 @@ class IP:
         else:
             logger.print_err(f"Couldn't find {DEPENDENCIES_FILE_NAME} file")
 
-    def create_table(self, ip_list, version=None, extended=False, local=False):
+    @staticmethod
+    def create_table(ip_list, version=None, extended=False, local=False):
         """creates table using rich tables
 
         Args:
@@ -347,7 +353,7 @@ class IP:
         else:
             logger.print_err("No IPs found")
 
-    def download_tarball(self, verified_ip, dest_path, ip_name, version):
+    def download_tarball(self, verified_ip, dest_path):
         """downloads the release tarball
 
         Args:
@@ -368,10 +374,13 @@ class IP:
         response = requests.get(release_url, stream=True, headers=headers)
         release_data = response.json()
         for data in release_data:
-            if ip_name in data["tarball_url"].split("/")[-1]:
+            if self.ip_name in data["tarball_url"].split("/")[-1]:
                 for assets in data["assets"]:
                     for asset_name, asset_value in assets.items():
-                        if asset_name == "name" and asset_value == f"{version}.tar.gz":
+                        if (
+                            asset_name == "name"
+                            and asset_value == f"{self.version}.tar.gz"
+                        ):
                             asset_id = assets["id"]
         headers = {
             "Authorization": f"Bearer {GITHUB_TOKEN}",
@@ -467,8 +476,6 @@ class Checks:
         ip.download_tarball(
             self.release_tarball_url,
             self.package_check_path,
-            self.ip_name,
-            self.version,
         )
 
     def check_json(self):
@@ -640,16 +647,15 @@ def install_ip(ip_name, version, ip_root, ipm_root):
         ipm_root (str): path to common installation path
     """
     logger = Logger()
-    ip_info = IPInfo()
     dependencies_list = []
-    verified_ip_info = ip_info.get_verified_ip_info(ip_name)
+    verified_ip_info = IPInfo.get_verified_ip_info(ip_name)
     if not version:
         version = get_latest_version(verified_ip_info["release"])
-    ip_info.get_dependencies(ip_name, version, dependencies_list)
+    IPInfo.get_dependencies(ip_name, version, dependencies_list)
     dependencies_list.append({ip_name: version})
     for dep in dependencies_list:
-        for dep_name, version in dep.items():
-            verified_ip_info = ip_info.get_verified_ip_info(dep_name)
+        for dep_name, version in dep.items():  # can use .key and .value
+            verified_ip_info = IPInfo.get_verified_ip_info(dep_name)
             if not version:
                 version = get_latest_version(verified_ip_info["release"])
             ip = IP(dep_name, ip_root, ipm_root, version)
@@ -658,7 +664,7 @@ def install_ip(ip_name, version, ip_root, ipm_root):
                 logger.print_info(
                     f"Installing IP {dep_name} at {ipm_root} and creating simlink to {ip_root}"
                 )
-                ip.download_tarball(verified_ip_info, ip_install_root, ip_name, version)
+                ip.download_tarball(verified_ip_info, ip_install_root)
                 ip.generate_bus_wrapper(verified_ip_info)
             else:
                 logger.print_info(f"Found IP {dep_name} locally")
@@ -667,7 +673,7 @@ def install_ip(ip_name, version, ip_root, ipm_root):
             os.symlink(f"{ipm_root}/{dep_name}/{version}", f"{ip_root}/{dep_name}")
             logger.print_success(f"Created simlink to {dep_name} IP at {ip_root}")
             if dep_name == ip_name:
-                ip.create_dependencies_file()
+                ip.update_dependencies_file()
     change_dir_to_readonly(ipm_root)
 
 
@@ -680,12 +686,11 @@ def uninstall_ip(ip_name, version, ipm_root):
         ipm_root (str): path to common installation path
     """
     logger = Logger()
-    ip_info = IPInfo()
     dependencies_list = []
-    verified_ip_info = ip_info.get_verified_ip_info(ip_name)
+    verified_ip_info = IPInfo.get_verified_ip_info(ip_name)
     if not version:
         version = get_latest_version(verified_ip_info["release"])
-    ip_info.get_dependencies(ip_name, version, dependencies_list)
+    IPInfo.get_dependencies(ip_name, version, dependencies_list)
     dependencies_list.append({ip_name: version})
     if query_yes_no(
         f"uninstalling {ip_name} might end up with broken simlinks if used in any project, and will uninstall all dependencies of IP"
@@ -706,11 +711,10 @@ def rm_ip_from_project(ip_name, ip_root):
         ip_root (str): path to the project ip dict
     """
     ip = IP(ip_name, ip_root)
-    ip_info = IPInfo()
     logger = Logger()
-    installed_ip_info = ip_info.get_installed_ip_info_from_simlink(ip_root, ip_name)
+    installed_ip_info = IPInfo.get_installed_ip_info_from_simlink(ip_root, ip_name)
     dep_arr = []
-    ip_info = ip_info.get_dependencies(
+    IPInfo.get_dependencies(
         ip_name, installed_ip_info[ip_name]["info"]["version"], dep_arr
     )
     dep_arr.append({ip_name: installed_ip_info[ip_name]["info"]["version"]})
@@ -724,10 +728,10 @@ def rm_ip_from_project(ip_name, ip_root):
 
 
 def install_using_dep_file(ip_root, ipm_root):
-    """install the ip from teh dependencies file, assuming the dependencies file is under ip_root
+    """install the ip from the dependencies file, assuming the dependencies file is under ip_root
 
     Args:
-        ip_root (str): path to the project ip dict
+        ip_root (str): path to the project ip dir
         ipm_root (str): path to common installation path
     """
     logger = Logger()
@@ -796,9 +800,7 @@ def list_verified_ips(category=None, technology=None):
         category (str, optional): filter the ips by category. Defaults to None.
         technology (str, optional): filter the ips by technology. Defaults to None.
     """
-    ip_info = IPInfo()
-    ip = IP()
-    verified_ips = ip_info.get_verified_ip_info()
+    verified_ips = IPInfo.get_verified_ip_info()
     ip_list = []
     for ip_name, ip_data in verified_ips.items():
         if category and not technology:
@@ -815,7 +817,7 @@ def list_verified_ips(category=None, technology=None):
         else:
             ip_list.append({ip_name: ip_data})
 
-    ip.create_table(ip_list)
+    IP.create_table(ip_list)
 
 
 def list_ip_info(ip_name):
@@ -824,11 +826,9 @@ def list_ip_info(ip_name):
     Args:
         ip_name (str): name of ip to get info
     """
-    ip_info = IPInfo()
-    ip = IP(ip_name)
-    ip_data = ip_info.get_verified_ip_info(ip_name)
+    ip_data = IPInfo.get_verified_ip_info(ip_name)
     ip_list = [{ip_name: ip_data}]
-    ip.create_table(ip_list, "all", True)
+    IP.create_table(ip_list, "all", True)
 
 
 def list_installed_ips(ipm_root):
@@ -837,10 +837,8 @@ def list_installed_ips(ipm_root):
     Args:
         ipm_root (str): path to common installation path
     """
-    ip_info = IPInfo()
-    ip = IP()
-    ip_data = ip_info.get_installed_ip_info(ipm_root)
-    ip.create_table(ip_data, local=True, extended=True)
+    ip_data = IPInfo.get_installed_ip_info(ipm_root)
+    IP.create_table(ip_data, local=True, extended=True)
 
 
 def check_ips(ipm_root, update=False, ip_root=None):
@@ -851,12 +849,11 @@ def check_ips(ipm_root, update=False, ip_root=None):
         update (bool, optional): if True, will check and update. Defaults to False.
         ip_root (str, optional): path to the project ip dict. Defaults to None.
     """
-    ip_info = IPInfo()
     logger = Logger()
-    installed_ips = ip_info.get_installed_ips(ipm_root)
+    installed_ips = IPInfo.get_installed_ips(ipm_root)
     for ips in installed_ips:
         for ip_name, ip_version in ips.items():
-            verified_ip_info = ip_info.get_verified_ip_info(ip_name)
+            verified_ip_info = IPInfo.get_verified_ip_info(ip_name)
             version = get_latest_version(verified_ip_info["release"])
             if version not in ip_version:
                 if update:
