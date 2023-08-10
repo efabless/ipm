@@ -19,14 +19,14 @@ from . import __version__
 from .manage import (
     ls_remote_cmd,
     ls_cmd,
-    output_cmd,
     install_cmd,
     uninstall_cmd,
+    rm_cmd,
     check_cmd,
     update_cmd,
     package_check_cmd,
     info_cmd,
-    install_deps_cmd
+    install_deps_cmd,
 )
 
 
@@ -40,11 +40,11 @@ def cli():
     pass
 
 
-cli.add_command(output_cmd)
 cli.add_command(ls_remote_cmd)
 cli.add_command(ls_cmd)
 cli.add_command(install_cmd)
 cli.add_command(uninstall_cmd)
+cli.add_command(rm_cmd)
 cli.add_command(check_cmd)
 cli.add_command(update_cmd)
 cli.add_command(package_check_cmd)

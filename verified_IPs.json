@@ -1,0 +1,148 @@
+{
+    "EF_ADCS0808NC": {
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "efabless",
+        "email": "efabless@efabless.com",
+        "category": "analog",
+        "technology": "sky130",
+        "license": "APACHE 2.0",
+        "tags": [
+            "Data Converter"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "7-1-2023",
+                "status": "verified",
+                "bus": [
+                    "genertic"
+                ],
+                "type": "hard",
+                "width": "0.235",
+                "height": "0.331",
+                "cell_count": "n/a",
+                "clock_freq_mhz": "1",
+                "supply_voltage": [
+                    "3.3",
+                    "1.8"
+                ]
+            }
+        }
+    },
+    "EF_PSRAM_CTRL": {
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "efabless",
+        "email": "efabless@efabless.com",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "MIT",
+        "tags": [
+            "mem"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "4-01-2023",
+                "status": "verified",
+                "bus": [
+                    "AHBL"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "550",
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            }
+        }
+    },
+    "EF_UART": {
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "efabless",
+        "email": "efabless@efabless.com",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "APACHE 2.0",
+        "tags": [
+            "peripheral",
+            "comm"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "3-18-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "1057",
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            }
+        }
+    },
+    "EF_PWM32": {
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "efabless",
+        "email": "efabless@efabless.com",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "APACHE 2.0",
+        "tags": [
+            "PWM",
+            "control"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "3-18-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "730",
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            }
+        }
+    },
+    "EF_TMR32": {
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "efabless",
+        "email": "efabless@efabless.com",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "MIT",
+        "tags": [
+            "peripheral",
+            "time",
+            "counter",
+            "PWM"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "3-18-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "690",
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            }
+        }
+    }
+}
