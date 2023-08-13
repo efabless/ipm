@@ -33,7 +33,7 @@ except KeyError:
     )
     exit(1)
 VERIFIED_JSON_FILE_URL = (
-    "https://raw.githubusercontent.com/efabless/ipm/refactor_code/verified_IPs.json"
+    "https://raw.githubusercontent.com/efabless/ipm/main/verified_IPs.json"
 )
 DEPENDENCIES_FILE_NAME = "dependencies.json"
 IPM_DEFAULT_HOME = os.path.join(os.path.expanduser("~"), ".ipm")
@@ -826,8 +826,10 @@ def list_ip_info(ip_name):
     Args:
         ip_name (str): name of ip to get info
     """
+    logger = Logger()
     ip_data = IPInfo.get_verified_ip_info(ip_name)
     ip_list = [{ip_name: ip_data}]
+    logger.print_success(f"Description: {ip_data['description']}")
     IP.create_table(ip_list, "all", True)
 
 
