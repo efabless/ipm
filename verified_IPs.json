@@ -1,5 +1,6 @@
 {
     "EF_ADCS0808NC": {
+        "description": "8 channel 8 bit SAR Analog to Digital converter",
         "repo": "github.com/efabless/EF_IPs",
         "author": "efabless",
         "email": "efabless@efabless.com",
@@ -29,6 +30,7 @@
         }
     },
     "EF_PSRAM_CTRL": {
+        "description": "A Controller for Quad I/O SPI PSRAM",
         "repo": "github.com/efabless/EF_IPs",
         "author": "efabless",
         "email": "efabless@efabless.com",
@@ -57,6 +59,7 @@
         }
     },
     "EF_UART": {
+        "description": "UART with a programmable baud rate generator and RX/TX FIFOs",
         "repo": "github.com/efabless/EF_IPs",
         "author": "efabless",
         "email": "efabless@efabless.com",
@@ -86,6 +89,7 @@
         }
     },
     "EF_PWM32": {
+        "description": "Pulse Width modulation",
         "repo": "github.com/efabless/EF_IPs",
         "author": "efabless",
         "email": "efabless@efabless.com",
@@ -115,6 +119,7 @@
         }
     },
     "EF_TMR32": {
+        "description": "A 32-bit Timer/Counter/Capture/PWM peripheral.",
         "repo": "github.com/efabless/EF_IPs",
         "author": "efabless",
         "email": "efabless@efabless.com",
