@@ -223,5 +223,69 @@
                 ]
             }
         }
+    },
+    "MS_SPI_XIP_CACHE": {
+        "description": "AHB-Lite SPI Flash memory controller with direct mapped cache and support for XiP.",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Mohamed Shalan",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "APACHE 2.0",
+        "tags": [
+            "memory",
+            "flash",
+            "spi",
+            "cache",
+            "XIP"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "1-01-2020",
+                "status": "verified",
+                "bus": [
+                    "AHBL"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "5200",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            }
+        }
+    },
+    "MS_DMAC_AHBL": {
+        "description": "Direct Memory Access Controller (DMAC) with AHB-lite bus interface.",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Mohamed Shalan",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "APACHE 2.0",
+        "tags": [
+            "DMA"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "1-01-2020",
+                "status": "verified",
+                "bus": [
+                    "AHBL"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "850",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            }
+        }
     }
 }
