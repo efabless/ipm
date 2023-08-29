@@ -369,7 +369,7 @@ class IP:
             "Accept": "application/vnd.github+json",
         }
         release_url = (
-            f"https://api.github.com/repos/{verified_ip['author']}/EF_IPs/releases"
+            "https://api.github.com/repos/efabless/EF_IPs/releases"
         )
         response = requests.get(release_url, stream=True, headers=headers)
         release_data = response.json()
@@ -387,7 +387,7 @@ class IP:
             "Accept": "application/octet-stream",
         }
         try:
-            release_url = f"https://api.github.com/repos/{verified_ip['author']}/EF_IPs/releases/assets/{asset_id}"
+            release_url = f"https://api.github.com/repos/efabless/EF_IPs/releases/assets/{asset_id}"
         except NameError:
             logger.print_err("Could not find asset")
             exit(1)

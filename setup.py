@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 from setuptools import setup, find_packages
 
-from ipm import __version__
+# from ipm import __version__
 
 requirements = open("requirements.txt").read().strip().split("\n")
 
 setup(
     name="ipm",
     packages=find_packages(),
-    version=__version__,
+    version="0.1.0",
     description="Open-source IPs Package Manager.",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
