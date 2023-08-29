@@ -7,7 +7,7 @@
         "owner": "Efabless Corp.",
         "category": "digital",
         "technology": "n/a",
-        "license": "MIT",
+        "license": "Apache 2.0",
         "tags": [
             "memory",
             "psram"
