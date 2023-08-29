@@ -1,57 +1,30 @@
 {
-    "EF_ADCS0808NC": {
-        "description": "8 channel 8 bit SAR Analog to Digital converter",
-        "repo": "github.com/efabless/EF_IPs",
-        "author": "efabless",
-        "email": "efabless@efabless.com",
-        "category": "analog",
-        "technology": "sky130",
-        "license": "APACHE 2.0",
-        "tags": [
-            "Data Converter"
-        ],
-        "release": {
-            "v1.0.0": {
-                "date": "7-1-2023",
-                "status": "verified",
-                "bus": [
-                    "genertic"
-                ],
-                "type": "hard",
-                "width": "0.235",
-                "height": "0.331",
-                "cell_count": "n/a",
-                "clock_freq_mhz": "1",
-                "supply_voltage": [
-                    "3.3",
-                    "1.8"
-                ]
-            }
-        }
-    },
     "EF_PSRAM_CTRL": {
         "description": "A Controller for Quad I/O SPI PSRAM",
         "repo": "github.com/efabless/EF_IPs",
-        "author": "efabless",
-        "email": "efabless@efabless.com",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Efabless Corp.",
         "category": "digital",
         "technology": "n/a",
         "license": "MIT",
         "tags": [
-            "mem"
+            "memory",
+            "psram"
         ],
         "release": {
             "v1.0.0": {
                 "date": "4-01-2023",
                 "status": "verified",
                 "bus": [
-                    "AHBL"
+                    "AHBL",
+                    "WB"
                 ],
                 "type": "soft",
                 "width": "0",
                 "height": "0",
-                "cell_count": "550",
-                "clock_freq_mhz": "10",
+                "cell_count": "530",
+                "clock_freq_mhz": "40",
                 "supply_voltage": [
                     "n/a"
                 ]
@@ -61,8 +34,9 @@
     "EF_UART": {
         "description": "UART with a programmable baud rate generator and RX/TX FIFOs",
         "repo": "github.com/efabless/EF_IPs",
-        "author": "efabless",
-        "email": "efabless@efabless.com",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Efabless Corp.",
         "category": "digital",
         "technology": "n/a",
         "license": "APACHE 2.0",
@@ -89,14 +63,16 @@
         }
     },
     "EF_PWM32": {
-        "description": "Pulse Width modulation",
+        "description": "A 32-bit dual channel PWM generator with a clock divider.",
         "repo": "github.com/efabless/EF_IPs",
-        "author": "efabless",
-        "email": "efabless@efabless.com",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Efabless Corp.",
         "category": "digital",
         "technology": "n/a",
         "license": "APACHE 2.0",
         "tags": [
+            "peripheral",
             "PWM",
             "control"
         ],
@@ -118,19 +94,20 @@
             }
         }
     },
-    "EF_TMR32": {
-        "description": "A 32-bit Timer/Counter/Capture/PWM peripheral.",
+    "EF_TCC32": {
+        "description": "A 32-bit Timer/Counter/Capture peripheral.",
         "repo": "github.com/efabless/EF_IPs",
-        "author": "efabless",
-        "email": "efabless@efabless.com",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Efabless Corp.",
         "category": "digital",
         "technology": "n/a",
-        "license": "MIT",
+        "license": "APACHE 2.0",
         "tags": [
             "peripheral",
-            "time",
+            "timer",
             "counter",
-            "PWM"
+            "capture"
         ],
         "release": {
             "v1.0.0": {
@@ -143,6 +120,103 @@
                 "width": "0",
                 "height": "0",
                 "cell_count": "690",
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            }
+        }
+    },
+    "MS_QSPI_XIP_CACHE": {
+        "description": "AHB-Lite Quad I/O SPI Flash memory controller with direct mapped cache and support for XiP.",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Mohamed Shalan",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "APACHE 2.0",
+        "tags": [
+            "memory",
+            "flash",
+            "qspi",
+            "cache"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "1-01-2020",
+                "status": "verified",
+                "bus": [
+                    "AHBL"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "5200",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            }
+        }
+    },
+    "MS_CLK_RST": {
+        "description": "All digital Clock and Reset Manager.",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Mohamed Shalan",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "APACHE 2.0",
+        "tags": [
+            "clock",
+            "reset",
+            "low power",
+            "frequency scaling"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "1-01-2020",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "730",
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            }
+        }
+    },
+    "EF_GPIO": {
+        "description": "A generic GPIO peripheral.",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Efabless Corp.",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "APACHE 2.0",
+        "tags": [
+            "peripheral",
+            "GPIO"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "8-28-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "730",
                 "clock_freq_mhz": "10",
                 "supply_voltage": [
                     "n/a"
