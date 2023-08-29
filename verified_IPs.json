@@ -287,5 +287,38 @@
                 ]
             }
         }
+    },
+    "RAM256": {
+        "description": "256x32 single port DFFRAM macro",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "AUCOHL",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "APACHE 2.0",
+        "tags": [
+            "peripheral",
+            "timer",
+            "counter",
+            "capture"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "1-1-2021",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "hard",
+                "width": "809.600",
+                "height": "446.080",
+                "cell_count": "0",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            }
+        }
     }
 }
