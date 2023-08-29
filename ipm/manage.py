@@ -88,7 +88,7 @@ def uninstall(
 @click.option(
     "--technology",
     required=False,
-    help="Optionally provide the technology (sky130, gf180mcu)",
+    help="Optionally provide the technology (sky130A, gf180mcuC)",
 )
 def ls_remote_cmd(category, technology):
     """Lists all verified IPs in ipm's database"""

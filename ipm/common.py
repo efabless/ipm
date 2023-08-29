@@ -409,7 +409,7 @@ class IP:
             return True
 
     def generate_bus_wrapper(self, verified_ip_info):
-        if "genertic" in verified_ip_info["release"][self.version]["bus"]:
+        if "generic" in verified_ip_info["release"][self.version]["bus"]:
             ip_install_root = f"{self.ipm_root}/{self.ip_name}/{self.version}"
             bus_wrapper_dir = f"{ip_install_root}/hdl/rtl/bus_wrapper"
             fw_dir = f"{ip_install_root}/fw"

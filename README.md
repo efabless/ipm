@@ -151,7 +151,7 @@ Your ```<ip>.json``` file should look like:
     "status": "SI_validated",
     "width": "0.25",
     "height": "0.2",
-    "technology": "sky130",
+    "technology": "sky130A",
     "cell_count": 200,
     "clk_freq": 10,
     "license": "public"
@@ -179,7 +179,7 @@ Your ```<ip>.json``` file should look like:
 
 `clk_freq` should be in `MHz`
 
-`license` can be `pulic/private`
+`license`
 
 **All the above fields must be included in your file**
 
