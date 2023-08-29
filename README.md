@@ -9,7 +9,7 @@ git clone https://github.com/efabless/ipm.git
 ``` 
 2.	Navigate to the cloned directory and install using pip
 ```bash
-cd <cloned_folder_name>
+cd ipm
 pip install .
 ``` 
 3.	To verify it is working run: 
@@ -17,54 +17,74 @@ pip install .
 ipm --version
 ``` 
 
-## Usage
+## ACCESS TO PRIVATE REPOS
+This is temporary step until IPM is publicly announced and IPs are all public
 
-### IPM_IPROOT
-IPM requires an IP Root. This IP root is where all your IPs will be installed and it can be anywhere on your computer, but by default it's the folder ```~/.ipm``` in your home directory. If you have the variable ```IPM_IPROOT``` set, ipm will use that instead. You can also manually override both values by supplying the ```--ipm-iproot``` command line argument. To check where is your current root just run ```ipm``` in your terminal and it should display where the IPs will be installed 
+### Create Github Token
+To create a Personal Github Token [Follow this link](https://github.com/settings/tokens), make sure to check the boxes `repo`, `workflow` and `write:packages`.
+
+
+### Export Github Token
+```bash
+export GITHUB_TOKEN=<your_github_token>
+```
+
+## Usage
 
 ### Listing all Verified IPs
 ```bash
 ipm ls-remote
 ``` 
-Shows all the verified IPs saved in a json file in the main GH repository of the project ```Verified_IPs.json```. The function lists all the IPs in a tabular format sorted by the IP category and gives you all the required information about the IP; name, version, category...etc.
+Lists all verified IPs supported by IPM, and verified by efabless, it shows the primary details about the IPs.
+
+### Getting more info about an IP
+```bash
+ipm info <ip_name>
+```
+Gives more details about a specific IP.
 
 ### Listing Installed IPs
 ```bash
 ipm ls
 ``` 
-Lists all locally installed IPs at the ```IPM_IPROOT```. IPM creates a local json file named ```Installed_IPs.json``` this file is how the manager keeps track of all your installed IPs and their versions so you should not edit that file!
+Lists all locally installed IPs on the machine.
 
 ### Installing an IP
 ```bash
-ipm install <ip_name> [OPTIONS] --overwrite
+ipm install <ip_name> [OPTIONS]
 ``` 
-Installs the IP in the IP root. The user must provide a valid `ip_name`, to check all available IPs run `ipm ls`. If there exists a non-empty folder of the IP in the IP root, the install function will not work and if the user wishes to overwrite the existing folder he should pass the option `--overwrite`
+Installs the IP by default in `{PWD}/ip`, you can also specify the ip installation directory using `--ip-root`. The user must provide a valid `ip_name`, to check all available IPs run `ipm ls-remote`. 
 To install a specific version of the IP you can specify it using `--version <version>`
-**NOTE** you can see all versions of IP using `ipm info --ip <ip name>`
 
 ### Installing IPs from dependencies file
 ```bash
-ipm install-dep <ip_name> [OPTIONS] --overwrite
+ipm install-dep <ip_name> [OPTIONS]
 ``` 
-There has to be a dependencies file that should be provided in the `--ip-root` path
+Installs IPs specified in a dependencies file, by default it looks in `{PWD}/ip/dependencies.json`. You can specify the dependencies file location using `--ip-root`
 
 ### Uninstalling an IP
 ```bash
 ipm uninstall <ip_name>
 ``` 
-Uninstalls a locally installed IP. The user must provide a valid installed ```ip_name```, to check all installed IPs run ```ipm ls```. It is advised to always use this function when you wish to remove an IP, as this function updates the ```Installed_IPs.json``` file as well. If you deleted the folder manually or renamed it this function may face errors
+Uninstalls a locally installed IP. The user must provide a valid installed ```ip_name```, to check all installed IPs run ```ipm ls```. It is advised to always use this function when you wish to remove an IP. If you deleted the folder manually or renamed it this function may face errors
+
+### Remove IP from project
+```bash
+ipm rm <ip_name>
+```
+Removes the IP from the project, but doesn't uninstall it from the machine, to uninstall from machine use `ipm uninstall`, it is advised to `rm` from project before uninstalling.
 
 ### Checking for Updates
 ```bash
 ipm check [OPTIONS] --ip
 ``` 
-Checks if there are newer versions available for the installed IPs. The function by default checks all the installed IPs for updates and if you wish to check for a certain IP pass the option ```--ip``` followed by the IP name. Note this function does not update the IPs, you can update them using the following function
+Checks if there are newer versions available for the installed IPs. The function by default checks all the installed IPs for updates.
 
 ### Updating Installed IP
 ```bash
-ipm update [OPTIONS] --ip --all
+ipm update [OPTIONS]
 ``` 
-Updates the IP if an update is available, by uninstalling the old version and installing the new one. You can pass the option ```--all``` to update all out dated IPs at once. The ```update``` and ```check``` functions depend on comparing the version of the installed IP against the version of the IP in the verified IPs list 
+Updates the IP if an update is available.
 
 ## Adding your IP to IPM
 To add your own IP to our package manager, you should follow these steps:
@@ -139,54 +159,44 @@ Your ```<ip>.json``` file should look like:
 
 ```
 {
-    "name" : "spm",
-    "repo": "github.com/shalan/spm",
-    "author" : "shalan",
-    "email": "mshalan@aucegypt.edu",
-    "version" : "0.9",
-    "date": "9-21-2022",
-    "category": "digital",
-    "tag": ["BUS"],
-    "type": "hard",
-    "status": "SI_validated",
-    "width": "0.25",
-    "height": "0.2",
-    "technology": "sky130A",
-    "cell_count": 200,
-    "clk_freq": 10,
-    "license": "public"
+    "info": {
+        "name": "<ip name>",
+        "description": "<ip_description>",
+        "repo": "<src repo>",
+        "owner": "<owner of IP>",
+        "license": "<license of IP>",
+        "author": "<author of IP>",
+        "email": "<email of author/owner>",
+        "version": "<IP version>",
+        "date": "<mm-dd-yyyy>",
+        "category": "<analog/digital/AMS>",
+        "tags": [
+            "<tags for ip>"
+        ],
+        "bus": [
+            "<APB|AHBL|WB|generic>"
+        ],
+        "type": "<hard|soft|firm|hybrid",
+        "status": "<Verified|FPGA Validated|SI Validated|Production Ready>",
+        "cell_count": "<number of cells in ip>",
+        "width": "<width of IP in um>",
+        "height": "<height of IP in um>",
+        "technology": "<sky130A|sky130B|gf180mcuC|gf180mcuD|n/a>",
+        "clock_freq_mhz": "<clock frequency of IP>",
+        "supply_voltage": [
+            "<supply voltage of IP>"
+        ]
+    }
 }
 ```
-**NOTE**
-
-`date` should be in the form: `mm-dd-yyyy`
-
-`category` can be `digital, analog, AMS`
-
-`tag` for `digital` can be a combination of `processor, comm, memory, BUS, acceleration, ... `
-
-`tag` for `analog` can be a combination of `clocking, power, dataconv, sensor, sigcond, rf, ... `
-
-`tag` for `other` can be a combination of `peripheral, graphics, security, automotive, AI, ... `
-
-*You can use any combination of tags*
-
-`type` can be `hard/soft`
-
-`status` can be `verified, FPGA_validated, SI_validated, production_ready`
-
-`width` and `height` should be in `um`
-
-`clk_freq` should be in `MHz`
-
-`license`
 
 **All the above fields must be included in your file**
 
 ### 3. Create tarball
 Compress your folder into a tarball (tar.gz) with the name ```<version>.tar.gz```, where `version` is the version of your release, you can do that by running:
 ```bash
-tar czf <version>.tar.gz <structured_IP_folder_name>
+cd <ip_directory>
+tar czf <version>.tar.gz *
 ``` 
 ### 4. Create release 
 create a new release in your GH repo with the tag ```<version>``` and add the tarball created there to the release's assets
