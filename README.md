@@ -205,6 +205,9 @@ tar czf <version>.tar.gz *
 create a new release in your GH repo with the tag ```<version>``` and add the tarball created there to the release's assets
 ### 5. IPM package_check
 Once you are done you can run a package_check function locally by running ```ipm package-check``` which checks that you’ve completed the above steps successfully. Options for ```IP name```, ```version``` and the ```GH repo``` are required
+
+**NOTE: THIS IS STILL A WIP**
+
 ### 6. Submit
 If the pre-check was successful you can submit your IP through the form ......
 
