@@ -55,6 +55,7 @@ ipm install <ip_name> [OPTIONS]
 ``` 
 Installs the IP by default in `{PWD}/ip`, you can also specify the ip installation directory using `--ip-root`. The user must provide a valid `ip_name`, to check all available IPs run `ipm ls-remote`. 
 To install a specific version of the IP you can specify it using `--version <version>`
+While IPM is installing the IP, if the IP's bus is `generic` it will create bus wrappers for `AHBL`, `APB`, `WB` and will create firmware `fw`, using [bus wrapper generator tool](https://github.com/efabless/bus_wrapper_gen)
 
 ### Installing IPs from dependencies file
 ```bash
