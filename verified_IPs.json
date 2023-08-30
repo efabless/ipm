@@ -167,7 +167,7 @@
         "email": "mshalan@efabless.com",
         "owner": "Mohamed Shalan",
         "category": "digital",
-        "technology": "n/a",
+        "technology": "sky130A",
         "license": "APACHE 2.0",
         "tags": [
             "clock",
@@ -295,7 +295,7 @@
         "email": "mshalan@efabless.com",
         "owner": "AUCOHL",
         "category": "digital",
-        "technology": "n/a",
+        "technology": "sky130A",
         "license": "APACHE 2.0",
         "tags": [
             "peripheral",

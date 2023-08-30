@@ -77,7 +77,7 @@ Removes the IP from the project, but doesn't uninstall it from the machine, to u
 
 ### Checking for Updates
 ```bash
-ipm check [OPTIONS] --ip
+ipm check [OPTIONS]
 ``` 
 Checks if there are newer versions available for the installed IPs. The function by default checks all the installed IPs for updates.
 
