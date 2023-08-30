@@ -864,6 +864,8 @@ def check_ips(ipm_root, update=False, ip_root=None):
                     logger.print_info(
                         f"IP {ip_name} has a newer version [magenta]{version}[/magenta], to update use command ipm update"
                     )
+            else:
+                logger.print_info(f"IP {ip_name} is the newest version [magenta]{version}[/magenta].")
 
 
 def package_check(ipm_root, ip, version, gh_repo):
