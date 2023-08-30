@@ -1,6 +1,20 @@
 # ipm
 IPM is an open-source IPs Package Manager; it is meant to provide a mean for distributing high quality open-source IPs.
 
+## ACCESS TO PRIVATE REPOS
+**This is temporary step until IPM is publicly announced and IPs are all public**
+
+### Create Github Token
+To create a Personal Github Token [Follow this link](https://github.com/settings/tokens), make sure to check the boxes `repo`, `workflow` and `write:packages`.
+
+### Export Github Token
+```bash
+export GITHUB_TOKEN=<your_github_token>
+```
+
+### Give Github Access to ssh public key
+Generate your public ssh key on your machine, then [Follow this link](https://github.com/settings/keys) to add it to your github account.
+
 ## Installation
 
 1.	Clone the IPM GH repository 
@@ -16,18 +30,6 @@ pip install .
 ```bash
 ipm --version
 ``` 
-
-## ACCESS TO PRIVATE REPOS
-This is temporary step until IPM is publicly announced and IPs are all public
-
-### Create Github Token
-To create a Personal Github Token [Follow this link](https://github.com/settings/tokens), make sure to check the boxes `repo`, `workflow` and `write:packages`.
-
-
-### Export Github Token
-```bash
-export GITHUB_TOKEN=<your_github_token>
-```
 
 ## Usage
 
