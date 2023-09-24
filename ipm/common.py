@@ -665,7 +665,7 @@ def install_ip(ip_name, version, ip_root, ipm_root):
                     f"Installing IP {dep_name} at {ipm_root} and creating simlink to {ip_root}"
                 )
                 ip.download_tarball(verified_ip_info, ip_install_root)
-                ip.generate_bus_wrapper(verified_ip_info)
+                # ip.generate_bus_wrapper(verified_ip_info)
             else:
                 logger.print_info(f"Found IP {dep_name} locally")
             if os.path.exists(f"{ip_root}/{dep_name}"):
