@@ -22,7 +22,7 @@ import click
 import requests
 from rich.console import Console
 from rich.table import Table
-import bus_wrapper_gen
+# import bus_wrapper_gen
 
 try:
     GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
@@ -408,33 +408,33 @@ class IP:
             os.remove(tarball_path)
             return True
 
-    def generate_bus_wrapper(self, verified_ip_info):
-        if "generic" in verified_ip_info["release"][self.version]["bus"]:
-            ip_install_root = f"{self.ipm_root}/{self.ip_name}/{self.version}"
-            bus_wrapper_dir = f"{ip_install_root}/hdl/rtl/bus_wrapper"
-            fw_dir = f"{ip_install_root}/fw"
-            os.makedirs(bus_wrapper_dir, exist_ok=True)
-            os.makedirs(fw_dir, exist_ok=True)
-            bus_wrapper_ip = bus_wrapper_gen.IP(
-                f"{ip_install_root}/{self.ip_name}.json"
-            )
-            org_stdout = sys.stdout
-            with open(f"{bus_wrapper_dir}/{self.ip_name}_wb.v", "w") as f:
-                sys.stdout = f
-                bus_wrapper_gen.WB_Wrapper(bus_wrapper_ip).print()
-                sys.stdout = org_stdout
-            with open(f"{bus_wrapper_dir}/{self.ip_name}_ahbl.v", "w") as f:
-                sys.stdout = f
-                bus_wrapper_gen.AHBL_Wrapper(bus_wrapper_ip).print()
-                sys.stdout = org_stdout
-            with open(f"{bus_wrapper_dir}/{self.ip_name}_apb.v", "w") as f:
-                sys.stdout = f
-                bus_wrapper_gen.APB_Wrapper(bus_wrapper_ip).print()
-                sys.stdout = org_stdout
-            with open(f"{fw_dir}/{self.ip_name}.c", "w") as f:
-                sys.stdout = f
-                bus_wrapper_gen.APB_Wrapper(bus_wrapper_ip).gen_driver(self.ip_name)
-                sys.stdout = org_stdout
+    # def generate_bus_wrapper(self, verified_ip_info):
+    #     if "generic" in verified_ip_info["release"][self.version]["bus"]:
+    #         ip_install_root = f"{self.ipm_root}/{self.ip_name}/{self.version}"
+    #         bus_wrapper_dir = f"{ip_install_root}/hdl/rtl/bus_wrapper"
+    #         fw_dir = f"{ip_install_root}/fw"
+    #         os.makedirs(bus_wrapper_dir, exist_ok=True)
+    #         os.makedirs(fw_dir, exist_ok=True)
+    #         bus_wrapper_ip = bus_wrapper_gen.IP(
+    #             f"{ip_install_root}/{self.ip_name}.json"
+    #         )
+    #         org_stdout = sys.stdout
+    #         with open(f"{bus_wrapper_dir}/{self.ip_name}_wb.v", "w") as f:
+    #             sys.stdout = f
+    #             bus_wrapper_gen.WB_Wrapper(bus_wrapper_ip).print()
+    #             sys.stdout = org_stdout
+    #         with open(f"{bus_wrapper_dir}/{self.ip_name}_ahbl.v", "w") as f:
+    #             sys.stdout = f
+    #             bus_wrapper_gen.AHBL_Wrapper(bus_wrapper_ip).print()
+    #             sys.stdout = org_stdout
+    #         with open(f"{bus_wrapper_dir}/{self.ip_name}_apb.v", "w") as f:
+    #             sys.stdout = f
+    #             bus_wrapper_gen.APB_Wrapper(bus_wrapper_ip).print()
+    #             sys.stdout = org_stdout
+    #         with open(f"{fw_dir}/{self.ip_name}.c", "w") as f:
+    #             sys.stdout = f
+    #             bus_wrapper_gen.APB_Wrapper(bus_wrapper_ip).gen_driver(self.ip_name)
+    #             sys.stdout = org_stdout
 
 
 class Checks:
