@@ -288,31 +288,30 @@
             }
         }
     },
-    "RAM256": {
-        "description": "256x32 single port DFFRAM macro",
+    "SW_AES": {
+        "description": "Verilog implementation of the symmetric block cipher AES (Advanced Encryption Standard) as specified in NIST FIPS 197. This implementation supports 128 and 256 bit keys.",
         "repo": "github.com/efabless/EF_IPs",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
-        "owner": "AUCOHL",
+        "author": "Joachim Strombergson",
+        "email": "",
+        "owner": "secworks",
         "category": "digital",
-        "technology": "sky130A",
-        "license": "APACHE 2.0",
+        "technology": "n/a",
+        "license": "MIT",
         "tags": [
-            "peripheral",
-            "timer",
-            "counter",
-            "capture"
+            "accelerator",
+            "AES",
+            "security"
         ],
         "release": {
             "v1.0.0": {
-                "date": "1-1-2021",
+                "date": "30-8-2023",
                 "status": "verified",
                 "bus": [
-                    "AHBL"
+                    "generic"
                 ],
-                "type": "hard",
-                "width": "809.600",
-                "height": "446.080",
+                "type": "soft",
+                "width": "0",
+                "height": "0",
                 "cell_count": "0",
                 "clock_freq_mhz": "40",
                 "supply_voltage": [
