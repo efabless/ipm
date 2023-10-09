@@ -668,10 +668,13 @@ def install_ip(ip_name, version, ip_root, ipm_root):
                 # ip.generate_bus_wrapper(verified_ip_info)
             else:
                 logger.print_info(f"Found IP {dep_name} locally")
-            if os.path.exists(f"{ip_root}/{dep_name}"):
-                os.unlink(f"{ip_root}/{dep_name}")
-            os.symlink(f"{ipm_root}/{dep_name}/{version}", f"{ip_root}/{dep_name}")
-            logger.print_success(f"Created simlink to {dep_name} IP at {ip_root}")
+            if ipm_root != ip_root:
+                if os.path.exists(f"{ip_root}/{dep_name}"):
+                    os.unlink(f"{ip_root}/{dep_name}")
+                os.symlink(f"{ipm_root}/{dep_name}/{version}", f"{ip_root}/{dep_name}")
+                logger.print_success(f"Created simlink to {dep_name} IP at {ip_root}")
+            else:
+                logger.print_success(f"Downloaded IP at {ipm_root}")
             if dep_name == ip_name:
                 ip.update_dependencies_file()
     change_dir_to_readonly(ipm_root)
