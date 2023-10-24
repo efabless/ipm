@@ -31,6 +31,38 @@
             }
         }
     },
+    "EF_PSRAM_CTRL_V2": {
+        "description": "A Controller for Quad I/O SPI PSRAM",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Efabless Corp.",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "Apache 2.0",
+        "tags": [
+            "memory",
+            "psram"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "4-01-2023",
+                "status": "verified",
+                "bus": [
+                    "AHBL",
+                    "WB"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "530",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            }
+        }
+    },
     "EF_UART": {
         "description": "UART with a programmable baud rate generator and RX/TX FIFOs",
         "repo": "github.com/efabless/EF_IPs",
