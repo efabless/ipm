@@ -351,5 +351,194 @@
                 ]
             }
         }
+    },
+    "EF_ACMP_DI": {
+        "description": "A digital interface for the EF_R2RVC02 analog comparator",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Efabless Corp.",
+        "category": "ams",
+        "technology": "n/a",
+        "license": "Apache 2.0",
+        "tags": [
+            "peripheral",
+            "analog comparator"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "9-05-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "hybrid",
+                "width": "0",
+                "height": "0",
+                "cell_count": "0",
+                "clock_freq_mhz": "n/a",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            }
+        }
+    },
+    "EF_DAC1001_DI": {
+        "description": "10-Bit Switching Capacitor Array Digital to Analog Converter (DAC) with a digital interface.",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Ahmed Reda",
+        "email": "ahmed.reda@efabless.com",
+        "owner": "Efabless Corp.",
+        "category": "ams",
+        "technology": "sky130",
+        "license": "Apache 2.0",
+        "tags": [
+            "dac",
+            "data converter",
+            "peripheral",
+            "analog"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "1-9-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "hard",
+                "width": "165.120",
+                "height": "360.790",
+                "cell_count": "0",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "3.3",
+                    "1.8"
+                ]
+            }
+        }
+    },
+    "EF_Q7_UNIT": {
+        "description": "Accelerators for NNoM framework.",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Efabless Corp.",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "APACHE 2.0",
+        "tags": [
+            "ML",
+            "accelerator"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "9-01-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "1800",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            }
+        }
+    },
+    "EF_ADCS1008A": {
+        "description": "A digital controller for 8 Channel 10-bit SAR ADC.",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Efabless Corp.",
+        "category": "analog",
+        "technology": "n/a",
+        "license": "APACHE 2.0",
+        "tags": [
+            "peripheral",
+            "data converter"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "7-30-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "0",
+                "clock_freq_mhz": "n/a",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            }
+        }
+    },
+    "DFFRAM256x32": {
+        "description": "1kbyte (256x32) DFFRAM hardened using OpenLane",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "AUCOHL",
+        "category": "digital",
+        "technology": "sky130",
+        "license": "APACHE 2.0",
+        "tags": [
+            "SRAM",
+            "DFFRAM",
+            "memory"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "7-30-2023",
+                "status": "verified",
+                "bus": [
+                    "AHBL"
+                ],
+                "type": "hard",
+                "width": "1153.835",
+                "height": "536.015",
+                "cell_count": "0",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "1.8"
+                ]
+            }
+        }
+    },
+    "EF_PIN_MUX": {
+        "description": "Pin Multiplexing Fabric; 32 pins x four functions per pin.",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Efabless Corp.",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "APACHE 2.0",
+        "tags": [
+            "peripheral"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "3-30-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "7000",
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            }
+        }
     }
 }
