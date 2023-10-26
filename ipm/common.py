@@ -368,10 +368,11 @@ class IP:
             "Authorization": f"Bearer {GITHUB_TOKEN}",
             "Accept": "application/vnd.github+json",
         }
+        params = {"per_page": 100, "page": 1}
         release_url = (
             "https://api.github.com/repos/efabless/EF_IPs/releases"
         )
-        response = requests.get(release_url, stream=True, headers=headers)
+        response = requests.get(release_url, stream=True, headers=headers, params=params)
         release_data = response.json()
         for data in release_data:
             if self.ip_name in data["tarball_url"].split("/")[-1]:
