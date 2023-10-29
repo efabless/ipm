@@ -317,6 +317,21 @@
                 "supply_voltage": [
                     "n/a"
                 ]
+            },
+            "v1.0.1": {
+                "date": "1-01-2020",
+                "status": "verified",
+                "bus": [
+                    "AHBL"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "850",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "n/a"
+                ]
             }
         }
     },
@@ -380,6 +395,21 @@
                 "supply_voltage": [
                     "n/a"
                 ]
+            },
+            "v1.0.1": {
+                "date": "9-05-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "hybrid",
+                "width": "0",
+                "height": "0",
+                "cell_count": "0",
+                "clock_freq_mhz": "n/a",
+                "supply_voltage": [
+                    "n/a"
+                ]
             }
         }
     },
@@ -414,6 +444,22 @@
                     "3.3",
                     "1.8"
                 ]
+            },
+            "v1.0.1": {
+                "date": "1-9-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "hard",
+                "width": "165.120",
+                "height": "360.790",
+                "cell_count": "0",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "3.3",
+                    "1.8"
+                ]
             }
         }
     },
@@ -432,6 +478,21 @@
         ],
         "release": {
             "v1.0.0": {
+                "date": "9-01-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "1800",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            },
+            "v1.0.1": {
                 "date": "9-01-2023",
                 "status": "verified",
                 "bus": [
@@ -508,6 +569,21 @@
                 "supply_voltage": [
                     "1.8"
                 ]
+            },
+            "v1.0.1": {
+                "date": "7-30-2023",
+                "status": "verified",
+                "bus": [
+                    "AHBL"
+                ],
+                "type": "hard",
+                "width": "1153.835",
+                "height": "536.015",
+                "cell_count": "0",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "1.8"
+                ]
             }
         }
     },
@@ -525,6 +601,21 @@
         ],
         "release": {
             "v1.0.0": {
+                "date": "3-30-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "7000",
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            },
+            "v1.0.1": {
                 "date": "3-30-2023",
                 "status": "verified",
                 "bus": [
