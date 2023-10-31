@@ -659,6 +659,9 @@ def install_ip(ip_name, version, ip_root, ipm_root):
     verified_ip_info = IPInfo.get_verified_ip_info(ip_name)
     if not version:
         version = get_latest_version(verified_ip_info["release"])
+    elif version not in verified_ip_info["release"]:
+        logger.print_err(f"Version {version} can't be found")
+        exit(1)
     IPInfo.get_dependencies(ip_name, version, dependencies_list)
     dependencies_list.append({ip_name: version})
     for dep in dependencies_list:
