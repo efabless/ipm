@@ -707,5 +707,37 @@
                 ]
             }
         }
+    },
+    "MS_WDT32": {
+        "description": "A 32-bit Watchdog Timer",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Mohamed Shalan",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "APACHE 2.0",
+        "tags": [
+            "peripheral",
+            "timer",
+            "wdt"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "1-1-2020",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "200",
+                "clock_freq_mhz": "100",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            }
+        }
     }
 }
