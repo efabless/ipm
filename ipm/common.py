@@ -210,10 +210,8 @@ class IP:
         Returns:
             bool: True if it didn't exist and is created, False if it exists
         """
-        if not os.path.exists(f"{self.ipm_root}/{self.ip_name}"):
-            os.mkdir(f"{self.ipm_root}/{self.ip_name}")
         if not os.path.exists(f"{self.ipm_root}/{self.ip_name}/{self.version}"):
-            os.mkdir(f"{self.ipm_root}/{self.ip_name}/{self.version}")
+            os.makedirs(f"{self.ipm_root}/{self.ip_name}/{self.version}")
             return True
         else:
             return False
@@ -367,6 +365,7 @@ class IP:
             bool: True if downloaded, False if failed to download
         """
         logger = Logger()
+        return_status = True
         headers = {
             "Authorization": f"Bearer {GITHUB_TOKEN}",
             "Accept": "application/vnd.github+json",
@@ -394,14 +393,14 @@ class IP:
             release_url = f"https://api.github.com/repos/efabless/EF_IPs/releases/assets/{asset_id}"
         except NameError:
             logger.print_err("Could not find asset")
-            exit(1)
+            return_status = False
         response = requests.get(release_url, stream=True, headers=headers)
         if response.status_code == 404:
             shutil.rmtree(dest_path)
             logger.print_err(
                 "Couldn't download IP, make sure you have access to the repo and you have GITHUB_TOKEN exported"
             )
-            exit(1)
+            return_status = False
         elif response.status_code == 200:
             tarball_path = os.path.join(dest_path, f"{self.version}.tar.gz")
             with open(tarball_path, "wb") as f:
@@ -410,7 +409,12 @@ class IP:
             file.extractall(dest_path)
             file.close
             os.remove(tarball_path)
+            return_status = True
+        if return_status:
             return True
+        else:
+            shutil.rmtree(os.path.dirname(dest_path))
+            exit(1)
 
     # def generate_bus_wrapper(self, verified_ip_info):
     #     if "generic" in verified_ip_info["release"][self.version]["bus"]:
