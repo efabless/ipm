@@ -232,7 +232,10 @@ class IP:
             for ips in json_decoded["IP"]:
                 for name, version in ips.items():
                     if name == self.ip_name:
-                        flag = False
+                        if version == self.version:
+                            flag = False
+                        else:
+                            json_decoded["IP"].remove({name: version})
             if flag:
                 json_decoded["IP"].append(tmp_dict)
         else:
