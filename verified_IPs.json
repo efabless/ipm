@@ -754,5 +754,68 @@
                 ]
             }
         }
+    },
+    "rosc_sky130": {
+        "description": "A standard cell based ring oscillator with enable and trim.",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Mohamed Shalan",
+        "category": "digital",
+        "technology": "sky130",
+        "license": "APACHE 2.0",
+        "tags": [
+            "oscillator",
+            "frequency scaling"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "1-1-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "170",
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "1.8"
+                ]
+            }
+        }
+    },
+    "sky130_ef_ip__xtal_osc_32k": {
+        "description": "ultra-low-power, low speed crystal oscillator",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Tim Edwardsn",
+        "email": "tim@efabless.com",
+        "owner": "Efabless Corp.",
+        "category": "analog",
+        "technology": "sky130",
+        "license": "APACHE 2.0",
+        "tags": [
+            "crystal oscillator",
+            "low power",
+            "low speed"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "1-11-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "hard",
+                "width": "56.9",
+                "height": "128.18",
+                "cell_count": "n/a",
+                "clock_freq_mhz": "0.032768",
+                "supply_voltage": [
+                    "1.8"
+                ]
+            }
+        }
     }
 }
