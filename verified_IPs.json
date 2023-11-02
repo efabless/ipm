@@ -832,5 +832,37 @@
                 ]
             }
         }
+    },
+    "EF_dll_sky130": {
+        "description": "Digital Locked Loop (ring oscillator + controller).",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Tim Edwards",
+        "email": "tim@efabless.com",
+        "owner": "Efabless Corp.",
+        "category": "digital",
+        "technology": "sky130",
+        "license": "APACHE 2.0",
+        "tags": [
+            "digital locked loop",
+            "frequency locked loop",
+            "frequency scaling"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "1-1-2021",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "360",
+                "clock_freq_mhz": "113",
+                "supply_voltage": [
+                    "1.8"
+                ]
+            }
+        }
     }
 }
