@@ -783,6 +783,21 @@
                 "supply_voltage": [
                     "1.8"
                 ]
+            },
+            "v1.0.1": {
+                "date": "1-1-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "170",
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "1.8"
+                ]
             }
         }
     },
