@@ -396,7 +396,7 @@
             }
         }
     },
-    "aes_core": {
+    "SW_AES": {
         "description": "Verilog implementation of the symmetric block cipher AES (Advanced Encryption Standard) as specified in NIST FIPS 197. This implementation supports 128 and 256 bit keys.",
         "repo": "github.com/efabless/EF_IPs",
         "author": "Joachim Strombergson",
@@ -425,25 +425,10 @@
                 "supply_voltage": [
                     "n/a"
                 ]
-            },
-            "v1.0.1": {
-                "date": "30-8-2023",
-                "status": "verified",
-                "bus": [
-                    "generic"
-                ],
-                "type": "soft",
-                "width": "0",
-                "height": "0",
-                "cell_count": "0",
-                "clock_freq_mhz": "40",
-                "supply_voltage": [
-                    "n/a"
-                ]
             }
         }
     },
-    "sha256_core": {
+    "SW_SHA256": {
         "description": "Hardware implementation of the SHA-256 cryptographic hash function.",
         "repo": "github.com/efabless/EF_IPs",
         "author": "Joachim Strombergson",
