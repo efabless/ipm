@@ -804,7 +804,7 @@
     "sky130_ef_ip__xtal_osc_32k": {
         "description": "ultra-low-power, low speed crystal oscillator",
         "repo": "github.com/efabless/EF_IPs",
-        "author": "Tim Edwardsn",
+        "author": "Tim Edwards",
         "email": "tim@efabless.com",
         "owner": "Efabless Corp.",
         "category": "analog",
@@ -820,13 +820,75 @@
                 "date": "1-11-2023",
                 "status": "verified",
                 "bus": [
-                    "generic"
+                    "n/a"
                 ],
                 "type": "hard",
                 "width": "56.9",
                 "height": "128.18",
                 "cell_count": "n/a",
                 "clock_freq_mhz": "0.032768",
+                "supply_voltage": [
+                    "1.8"
+                ]
+            }
+        }
+    },
+    "sky130_ef_ip__rc_osc_500k": {
+        "description": "A 500kHz oscillator using a current-starved ring oscillator",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Tim Edwards",
+        "email": "tim@efabless.com",
+        "owner": "Efabless Corp.",
+        "category": "analog",
+        "technology": "sky130",
+        "license": "APACHE 2.0",
+        "tags": [
+            "ring oscillator",
+            "low power"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "1-11-2023",
+                "status": "verified",
+                "bus": [
+                    "n/a"
+                ],
+                "type": "hard",
+                "width": "61.21",
+                "height": "53.62",
+                "cell_count": "n/a",
+                "clock_freq_mhz": "0.5",
+                "supply_voltage": [
+                    "1.8"
+                ]
+            }
+        }
+    },
+    "sky130_ef_ip__xtal_osc_16M": {
+        "description": "High speed crystal oscillator",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Tim Edwards",
+        "email": "tim@efabless.com",
+        "owner": "Efabless Corp.",
+        "category": "analog",
+        "technology": "sky130",
+        "license": "APACHE 2.0",
+        "tags": [
+            "crystal oscillator",
+            "high speed"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "1-11-2023",
+                "status": "verified",
+                "bus": [
+                    "n/a"
+                ],
+                "type": "hard",
+                "width": "54.635",
+                "height": "28.48",
+                "cell_count": "n/a",
+                "clock_freq_mhz": "16",
                 "supply_voltage": [
                     "1.8"
                 ]
