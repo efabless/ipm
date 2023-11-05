@@ -958,5 +958,38 @@
                 ]
             }
         }
+    },
+    "EF_CLK_RST_V2": {
+        "description": "All digital Clock and Reset Manager with on-chip crystal oscillators.",
+        "repo": "https://github.com/efabless/EF_CLK_RST_V2",
+        "author": "Bassant Hassan",
+        "email": "bassant.hassan@efabless.com",
+        "owner": "Efabless Corp.",
+        "category": "digital",
+        "technology": "sky130",
+        "license": "APACHE 2.0",
+        "tags": [
+            "clock",
+            "reset",
+            "low power",
+            "frequency scaling"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "1-1-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "614",
+                "clock_freq_mhz": "50",
+                "supply_voltage": [
+                    "1.8"
+                ]
+            }
+        }
     }
 }
