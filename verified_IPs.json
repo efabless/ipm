@@ -76,6 +76,22 @@
                 "supply_voltage": [
                     "n/a"
                 ]
+            },
+            "v1.0.2": {
+                "date": "4-01-2023",
+                "status": "verified",
+                "bus": [
+                    "AHBL",
+                    "WB"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "530",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "n/a"
+                ]
             }
         }
     },
@@ -800,6 +816,21 @@
                 "supply_voltage": [
                     "n/a"
                 ]
+            },
+            "v1.0.1": {
+                "date": "1-1-2020",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "200",
+                "clock_freq_mhz": "100",
+                "supply_voltage": [
+                    "n/a"
+                ]
             }
         }
     },
@@ -1004,6 +1035,38 @@
                 "clock_freq_mhz": "50",
                 "supply_voltage": [
                     "1.8"
+                ]
+            }
+        }
+    },
+    "EF_I2S": {
+        "description": "I2S receiver with a FIFO",
+        "repo": "github.com/efabless/EF_I2S",
+        "owner": "Efabless Corp.",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "APACHE 2.0",
+        "tags": [
+            "peripheral",
+            "audio",
+            "serial"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "11-05-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "2661",
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "n/a"
                 ]
             }
         }
