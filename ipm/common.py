@@ -174,8 +174,25 @@ class IPInfo:
             exit(1)
 
     @staticmethod
-    def get_dependencies(ip_name, version, dependencies_list):
-        """gets the dependencies of ip from the remote database using recurrsion
+    def get_installed_ip_dependencies_from_simlink(ip_root, ip_name):
+        """gets info of a specific ip from <ip>.json
+
+        Args:
+            ip_root (str): path to ip_root
+            ip_name (str): name of ip
+
+        Returns:
+            dict: info of the ip
+        """
+        json_file = f"{ip_root}/{ip_name}/ip/dependencies.json"
+        if os.path.exists(json_file):
+            with open(json_file) as f:
+                data = json.load(f)
+            return data
+
+    @staticmethod
+    def get_dependencies(ip_name, version, dependencies_list, ip_root):
+        """gets the dependencies of ip from the remote database using recursion
 
         Args:
             ip_name (str): name of ip
@@ -185,14 +202,14 @@ class IPInfo:
         Returns:
             dict: name and version of each dependency
         """
-        ip_info = IPInfo.get_verified_ip_info(ip_name)
-        release = ip_info["release"][version]
-        if "dependencies" in release:
-            dependencies = ip_info["release"][version]["dependencies"]
-            for dep_name, dep_version in dependencies.items():
-                if {dep_name, dep_version} not in dependencies_list:
-                    dependencies_list.append({dep_name: dep_version})
-                    IPInfo.get_dependencies(dep_name, dep_version, dependencies_list)
+        ip_info = IPInfo.get_installed_ip_dependencies_from_simlink(ip_root, ip_name)
+        if ip_info:
+            for dep in ip_info['IP']:
+                for dep_name, dep_version in dep.items():
+                    print(dep_name)
+                    if {dep_name, dep_version} not in dependencies_list:
+                        dependencies_list.append({dep_name: dep_version})
+                        IPInfo.get_dependencies(dep_name, dep_version, dependencies_list, f"{ip_root}/dep_name")
         else:
             return {ip_name, version}
 
@@ -662,7 +679,7 @@ def install_ip(ip_name, version, ip_root, ipm_root):
     elif version not in verified_ip_info["release"]:
         logger.print_err(f"Version {version} can't be found")
         exit(1)
-    IPInfo.get_dependencies(ip_name, version, dependencies_list)
+    IPInfo.get_dependencies(ip_name, version, dependencies_list, ip_root)
     dependencies_list.append({ip_name: version})
     for dep in dependencies_list:
         for dep_name, version in dep.items():  # can use .key and .value
