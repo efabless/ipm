@@ -92,6 +92,22 @@
                 "supply_voltage": [
                     "n/a"
                 ]
+            },
+            "v1.0.3": {
+                "date": "4-01-2023",
+                "status": "verified",
+                "bus": [
+                    "AHBL",
+                    "WB"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "530",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "n/a"
+                ]
             }
         }
     },
@@ -924,6 +940,53 @@
                 "supply_voltage": [
                     "1.8"
                 ]
+            },
+            "v1.0.1": {
+                "date": "1-11-2023",
+                "status": "verified",
+                "bus": [
+                    "n/a"
+                ],
+                "type": "hard",
+                "width": "56.9",
+                "height": "128.18",
+                "cell_count": "n/a",
+                "clock_freq_mhz": "0.032768",
+                "supply_voltage": [
+                    "1.8"
+                ]
+            }
+        }
+    },
+    "sky130_ef_ip__xtal_osc_32k_DI": {
+        "description": "Digital wrapper for an ultra-low-power, low speed crystal oscillator",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Marwan Abbas",
+        "email": "marwan.abbas@efabless.com",
+        "owner": "Efabless Corp.",
+        "category": "analog",
+        "technology": "sky130",
+        "license": "APACHE 2.0",
+        "tags": [
+            "crystal oscillator",
+            "low power",
+            "low speed"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "1-11-2023",
+                "status": "verified",
+                "bus": [
+                    "n/a"
+                ],
+                "type": "hard",
+                "width": "525.3",
+                "height": "211.8",
+                "cell_count": "n/a",
+                "clock_freq_mhz": "0.032768",
+                "supply_voltage": [
+                    "1.8"
+                ]
             }
         }
     },
@@ -942,6 +1005,21 @@
         ],
         "release": {
             "v1.0.0": {
+                "date": "1-11-2023",
+                "status": "verified",
+                "bus": [
+                    "n/a"
+                ],
+                "type": "hard",
+                "width": "61.21",
+                "height": "53.62",
+                "cell_count": "n/a",
+                "clock_freq_mhz": "0.5",
+                "supply_voltage": [
+                    "1.8"
+                ]
+            },
+            "v1.0.1": {
                 "date": "1-11-2023",
                 "status": "verified",
                 "bus": [
@@ -981,6 +1059,52 @@
                 "type": "hard",
                 "width": "54.635",
                 "height": "28.48",
+                "cell_count": "n/a",
+                "clock_freq_mhz": "16",
+                "supply_voltage": [
+                    "1.8"
+                ]
+            },
+            "v1.0.1": {
+                "date": "1-11-2023",
+                "status": "verified",
+                "bus": [
+                    "n/a"
+                ],
+                "type": "hard",
+                "width": "56.9",
+                "height": "128.18",
+                "cell_count": "n/a",
+                "clock_freq_mhz": "0.032768",
+                "supply_voltage": [
+                    "1.8"
+                ]
+            }
+        }
+    },
+    "sky130_ef_ip__xtal_osc_16M_DI": {
+        "description": "Digital wrapper for high speed crystal oscillator",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Marwan Abbas",
+        "email": "marwan.abbas@efabless.com",
+        "owner": "Efabless Corp.",
+        "category": "analog",
+        "technology": "sky130",
+        "license": "APACHE 2.0",
+        "tags": [
+            "crystal oscillator",
+            "high speed"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "1-11-2023",
+                "status": "verified",
+                "bus": [
+                    "n/a"
+                ],
+                "type": "hard",
+                "width": "525.3",
+                "height": "211.8",
                 "cell_count": "n/a",
                 "clock_freq_mhz": "16",
                 "supply_voltage": [
