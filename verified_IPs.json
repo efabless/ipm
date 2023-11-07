@@ -1402,7 +1402,40 @@
                 "width": "0.0",
                 "height": "0.0",
                 "cell_count": "0",
-                "clock_freq_mhz": "28",
+                "clock_freq_mhz": "48",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            }
+        }
+    },
+    "USB_CDC_FIFO": {
+        "description": "Bus wrapper for usb cdc which utilizes fifo",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Efabless Corp.",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "APACHE 2.0",
+        "tags": [
+            "peripheral",
+            "comm",
+            "usb",
+            "cdc"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "3-18-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "0",
+                "clock_freq_mhz": "48",
                 "supply_voltage": [
                     "n/a"
                 ]
