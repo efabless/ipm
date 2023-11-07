@@ -704,12 +704,12 @@ def download_ip(dep_name, version, ip_root, ipm_root, logger):
     if ip.check_install_root():
         ip_install_root = f"{ipm_root}/{dep_name}/{version}"
         logger.print_info(
-            f"Installing IP [blue]{dep_name}[/blue] at {ipm_root} and creating simlink to {ip_root}"
+            f"Installing IP [cyan]{dep_name}[/cyan] at {ipm_root} and creating simlink to {ip_root}"
         )
         ip.download_tarball(verified_ip_info, ip_install_root)
         # ip.generate_bus_wrapper(verified_ip_info)
     else:
-        logger.print_info(f"Found IP [blue]{dep_name}[/blue] locally")
+        logger.print_info(f"Found IP [cyan]{dep_name}[/cyan] locally")
     if ipm_root != ip_root:
         if os.path.exists(f"{ip_root}/{dep_name}"):
             os.unlink(f"{ip_root}/{dep_name}")
