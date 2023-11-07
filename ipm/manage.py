@@ -145,20 +145,22 @@ def install_deps(ip_root, ipm_root):
 
 
 @click.command("rm")
+@opt_ipm_root
 @click.argument("ip")
 @click.option(
     "--ip-root", required=False, default=os.path.join(os.getcwd(), "ip"), help="IP path"
 )
-def rm_cmd(ip_root, ip):
+def rm_cmd(ip_root, ip, ipm_root):
     """remove IP from project"""
-    rm(ip_root, ip)
+    rm(ip_root, ip, ipm_root)
 
 
-def rm(ip_root, ip):
+def rm(ip_root, ip, ipm_root):
     """remove IP from project"""
     valid_ip_dir = check_ip_root_dir(ip_root)
-    if valid_ip_dir:
-        rm_ip_from_project(ip, ip_root)
+    valid = check_ipm_directory(ipm_root)
+    if valid_ip_dir and valid:
+        rm_ip_from_project(ip, ip_root, ipm_root)
 
 
 @click.command("check")

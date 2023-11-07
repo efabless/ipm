@@ -22,6 +22,7 @@ import click
 import requests
 from rich.console import Console
 from rich.table import Table
+
 # import bus_wrapper_gen
 
 try:
@@ -174,7 +175,7 @@ class IPInfo:
             exit(1)
 
     @staticmethod
-    def get_installed_ip_dependencies_from_simlink(ip_root, ip_name):
+    def get_installed_ip_dependencies_from_simlink(ipm_root, ip_name, version):
         """gets info of a specific ip from <ip>.json
 
         Args:
@@ -184,14 +185,14 @@ class IPInfo:
         Returns:
             dict: info of the ip
         """
-        json_file = f"{ip_root}/{ip_name}/ip/dependencies.json"
+        json_file = f"{ipm_root}/{ip_name}/{version}/ip/dependencies.json"
         if os.path.exists(json_file):
             with open(json_file) as f:
                 data = json.load(f)
             return data
 
     @staticmethod
-    def get_dependencies(ip_name, version, dependencies_list, ip_root):
+    def get_dependencies(ip_name, version, dependencies_list, ipm_root):
         """gets the dependencies of ip from the remote database using recursion
 
         Args:
@@ -202,14 +203,20 @@ class IPInfo:
         Returns:
             dict: name and version of each dependency
         """
-        ip_info = IPInfo.get_installed_ip_dependencies_from_simlink(ip_root, ip_name)
+        ip_info = IPInfo.get_installed_ip_dependencies_from_simlink(
+            ipm_root, ip_name, version
+        )
         if ip_info:
-            for dep in ip_info['IP']:
+            for dep in ip_info["IP"]:
                 for dep_name, dep_version in dep.items():
-                    print(dep_name)
                     if {dep_name, dep_version} not in dependencies_list:
                         dependencies_list.append({dep_name: dep_version})
-                        IPInfo.get_dependencies(dep_name, dep_version, dependencies_list, f"{ip_root}/dep_name")
+                        IPInfo.get_dependencies(
+                            dep_name,
+                            dep_version,
+                            dependencies_list,
+                            f"{ipm_root}/dep_name",
+                        )
         else:
             return {ip_name, version}
 
@@ -388,10 +395,10 @@ class IP:
             "Accept": "application/vnd.github+json",
         }
         params = {"per_page": 100, "page": 1}
-        release_url = (
-            "https://api.github.com/repos/efabless/EF_IPs/releases"
+        release_url = "https://api.github.com/repos/efabless/EF_IPs/releases"
+        response = requests.get(
+            release_url, stream=True, headers=headers, params=params
         )
-        response = requests.get(release_url, stream=True, headers=headers, params=params)
         release_data = response.json()
         for data in release_data:
             if self.ip_name in data["tarball_url"].split("/")[-1]:
@@ -539,7 +546,6 @@ class Checks:
             json_decoded = json.load(json_file)
 
         if self.ip_name != json_decoded["name"]:
-            print(type(json_decoded["name"]), type(self.ip_name))
             logger.print_err(
                 f"The given IP name {self.ip_name} is not the same as the one in json file"
             )
@@ -679,33 +685,38 @@ def install_ip(ip_name, version, ip_root, ipm_root):
     elif version not in verified_ip_info["release"]:
         logger.print_err(f"Version {version} can't be found")
         exit(1)
-    IPInfo.get_dependencies(ip_name, version, dependencies_list, ip_root)
-    dependencies_list.append({ip_name: version})
+
+    download_ip(ip_name, version, ip_root, ipm_root, logger)
+    IPInfo.get_dependencies(ip_name, version, dependencies_list, ipm_root)
+    ip = IP(ip_name, ip_root, ipm_root, version)
+    ip.update_dependencies_file()
     for dep in dependencies_list:
         for dep_name, version in dep.items():  # can use .key and .value
-            verified_ip_info = IPInfo.get_verified_ip_info(dep_name)
-            if not version:
-                version = get_latest_version(verified_ip_info["release"])
-            ip = IP(dep_name, ip_root, ipm_root, version)
-            if ip.check_install_root():
-                ip_install_root = f"{ipm_root}/{dep_name}/{version}"
-                logger.print_info(
-                    f"Installing IP {dep_name} at {ipm_root} and creating simlink to {ip_root}"
-                )
-                ip.download_tarball(verified_ip_info, ip_install_root)
-                # ip.generate_bus_wrapper(verified_ip_info)
-            else:
-                logger.print_info(f"Found IP {dep_name} locally")
-            if ipm_root != ip_root:
-                if os.path.exists(f"{ip_root}/{dep_name}"):
-                    os.unlink(f"{ip_root}/{dep_name}")
-                os.symlink(f"{ipm_root}/{dep_name}/{version}", f"{ip_root}/{dep_name}")
-                logger.print_success(f"Created simlink to {dep_name} IP at {ip_root}")
-            else:
-                logger.print_success(f"Downloaded IP at {ipm_root}")
-            if dep_name == ip_name:
-                ip.update_dependencies_file()
+            download_ip(dep_name, version, ip_root, ipm_root, logger)
     change_dir_to_readonly(ipm_root)
+
+
+def download_ip(dep_name, version, ip_root, ipm_root, logger):
+    verified_ip_info = IPInfo.get_verified_ip_info(dep_name)
+    if not version:
+        version = get_latest_version(verified_ip_info["release"])
+    ip = IP(dep_name, ip_root, ipm_root, version)
+    if ip.check_install_root():
+        ip_install_root = f"{ipm_root}/{dep_name}/{version}"
+        logger.print_info(
+            f"Installing IP [blue]{dep_name}[/blue] at {ipm_root} and creating simlink to {ip_root}"
+        )
+        ip.download_tarball(verified_ip_info, ip_install_root)
+        # ip.generate_bus_wrapper(verified_ip_info)
+    else:
+        logger.print_info(f"Found IP [blue]{dep_name}[/blue] locally")
+    if ipm_root != ip_root:
+        if os.path.exists(f"{ip_root}/{dep_name}"):
+            os.unlink(f"{ip_root}/{dep_name}")
+        os.symlink(f"{ipm_root}/{dep_name}/{version}", f"{ip_root}/{dep_name}")
+        logger.print_success(f"Created simlink to {dep_name} IP at {ip_root}")
+    else:
+        logger.print_success(f"Downloaded IP at {ipm_root}")
 
 
 def uninstall_ip(ip_name, version, ipm_root):
@@ -721,7 +732,7 @@ def uninstall_ip(ip_name, version, ipm_root):
     verified_ip_info = IPInfo.get_verified_ip_info(ip_name)
     if not version:
         version = get_latest_version(verified_ip_info["release"])
-    IPInfo.get_dependencies(ip_name, version, dependencies_list)
+    IPInfo.get_dependencies(ip_name, version, dependencies_list, ipm_root)
     dependencies_list.append({ip_name: version})
     if query_yes_no(
         f"uninstalling {ip_name} might end up with broken simlinks if used in any project, and will uninstall all dependencies of IP"
@@ -734,7 +745,7 @@ def uninstall_ip(ip_name, version, ipm_root):
         logger.print_success(f"Successfully uninstalled {ip_name}")
 
 
-def rm_ip_from_project(ip_name, ip_root):
+def rm_ip_from_project(ip_name, ip_root, ipm_root):
     """removes the simlink of the ip from project and removes it from dependencies file
 
     Args:
@@ -746,7 +757,7 @@ def rm_ip_from_project(ip_name, ip_root):
     installed_ip_info = IPInfo.get_installed_ip_info_from_simlink(ip_root, ip_name)
     dep_arr = []
     IPInfo.get_dependencies(
-        ip_name, installed_ip_info[ip_name]["info"]["version"], dep_arr
+        ip_name, installed_ip_info[ip_name]["info"]["version"], dep_arr, ipm_root
     )
     dep_arr.append({ip_name: installed_ip_info[ip_name]["info"]["version"]})
     for d in dep_arr:
@@ -896,7 +907,9 @@ def check_ips(ipm_root, update=False, ip_root=None):
                         f"IP {ip_name} has a newer version [magenta]{version}[/magenta], to update use command ipm update"
                     )
             else:
-                logger.print_info(f"IP {ip_name} is the newest version [magenta]{version}[/magenta].")
+                logger.print_info(
+                    f"IP {ip_name} is the newest version [magenta]{version}[/magenta]."
+                )
 
 
 def package_check(ipm_root, ip, version, gh_repo):
