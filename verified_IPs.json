@@ -799,8 +799,22 @@
                 "supply_voltage": [
                     "n/a"
                 ]
+            },
+            "v2.0.1": {
+                "date": "5-11-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "7000",
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "n/a"
+                ]
             }
-
         }
     },
     "MS_WDT32": {
@@ -849,6 +863,21 @@
                 ]
             },
             "v1.0.2": {
+                "date": "1-1-2020",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "200",
+                "clock_freq_mhz": "100",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            },
+            "v1.0.3": {
                 "date": "1-1-2020",
                 "status": "verified",
                 "bus": [
@@ -1205,6 +1234,21 @@
                 "supply_voltage": [
                     "1.8"
                 ]
+            },
+            "v1.0.1": {
+                "date": "29-10-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "614",
+                "clock_freq_mhz": "50",
+                "supply_voltage": [
+                    "1.8"
+                ]
             }
         }
     },
@@ -1254,6 +1298,21 @@
                 ]
             },
             "v1.0.2": {
+                "date": "11-05-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "2661",
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            },
+            "v1.0.3": {
                 "date": "11-05-2023",
                 "status": "verified",
                 "bus": [
