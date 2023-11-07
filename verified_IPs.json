@@ -1375,5 +1375,38 @@
                 ]
             }
         }
+    },
+    "USB_CDC": {
+        "description": "An implementation of the Full Speed (12Mbit/s) USB communications device class",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "ulixxe",
+        "email": "",
+        "owner": "ulixxe",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "MIT",
+        "tags": [
+            "peripheral",
+            "comm",
+            "usb",
+            "cdc"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "3-18-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "0",
+                "clock_freq_mhz": "28",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            }
+        }
     }
 }
