@@ -1095,6 +1095,38 @@
             }
         }
     },
+    "sky130_ef_ip__rc_osc_500k_DI": {
+        "description": "Digital wrapper for A 500kHz oscillator using a current-starved ring oscillator",
+        "repo": "github.com/efabless/EF_IPs",
+        "owner": "Efabless Corp.",
+        "author": "Marwan Abbas",
+        "email": "marwan.abbas@efabless.com",
+        "category": "analog",
+        "technology": "sky130",
+        "license": "APACHE 2.0",
+        "tags": [
+            "ring oscillator",
+            "low power"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "1-11-2023",
+                "status": "verified",
+                "bus": [
+                    "n/a"
+                ],
+                "type": "hard",
+                "width": "92.06",
+                "height": "130.696",
+                "technology": "sky130",
+                "cell_count": "n/a",
+                "clock_freq_mhz": "0.5",
+                "supply_voltage": [
+                    "1.8"
+                ]
+            }
+        }
+    },
     "sky130_ef_ip__xtal_osc_16M": {
         "description": "High speed crystal oscillator",
         "repo": "github.com/efabless/EF_IPs",
