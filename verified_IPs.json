@@ -585,6 +585,22 @@
                     "3.3",
                     "1.8"
                 ]
+            },
+            "v1.0.2": {
+                "date": "1-9-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "hard",
+                "width": "165.120",
+                "height": "360.790",
+                "cell_count": "0",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "3.3",
+                    "1.8"
+                ]
             }
         }
     },
