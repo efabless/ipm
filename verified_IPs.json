@@ -1500,6 +1500,21 @@
                 "supply_voltage": [
                     "n/a"
                 ]
+            },
+            "v1.0.1": {
+                "date": "3-18-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "0",
+                "clock_freq_mhz": "48",
+                "supply_voltage": [
+                    "n/a"
+                ]
             }
         }
     }
