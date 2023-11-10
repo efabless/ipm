@@ -1077,7 +1077,38 @@
                 "supply_voltage": [
                     "1.8"
                 ]
+            },
+            "v1.0.1": {
+                "date": "1-11-2023",
+                "status": "verified",
+                "bus": [
+                    "n/a"
+                ],
+                "type": "hard",
+                "width": "525.3",
+                "height": "211.8",
+                "cell_count": "n/a",
+                "clock_freq_mhz": "0.032768",
+                "supply_voltage": [
+                    "1.8"
+                ]
+            },
+            "v1.0.2": {
+                "date": "1-11-2023",
+                "status": "verified",
+                "bus": [
+                    "n/a"
+                ],
+                "type": "hard",
+                "width": "525.3",
+                "height": "211.8",
+                "cell_count": "n/a",
+                "clock_freq_mhz": "0.032768",
+                "supply_voltage": [
+                    "1.8"
+                ]
             }
+
         }
     },
     "sky130_ef_ip__rc_osc_500k": {
@@ -1225,8 +1256,8 @@
                     "n/a"
                 ],
                 "type": "hard",
-                "width": "56.9",
-                "height": "128.18",
+                "width": "525.3",
+                "height": "211.8",
                 "cell_count": "n/a",
                 "clock_freq_mhz": "0.032768",
                 "supply_voltage": [
@@ -1278,7 +1309,23 @@
                 "supply_voltage": [
                     "1.8"
                 ]
+            },
+            "v1.0.2": {
+                "date": "1-11-2023",
+                "status": "verified",
+                "bus": [
+                    "n/a"
+                ],
+                "type": "hard",
+                "width": "525.3",
+                "height": "211.8",
+                "cell_count": "n/a",
+                "clock_freq_mhz": "16",
+                "supply_voltage": [
+                    "1.8"
+                ]
             }
+
         }
     },
     "EF_dll_sky130": {
