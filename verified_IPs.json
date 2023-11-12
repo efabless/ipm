@@ -1107,7 +1107,23 @@
                 "supply_voltage": [
                     "1.8"
                 ]
+            },
+            "v1.0.3": {
+                "date": "1-11-2023",
+                "status": "verified",
+                "bus": [
+                    "n/a"
+                ],
+                "type": "hard",
+                "width": "525.3",
+                "height": "211.8",
+                "cell_count": "n/a",
+                "clock_freq_mhz": "0.032768",
+                "supply_voltage": [
+                    "1.8"
+                ]
             }
+
 
         }
     },
