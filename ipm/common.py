@@ -215,7 +215,7 @@ class IPInfo:
                             dep_name,
                             dep_version,
                             dependencies_list,
-                            f"{ipm_root}/dep_name",
+                            ipm_root,
                         )
         else:
             return {ip_name, version}
