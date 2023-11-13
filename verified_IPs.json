@@ -1669,7 +1669,7 @@
             }
         }
     },
-    "USB_CDC": {
+    "usb_cdc": {
         "description": "An implementation of the Full Speed (12Mbit/s) USB communications device class",
         "repo": "github.com/efabless/EF_IPs",
         "author": "ulixxe",
@@ -1702,7 +1702,7 @@
             }
         }
     },
-    "USB_CDC_FIFO": {
+    "usb_cdc_wrapper": {
         "description": "Bus wrapper for usb cdc which utilizes fifo",
         "repo": "github.com/efabless/EF_IPs",
         "author": "Mohamed Shalan",
