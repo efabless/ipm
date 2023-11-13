@@ -1249,6 +1249,22 @@
                 "supply_voltage": [
                     "1.8"
                 ]
+            },
+            "v1.0.3": {
+                "date": "1-11-2023",
+                "status": "verified",
+                "bus": [
+                    "n/a"
+                ],
+                "type": "hard",
+                "width": "92.06",
+                "height": "130.696",
+                "technology": "sky130",
+                "cell_count": "n/a",
+                "clock_freq_mhz": "0.5",
+                "supply_voltage": [
+                    "1.8"
+                ]
             }
         }
     },
@@ -1499,6 +1515,21 @@
                 ]
             },
             "v1.0.5": {
+                "date": "29-10-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "614",
+                "clock_freq_mhz": "50",
+                "supply_voltage": [
+                    "1.8"
+                ]
+            },
+            "v1.0.6": {
                 "date": "29-10-2023",
                 "status": "verified",
                 "bus": [
