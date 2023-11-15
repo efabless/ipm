@@ -1589,6 +1589,21 @@
                 "supply_voltage": [
                     "1.8"
                 ]
+            },
+            "v1.0.9": {
+                "date": "29-10-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "614",
+                "clock_freq_mhz": "50",
+                "supply_voltage": [
+                    "1.8"
+                ]
             }
         }
     },
