@@ -1436,6 +1436,21 @@
                 "supply_voltage": [
                     "1.8"
                 ]
+            },
+            "v1.0.1": {
+                "date": "1-1-2021",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "360",
+                "clock_freq_mhz": "113",
+                "supply_voltage": [
+                    "1.8"
+                ]
             }
         }
     },
@@ -1561,6 +1576,36 @@
                 ]
             },
             "v1.0.7": {
+                "date": "29-10-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "614",
+                "clock_freq_mhz": "50",
+                "supply_voltage": [
+                    "1.8"
+                ]
+            },
+            "v1.0.8": {
+                "date": "29-10-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "614",
+                "clock_freq_mhz": "50",
+                "supply_voltage": [
+                    "1.8"
+                ]
+            },
+            "v1.0.9": {
                 "date": "29-10-2023",
                 "status": "verified",
                 "bus": [
@@ -1744,6 +1789,38 @@
                 "height": "0.0",
                 "cell_count": "0",
                 "clock_freq_mhz": "48",
+                "supply_voltage": [
+                    "n/a"
+                ]
+            }
+        }
+    },
+    "I2C": {
+        "description": "Verilog I2C interface for FPGA implementation",
+        "repo": "github.com/efabless/EF_IPs",
+        "author": "Alex Forencich",
+        "email": "",
+        "owner": "Alex Forencich",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "MIT",
+        "tags": [
+            "peripheral",
+            "comm",
+            "i2c"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "7-20-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "0",
+                "clock_freq_mhz": "n/a",
                 "supply_voltage": [
                     "n/a"
                 ]
