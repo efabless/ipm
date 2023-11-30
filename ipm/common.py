@@ -29,14 +29,6 @@ from rich.table import Table
 
 # import bus_wrapper_gen
 
-try:
-    GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
-except KeyError:
-    console = Console()
-    console.print(
-        "[red]Can't find GITHUB_TOKEN in environment, please export your github token"
-    )
-    exit(1)
 VERIFIED_JSON_FILE_URL = (
     "https://raw.githubusercontent.com/efabless/ipm/main/verified_IPs.json"
 )
@@ -58,12 +50,13 @@ def opt_ipm_root(function: Callable):
 class GitHubSession(httpx.Client):
     def __init__(self, follow_redirects=True, **kwargs) -> None:
         super().__init__(follow_redirects=follow_redirects, **kwargs)
-        self.headers = httpx.Headers(
-            {
-                "User-Agent": "Efabless IPM",
-                "Authorization": f"Bearer {GITHUB_TOKEN}",
-            }
-        )
+        headers_raw = {
+            "User-Agent": "Efabless IPM",
+        }
+        token = os.getenv("GITHUB_TOKEN", None)
+        if token is not None:
+            headers_raw["Authorization"] = f"Bearer {token}"
+        self.headers = httpx.Headers(headers_raw)
 
     def throw_status(self, r: httpx.Response, purpose: str):
         try:
@@ -71,7 +64,7 @@ class GitHubSession(httpx.Client):
         except httpx.HTTPStatusError as e:
             if e.response.status_code == 404:
                 raise RuntimeError(
-                    f"Failed to {purpose}: Are you sure your GITHUB_TOKEN has the proper permissions? (404)"
+                    f"Failed to {purpose}: Make sure that GITHUB_TOKEN is set and has the proper permissions (404)"
                 )
             elif e.response.status_code == 401:
                 raise RuntimeError(
@@ -396,7 +389,8 @@ class IPRoot:
                     # Detect an unsatisfiable condition, i.e., two different IPs
                     # (including the IP Root itself) requesting two different
                     # versions of the same IP
-                    if tup := so_far.get(dep_name):
+                    tup = so_far.get(dep_name)
+                    if tup is not None:
                         found, found_requester = tup
                         if found.version != dep_version:
                             raise RuntimeError(
@@ -473,7 +467,8 @@ class IP:
 
     @property
     def path_in_ipm_root(self) -> Optional[str]:
-        if ipmr := self.ipm_root:
+        ipmr = self.ipm_root
+        if ipmr is not None:
             return os.path.join(ipmr, self.ip_name, self.version)
 
     def install(self, depth: int = 0):

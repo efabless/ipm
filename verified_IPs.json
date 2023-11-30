@@ -758,7 +758,7 @@
     },
     "DFFRAM256x32": {
         "description": "1kbyte (256x32) DFFRAM hardened using OpenLane",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/OL-DFFRAM",
         "author": "Mohamed Shalan",
         "email": "mshalan@efabless.com",
         "owner": "AUCOHL",

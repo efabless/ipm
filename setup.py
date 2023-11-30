@@ -1,19 +1,34 @@
 #!/usr/bin/env python3
+import os
+import subprocess
 from setuptools import setup, find_packages
 
 # from ipm import __version__
 
 requirements = open("requirements.txt").read().strip().split("\n")
 
+__dir__ = os.path.abspath(os.path.dirname(__file__))
+version = subprocess.check_output(
+    [
+        "python3",
+        os.path.join(
+            __dir__,
+            "ipm",
+            "__version__.py",
+        ),
+    ],
+    encoding="utf8",
+)
+
 setup(
     name="ipm",
     packages=find_packages(),
-    version="0.1.0",
+    version=version,
     description="Open-source IPs Package Manager.",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    author="Zeyad Zaki",
-    author_email="zeyadzaki@aucegypt.edu",
+    author="Efabless Corporation",
+    author_email="marwan.abbas@efabless.com",
     install_requires=requirements,
     classifiers=[
         "License :: OSI Approved :: Apache Software License",

@@ -194,7 +194,7 @@ def update_cmd(ipm_root, ip_root):
         check_ips(ipm_root, update=True, ip_root=ip_root)
 
 
-@click.command("package-check")
+@click.command("package-check", hidden=True)
 @click.option("--name", required=True, help="Provide IP name")
 @click.option("--version", required=True, help="Provide IP version")
 @click.option("--url", required=True, help="Provide IP url")
