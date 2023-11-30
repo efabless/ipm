@@ -350,6 +350,16 @@ class IPRoot:
             if element not in deps_by_name:
                 os.remove(path)
 
+    def _install_ip(self, ip: "IP", depth: int = 0):
+        ip.install(depth)
+        path_in_ip_root = os.path.join(self.path, ip.ip_name)
+        if os.path.exists(path_in_ip_root):
+            os.unlink(path_in_ip_root)
+        os.symlink(
+            ip.path_in_ipm_root,
+            path_in_ip_root,
+        )
+
     def _get_symlinked_ips(self) -> Iterable[Tuple[str, str]]:
         for element in os.listdir(self.path):
             element_path = os.path.join(self.path, element)
@@ -398,7 +408,7 @@ class IPRoot:
                         dependency = IP.find_verified_ip(
                             dep_name, dep_version, self.ipm_root
                         )
-                        dependency.install_to_root(self.path, depth + 1)
+                        self._install_ip(dependency, depth + 1)
                         so_far[dep_name] = (dependency, requester)
                         _recursive(
                             dependency.ip_name,
@@ -477,21 +487,6 @@ class IP:
             )
             self.download_tarball(self.path_in_ipm_root)
             change_dir_to_readonly(self.ipm_root)
-
-    def install_to_root(self, root_path: str, depth: int = 0):
-        self.install(depth)
-        logger = Logger()
-        path_in_ip_root = os.path.join(root_path, self.ip_name)
-        if os.path.exists(path_in_ip_root):
-            os.unlink(path_in_ip_root)
-        os.symlink(
-            self.path_in_ipm_root,
-            path_in_ip_root,
-        )
-        if depth == 0:
-            logger.print_success(
-                f"{indent(depth)}* Created symbolic link to [cyan]{self.full_name}[/cyan] IP at {root_path}"
-            )
 
     @property
     def installed(self):

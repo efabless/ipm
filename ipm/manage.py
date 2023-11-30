@@ -69,7 +69,7 @@ def install(
     # Translation of the line below: "if (!value) { ctx.abort() }"
     callback=lambda ctx, _, value: value or ctx.abort(),
     expose_value=False,
-    prompt="Uninstalling this IP may break all projects depending on it.\nIf you want to remove it from just this project, try 'ipm rm'.\nProceed?",
+    prompt="Uninstalling this IP may break all projects depending on it.\nIf you want to remove it from just one project, try 'ipm rm'.\nProceed?",
 )
 @opt_ipm_root
 def uninstall_cmd(ip, ipm_root, version=None):
