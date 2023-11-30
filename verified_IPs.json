@@ -27,7 +27,8 @@
                 "clock_freq_mhz": "40",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "1a2530d23671d2fcfa711eb829b3018be30d6392da6b4936f1341366c5074e2a"
             }
         }
     },
@@ -59,7 +60,8 @@
                 "clock_freq_mhz": "40",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "242120c67a172f6ff549e10770e8f12d317eda0e7dc2cd5d75cc1eb9ea5b7c8c"
             },
             "v1.0.1": {
                 "date": "4-01-2023",
@@ -75,7 +77,8 @@
                 "clock_freq_mhz": "40",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "85cb2c2ca2d843f59fd7118cef477e2d8b5104a92d8a2308b54f55e369a10f8f"
             },
             "v1.0.2": {
                 "date": "4-01-2023",
@@ -91,7 +94,8 @@
                 "clock_freq_mhz": "40",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "82f3819a519a66bd0713a649bb85456338b90796d484c2a80884d89cc2f6b6f0"
             },
             "v1.0.3": {
                 "date": "4-01-2023",
@@ -107,7 +111,8 @@
                 "clock_freq_mhz": "40",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "da50e1b58d426bf4146775ede2757a3a173211fb93d9572fdcaa3fff0c5b4ef5"
             }
         }
     },
@@ -138,7 +143,8 @@
                 "clock_freq_mhz": "10",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "ca1e8118e4420260237f7b7f81a8cab01b4020f3458f6a1634ffca3538e1d253"
             }
         }
     },
@@ -170,7 +176,8 @@
                 "clock_freq_mhz": "10",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "47d1cdf641b3cb9e72ab4864df685997984c92d7a7b93122bd294483b3edebd4"
             }
         }
     },
@@ -203,7 +210,8 @@
                 "clock_freq_mhz": "10",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "a7e1cb939c5003a5aaa28ef5a8391326f95a9f77e8cc529ae5fc56bbc9957f56"
             },
             "v1.0.1": {
                 "date": "3-18-2023",
@@ -218,7 +226,8 @@
                 "clock_freq_mhz": "10",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "64cee8c74e4fd81b5e8e2a4563c5a326376cbfe4de1deceb2b2f888a33fa15f9"
             }
         }
     },
@@ -251,7 +260,8 @@
                 "clock_freq_mhz": "40",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "99f7b27fa3c2fdff7e0720631e4c50bd74ad573999754f15975e4c79fb1346a8"
             },
             "v1.0.1": {
                 "date": "1-01-2020",
@@ -266,7 +276,8 @@
                 "clock_freq_mhz": "40",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "aac130d4438a21ae3c427984dbd5b8e87cbd918181951f7074c1da2a6a49b2fc"
             }
         }
     },
@@ -299,7 +310,8 @@
                 "clock_freq_mhz": "10",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "01021201bd084a8e08d5185a8a88db70866c0ee0770189eaf6393c0d4a851030"
             },
             "v1.0.1": {
                 "date": "1-01-2020",
@@ -314,7 +326,8 @@
                 "clock_freq_mhz": "10",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "b69c5329a6d04b7efdd012c4a63b07a778bc376f392b365ff10531c93b7111d4"
             }
         }
     },
@@ -345,7 +358,8 @@
                 "clock_freq_mhz": "10",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "9662615f7cfdd64e62d8ffb414da868fe9dcf912e993bdd69c228abc415c59ca"
             }
         }
     },
@@ -379,7 +393,8 @@
                 "clock_freq_mhz": "40",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "22b72af83175b3a461376dece62f056b16193a55addf4638e8e3b6f5471c36c4"
             }
         }
     },
@@ -409,7 +424,8 @@
                 "clock_freq_mhz": "40",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "d2d219f948d9f8e412d8c6b511b16cefc59fbf9ff942f6a967a81c7be1001b5d"
             },
             "v1.0.1": {
                 "date": "1-01-2020",
@@ -424,7 +440,8 @@
                 "clock_freq_mhz": "40",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "636bfd6832b64984743fd4d28cfd539b9704613ec4719fb1c9e090d9bbd8e57d"
             },
             "v1.0.2": {
                 "date": "1-01-2020",
@@ -439,7 +456,8 @@
                 "clock_freq_mhz": "40",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "0048a1004a2014cb2ee5e56ebc6a29bd627aafd7a1d1e09bce764ff13eaf9b58"
             }
         }
     },
@@ -471,7 +489,8 @@
                 "clock_freq_mhz": "40",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "049eca0a8e378a24a2381f04c28b3136ea97cd6590e37a6b4550abf0496404a4"
             }
         }
     },
@@ -503,7 +522,8 @@
                 "clock_freq_mhz": "40",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "6028a72d11626e6b8d0f805adecdae01366370adfb6e139a254d332f73bd508a"
             }
         }
     },
@@ -534,7 +554,8 @@
                 "clock_freq_mhz": "n/a",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "925b0ad94a6b26a2aff3daf693c1cd2d1de252f6e9dac959477ddff894f36e38"
             },
             "v1.0.1": {
                 "date": "9-05-2023",
@@ -549,7 +570,8 @@
                 "clock_freq_mhz": "n/a",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "6c06df55321188fbf173897126877a205cd4eb16444815628419669ae9339d22"
             }
         }
     },
@@ -583,7 +605,8 @@
                 "supply_voltage": [
                     "3.3",
                     "1.8"
-                ]
+                ],
+                "sha256": "6c80a3f343a88fe307c384d4fa79055362a4387ad31245ba75db32883882fa38"
             },
             "v1.0.1": {
                 "date": "1-9-2023",
@@ -599,7 +622,8 @@
                 "supply_voltage": [
                     "3.3",
                     "1.8"
-                ]
+                ],
+                "sha256": "a4e2d1cffd156108aa2bfaba4a4522eb064901c0805e152bd34f0761b28eb723"
             },
             "v1.0.2": {
                 "date": "1-9-2023",
@@ -615,7 +639,8 @@
                 "supply_voltage": [
                     "3.3",
                     "1.8"
-                ]
+                ],
+                "sha256": "fbf5cf3ac68b646b8c671572cfb9e00b8a4bb0fe922d464de20fd0c1e5173651"
             }
         }
     },
@@ -646,7 +671,8 @@
                 "clock_freq_mhz": "40",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "96555872fbff7a03173f274756826af57c82c04acd29574218c613d456e4d752"
             },
             "v1.0.1": {
                 "date": "9-01-2023",
@@ -661,7 +687,8 @@
                 "clock_freq_mhz": "40",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "1adb4fff94642e61f5423331bcf8e7d2e552fb630dbb9d1f952fd79113bdd864"
             },
             "v1.0.2": {
                 "date": "9-01-2023",
@@ -676,7 +703,8 @@
                 "clock_freq_mhz": "40",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "1c0c6ba6c8ce2227d0bf070e9bf97d05d9a8af9052f10bad223302ef67b34358"
             }
         }
     },
@@ -707,7 +735,8 @@
                 "clock_freq_mhz": "n/a",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "477010c1f12233f7389be4250c17aec6645b47dbe18dd983a49f2cb542114174"
             },
             "v1.0.1": {
                 "date": "7-30-2023",
@@ -722,7 +751,8 @@
                 "clock_freq_mhz": "n/a",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "498000adb5aec957101f2d06844a18289c06afb6caa11a796c47c5eeb78ff254"
             }
         }
     },
@@ -754,7 +784,8 @@
                 "clock_freq_mhz": "40",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "0f7cbf35b5bb18ee287d384f20303d516827f0d060b8fb3a668f90526a63d144"
             },
             "v1.0.1": {
                 "date": "7-30-2023",
@@ -769,7 +800,8 @@
                 "clock_freq_mhz": "40",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "366be61e4b8a44467acae892e5a22e8885380e7d1d0f984619bff6d50c8e9912"
             }
         }
     },
@@ -799,7 +831,8 @@
                 "clock_freq_mhz": "10",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "e00c042e1b369081acb19ed473fe391415719f3c25a1fdb7f6e58a1d9c26fb2f"
             },
             "v1.0.1": {
                 "date": "3-30-2023",
@@ -814,7 +847,8 @@
                 "clock_freq_mhz": "10",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "dd95e2a556462946799fb1cc14e743aa5574da23448df4d3df2afac5faaddc0c"
             },
             "v1.0.2": {
                 "date": "3-30-2023",
@@ -829,7 +863,8 @@
                 "clock_freq_mhz": "10",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "20548704b3510b98f228f3e0dc9096a5f1e2ec64c64c05a93483a803dfbb3ecc"
             },
             "v2.0.0": {
                 "date": "5-11-2023",
@@ -844,7 +879,8 @@
                 "clock_freq_mhz": "10",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "c075993d1660ab3b49a608186eaf3affc2168b897285929db2b93346710cddf5"
             },
             "v2.0.1": {
                 "date": "5-11-2023",
@@ -859,7 +895,8 @@
                 "clock_freq_mhz": "10",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "96709f376a79d5801ce70d49e88514922c5b725cb99544ec06c5cccab3c01cca"
             }
         }
     },
@@ -891,7 +928,8 @@
                 "clock_freq_mhz": "100",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "e8c2c675cb7c723a0183487853f4fd42a30a1b0dabd8d84d53ac752700da7c38"
             },
             "v1.0.1": {
                 "date": "1-1-2020",
@@ -906,7 +944,8 @@
                 "clock_freq_mhz": "100",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "f5d30f66f762a5f558708fc79c14f6a6a66f72374bb4490f35b1f13b3f52a5d5"
             },
             "v1.0.2": {
                 "date": "1-1-2020",
@@ -921,7 +960,8 @@
                 "clock_freq_mhz": "100",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "1edfe6b5245d4db23e4f5e9e906a650bf5e71998b4935a47839e453d98361a2a"
             },
             "v1.0.3": {
                 "date": "1-1-2020",
@@ -936,7 +976,8 @@
                 "clock_freq_mhz": "100",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "977a743ab64681761fe1c82bb164a67079239c6c6ab0db85dbf7f1370aa6a2e3"
             }
         }
     },
@@ -967,7 +1008,8 @@
                 "clock_freq_mhz": "10",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "4aca6a5e5ca1e66341a9b3de6b47908098fa1cf40e406fd9f505474ab0bfe22b"
             },
             "v1.0.1": {
                 "date": "1-1-2023",
@@ -982,7 +1024,8 @@
                 "clock_freq_mhz": "10",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "f63b1d5ad049f131f762879ab275a6970e13f110ac9c59a04d87db053f78bd53"
             },
             "v1.0.2": {
                 "date": "1-1-2023",
@@ -997,7 +1040,8 @@
                 "clock_freq_mhz": "10",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "e64d7b64a20275f0a47eb0d324887a28404989f9310cb1d00893c35f756a60fa"
             }
         }
     },
@@ -1029,7 +1073,8 @@
                 "clock_freq_mhz": "0.032768",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "2f9a0dcba3424bb6f6df19eada827faf3ad7a71dc20651909080758b021be418"
             },
             "v1.0.1": {
                 "date": "1-11-2023",
@@ -1044,7 +1089,8 @@
                 "clock_freq_mhz": "0.032768",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "2baaba8674281ecf22a2aaba56dbe8cdd08e18e07a6be04828355edc9c5eb03c"
             }
         }
     },
@@ -1076,11 +1122,12 @@
                 "clock_freq_mhz": "0.032768",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "c256db40f6aa609119255b99b84d444ab4769d93b0140a9de395c89b745a365c"
             },
             "v1.0.1": {
                 "date": "1-11-2023",
-                "status": "verified",
+                "status": "broken",
                 "bus": [
                     "n/a"
                 ],
@@ -1095,7 +1142,7 @@
             },
             "v1.0.2": {
                 "date": "1-11-2023",
-                "status": "verified",
+                "status": "broken",
                 "bus": [
                     "n/a"
                 ],
@@ -1121,10 +1168,9 @@
                 "clock_freq_mhz": "0.032768",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "1c8ab3b803edb98bcd1268f14339c6f51aadede852886ea129e71519ff67d86d"
             }
-
-
         }
     },
     "sky130_ef_ip__rc_osc_500k": {
@@ -1154,7 +1200,8 @@
                 "clock_freq_mhz": "0.5",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "dc6d3a161ab75fc98c279223587844c349ad95263896f4591afa2c21441340fe"
             },
             "v1.0.1": {
                 "date": "1-11-2023",
@@ -1169,7 +1216,8 @@
                 "clock_freq_mhz": "0.5",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "5ba3c918b470117b650321d23cb3d0d6fbc8c1a1eaf1241ebb18b52a72549730"
             },
             "v1.0.2": {
                 "date": "1-11-2023",
@@ -1184,7 +1232,8 @@
                 "clock_freq_mhz": "0.5",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "9e7b5afe891165cfa9ab7cae7f6e68f6fbde7df655156b0ee12a1179155d99c5"
             }
         }
     },
@@ -1216,7 +1265,8 @@
                 "clock_freq_mhz": "0.5",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "b30bb85358c3b78cb01536dae8c3f9dffa6c63969665a8729e2dc94c4fe1b6d3"
             },
             "v1.0.1": {
                 "date": "1-11-2023",
@@ -1232,7 +1282,8 @@
                 "clock_freq_mhz": "0.5",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "704e976caa2972f5ddf028987e93c83ace70243c2901d80775267c3e2fc91fc6"
             },
             "v1.0.2": {
                 "date": "1-11-2023",
@@ -1248,7 +1299,8 @@
                 "clock_freq_mhz": "0.5",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "92303d05a941ab75d0d211c8ebbe50610dd601819e4b46c818225a4cee3d3e75"
             },
             "v1.0.3": {
                 "date": "1-11-2023",
@@ -1264,7 +1316,8 @@
                 "clock_freq_mhz": "0.5",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "f57f1c9d9e61c4ba12bc79cd33161672521be3794da24bd6732fb1fd5e0d4af3"
             },
             "v1.0.4": {
                 "date": "1-11-2023",
@@ -1280,7 +1333,8 @@
                 "clock_freq_mhz": "0.5",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "660a4890b2d8d1a03a4592d8b7e79e3ab8aff57da7016743427e9e0c573da0fd"
             }
         }
     },
@@ -1311,7 +1365,8 @@
                 "clock_freq_mhz": "16",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "183cc4abf3bd320101be9052740f5f3378207a8d49deae62518cba8ceb99ece6"
             },
             "v1.0.1": {
                 "date": "1-11-2023",
@@ -1326,7 +1381,8 @@
                 "clock_freq_mhz": "0.032768",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "1b6c32c6b7ce9bcad56f7aeda42a1425bc0abc4dc899a2b7aa0c733e4b086905"
             }
         }
     },
@@ -1357,7 +1413,8 @@
                 "clock_freq_mhz": "16",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "1d56619e22024b47905a8cf619db4d15da1daf8aafb6bc56849b5b48fd48551c"
             },
             "v1.0.1": {
                 "date": "1-11-2023",
@@ -1372,7 +1429,8 @@
                 "clock_freq_mhz": "16",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "b870677fe4a8aceb0e5f31ffe24b52013302ee214c14a1636c36f58d58468d19"
             },
             "v1.0.2": {
                 "date": "1-11-2023",
@@ -1387,7 +1445,8 @@
                 "clock_freq_mhz": "16",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "66d7e33f01ac775959696a07a51ee500bc92d7bac36b6563e81ed6ce89286e91"
             },
             "v1.0.3": {
                 "date": "1-11-2023",
@@ -1402,9 +1461,9 @@
                 "clock_freq_mhz": "16",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "d5381495dda1fceafc68d8dbf9fb71f3cf595dd46bfe903961c970babb766c49"
             }
-
         }
     },
     "EF_dll_sky130": {
@@ -1435,7 +1494,8 @@
                 "clock_freq_mhz": "113",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "04be802dc7b6142564a48d0ffe32f3dcfa9da745508f09565794f67b1155efe1"
             },
             "v1.0.1": {
                 "date": "1-1-2021",
@@ -1450,7 +1510,8 @@
                 "clock_freq_mhz": "113",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "7f6c0a981d9ce920d5cbb6cfef3b53ed3c5d39283bd4d7704e73e0bca2b24add"
             }
         }
     },
@@ -1483,7 +1544,8 @@
                 "clock_freq_mhz": "50",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "155d3290be9b1e5ad2f20391950e4884a30928893b1c73d5cab997181c758471"
             },
             "v1.0.1": {
                 "date": "29-10-2023",
@@ -1498,7 +1560,8 @@
                 "clock_freq_mhz": "50",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "f754a0b07a03c58db03c899a017a6c30b2af266ccb4f3a7e04ec71ce021dc36f"
             },
             "v1.0.2": {
                 "date": "29-10-2023",
@@ -1513,7 +1576,8 @@
                 "clock_freq_mhz": "50",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "dddebd4b219fc4088664e1f7bab96b38eb347e2a837b04a6f7195aa0d79c06ed"
             },
             "v1.0.3": {
                 "date": "29-10-2023",
@@ -1528,7 +1592,8 @@
                 "clock_freq_mhz": "50",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "22ce76cae96c389282ecab6a284f40150b640f96b17fc7b6885fe2258abd9e04"
             },
             "v1.0.4": {
                 "date": "29-10-2023",
@@ -1543,7 +1608,8 @@
                 "clock_freq_mhz": "50",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "1a96f7d49692d07437c5968e4a358710d630bcd0f8fd923be53fdfcbf9076414"
             },
             "v1.0.5": {
                 "date": "29-10-2023",
@@ -1558,7 +1624,8 @@
                 "clock_freq_mhz": "50",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "bf8d1ac7f3b3d913a943578a061e4c1dcd983ef00fba45a98244e9b0acd27f46"
             },
             "v1.0.6": {
                 "date": "29-10-2023",
@@ -1573,7 +1640,8 @@
                 "clock_freq_mhz": "50",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "7bc51616f6284ada137048d487e59064bc4977f767655f1f173388a851f9ca7d"
             },
             "v1.0.7": {
                 "date": "29-10-2023",
@@ -1588,7 +1656,8 @@
                 "clock_freq_mhz": "50",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "0701c7521c6f9488fa8642ed6296cb54940b9fa18325264ba2581aaae98fb560"
             },
             "v1.0.8": {
                 "date": "29-10-2023",
@@ -1603,7 +1672,8 @@
                 "clock_freq_mhz": "50",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "fd3a4833996757a1e372b45a9f04f8f199252ad3da9c38ade90dd0989c672b1c"
             },
             "v1.0.9": {
                 "date": "29-10-2023",
@@ -1618,7 +1688,8 @@
                 "clock_freq_mhz": "50",
                 "supply_voltage": [
                     "1.8"
-                ]
+                ],
+                "sha256": "5e114f0d577539bcd2646171e33fbc54367d7f2abc5f81c63b88c62a9957a8fb"
             }
         }
     },
@@ -1650,7 +1721,8 @@
                 "clock_freq_mhz": "10",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "fddac95afd9890fcb5d74e4a9ed7e42f3036cf429dd04063ac1d10b0a401f5fb"
             },
             "v1.0.1": {
                 "date": "11-05-2023",
@@ -1665,7 +1737,8 @@
                 "clock_freq_mhz": "10",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "7fd0be886c0497319764242c8d15b6a996b19df0c805621e6c913717720c8b09"
             },
             "v1.0.2": {
                 "date": "11-05-2023",
@@ -1680,7 +1753,8 @@
                 "clock_freq_mhz": "10",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "457090fb155db5332e4a96cdfde8347e2824c412dbaf9d18ffb62cc800cbd78c"
             },
             "v1.0.3": {
                 "date": "11-05-2023",
@@ -1695,7 +1769,8 @@
                 "clock_freq_mhz": "10",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "42ff37e4530d9ceae677d2e5380501416e526fe1c87422fbfc61a5b29ff173db"
             },
             "v1.0.4": {
                 "date": "11-05-2023",
@@ -1710,7 +1785,8 @@
                 "clock_freq_mhz": "10",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "f94d7b1dd4f857f88236f5d7aa125f94906278925f98943f4251bb4d490f7349"
             }
         }
     },
@@ -1743,7 +1819,8 @@
                 "clock_freq_mhz": "48",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "30b3a2e918cba43a82aa75a4c73adb60409eb90ab99be1a3a4b93611fbff73d9"
             }
         }
     },
@@ -1765,7 +1842,7 @@
         "release": {
             "v1.0.0": {
                 "date": "3-18-2023",
-                "status": "verified",
+                "status": "broken",
                 "bus": [
                     "generic"
                 ],
@@ -1791,7 +1868,8 @@
                 "clock_freq_mhz": "48",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "7e28fa27debc922781a55d48118cdd599debbf681601f5c7864a858e67ea50d3"
             }
         }
     },
@@ -1823,7 +1901,8 @@
                 "clock_freq_mhz": "n/a",
                 "supply_voltage": [
                     "n/a"
-                ]
+                ],
+                "sha256": "3a66b985451588b27761ad4cb1d037bf2b5c573d1985bd9f64d208a94f86fa8d"
             }
         }
     }
