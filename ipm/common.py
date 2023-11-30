@@ -12,27 +12,23 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import json
 import os
+import json
 import shutil
-import sys
 import tarfile
-from typing import Callable
+import tempfile
+import hashlib
+import pathlib
+from dataclasses import dataclass
+from typing import Callable, ClassVar, Dict, Iterable, Optional, Tuple
+
 import click
-import requests
+import httpx
 from rich.console import Console
 from rich.table import Table
 
 # import bus_wrapper_gen
 
-try:
-    GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
-except KeyError:
-    console = Console()
-    console.print(
-        "[red]Can't find GITHUB_TOKEN in environment, please export your github token"
-    )
-    exit(1)
 VERIFIED_JSON_FILE_URL = (
     "https://raw.githubusercontent.com/efabless/ipm/main/verified_IPs.json"
 )
@@ -49,6 +45,33 @@ def opt_ipm_root(function: Callable):
         show_default=True,
     )(function)
     return function
+
+
+class GitHubSession(httpx.Client):
+    def __init__(self, follow_redirects=True, **kwargs) -> None:
+        super().__init__(follow_redirects=follow_redirects, **kwargs)
+        headers_raw = {
+            "User-Agent": "Efabless IPM",
+        }
+        token = os.getenv("GITHUB_TOKEN", None)
+        if token is not None:
+            headers_raw["Authorization"] = f"Bearer {token}"
+        self.headers = httpx.Headers(headers_raw)
+
+    def throw_status(self, r: httpx.Response, purpose: str):
+        try:
+            r.raise_for_status()
+        except httpx.HTTPStatusError as e:
+            if e.response.status_code == 404:
+                raise RuntimeError(
+                    f"Failed to {purpose}: Make sure that GITHUB_TOKEN is set and has the proper permissions (404)"
+                )
+            elif e.response.status_code == 401:
+                raise RuntimeError(
+                    f"Failed to {purpose} IP releases: GITHUB_TOKEN is invalid (401)"
+                )
+            else:
+                raise RuntimeError(f"Failed to {purpose} ({e.response.status_code})")
 
 
 class Logger:
@@ -72,11 +95,10 @@ class Logger:
 
 
 class IPInfo:
-    def __init__(self):
-        pass
+    cache: ClassVar[Optional[dict]] = None
 
-    @staticmethod
-    def get_verified_ip_info(ip_name=None):
+    @classmethod
+    def get_verified_ip_info(Self, ip_name=None):
         """get ip info from remote verified backend
 
         Args:
@@ -86,28 +108,26 @@ class IPInfo:
             dict: info of ip
         """
         logger = Logger()
-        if GITHUB_TOKEN:
-            headers = {"Authorization": f"token {GITHUB_TOKEN}"}
-        else:
-            logger.print_err(
-                "Can't find GITHUB_TOKEN in environment, please export your github token"
-            )
-            logger.print_err("THIS IS A TEMP WORKAROUND")
-            exit(1)
-        resp = requests.get(VERIFIED_JSON_FILE_URL, headers=headers)
-        if resp.status_code == 404:
-            logger.print_err(
-                "Can't find remote file, you don't have access to IPM private repo, or GITHUB_TOKEN is wrong"
-            )
-            exit(1)
-        data = json.loads(resp.text)
+        data = Self.cache
+        session = GitHubSession()
+        if data is None:
+            resp = session.get(VERIFIED_JSON_FILE_URL)
+            session.throw_status(resp, "download IP release index")
+
+            data = resp.json()
+            if os.getenv("IPM_DEBUG_USE_LOCAL_VERIFIED_IPS", "0") == "1":
+                local = os.path.join(
+                    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                    "verified_IPs.json",
+                )
+                data = json.load(open(local, encoding="utf8"))
+            Self.cache = data
+
         if ip_name:
             if ip_name in data:
                 return data[ip_name]
             else:
-                logger.print_err(
-                    f"Please provide a valid IP, {ip_name} is not a verified IP"
-                )
+                logger.print_err(f"IP {ip_name} not found in the release list.")
                 exit(1)
         else:
             return data
@@ -153,137 +173,338 @@ class IPInfo:
                     installed_ips_arr.append({data["info"]["name"]: data})
         return installed_ips_arr
 
-    @staticmethod
-    def get_installed_ip_info_from_simlink(ip_root, ip_name):
-        """gets info of a specific ip from <ip>.json
 
-        Args:
-            ip_root (str): path to ip_root
-            ip_name (str): name of ip
+def indent(depth: int) -> str:
+    return "  " * depth
+
+
+@dataclass
+class IPRoot:
+    ipm_root: str
+    path: str
+
+    def __post_init__(self):
+        pathlib.Path(self.path).mkdir(parents=True, exist_ok=True)
+
+    @property
+    def dependencies_path(self) -> str:
+        """
+        Returns:
+            str: the path to the ``dependencies.json`` for this ip root
+        """
+        return os.path.join(self.path, DEPENDENCIES_FILE_NAME)
+
+    def get_dependencies_object(self) -> dict:
+        """
+        Creates a dependencies object for this root, which is:
+
+        * The parsed contents of ``self.dependencies_path`` if it exists
+        * Otherwise
 
         Returns:
-            dict: info of the ip
+            dict: The dependencies object
+        """
+        json_decoded = {"IP": []}
+
+        if os.path.exists(self.dependencies_path):
+            with open(self.dependencies_path) as json_file:
+                json_decoded = json.load(json_file)
+        return json_decoded
+
+    def try_add(self, ip: "IP"):
+        """
+        Attempts to add the IP ``ip`` to this IP root, by adding it to the
+        dependencies object and calling :meth:`update_paths`\\.
+
+        If any of these occur:
+        * The IP or any of its dependencies cannot be downloaded for any reason
+        * Adding this IP causes an unsatisfiable dependency set
+        * Any OS permission error
+
+        A ``RuntimeError`` is thrown and the changes are not committed to the
+        ``dependencies.json`` file.
+
+        Args:
+            ip (IP): The :class:`IP` object to attempt to add.
         """
         logger = Logger()
-        json_file = f"{ip_root}/{ip_name}/{ip_name}.json"
-        if os.path.exists(json_file):
-            with open(json_file) as f:
-                data = json.load(f)
-            return {data["info"]["name"]: data}
-        else:
-            logger.print_err(f"Couldn't find {json_file}")
-            exit(1)
+        dependencies_object = self.get_dependencies_object()
 
-    @staticmethod
-    def get_installed_ip_dependencies_from_simlink(ipm_root, ip_name, version):
-        """gets info of a specific ip from <ip>.json
-
-        Args:
-            ip_root (str): path to ip_root
-            ip_name (str): name of ip
-
-        Returns:
-            dict: info of the ip
-        """
-        json_file = f"{ipm_root}/{ip_name}/{version}/ip/dependencies.json"
-        if os.path.exists(json_file):
-            with open(json_file) as f:
-                data = json.load(f)
-            return data
-
-    @staticmethod
-    def get_dependencies(ip_name, version, dependencies_list, ipm_root):
-        """gets the dependencies of ip from the remote database using recursion
-
-        Args:
-            ip_name (str): name of ip
-            version (str): version of ip
-            dependencies_list (list): list of dependencies
-
-        Returns:
-            dict: name and version of each dependency
-        """
-        ip_info = IPInfo.get_installed_ip_dependencies_from_simlink(
-            ipm_root, ip_name, version
-        )
-        if ip_info:
-            for dep in ip_info["IP"]:
-                for dep_name, dep_version in dep.items():
-                    if {dep_name, dep_version} not in dependencies_list:
-                        dependencies_list.append({dep_name: dep_version})
-                        IPInfo.get_dependencies(
-                            dep_name,
-                            dep_version,
-                            dependencies_list,
-                            ipm_root,
-                        )
-        else:
-            return {ip_name, version}
-
-
-class IP:
-    def __init__(self, ip_name=None, ip_root=None, ipm_root=None, version=None):
-        self.ip_name = ip_name
-        self.ip_root = ip_root
-        self.ipm_root = ipm_root
-        self.version = version
-
-    def check_install_root(self):
-        """checks the install root if it exists, if not it will create it
-
-        Returns:
-            bool: True if it didn't exist and is created, False if it exists
-        """
-        if not os.path.exists(f"{self.ipm_root}/{self.ip_name}/{self.version}"):
-            os.makedirs(f"{self.ipm_root}/{self.ip_name}/{self.version}")
-            return True
-        else:
-            return False
-
-    def update_dependencies_file(self):
-        """creates a json file that has all the dependencies of the project"""
-        dependencies_file_path = os.path.join(self.ip_root, DEPENDENCIES_FILE_NAME)
-        if os.path.exists(dependencies_file_path):
-            with open(dependencies_file_path) as json_file:
-                json_decoded = json.load(json_file)
-        else:
-            json_decoded = {"IP": []}
-        tmp_dict = {self.ip_name: self.version}
+        tmp_dict = {ip.ip_name: ip.version}
         flag = True
-        if len(json_decoded["IP"]) > 0:
-            for ips in json_decoded["IP"]:
+        if len(dependencies_object["IP"]) > 0:
+            for ips in dependencies_object["IP"]:
                 for name, version in ips.items():
-                    if name == self.ip_name:
-                        if version == self.version:
+                    if name == ip.ip_name:
+                        if version == ip.version:
                             flag = False
                         else:
-                            json_decoded["IP"].remove({name: version})
+                            dependencies_object["IP"].remove({name: version})
             if flag:
-                json_decoded["IP"].append(tmp_dict)
+                dependencies_object["IP"].append(tmp_dict)
         else:
-            json_decoded["IP"].append(tmp_dict)
+            dependencies_object["IP"].append(tmp_dict)
 
-        with open(dependencies_file_path, "w") as json_file:
-            json.dump(json_decoded, json_file)
+        try:
+            logger.print_info("* Updating IP root…")
+            self.update_paths(dependencies_object)
+        except Exception as e:
+            logger.print_err("* An exception occurred, attempting to roll back…")
+            try:
+                self.update_paths()
+            except Exception as e2:
+                logger.print_err(f"* Failed to roll back: {e2}")
+            raise e from None
 
-    def remove_from_dependencies_file(self):
-        """removes the ip from the dependencies file of the project"""
+        with open(self.dependencies_path, "w") as json_file:
+            json.dump(dependencies_object, json_file)
+        logger.print_success(f"* Added {ip.full_name} to {self.dependencies_path}.")
+
+    def try_remove(self, ip: "IP"):
+        """
+        Attempts to add the IP ``ip`` to this IP root, by adding it to the
+        dependencies object and calling :meth:`update_paths`\\.
+
+        If any of these occur:
+        * ``self.dependencies_path`` does not exist
+        * ``self.dependencies_path`` was modified externally and introduced
+          an unsatisfiable dependency set
+        * Any OS permission error
+
+        A ``RuntimeError`` is thrown and the changes are not committed to the
+        ``dependencies.json`` file.
+
+        Args:
+            ip (IP): The :class:`IP` object to attempt to remove.
+        """
         logger = Logger()
-        dependencies_file_path = os.path.join(self.ip_root, DEPENDENCIES_FILE_NAME)
-        if os.path.exists(dependencies_file_path):
-            with open(dependencies_file_path) as json_file:
-                json_decoded = json.load(json_file)
-            ip_category = json_decoded["IP"]
-            for ips in ip_category:
-                for ips_name, ip_version in ips.items():
-                    if ips_name == self.ip_name:
-                        ip_category.remove({ips_name: ip_version})
-                json_decoded["IP"] = ip_category
+        if not os.path.exists(self.dependencies_path):
+            raise RuntimeError(f"Couldn't find {DEPENDENCIES_FILE_NAME} file")
+        dependencies_object = self.get_dependencies_object()
+        ip_category = dependencies_object["IP"]
+        for ips in ip_category:
+            for ips_name, ip_version in ips.items():
+                if ips_name == ip.ip_name:
+                    ip_category.remove({ips_name: ip_version})
+            dependencies_object["IP"] = ip_category
 
-            with open(dependencies_file_path, "w") as json_file:
-                json.dump(json_decoded, json_file)
-        else:
-            logger.print_err(f"Couldn't find {DEPENDENCIES_FILE_NAME} file")
+        try:
+            logger.print_info("* Updating IP root…")
+            self.update_paths(dependencies_object)
+        except Exception as e:
+            logger.print_err("* An exception occurred, attempting to roll back…")
+            try:
+                self.update_paths()
+            except Exception as e2:
+                logger.print_err(f"* Failed to roll back: {e2}")
+            raise e from None
+
+        with open(self.dependencies_path, "w") as json_file:
+            json.dump(dependencies_object, json_file)
+        logger.print_success(f"* Removed {ip.full_name} from {self.dependencies_path}.")
+
+    def get_installed_ips(self) -> Dict[str, "IP"]:
+        """
+        Returns:
+            dict: The IPs installed in this root (as IP objects), indexed by their names
+        """
+        final = {}
+        dependencies_object = self.get_dependencies_object()
+        ip_category = dependencies_object["IP"]
+        for ips in ip_category:
+            for ip_name, ip_version in ips.items():
+                final[ip_name] = IP.find_verified_ip(ip_name, ip_version, self.ipm_root)
+        return final
+
+    def update_paths(
+        self,
+        dependency_dict: Optional[dict] = None,
+    ):
+        """
+        Updates the paths of this IP root based on the dependency object, i.e.,
+        make reality match the ``dependencies.json``\\.
+
+        If called with a dictionary object, the update will be attempted with
+        that dictionary instead. This is useful if you want to try the changes
+        before writing them to ``dependencies.json`` (see :meth:`try_add` and
+        :meth:`try_remove`\\).
+
+        Args:
+            dependency_dict (dict | None): An optional override for ``dependencies.json``
+        """
+        if dependency_dict is None:
+            dependency_dict = self.get_dependencies_object()
+        deps = self._resolve_dependencies(
+            self.dependencies_path,
+            dependency_dict,
+        )
+        deps_by_name = {ip.ip_name: ip for ip in deps}
+        for element, path in self._get_symlinked_ips():
+            if element not in deps_by_name:
+                os.remove(path)
+
+    def _install_ip(self, ip: "IP", depth: int = 0):
+        ip.install(depth)
+        path_in_ip_root = os.path.join(self.path, ip.ip_name)
+        if os.path.exists(path_in_ip_root):
+            os.unlink(path_in_ip_root)
+        os.symlink(
+            ip.path_in_ipm_root,
+            path_in_ip_root,
+        )
+
+    def _get_symlinked_ips(self) -> Iterable[Tuple[str, str]]:
+        for element in os.listdir(self.path):
+            element_path = os.path.join(self.path, element)
+            if not os.path.islink(element_path):
+                continue
+            if not os.path.isdir(element_path):
+                continue
+            if not os.path.realpath(element_path).startswith(self.ipm_root):
+                continue
+            yield (element, element_path)
+
+    def _resolve_dependencies(
+        self,
+        requester: str,
+        dependency_dict: dict,
+    ):
+        logger = Logger()
+        so_far: Dict[str, Tuple["IP", str]] = {}
+
+        def _recursive(
+            requester: str,
+            dependency_dict: dict,
+            depth=0,
+        ):
+            if len(dependency_dict["IP"]):
+                logger.print_info(
+                    f"{indent(depth)}* Resolving dependencies for [cyan]{requester}[/cyan]…"
+                )
+            for dep in dependency_dict["IP"]:
+                for dep_name, dep_version in dep.items():
+                    logger.print_info(
+                        f"{indent(depth+1)}* Resolving [cyan]{dep_name}@{dep_version}[/cyan]…"
+                    )
+                    # Detect an unsatisfiable condition, i.e., two different IPs
+                    # (including the IP Root itself) requesting two different
+                    # versions of the same IP
+                    tup = so_far.get(dep_name)
+                    if tup is not None:
+                        found, found_requester = tup
+                        if found.version != dep_version:
+                            raise RuntimeError(
+                                f"Dependency {dep_name}@{dep_version} requested by {requester} conflicts with {found.ip_name}@{found.version} requested by {found_requester}"
+                            )
+                        else:
+                            logger.print_info(f"{indent(depth+1)}* Already fetched.")
+                    else:
+                        dependency = IP.find_verified_ip(
+                            dep_name, dep_version, self.ipm_root
+                        )
+                        self._install_ip(dependency, depth + 1)
+                        so_far[dep_name] = (dependency, requester)
+                        _recursive(
+                            dependency.ip_name,
+                            dependency._get_dependency_dict(),
+                            depth + 1,
+                        )
+
+        _recursive(requester, dependency_dict)
+        logger.print_success("* Dependencies resolved.")
+        return [t[0] for _, t in so_far.items()]
+
+
+@dataclass
+class IP:
+    ip_name: str
+    version: str
+    repo: str
+    ipm_root: Optional[str] = None
+    sha256: Optional[str] = None
+
+    @classmethod
+    def find_verified_ip(
+        Self,
+        ip_name: str,
+        version: Optional[str],
+        ipm_root: Optional[str],
+    ):
+        """
+        Finds an IP in the release index and returns it as a :class:`IP` object.
+
+        If an IP or version are not found, a ``RuntimeError`` is raised.
+
+        Args:
+            ip_name (str): The name/id of the IP
+            version (str | None): The version of the IP. If omitted, the latest will be fetched.
+            ipm_root (str | None): The IPM root to associate with this IP for installation and such.
+
+        Returns:
+            IP: The IP object generated
+        """
+        meta = IPInfo.get_verified_ip_info(ip_name)
+        releases = meta["release"]
+        if version is None:
+            version = get_latest_version(releases)
+        elif version not in releases:
+            raise RuntimeError(f"Version {version} of {ip_name} not found in IP index")
+        release = releases[version]
+        if release["status"] != "verified":
+            raise RuntimeError(
+                f"{ip_name}@{version} is not verified and cannot be used."
+            )
+        repo: str = meta["repo"]
+        if repo.startswith("github.com/"):
+            repo = repo[len("github.com/") :]
+        ip = Self(ip_name, version, repo, ipm_root, release.get("sha256", None))
+        return ip
+
+    # ---
+    @property
+    def full_name(self) -> str:
+        return f"{self.ip_name}@{self.version}"
+
+    @property
+    def path_in_ipm_root(self) -> Optional[str]:
+        ipmr = self.ipm_root
+        if ipmr is not None:
+            return os.path.join(ipmr, self.ip_name, self.version)
+
+    def install(self, depth: int = 0):
+        if self.path_in_ipm_root is None:
+            raise RuntimeError("Cannot install without an IPM root")
+
+        logger = Logger()
+        if not os.path.isdir(self.path_in_ipm_root):
+            logger.print_info(
+                f"{indent(depth)}* Installing IP [cyan]{self.full_name}[/cyan] at {self.ipm_root}…"
+            )
+            self.download_tarball(self.path_in_ipm_root)
+            change_dir_to_readonly(self.ipm_root)
+
+    @property
+    def installed(self):
+        return self.path_in_ipm_root is not None and os.path.exists(
+            self.path_in_ipm_root
+        )
+
+    def uninstall(self):
+        if self.path_in_ipm_root is None:
+            raise ValueError("Cannot uninstall IP without IPM root")
+        shutil.rmtree(self.path_in_ipm_root)
+
+    def _get_dependency_dict(self) -> dict:
+        if not self.path_in_ipm_root:
+            raise ValueError("Cannot get dependencies for IP without an IPM root")
+        if not self.installed:
+            self.install()
+
+        json_path = os.path.join(self.path_in_ipm_root, "ip", "dependencies.json")
+        try:
+            return json.load(open(json_path, encoding="utf8"))
+        except FileNotFoundError:
+            return {"IP": []}
 
     @staticmethod
     def create_table(ip_list, version=None, extended=False, local=False):
@@ -378,67 +599,89 @@ class IP:
         else:
             logger.print_err("No IPs found")
 
-    def download_tarball(self, verified_ip, dest_path):
+    def download_tarball(self, dest_path, no_verify_hash=False):
         """downloads the release tarball
 
         Args:
-            release_url (str): url of the release tarball
             dest_path (str): path to destination of download
-
-        Returns:
-            bool: True if downloaded, False if failed to download
+            no_verify_hash (bool): whether to verify the sha256 of the download or not
         """
-        logger = Logger()
-        return_status = True
-        headers = {
-            "Authorization": f"Bearer {GITHUB_TOKEN}",
-            "Accept": "application/vnd.github+json",
-        }
-        params = {"per_page": 100, "page": 1}
-        release_url = "https://api.github.com/repos/efabless/EF_IPs/releases"
-        response = requests.get(
-            release_url, stream=True, headers=headers, params=params
-        )
-        release_data = response.json()
-        for data in release_data:
-            if self.ip_name in data["tarball_url"].split("/")[-1]:
-                for assets in data["assets"]:
-                    for asset_name, asset_value in assets.items():
-                        if (
-                            asset_name == "name"
-                            and asset_value == f"{self.version}.tar.gz"
-                        ):
-                            asset_id = assets["id"]
-        headers = {
-            "Authorization": f"Bearer {GITHUB_TOKEN}",
-            "Accept": "application/octet-stream",
-        }
+
+        d = tempfile.TemporaryDirectory()
+        tgz_path = os.path.join(d.name, "asset.tar.gz")
         try:
-            release_url = f"https://api.github.com/repos/efabless/EF_IPs/releases/assets/{asset_id}"
-        except NameError:
-            logger.print_err("Could not find asset")
-            return_status = False
-        response = requests.get(release_url, stream=True, headers=headers)
-        if response.status_code == 404:
-            shutil.rmtree(dest_path)
-            logger.print_err(
-                "Couldn't download IP, make sure you have access to the repo and you have GITHUB_TOKEN exported"
+            session = GitHubSession()
+
+            releases = []
+            last_response = [{}]
+            page = 1
+            while len(last_response) != 0:
+                params = {"per_page": 100, "page": page}
+                release_url = f"https://api.github.com/repos/{self.repo}/releases"
+                response = session.get(
+                    release_url,
+                    params=params,
+                )
+                session.throw_status(response, "download IP releases")
+                last_response = response.json()
+                releases += last_response
+                page += 1
+
+            asset_id = None
+            for release in releases:
+                if self.ip_name in release["tarball_url"].split("/")[-1]:
+                    for assets in release["assets"]:
+                        for asset_name, asset_value in assets.items():
+                            if (
+                                asset_name == "name"
+                                and asset_value == f"{self.version}.tar.gz"
+                            ):
+                                asset_id = assets["id"]
+            if asset_id is None:
+                raise RuntimeError(
+                    f"IP {self.ip_name}@{self.version} not found in the releases of repo {self.repo}"
+                )
+
+            release_url = (
+                f"https://api.github.com/repos/{self.repo}/releases/assets/{asset_id}"
             )
-            return_status = False
-        elif response.status_code == 200:
-            tarball_path = os.path.join(dest_path, f"{self.version}.tar.gz")
-            with open(tarball_path, "wb") as f:
-                f.write(response.raw.read())
-            file = tarfile.open(tarball_path)
-            file.extractall(dest_path)
-            file.close
-            os.remove(tarball_path)
-            return_status = True
-        if return_status:
-            return True
-        else:
-            shutil.rmtree(os.path.dirname(dest_path))
-            exit(1)
+
+            with session.stream(
+                "GET",
+                release_url,
+                headers={
+                    "Accept": "application/octet-stream",
+                },
+            ) as r, open(tgz_path, "wb") as tgz:
+                session.throw_status(r, "download the release tarball")
+                for chunk in r.iter_bytes(chunk_size=8192):
+                    tgz.write(chunk)
+
+            if not no_verify_hash:
+                sha256 = hashlib.sha256(open(tgz_path, "rb").read()).hexdigest()
+                if sha256 != self.sha256:
+                    if self.sha256 is None:
+                        raise RuntimeError(
+                            f"Refusing to unpack tarball for {self.full_name}: Missing 'sha256' field in release\n"
+                            + f"\tURL:       {release_url}\n"
+                            + f"\tGot:       {sha256}\n"
+                            + "\tPlease submit an issue to the IPM repository."
+                        )
+                    else:
+                        raise RuntimeError(
+                            f"Hash mismatch for {self.full_name}'s download:\n"
+                            + f"\tURL:       {release_url}\n"
+                            + f"\tExpecting: {self.sha256}\n"
+                            + f"\tGot:       {sha256}"
+                        )
+
+            with tarfile.open(tgz_path, mode="r:gz") as tf:
+                r.raise_for_status()
+                tf.extractall(dest_path)
+        except Exception as e:
+            d.cleanup()
+            shutil.rmtree(os.path.dirname(dest_path), ignore_errors=True)
+            raise e from None
 
     # def generate_bus_wrapper(self, verified_ip_info):
     #     if "generic" in verified_ip_info["release"][self.version]["bus"]:
@@ -495,19 +738,16 @@ class Checks:
         Returns:
             bool: True if can be accessed, False if failed to access
         """
-        repo_response = requests.get(url, stream=True)
-        if repo_response.status_code == 404:
-            return False
-        elif repo_response.status_code == 200:
-            return True
+
+        repo_response = GitHubSession().get(url)
+        return (repo_response.status_code // 100) == 2
 
     def download_check_tarball(self):
         """downloads the tarball of package checker"""
         ip = IP(self.ip_name, ipm_root=self.ipm_root, version=self.version)
-        os.mkdir(self.package_check_path)
         ip.download_tarball(
-            self.release_tarball_url,
             self.package_check_path,
+            no_verify_hash=True,
         )
 
     def check_json(self):
@@ -620,38 +860,6 @@ def change_dir_to_readonly(dir):
             change_dir_to_readonly(file_path)
 
 
-def query_yes_no(question, default="yes"):
-    # from https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input
-    """Ask a yes/no question via raw_input() and return their answer.
-
-    "question" is a string that is presented to the user.
-    "default" is the presumed answer if the user just hits <Enter>.
-            It must be "yes" (the default), "no" or None (meaning
-            an answer is required of the user).
-
-    The "answer" return value is True for "yes" or False for "no".
-    """
-    valid = {"yes": True, "y": True, "ye": True, "no": False, "n": False}
-    if default is None:
-        prompt = " [y/n] "
-    elif default == "yes":
-        prompt = " [Y/n] "
-    elif default == "no":
-        prompt = " [y/N] "
-    else:
-        raise ValueError("invalid default answer: '%s'" % default)
-
-    while True:
-        sys.stdout.write(question + prompt)
-        choice = input().lower()
-        if default is not None and choice == "":
-            return valid[default]
-        elif choice in valid:
-            return valid[choice]
-        else:
-            sys.stdout.write("Please respond with 'yes' or 'no' " "(or 'y' or 'n').\n")
-
-
 def get_latest_version(data):
     """gets the latest version of the ip
 
@@ -678,49 +886,19 @@ def install_ip(ip_name, version, ip_root, ipm_root):
         ipm_root (str): path to common installation path
     """
     logger = Logger()
-    dependencies_list = []
-    verified_ip_info = IPInfo.get_verified_ip_info(ip_name)
-    if not version:
-        version = get_latest_version(verified_ip_info["release"])
-    elif version not in verified_ip_info["release"]:
-        logger.print_err(f"Version {version} can't be found")
-        exit(1)
 
-    download_ip(ip_name, version, ip_root, ipm_root, logger)
-    IPInfo.get_dependencies(ip_name, version, dependencies_list, ipm_root)
-    ip = IP(ip_name, ip_root, ipm_root, version)
-    ip.update_dependencies_file()
-    for dep in dependencies_list:
-        for dep_name, version in dep.items():  # can use .key and .value
-            download_ip(dep_name, version, ip_root, ipm_root, logger)
-    change_dir_to_readonly(ipm_root)
+    root = IPRoot(ipm_root, ip_root)
 
-
-def download_ip(dep_name, version, ip_root, ipm_root, logger):
-    verified_ip_info = IPInfo.get_verified_ip_info(dep_name)
-    if not version:
-        version = get_latest_version(verified_ip_info["release"])
-    ip = IP(dep_name, ip_root, ipm_root, version)
-    if ip.check_install_root():
-        ip_install_root = f"{ipm_root}/{dep_name}/{version}"
-        logger.print_info(
-            f"Installing IP [cyan]{dep_name}[/cyan] at {ipm_root} and creating simlink to {ip_root}"
-        )
-        ip.download_tarball(verified_ip_info, ip_install_root)
-        # ip.generate_bus_wrapper(verified_ip_info)
-    else:
-        logger.print_info(f"Found IP [cyan]{dep_name}[/cyan] locally")
-    if ipm_root != ip_root:
-        if os.path.exists(f"{ip_root}/{dep_name}"):
-            os.unlink(f"{ip_root}/{dep_name}")
-        os.symlink(f"{ipm_root}/{dep_name}/{version}", f"{ip_root}/{dep_name}")
-        logger.print_success(f"Created simlink to {dep_name} IP at {ip_root}")
-    else:
-        logger.print_success(f"Downloaded IP at {ipm_root}")
+    try:
+        ip = IP.find_verified_ip(ip_name, version, ipm_root)
+        root.try_add(ip)
+    except RuntimeError as e:
+        logger.print_err(e)
+        exit(-1)
 
 
 def uninstall_ip(ip_name, version, ipm_root):
-    """uninstalls the ip tarball
+    """uninstalls the ip tarball from an ipm root
 
     Args:
         ip_name (str): name of the ip to get installed
@@ -728,45 +906,37 @@ def uninstall_ip(ip_name, version, ipm_root):
         ipm_root (str): path to common installation path
     """
     logger = Logger()
-    dependencies_list = []
-    verified_ip_info = IPInfo.get_verified_ip_info(ip_name)
-    if not version:
-        version = get_latest_version(verified_ip_info["release"])
-    IPInfo.get_dependencies(ip_name, version, dependencies_list, ipm_root)
-    dependencies_list.append({ip_name: version})
-    if query_yes_no(
-        f"uninstalling {ip_name} might end up with broken simlinks if used in any project, and will uninstall all dependencies of IP"
-    ):
-        for dep in dependencies_list:
-            for dep_name, version in dep.items():
-                ip_root = f"{ipm_root}/{dep_name}"
-                if os.path.exists(ip_root):
-                    shutil.rmtree(ip_root)
-        logger.print_success(f"Successfully uninstalled {ip_name}")
+
+    try:
+        ip = IP.find_verified_ip(ip_name, version, ipm_root)
+        if not ip.installed:
+            logger.print_info("Nothing to uninstall.")
+        else:
+            ip.uninstall()
+
+            logger.print_success(f"Successfully uninstalled {ip_name}")
+    except RuntimeError as e:
+        logger.print_err(e)
+        exit(-1)
 
 
 def rm_ip_from_project(ip_name, ip_root, ipm_root):
-    """removes the simlink of the ip from project and removes it from dependencies file
+    """removes the symbolic link of the ip from project and removes it from dependencies file
 
     Args:
         ip_name (str): name of the ip to get installed
         ip_root (str): path to the project ip dict
     """
-    ip = IP(ip_name, ip_root)
     logger = Logger()
-    installed_ip_info = IPInfo.get_installed_ip_info_from_simlink(ip_root, ip_name)
-    dep_arr = []
-    IPInfo.get_dependencies(
-        ip_name, installed_ip_info[ip_name]["info"]["version"], dep_arr, ipm_root
-    )
-    dep_arr.append({ip_name: installed_ip_info[ip_name]["info"]["version"]})
-    for d in dep_arr:
-        for dep_name, dep_version in d.items():
-            uninstall_ip_root = f"{ip_root}/{dep_name}"
-            if os.path.exists(uninstall_ip_root):
-                os.unlink(uninstall_ip_root)
-    ip.remove_from_dependencies_file()
-    logger.print_success(f"removed IP {ip_name} and dependencies from project")
+    root = IPRoot(ipm_root, ip_root)
+    try:
+        installed = root.get_installed_ips()
+        if ip_name not in installed:
+            raise RuntimeError(f"{ip_name} not found in {root.dependencies_path}")
+        root.try_remove(installed[ip_name])
+    except RuntimeError as e:
+        logger.print_err(e)
+        exit(-1)
 
 
 def install_using_dep_file(ip_root, ipm_root):
@@ -777,17 +947,15 @@ def install_using_dep_file(ip_root, ipm_root):
         ipm_root (str): path to common installation path
     """
     logger = Logger()
-    json_file = f"{ip_root}/{DEPENDENCIES_FILE_NAME}"
-    if os.path.exists(json_file):
-        logger.print_info(f"using {json_file} to download IPs")
-        with open(json_file) as f:
-            data = json.load(f)
-        for ips in data["IP"]:
-            for ip_name, ip_version in ips.items():
-                install_ip(ip_name, ip_version, ip_root, ipm_root)
-        change_dir_to_readonly(ipm_root)
-    else:
-        logger.print_err(f"Can't find {DEPENDENCIES_FILE_NAME} file in {ip_root}")
+    root = IPRoot(ipm_root, ip_root)
+
+    try:
+        if os.path.exists(root.dependencies_path):
+            root.update_paths()
+        else:
+            raise RuntimeError(f"{root.dependencies_path} not found.")
+    except RuntimeError as e:
+        logger.print_err(e)
         exit(1)
 
 
@@ -901,6 +1069,9 @@ def check_ips(ipm_root, update=False, ip_root=None):
             version = get_latest_version(verified_ip_info["release"])
             if version not in ip_version:
                 if update:
+                    logger.print_info(
+                        f"Updating IP {ip_name} to [magenta]{version}[/magenta]…"
+                    )
                     install_ip(ip_name, version, ip_root, ipm_root)
                 else:
                     logger.print_info(
@@ -919,7 +1090,7 @@ def package_check(ipm_root, ip, version, gh_repo):
         ipm_root (str): path to common installation path
         ip (str): ip name to check
         version (str): version of ip to check
-        gh_repo (str): url to github repo
+        gh_repo (str): url to github repo (MINUS the scheme)
     """
     checker = Checks(ipm_root, ip, version, gh_repo)
     logger = Logger()

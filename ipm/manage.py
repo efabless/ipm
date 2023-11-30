@@ -62,6 +62,15 @@ def install(
 @click.command("uninstall")
 @click.argument("ip")
 @click.option("--version", required=False, help="Install IP with a specific version")
+@click.option(
+    "-f",
+    "--force",
+    is_flag=True,
+    # Translation of the line below: "if (!value) { ctx.abort() }"
+    callback=lambda ctx, _, value: value or ctx.abort(),
+    expose_value=False,
+    prompt="Uninstalling this IP may break all projects depending on it.\nIf you want to remove it from just one project, try 'ipm rm'.\nProceed?",
+)
 @opt_ipm_root
 def uninstall_cmd(ip, ipm_root, version=None):
     """Uninstall local IP"""
@@ -185,7 +194,7 @@ def update_cmd(ipm_root, ip_root):
         check_ips(ipm_root, update=True, ip_root=ip_root)
 
 
-@click.command("package-check")
+@click.command("package-check", hidden=True)
 @click.option("--name", required=True, help="Provide IP name")
 @click.option("--version", required=True, help="Provide IP version")
 @click.option("--url", required=True, help="Provide IP url")

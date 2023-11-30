@@ -1,4 +1,4 @@
-# Copyright 2022 Efabless Corporation
+# Copyright 2023 Efabless Corporation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .__version__ import __version__
+__version__ = "0.2.0"
 
-from .manage import install, ls, ls_remote, info, install_deps
+if __name__ == "__main__":
+    print(__version__, end="")
