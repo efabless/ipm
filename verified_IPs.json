@@ -756,6 +756,39 @@
             }
         }
     },
+    "DFFRAM128x32": {
+        "description": "512 bytes (128x32) DFFRAM hardened using OpenLane",
+        "repo": "github.com/efabless/OL-DFFRAM",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "AUCOHL",
+        "category": "digital",
+        "technology": "sky130",
+        "license": "APACHE 2.0",
+        "tags": [
+            "SRAM",
+            "DFFRAM",
+            "memory"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "7-30-2023",
+                "status": "verified",
+                "bus": [
+                    "AHBL"
+                ],
+                "type": "hard",
+                "width": "551.115",
+                "height": "561.835",
+                "cell_count": "0",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "1.8"
+                ],
+                "sha256": "ebdbd0ddf325f23c1d1977443e3427eab4ad3f0b46d26e5178ee731012c32ab3"
+            }
+        }
+    },
     "DFFRAM256x32": {
         "description": "1kbyte (256x32) DFFRAM hardened using OpenLane",
         "repo": "github.com/efabless/OL-DFFRAM",
@@ -802,6 +835,39 @@
                     "1.8"
                 ],
                 "sha256": "366be61e4b8a44467acae892e5a22e8885380e7d1d0f984619bff6d50c8e9912"
+            }
+        }
+    },
+    "DFFRAM512x32": {
+        "description": "2kbyte (512x32) DFFRAM hardened using OpenLane",
+        "repo": "github.com/efabless/OL-DFFRAM",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "AUCOHL",
+        "category": "digital",
+        "technology": "sky130",
+        "license": "APACHE 2.0",
+        "tags": [
+            "SRAM",
+            "DFFRAM",
+            "memory"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "7-30-2023",
+                "status": "verified",
+                "bus": [
+                    "AHBL"
+                ],
+                "type": "hard",
+                "width": "1016.38",
+                "height": "1127.635",
+                "cell_count": "0",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "1.8"
+                ],
+                "sha256": "64beb9a0921356ab385303dd6e9a38f3b3c20c85de98c66a277e7b504223840b"
             }
         }
     },
