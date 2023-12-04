@@ -1,7 +1,7 @@
 {
     "EF_PSRAM_CTRL": {
         "description": "A Controller for Quad I/O SPI PSRAM",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/EF_PSRAM_CTRL",
         "author": "Mohamed Shalan",
         "email": "mshalan@efabless.com",
         "owner": "Efabless Corp.",
@@ -34,7 +34,7 @@
     },
     "EF_PSRAM_CTRL_V2": {
         "description": "A Controller for Quad I/O SPI PSRAM",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/EF_PSRAM_CTRL_V2",
         "author": "Mohamed Shalan",
         "email": "mshalan@efabless.com",
         "owner": "Efabless Corp.",
@@ -118,7 +118,7 @@
     },
     "EF_UART": {
         "description": "UART with a programmable baud rate generator and RX/TX FIFOs",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/EF_UART",
         "author": "Mohamed Shalan",
         "email": "mshalan@efabless.com",
         "owner": "Efabless Corp.",
@@ -150,7 +150,7 @@
     },
     "EF_PWM32": {
         "description": "A 32-bit dual channel PWM generator with a clock divider.",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/EF_PWM32",
         "author": "Mohamed Shalan",
         "email": "mshalan@efabless.com",
         "owner": "Efabless Corp.",
@@ -183,7 +183,7 @@
     },
     "EF_TCC32": {
         "description": "A 32-bit Timer/Counter/Capture peripheral.",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/EF_TCC32",
         "author": "Mohamed Shalan",
         "email": "mshalan@efabless.com",
         "owner": "Efabless Corp.",
@@ -233,7 +233,7 @@
     },
     "MS_QSPI_XIP_CACHE": {
         "description": "AHB-Lite Quad I/O SPI Flash memory controller with direct mapped cache and support for XiP.",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/MS_QSPI_XIP_CACHE",
         "author": "Mohamed Shalan",
         "email": "mshalan@efabless.com",
         "owner": "Mohamed Shalan",
@@ -283,7 +283,7 @@
     },
     "MS_CLK_RST": {
         "description": "All digital Clock and Reset Manager.",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/MS_CLK_RST",
         "author": "Mohamed Shalan",
         "email": "mshalan@efabless.com",
         "owner": "Mohamed Shalan",
@@ -333,7 +333,7 @@
     },
     "EF_GPIO": {
         "description": "A generic GPIO peripheral.",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/EF_GPIO",
         "author": "Mohamed Shalan",
         "email": "mshalan@efabless.com",
         "owner": "Efabless Corp.",
@@ -365,7 +365,7 @@
     },
     "MS_SPI_XIP_CACHE": {
         "description": "AHB-Lite SPI Flash memory controller with direct mapped cache and support for XiP.",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/MS_SPI_XIP_CACHE",
         "author": "Mohamed Shalan",
         "email": "mshalan@efabless.com",
         "owner": "Mohamed Shalan",
@@ -400,7 +400,7 @@
     },
     "MS_DMAC_AHBL": {
         "description": "Direct Memory Access Controller (DMAC) with AHB-lite bus interface.",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/MS_DMAC_AHBL",
         "author": "Mohamed Shalan",
         "email": "mshalan@efabless.com",
         "owner": "Mohamed Shalan",
@@ -463,7 +463,7 @@
     },
     "SW_AES": {
         "description": "Verilog implementation of the symmetric block cipher AES (Advanced Encryption Standard) as specified in NIST FIPS 197. This implementation supports 128 and 256 bit keys.",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/SW_AES",
         "author": "Joachim Strombergson",
         "email": "",
         "owner": "secworks",
@@ -496,7 +496,7 @@
     },
     "SW_SHA256": {
         "description": "Hardware implementation of the SHA-256 cryptographic hash function.",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/SW_SHA256",
         "author": "Joachim Strombergson",
         "email": "",
         "owner": "secworks",
@@ -529,7 +529,7 @@
     },
     "EF_ACMP_DI": {
         "description": "A digital interface for the EF_R2RVC02 analog comparator",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/EF_ACMP_DI",
         "author": "Mohamed Shalan",
         "email": "mshalan@efabless.com",
         "owner": "Efabless Corp.",
@@ -646,7 +646,7 @@
     },
     "EF_Q7_UNIT": {
         "description": "Accelerators for NNoM framework.",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/EF_Q7_UNIT",
         "author": "Mohamed Shalan",
         "email": "mshalan@efabless.com",
         "owner": "Efabless Corp.",
@@ -873,7 +873,7 @@
     },
     "EF_PIN_MUX": {
         "description": "Pin Multiplexing Fabric; 32 pins x four functions per pin.",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/EF_PIN_MUX",
         "author": "Mohamed Shalan",
         "email": "mshalan@efabless.com",
         "owner": "Efabless Corp.",
@@ -968,7 +968,7 @@
     },
     "MS_WDT32": {
         "description": "A 32-bit Watchdog Timer",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/MS_WDT32",
         "author": "Mohamed Shalan",
         "email": "mshalan@efabless.com",
         "owner": "Mohamed Shalan",
@@ -1049,7 +1049,7 @@
     },
     "rosc_sky130": {
         "description": "A standard cell based ring oscillator with enable and trim.",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/rosc_sky130",
         "author": "Mohamed Shalan",
         "email": "mshalan@efabless.com",
         "owner": "Mohamed Shalan",
@@ -1113,7 +1113,7 @@
     },
     "sky130_ef_ip__xtal_osc_32k": {
         "description": "ultra-low-power, low speed crystal oscillator",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/sky130_ef_ip__xtal_osc_32k",
         "author": "Tim Edwards",
         "email": "tim@efabless.com",
         "owner": "Efabless Corp.",
@@ -1162,7 +1162,7 @@
     },
     "sky130_ef_ip__xtal_osc_32k_DI": {
         "description": "Digital wrapper for an ultra-low-power, low speed crystal oscillator",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/sky130_ef_ip__xtal_osc_32k_DI",
         "author": "Marwan Abbas",
         "email": "marwan.abbas@efabless.com",
         "owner": "Efabless Corp.",
@@ -1190,21 +1190,6 @@
                     "1.8"
                 ],
                 "sha256": "c256db40f6aa609119255b99b84d444ab4769d93b0140a9de395c89b745a365c"
-            },
-            "v1.0.1": {
-                "date": "1-11-2023",
-                "status": "broken",
-                "bus": [
-                    "n/a"
-                ],
-                "type": "hard",
-                "width": "525.3",
-                "height": "211.8",
-                "cell_count": "n/a",
-                "clock_freq_mhz": "0.032768",
-                "supply_voltage": [
-                    "1.8"
-                ]
             },
             "v1.0.2": {
                 "date": "1-11-2023",
@@ -1241,7 +1226,7 @@
     },
     "sky130_ef_ip__rc_osc_500k": {
         "description": "A 500kHz oscillator using a current-starved ring oscillator",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/sky130_ef_ip__rc_osc_500k",
         "author": "Tim Edwards",
         "email": "tim@efabless.com",
         "owner": "Efabless Corp.",
@@ -1406,7 +1391,7 @@
     },
     "sky130_ef_ip__xtal_osc_16M": {
         "description": "High speed crystal oscillator",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/sky130_ef_ip__xtal_osc_16M",
         "author": "Tim Edwards",
         "email": "tim@efabless.com",
         "owner": "Efabless Corp.",
@@ -1454,7 +1439,7 @@
     },
     "sky130_ef_ip__xtal_osc_16M_DI": {
         "description": "Digital wrapper for high speed crystal oscillator",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/sky130_ef_ip__xtal_osc_16M_DI",
         "author": "Marwan Abbas",
         "email": "marwan.abbas@efabless.com",
         "owner": "Efabless Corp.",
@@ -1534,7 +1519,7 @@
     },
     "EF_dll_sky130": {
         "description": "Digital Locked Loop (ring oscillator + controller).",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/EF_dll_sky130",
         "author": "Tim Edwards",
         "email": "tim@efabless.com",
         "owner": "Efabless Corp.",
@@ -1583,7 +1568,7 @@
     },
     "EF_CLK_RST_V2": {
         "description": "All digital Clock and Reset Manager with on-chip crystal oscillators.",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/EF_CLK_RST_V2",
         "author": "Bassant Hassan",
         "email": "bassant.hassan@efabless.com",
         "owner": "Efabless Corp.",
@@ -1761,7 +1746,7 @@
     },
     "EF_I2S": {
         "description": "I2S receiver with a FIFO",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/EF_I2S",
         "owner": "Efabless Corp.",
         "author": "Mohamed Shalan",
         "email": "mshalan@efabless.com",
@@ -1892,7 +1877,7 @@
     },
     "usb_cdc_wrapper": {
         "description": "Bus wrapper for usb cdc which utilizes fifo",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/usb_cdc_wrapper",
         "author": "Mohamed Shalan",
         "email": "mshalan@efabless.com",
         "owner": "Efabless Corp.",
@@ -1941,7 +1926,7 @@
     },
     "I2C": {
         "description": "Verilog I2C interface for FPGA implementation",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/I2C",
         "author": "Alex Forencich",
         "email": "",
         "owner": "Alex Forencich",
