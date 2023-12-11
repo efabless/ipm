@@ -786,6 +786,22 @@
                     "1.8"
                 ],
                 "sha256": "c7d12110cbea1d99ce624a1a6ea2743b20a42d11b0b3150b98a5ad6167674812"
+            },
+            "v1.0.1": {
+                "date": "7-30-2023",
+                "status": "verified",
+                "bus": [
+                    "AHBL"
+                ],
+                "type": "hard",
+                "width": "551.115",
+                "height": "561.835",
+                "cell_count": "0",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "1.8"
+                ],
+                "sha256": "ddefce8e60076b893e748284f9c0d384c43b61ca4122fe31c298cfee38ef4661"
             }
         }
     },
@@ -835,6 +851,22 @@
                     "1.8"
                 ],
                 "sha256": "366be61e4b8a44467acae892e5a22e8885380e7d1d0f984619bff6d50c8e9912"
+            },
+            "v1.0.2": {
+                "date": "7-30-2023",
+                "status": "verified",
+                "bus": [
+                    "AHBL"
+                ],
+                "type": "hard",
+                "width": "1153.835",
+                "height": "536.015",
+                "cell_count": "0",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "1.8"
+                ],
+                "sha256": "cfa665103a66f044a410ceebb2fb5593b394230bda797e931eb1bdc966eea49b"
             }
         }
     },
@@ -868,6 +900,22 @@
                     "1.8"
                 ],
                 "sha256": "08e8908e7604f5a17233ee09c536abcb8b159c13a462b348e65ba454de25a145"
+            },
+            "v1.0.1": {
+                "date": "7-30-2023",
+                "status": "verified",
+                "bus": [
+                    "AHBL"
+                ],
+                "type": "hard",
+                "width": "1016.38",
+                "height": "1127.635",
+                "cell_count": "0",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "1.8"
+                ],
+                "sha256": "794ceeafa4244c94f09672800bf1d831063efc9e9b20ff8f6339569e94de351c"
             }
         }
     },
