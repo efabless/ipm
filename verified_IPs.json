@@ -155,8 +155,8 @@
                 "type": "soft",
                 "width": "0",
                 "height": "0",
-                "cell_count": "1057",
-                "clock_freq_mhz": "10",
+                "cell_count": "1590",
+                "clock_freq_mhz": "277",
                 "supply_voltage": [
                     "n/a"
                 ],
