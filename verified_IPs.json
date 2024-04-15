@@ -347,7 +347,7 @@
             }
         }
     },
-    "EF_GPIO": {
+    "EF_GPIO8": {
         "description": "A generic GPIO peripheral.",
         "repo": "github.com/efabless/EF_GPIO",
         "author": "Mohamed Shalan",
@@ -376,6 +376,22 @@
                     "n/a"
                 ],
                 "sha256": "9662615f7cfdd64e62d8ffb414da868fe9dcf912e993bdd69c228abc415c59ca"
+            },
+            "v1.0.1": {
+                "date": "15-4-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "72",
+                "clock_freq_mhz": "1666",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "8be6686319430c7e526ef1c74c44f9f3344f0a39d4e8026ae0789c5ddb54661a"
             }
         }
     },
