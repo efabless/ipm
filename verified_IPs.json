@@ -145,6 +145,22 @@
                     "n/a"
                 ],
                 "sha256": "ca1e8118e4420260237f7b7f81a8cab01b4020f3458f6a1634ffca3538e1d253"
+            },
+            "v1.1.0": {
+                "date": "11-1-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "1057",
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "f9b9ad3c392ad2f65094a5fc23e8961298ff6ee07fbd5384105dfe51af671b21"
             }
         }
     },
