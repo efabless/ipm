@@ -2100,5 +2100,41 @@
                 "sha256": "3a66b985451588b27761ad4cb1d037bf2b5c573d1985bd9f64d208a94f86fa8d"
             }
         }
+    },
+    "EF_TMR32": {
+        "description": "A 32-bit timer and PWM generator",
+        "repo": "github.com/efabless/EF_TMR32/tree/main",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Efabless Corp",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "APACHE 2.0",
+        "tags": [
+            "timer",
+            "pwm",
+            "peripheral",
+            "motor control",
+            "time",
+            "periodic"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "12-01-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "797",
+                "clock_freq_mhz": "163",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "4a1a007d5c9b7a708d873c381af038cd21ffde416e0fd0fc3799fb153e828972"
+            }
+        }
     }
 }
