@@ -2103,7 +2103,7 @@
     },
     "EF_TMR32": {
         "description": "A 32-bit timer and PWM generator",
-        "repo": "https://github.com/efabless/EF_TMR32",
+        "repo": "github.com/efabless/EF_TMR32",
         "author": "Mohamed Shalan",
         "email": "mshalan@efabless.com",
         "owner": "Efabless Corp",
