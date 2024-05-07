@@ -161,6 +161,22 @@
                     "n/a"
                 ],
                 "sha256": "6d15efb722dca3c7a7085b9c67ef0e6aba1dee2c5654a32e5adcc1f521890805"
+            },
+            "v1.1.1": {
+                "date": "07-5-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "1590",
+                "clock_freq_mhz": "277",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "6d15efb722dca3c7a7085b9c67ef0e6aba1dee2c5654a32e5adcc1f521890805"
             }
         }
     },
@@ -296,7 +312,7 @@
                 "sha256": "aac130d4438a21ae3c427984dbd5b8e87cbd918181951f7074c1da2a6a49b2fc"
             },
             "v1.0.2": {
-                "date": "1-01-2020",
+                "date": "15-04-2024",
                 "status": "verified",
                 "bus": [
                     "AHBL"
@@ -310,6 +326,22 @@
                     "n/a"
                 ],
                 "sha256": "03e953225254ccf7ec040f584ef127089507d6f20b5d912a234bcadbd32a840a"
+            },
+            "v1.0.3": {
+                "date": "07-05-2024",
+                "status": "verified",
+                "bus": [
+                    "AHBL"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "534",
+                "clock_freq_mhz": "384",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "e93ec50fec472032022c23811c7bb92d5f081adbbec2bcacb89b37aab7ce6377"
             }
         }
     },
@@ -408,6 +440,22 @@
                     "n/a"
                 ],
                 "sha256": "3ddf432a9df47e3358f277d403d198013efcbbe15b713ea42285fd2980ea38e3"
+            },
+            "v1.0.2": {
+                "date": "07-5-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "72",
+                "clock_freq_mhz": "1666",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "043b00fbe98b044fdd7ba541b37378e31c855fcaa72f6b07fa78ef2e57ea779b"
             }
         }
     },
@@ -1982,6 +2030,22 @@
                     "n/a"
                 ],
                 "sha256": "f94d7b1dd4f857f88236f5d7aa125f94906278925f98943f4251bb4d490f7349"
+            },
+            "v2.0.0": {
+                "date": "07-05-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "2661",
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "f1e956d3bb7138121d4e4f8b0c0d6634649ab3821b45768455a3ce6c5c747f14"
             }
         }
     },
@@ -2134,6 +2198,55 @@
                     "n/a"
                 ],
                 "sha256": "4a1a007d5c9b7a708d873c381af038cd21ffde416e0fd0fc3799fb153e828972"
+            },
+            "v1.0.1": {
+                "date": "07-05-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "797",
+                "clock_freq_mhz": "163",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "74c936849bee2b74f60f3cc59896608699ee6b0ada9078cf14032ce434f0fbd3"
+            }
+        }
+    },
+    "EF_SPI": {
+        "description": "SPI master controller with receive and transmit FIFOs.",
+        "repo": "github.com/efabless/EF_SPI",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Efabless Corp",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "APACHE 2.0",
+        "tags": [
+            "peripheral",
+            "comm",
+            "spi"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "07-05-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "0",
+                "clock_freq_mhz": "0",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "8467a039e9ae4437e1e22b2b3eb1c199d70a69b70b212c02766b67a30f889c23"
             }
         }
     }
