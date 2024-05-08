@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 # from ipm import __version__
 
-requirements = open("requirements.txt").read().strip().split("\n")
+# requirements = open("requirements.txt").read().strip().split("\n")
 
 __dir__ = os.path.abspath(os.path.dirname(__file__))
 version = subprocess.check_output(
@@ -21,15 +21,15 @@ version = subprocess.check_output(
 )
 
 setup(
-    name="ipm",
+    name="efipm",
     packages=find_packages(),
     version=version,
     description="Open-source IPs Package Manager.",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     author="Efabless Corporation",
-    author_email="marwan.abbas@efabless.com",
-    install_requires=requirements,
+    author_email="contact@efabless.com",
+    install_requires="requirements.txt",
     classifiers=[
         "License :: OSI Approved :: Apache Software License",
         "Programming Language :: Python :: 3",
