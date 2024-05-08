@@ -113,6 +113,22 @@
                     "n/a"
                 ],
                 "sha256": "da50e1b58d426bf4146775ede2757a3a173211fb93d9572fdcaa3fff0c5b4ef5"
+            },
+            "v1.0.4": {
+                "date": "07-05-2024",
+                "status": "verified",
+                "bus": [
+                    "AHBL"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "530",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "b5c5f2b72cea9c93d6188e594404b488e6411c9acd551b528024393322031be6"
             }
         }
     },
@@ -635,6 +651,22 @@
                     "n/a"
                 ],
                 "sha256": "049eca0a8e378a24a2381f04c28b3136ea97cd6590e37a6b4550abf0496404a4"
+            },
+            "v1.0.1": {
+                "date": "08-5-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "0",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "7c0c22ee3f3f39181d4a54f6a4f3debd8e71706afb9a09c2d7b7edbda3ba1044"
             }
         }
     },
@@ -668,7 +700,24 @@
                     "n/a"
                 ],
                 "sha256": "6028a72d11626e6b8d0f805adecdae01366370adfb6e139a254d332f73bd508a"
+            },
+            "v1.0.1": {
+                "date": "08-5-2023",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "0",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "a317a6481c75fefaa8bf78f51e11fc84a3055e2145e747ad0a542d92b3796f30"
             }
+            
         }
     },
     "EF_ACMP_DI": {
@@ -2279,6 +2328,39 @@
                     "n/a"
                 ],
                 "sha256": "70033f9c5a861a03ec0f552012ae94d6b5f890775e4ab127e3b93c26e95b80e8"
+            }
+        }
+    },
+    "EF_QSPI_FLASH_WRITER": {
+        "description": "A Quad SPI Flash Writer used to program flash. It can be used along with flash controller to program the flash then read from it.",
+        "repo": "github.com/efabless/EF_QSPI_FLASH_WRITER",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Efabless Corp",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "APACHE 2.0",
+        "tags": [
+            "memory",
+            "flash",
+            "qspi"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "07-05-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "0",
+                "clock_freq_mhz": "0",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "8467a039e9ae4437e1e22b2b3eb1c199d70a69b70b212c02766b67a30f889c23"
             }
         }
     }
