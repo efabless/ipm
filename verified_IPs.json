@@ -193,6 +193,22 @@
                     "n/a"
                 ],
                 "sha256": "6d15efb722dca3c7a7085b9c67ef0e6aba1dee2c5654a32e5adcc1f521890805"
+            },
+            "v1.1.2": {
+                "date": "12-5-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "1590",
+                "clock_freq_mhz": "277",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "66d0c6c38812a4f7dc6eb0e6026d5a6e04a4239d90065d91a1315e9cd964b7ed"
             }
         }
     },
@@ -472,6 +488,22 @@
                     "n/a"
                 ],
                 "sha256": "043b00fbe98b044fdd7ba541b37378e31c855fcaa72f6b07fa78ef2e57ea779b"
+            },
+            "v1.0.3": {
+                "date": "12-5-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "72",
+                "clock_freq_mhz": "1666",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "50eeedb552b53b75fb3347412fc18e5dd0a3f59f1174c89e138558899504518a"
             }
         }
     },
@@ -2080,7 +2112,7 @@
                 ],
                 "sha256": "f94d7b1dd4f857f88236f5d7aa125f94906278925f98943f4251bb4d490f7349"
             },
-            "v2.0.0": {
+            "v1.1.0": {
                 "date": "07-05-2024",
                 "status": "verified",
                 "bus": [
@@ -2096,7 +2128,7 @@
                 ],
                 "sha256": "da4efe37e36e6976c5445100965ee51db36cd8c449a9fb13f9ffc2660d99e30f"
             },
-            "v2.0.1": {
+            "v1.1.1": {
                 "date": "07-05-2024",
                 "status": "verified",
                 "bus": [
@@ -2111,6 +2143,22 @@
                     "n/a"
                 ],
                 "sha256": "da4efe37e36e6976c5445100965ee51db36cd8c449a9fb13f9ffc2660d99e30f"
+            },
+            "v1.1.2": {
+                "date": "12-05-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "2661",
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "26c4175ddc73a3dc70e16d734c85edc5d8bd92247e6de093fa4b0dd2ef3c13e1"
             }
         }
     },
@@ -2279,6 +2327,22 @@
                     "n/a"
                 ],
                 "sha256": "74c936849bee2b74f60f3cc59896608699ee6b0ada9078cf14032ce434f0fbd3"
+            },
+            "v1.0.2": {
+                "date": "12-05-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "797",
+                "clock_freq_mhz": "163",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "0f798302337f2ec0ebcf36c90bf4c47e288c79ec319693a614143980b3bf9384"
             }
         }
     },
@@ -2393,6 +2457,39 @@
                     "n/a"
                 ],
                 "sha256": "260abb86f6f8fd9648307b36f9b850d7311a4dd2a9c9426bf9080b0494d36404"
+            }
+        }
+    },
+    "EF_QSPI_XIP_CTRL": {
+        "description": "A QSPI XiP Flash COntroller with a parameterized Direct-Mapped Cache.",
+        "repo": "github.com/efabless/EF_QSPI_XIP_CTRL",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Efabless Corp",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "APACHE 2.0",
+        "tags": [
+            "memory",
+            "flash",
+            "qspi"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "12-05-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "0",
+                "clock_freq_mhz": "0",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "c6eb75972157dcea590ff8985071ccf90755d892501933307b3393f201f93d13"
             }
         }
     }
