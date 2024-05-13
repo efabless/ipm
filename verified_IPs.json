@@ -2278,6 +2278,39 @@
             }
         }
     },
+    "EF_I2C": {
+        "description": "I2C master controller with an APB interface",
+        "repo": "github.com/efabless/EF_I2C",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Efabless Corp",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "APACHE 2.0",
+        "tags": [
+            "peripheral",
+            "comm",
+            "i2c"
+        ],
+        "release": {
+            "v1.0.1": {
+                "date": "7-05-2024",
+                "status": "verified",
+                "bus": [
+                    "APB"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "0",
+                "clock_freq_mhz": "n/a",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "74c936849bee2b74f60f3cc59896608699ee6b0ada9078cf14032ce434f0fbd3"
+            }
+        }
+    },
     "EF_TMR32": {
         "description": "A 32-bit timer and PWM generator",
         "repo": "github.com/efabless/EF_TMR32",
