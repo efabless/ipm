@@ -2475,7 +2475,7 @@
         ],
         "release": {
             "v1.0.0": {
-                "date": "08-05-2024",
+                "date": "13-05-2024",
                 "status": "verified",
                 "bus": [
                     "generic"
