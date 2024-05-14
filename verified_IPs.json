@@ -2460,6 +2460,38 @@
             }
         }
     },
+    "EF_SRAM_1024x32": {
+        "description": "Commercial 1024x3 SRAM",
+        "repo": "github.com/efabless/EF_SRAM_1024x32",
+        "author": "Efabless Corp.",
+        "email": "purchase_ip@efabless.com",
+        "owner": "Efabless Corp.",
+        "category": "digital",
+        "technology": "sky130",
+        "license": "",
+        "tags": [
+            "SRAM",
+            "memory"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "08-05-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "hard",
+                "width": "387.87",
+                "height": "303.315",
+                "cell_count": "0",
+                "clock_freq_mhz": "0",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "ef225c2255021c17fcd5ede1cceeb4b96c669688b5103842f71e71a2c0525603"
+            }
+        }
+    },
     "EF_QSPI_FLASH_WRITER": {
         "description": "A Quad SPI Flash Writer used to program flash. It can be used along with flash controller to program the flash then read from it.",
         "repo": "github.com/efabless/EF_QSPI_FLASH_WRITER",
