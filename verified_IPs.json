@@ -2444,38 +2444,6 @@
             }
         }
     },
-    "EFSRAM_01024x032_008_18": {
-        "description": "Commercial 1024x3 SRAM",
-        "repo": "github.com/efabless/EFSRAM_01024x032_008_18",
-        "author": "Efabless Corp.",
-        "email": "purchase_ip@efabless.com",
-        "owner": "Efabless Corp.",
-        "category": "digital",
-        "technology": "sky130",
-        "license": "",
-        "tags": [
-            "SRAM",
-            "memory"
-        ],
-        "release": {
-            "v1.0.0": {
-                "date": "08-05-2024",
-                "status": "verified",
-                "bus": [
-                    "generic"
-                ],
-                "type": "hard",
-                "width": "387.87",
-                "height": "303.315",
-                "cell_count": "0",
-                "clock_freq_mhz": "0",
-                "supply_voltage": [
-                    "n/a"
-                ],
-                "sha256": "e72836ea268c9104ff46501bc4b84cf5f256cbfb5f7cd79a865268c06d24de59"
-            }
-        }
-    },
     "EF_SRAM_1024x32": {
         "description": "Commercial 1024x3 SRAM",
         "repo": "github.com/efabless/EF_SRAM_1024x32",
