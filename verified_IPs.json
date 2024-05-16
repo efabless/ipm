@@ -504,6 +504,22 @@
                     "n/a"
                 ],
                 "sha256": "50eeedb552b53b75fb3347412fc18e5dd0a3f59f1174c89e138558899504518a"
+            },
+            "v1.0.4": {
+                "date": "16-5-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "72",
+                "clock_freq_mhz": "1666",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "ed658bbf85961737a3e8da4bb48d9f0a686e76768d754576076e237e024215ca"
             }
         }
     },
