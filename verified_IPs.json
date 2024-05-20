@@ -209,6 +209,22 @@
                     "n/a"
                 ],
                 "sha256": "66d0c6c38812a4f7dc6eb0e6026d5a6e04a4239d90065d91a1315e9cd964b7ed"
+            },
+            "v1.1.3": {
+                "date": "20-5-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "1590",
+                "clock_freq_mhz": "277",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "87cc3e08b380460e5f945d551e496012057af2a2006ff406faccf5357b270f8b"
             }
         }
     },
@@ -520,6 +536,22 @@
                     "n/a"
                 ],
                 "sha256": "ed658bbf85961737a3e8da4bb48d9f0a686e76768d754576076e237e024215ca"
+            },
+            "v1.0.5": {
+                "date": "20-5-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "72",
+                "clock_freq_mhz": "1666",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "1dc02e7e687852ad9cad54a481f13fde19f8ff653ecc21832f12bdbe1ce4f0c3"
             }
         }
     },
@@ -946,6 +978,22 @@
                     "n/a"
                 ],
                 "sha256": "1c0c6ba6c8ce2227d0bf070e9bf97d05d9a8af9052f10bad223302ef67b34358"
+            },
+            "v1.0.3": {
+                "date": "20-05-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "1800",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "5bdffca9208b970f97f15fce736dd52f8fae8e6ff1eb65ba696789bb63754cf9"
             }
         }
     },
@@ -2537,6 +2585,22 @@
                     "n/a"
                 ],
                 "sha256": "0715c965f03e0f7e58470c52ddfd0561d00c684638ad202ff5539be13eeb38e2"
+            },
+            "v1.0.4": {
+                "date": "20-05-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "0",
+                "clock_freq_mhz": "0",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "1f423f62a8ce42822e59533fe979b238a5f7e13d86fb30c108d90d0f0aac7c8f"
             }
         }
     },
