@@ -2649,6 +2649,22 @@
                     "n/a"
                 ],
                 "sha256": "0ead93b6dbc18eba9206641d110d6520f0ca25dd3d0804680b01c7a2d84bc386"
+            },
+            "v1.1.0": {
+                "date": "22-05-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "hard",
+                "width": "387.87",
+                "height": "303.315",
+                "cell_count": "0",
+                "clock_freq_mhz": "0",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "908558ba89a646eff8da25960ffabfc1c07deec68d4ff7f0ca1bc938dd402d6b"
             }
         }
     },
