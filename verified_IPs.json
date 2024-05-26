@@ -1300,6 +1300,22 @@
                     "n/a"
                 ],
                 "sha256": "96709f376a79d5801ce70d49e88514922c5b725cb99544ec06c5cccab3c01cca"
+            },
+            "v2.0.2": {
+                "date": "26-05-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "7000",
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "5cdd4940035ea191a4c451646cb5e1d20926d7f71cd38aef5c3663a26c3268e3"
             }
         }
     },
