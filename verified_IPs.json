@@ -917,7 +917,7 @@
     },
     "EF_ADCS1008A": {
         "description": "A digital controller for 8 Channel 10-bit SAR ADC.",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/EF_ADC1008A",
         "author": "Mohamed Shalan",
         "email": "mshalan@efabless.com",
         "owner": "Efabless Corp.",
