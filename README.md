@@ -19,14 +19,9 @@ Generate your public ssh key on your machine, then [Follow this link](https://gi
 
 1.	Clone the IPM GH repository 
 ```bash
-git clone https://github.com/efabless/ipm.git
+pip install ipmgr
 ``` 
-2.	Navigate to the cloned directory and install using pip
-```bash
-cd ipm
-pip install .
-``` 
-3.	To verify it is working run: 
+2.	To verify it is working run: 
 ```bash
 ipm --version
 ``` 
