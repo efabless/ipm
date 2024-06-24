@@ -21,7 +21,7 @@ version = subprocess.check_output(
 )
 
 setup(
-    name="ipm",
+    name="ipmgr",
     packages=find_packages(),
     version=version,
     description="Open-source IPs Package Manager.",
