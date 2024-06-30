@@ -1031,7 +1031,7 @@ def list_verified_ips(category=None, technology=None):
                     platform_ips.append(text)
 
     for ip_name, ip_data in verified_ips.items():
-        if ip_name in platform_ips:
+        if ip_name.upper() in platform_ips:
             if category and not technology:
                 if ip_data["category"] == category:
                     ip_list.append({ip_name: ip_data})
