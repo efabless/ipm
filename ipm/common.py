@@ -24,6 +24,7 @@ from typing import Callable, ClassVar, Dict, Iterable, Optional, Tuple
 
 import click
 import httpx
+import yaml
 from rich.console import Console
 from rich.table import Table
 
@@ -162,14 +163,33 @@ class IPInfo:
         Returns:
             list: list of dicts of all installed ips and their data
         """
+        logger = Logger()
         installed_ips = IPInfo.get_installed_ips(ipm_root)
         installed_ips_arr = []
         for ips in installed_ips:
             for ip_name, ip_version in ips.items():
                 for version in ip_version:
                     json_file = f"{ipm_root}/{ip_name}/{version}/{ip_name}.json"
-                    with open(json_file) as f:
-                        data = json.load(f)
+                    yaml_file = f"{ipm_root}/{ip_name}/{version}/{ip_name}.yaml"
+                    config_path = None
+                    if os.path.exists(json_file):
+                        config_path = json_file
+                    elif os.path.exists(yaml_file):
+                        config_path = yaml_file
+                    else:
+                        logger.print_err(
+                            f"Can't find {json_file} or {yaml_file}. Please refer to the IPM directory structure (IP name {self.ip_name} might be wrong)."
+                        )
+                        return False
+
+                    if config_path.endswith('.json'):
+                        with open(config_path) as config_file:
+                            data = json.load(config_file)
+                    else:
+                        with open(config_path) as config_file:
+                            data = yaml.safe_load(config_file)
+                    # with open(json_file) as f:
+                    #     data = json.load(f)
                     installed_ips_arr.append({data["info"]["name"]: data})
         return installed_ips_arr
 
@@ -529,11 +549,13 @@ class IP:
         table.add_column("Status")
         if extended:
             table.add_column("Bus")
-            table.add_column("Cell count")
-            table.add_column("Clk freq (MHz)")
+            if not local:
+                table.add_column("Cell count")
+                table.add_column("Clk freq (MHz)")
             table.add_column("Width (um)")
             table.add_column("Height (um)")
-            table.add_column("Voltage (v)")
+            if not local:
+                table.add_column("Voltage (v)")
         table.add_column("Technology", style="cyan")
         table.add_column("License", style="magenta")
 
@@ -583,11 +605,11 @@ class IP:
                         table_list.append(value["info"]["status"])
                         if extended:
                             table_list.append(",".join(value["info"]["bus"]))
-                            table_list.append(value["info"]["cell_count"])
-                            table_list.append(value["info"]["clock_freq_mhz"])
+                            # table_list.append(value["info"]["cell_count"])
+                            # table_list.append(value["info"]["clock_freq_mhz"])
                             table_list.append(value["info"]["width"])
                             table_list.append(value["info"]["height"])
-                            table_list.append(",".join(value["info"]["supply_voltage"]))
+                            # table_list.append(",".join(value["info"]["supply_voltage"]))
                         table_list.append(value["info"]["technology"])
                         table_list.append(value["info"]["license"])
                     table.add_row(*table_list)
