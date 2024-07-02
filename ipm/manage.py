@@ -28,6 +28,7 @@ from .common import (
     package_check,
     rm_ip_from_project,
     uninstall_ip,
+    update_ips,
 )
 
 
@@ -191,7 +192,7 @@ def update_cmd(ipm_root, ip_root):
     valid = check_ipm_directory(ipm_root)
     valid_ip_dir = check_ip_root_dir(ip_root)
     if valid and valid_ip_dir:
-        check_ips(ipm_root, update=True, ip_root=ip_root)
+        update_ips(ipm_root, ip_root=ip_root)
 
 
 @click.command("package-check", hidden=True)

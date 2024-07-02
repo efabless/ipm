@@ -1052,6 +1052,37 @@ def list_installed_ips(ipm_root):
     ip_data = IPInfo.get_installed_ip_info(ipm_root)
     IP.create_table(ip_data, local=True, extended=True)
 
+def update_ips(ipm_root, ip_root=None):
+    """checks if the ips installed have newer versions
+
+    Args:
+        ipm_root (str): path to common installation path
+        update (bool, optional): if True, will check and update. Defaults to False.
+        ip_root (str, optional): path to the project ip dict. Defaults to None.
+    """
+    logger = Logger()
+    root = IPRoot(ipm_root, ip_root)
+    installed_ips = root.get_dependencies_object()
+    if len(installed_ips["IP"]) > 0:
+        for ips in installed_ips["IP"]:
+            for ip_name, ip_version in ips.items():
+                verified_ip_info = IPInfo.get_verified_ip_info(ip_name)
+                version = get_latest_version(verified_ip_info["release"])
+                if version not in ip_version:
+                    logger.print_info(
+                        f"Updating IP {ip_name} to [magenta]{version}[/magenta]…"
+                    )
+                    ip = IP.find_verified_ip(ip_name, version, ipm_root)
+                    root.try_add(ip)
+                else:
+                    logger.print_info(
+                        f"IP {ip_name} is the newest version [magenta]{version}[/magenta]."
+                    )
+    else:
+        logger.print_warn(
+            f"No IPs in your project to be updated."
+        )
+
 
 def check_ips(ipm_root, update=False, ip_root=None):
     """checks if the ips installed have newer versions
