@@ -188,6 +188,11 @@ class IPRoot:
 
     def __post_init__(self):
         pathlib.Path(self.path).mkdir(parents=True, exist_ok=True)
+        gitignore_path = os.path.join(self.path, '.gitignore')
+        with open(gitignore_path, 'w') as gitignore_file:
+            gitignore_file.write('*\n')
+            gitignore_file.write('!dependencies.json\n')
+            gitignore_file.write('!.gitignore\n')
 
     @property
     def dependencies_path(self) -> str:
