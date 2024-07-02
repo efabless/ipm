@@ -2891,5 +2891,37 @@
                 "sha256": "0dbc072495e67a2ea9fb12e9468d248d60d364aeb69a4a6b220dd53d2acf273a"
             }
         }
+    },
+    "EF_eFPGA": {
+        "description": "An embedded FPGA.",
+        "repo": "github.com/efabless/EF_eFPGA",
+        "author": "Efabless",
+        "email": "purchase_ip@efabless.com",
+        "owner": "Efabless Corp",
+        "category": "digital",
+        "technology": "sky130",
+        "license": "APACHE 2.0",
+        "tags": [
+            "embedded",
+            "FPGA"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "01-07-2024",
+                "status": "verified",
+                "bus": [
+                    "generic"
+                ],
+                "type": "hard",
+                "width": "2475.0",
+                "height": "2715.0",
+                "cell_count": "0",
+                "clock_freq_mhz": "0",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "65001f81511dd7d7a51ae2d4d7648632ff1c8d3c5e848022cb0dee05f2a7be21"
+            }
+        }
     }
 }
