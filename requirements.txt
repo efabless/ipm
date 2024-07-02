@@ -4,4 +4,5 @@ httpx>=0.22.0,<0.26.0
 click-default-group~=1.2.2
 requests==2.31.0
 beautifulsoup4==4.12.3
+PyYAML==6.0.1
 # bus_wrapper_gen @ git+ssh://git@github.com/efabless/bus_wrapper_gen.git

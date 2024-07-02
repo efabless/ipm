@@ -1043,7 +1043,7 @@ def list_verified_ips(category=None, technology=None):
     verified_ips = IPInfo.get_verified_ip_info()
     ip_list = []
     response = requests.get(PLATFORM_IP_URL)
-
+    print("here")
     # Check if the request was successful
     if response.status_code == 200:
         # Parse the HTML content of the webpage
