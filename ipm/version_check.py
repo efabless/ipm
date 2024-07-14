@@ -40,6 +40,8 @@ def check_for_updates(logger):
         return {}
 
     def save_last_check(data):
+        if not os.path.exists(os.path.join(os.path.expanduser('~'), '.ipm')):
+            os.mkdir(os.path.join(os.path.expanduser('~'), '.ipm'))
         with open(config_file, 'w') as f:
             json.dump(data, f)
 
