@@ -444,6 +444,12 @@ class IPRoot:
         return [t[0] for _, t in so_far.items()]
 
 
+def get_terminal_width():
+        try:
+            return os.get_terminal_size().columns
+        except OSError:
+            return 80  # Default width if terminal size can't be determined
+
 @dataclass
 class IP:
     ip_name: str
@@ -537,7 +543,7 @@ class IP:
 
     @staticmethod
     def create_table(ip_list, version=None, extended=False, local=False):
-        """creates table using rich tables
+        """Creates table using rich tables
 
         Args:
             ip_list (list): list of ips
@@ -545,28 +551,41 @@ class IP:
             extended (bool, optional): extended table (has more info). Defaults to False.
             local (bool, optional): gets the info from local install. Defaults to False.
         """
+        # Define columns with their priorities and fixed widths
+        columns = [
+            ("IP Name", "magenta", 50, 1),
+            ("Category", "cyan", 1, 2),
+            ("Type", None, 8, 3),
+            ("Status", None, 10, 4),
+            ("Tags", None, 20, 5),
+            ("Version", None, 10, 6),
+            ("Owner", None, 15, 7),
+            ("Technology", "cyan", 15, 8),
+            ("License", "magenta", 10, 9),
+            ("Width (um)", None, 10, 10),
+            ("Height (um)", None, 10, 11),
+            ("Voltage (v)", None, 10, 12),
+            ("Clk freq (MHz)", None, 15, 13),
+        ]
+
+        terminal_width = get_terminal_width()
+        total_width = 0
+        included_columns = []
+
+        # Sort columns by priority and select columns that fit within the terminal width
+        columns = sorted(columns, key=lambda x: x[3])
+        for col_name, col_style, col_width, _ in columns:
+            if col_width and total_width + col_width <= terminal_width:
+                total_width += col_width
+                included_columns.append((col_name, col_style, col_width))
+
         table = Table()
         logger = Logger()
         console = Console()
 
-        table.add_column("IP Name", style="magenta")
-        table.add_column("Category", style="cyan")
-        table.add_column("Version")
-        table.add_column("Owner")
-        table.add_column("Type")
-        table.add_column("Tags")
-        table.add_column("Status")
-        if extended:
-            table.add_column("Bus")
-            if not local:
-                table.add_column("Cell count")
-                table.add_column("Clk freq (MHz)")
-            table.add_column("Width (um)")
-            table.add_column("Height (um)")
-            if not local:
-                table.add_column("Voltage (v)")
-        table.add_column("Technology", style="cyan")
-        table.add_column("License", style="magenta")
+        # Add selected columns to the table
+        for col_name, col_style, _ in included_columns:
+            table.add_column(col_name, style=col_style)
 
         for ips in ip_list:
             for key, value in ips.items():
@@ -582,53 +601,49 @@ class IP:
                     version_list.append(value["info"]["version"])
                 for versions in version_list:
                     if not local:
-                        table_list.append(key)
-                        table_list.append(value["category"])
-                        table_list.append(versions)
-                        table_list.append(value["owner"])
-                        table_list.append(value["release"][versions]["type"])
-                        table_list.append(",".join(value["tags"]))
-                        table_list.append(value["release"][versions]["status"])
-                        if extended:
-                            table_list.append(
-                                ",".join(value["release"][versions]["bus"])
-                            )
-                            table_list.append(value["release"][versions]["cell_count"])
-                            table_list.append(
-                                value["release"][versions]["clock_freq_mhz"]
-                            )
-                            table_list.append(value["release"][versions]["width"])
-                            table_list.append(value["release"][versions]["height"])
-                            table_list.append(
-                                ",".join(value["release"][versions]["supply_voltage"])
-                            )
-                        table_list.append(value["technology"])
-                        table_list.append(value["license"])
+                        data_dict = {
+                            "IP Name": key,
+                            "Category": value["category"],
+                            "Type": value["release"][versions]["type"],
+                            "Status": value["release"][versions]["status"],
+                            "Tags": ",".join(value["tags"]),
+                            "Version": versions,
+                            "Owner": value["owner"],
+                            "Technology": value["technology"],
+                            "License": value["license"],
+                            "Width (um)": value["release"][versions]["width"],
+                            "Height (um)": value["release"][versions]["height"],
+                            "Voltage (v)": ",".join(value["release"][versions]["supply_voltage"]),
+                            "Clk freq (MHz)": value["release"][versions]["clock_freq_mhz"]
+                        }
                     if local:
-                        table_list.append(key)
-                        table_list.append(value["info"]["category"])
-                        table_list.append(versions)
-                        table_list.append(value["info"]["owner"])
-                        table_list.append(value["info"]["type"])
-                        table_list.append(",".join(value["info"]["tags"]))
-                        table_list.append(value["info"]["status"])
-                        if extended:
-                            table_list.append(",".join(value["info"]["bus"]))
-                            # table_list.append(value["info"]["cell_count"])
-                            # table_list.append(value["info"]["clock_freq_mhz"])
-                            table_list.append(value["info"]["width"])
-                            table_list.append(value["info"]["height"])
-                            # table_list.append(",".join(value["info"]["supply_voltage"]))
-                        table_list.append(value["info"]["technology"])
-                        table_list.append(value["info"]["license"])
+                        data_dict = {
+                            "IP Name": key,
+                            "Category": value["info"]["category"],
+                            "Type": value["info"]["type"],
+                            "Status": value["info"]["status"],
+                            "Tags": ",".join(value["info"]["tags"]),
+                            "Version": versions,
+                            "Owner": value["info"]["owner"],
+                            "Technology": value["info"]["technology"],
+                            "License": value["info"]["license"],
+                            "Width (um)": value["info"]["width"],
+                            "Height (um)": value["info"]["height"],
+                            # "Voltage (v)": ",".join(value["info"]["supply_voltage"]),
+                            "Clk freq (MHz)": value["info"]["clock_freq_mhz"]
+                        }
+
+                    for col_name, _, _ in included_columns:
+                        table_list.append(str(data_dict[col_name]))
+
                     table.add_row(*table_list)
-                    table_list = []
 
         if len(ip_list) > 0:
             console.print(table)
             logger.print_info(f"Total number of IPs: {len(ip_list)}")
         else:
             logger.print_err("No IPs found")
+
 
     def download_tarball(self, dest_path, no_verify_hash=False):
         """downloads the release tarball
