@@ -22,6 +22,7 @@ import pathlib
 import requests
 from dataclasses import dataclass
 from typing import Callable, ClassVar, Dict, Iterable, Optional, Tuple
+from ipm.version_check import check_for_updates
 
 import click
 import httpx
@@ -916,6 +917,7 @@ def install_ip(ip_name, version, ip_root, ipm_root):
         ipm_root (str): path to common installation path
     """
     logger = Logger()
+    check_for_updates(logger)
 
     root = IPRoot(ipm_root, ip_root)
 
@@ -936,6 +938,7 @@ def uninstall_ip(ip_name, version, ipm_root):
         ipm_root (str): path to common installation path
     """
     logger = Logger()
+    check_for_updates(logger)
 
     try:
         ip = IP.find_verified_ip(ip_name, version, ipm_root)
@@ -958,6 +961,7 @@ def rm_ip_from_project(ip_name, ip_root, ipm_root):
         ip_root (str): path to the project ip dict
     """
     logger = Logger()
+    check_for_updates(logger)
     root = IPRoot(ipm_root, ip_root)
     try:
         installed = root.get_installed_ips()
@@ -977,6 +981,7 @@ def install_using_dep_file(ip_root, ipm_root):
         ipm_root (str): path to common installation path
     """
     logger = Logger()
+    check_for_updates(logger)
     root = IPRoot(ipm_root, ip_root)
 
     try:
@@ -999,6 +1004,7 @@ def check_ipm_directory(ipm_root) -> bool:
         bool: True if it exists, False if it doesn't
     """
     logger = Logger()
+    check_for_updates(logger)
     if ipm_root == IPM_DEFAULT_HOME:
         if os.path.isdir(ipm_root):
             return True
@@ -1025,6 +1031,7 @@ def check_ip_root_dir(ip_root) -> bool:
         bool: True if it exists, False if it doesn't
     """
     logger = Logger()
+    check_for_updates(logger)
     if not os.path.isdir(ip_root):
         logger.print_info(f"ip-root {ip_root} can't be found, will create ip directory")
         os.mkdir(ip_root)
@@ -1043,7 +1050,8 @@ def list_verified_ips(category=None, technology=None):
     verified_ips = IPInfo.get_verified_ip_info()
     ip_list = []
     response = requests.get(PLATFORM_IP_URL)
-    print("here")
+    logger = Logger()
+    check_for_updates(logger)
     # Check if the request was successful
     if response.status_code == 200:
         # Parse the HTML content of the webpage
@@ -1083,6 +1091,7 @@ def list_ip_info(ip_name):
         ip_name (str): name of ip to get info
     """
     logger = Logger()
+    check_for_updates(logger)
     ip_data = IPInfo.get_verified_ip_info(ip_name)
     ip_list = [{ip_name: ip_data}]
     logger.print_success(f"Description: {ip_data['description']}")
@@ -1095,6 +1104,8 @@ def list_installed_ips(ipm_root):
     Args:
         ipm_root (str): path to common installation path
     """
+    logger = Logger()
+    check_for_updates(logger)
     ip_data = IPInfo.get_installed_ip_info(ipm_root)
     IP.create_table(ip_data, local=True, extended=True)
 
@@ -1108,6 +1119,7 @@ def update_ips(ipm_root, ip_root=None, ip_to_update=None):
         update_ip (str, optional): Name of the IP to be updated. Defaults to None.
     """
     logger = Logger()
+    check_for_updates(logger)
     root = IPRoot(ipm_root, ip_root)
     installed_ips = root.get_dependencies_object()
 
@@ -1153,6 +1165,7 @@ def check_ips(ipm_root, update=False, ip_root=None):
         ip_root (str, optional): path to the project ip dict. Defaults to None.
     """
     logger = Logger()
+    check_for_updates(logger)
     installed_ips = IPInfo.get_installed_ips(ipm_root)
     for ips in installed_ips:
         for ip_name, ip_version in ips.items():
@@ -1185,6 +1198,7 @@ def package_check(ipm_root, ip, version, gh_repo):
     """
     checker = Checks(ipm_root, ip, version, gh_repo)
     logger = Logger()
+    check_for_updates(logger)
 
     logger.print_step("[STEP 1]: Checking the Github repo")
     if not checker.check_url(checker.gh_url):
