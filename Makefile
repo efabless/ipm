@@ -1,23 +1,23 @@
-FILE=./requirements_dev.txt
-
 all: dist
-
 .PHONY: dist
-dist: venv/created
-	./venv/bin/python3 setup.py sdist bdist_wheel
+dist: venv/manifest.txt
+	./venv/bin/poetry build
 
 .PHONY: lint
-lint: venv/created
+lint: venv/manifest.txt
 	./venv/bin/black --check .
 	./venv/bin/flake8 .
 
-venv: venv/created
-venv/created: $(FILE)
+venv: venv/manifest.txt
+venv/manifest.txt: ./pyproject.toml
 	rm -rf venv
 	python3 -m venv ./venv
-	./venv/bin/python3 -m pip install wheel
-	./venv/bin/python3 -m pip install -r $(FILE)
-	touch venv/created
+	PYTHONPATH= ./venv/bin/python3 -m pip install --upgrade pip
+	PYTHONPATH= ./venv/bin/python3 -m pip install --upgrade wheel poetry poetry-plugin-export
+	PYTHONPATH= ./venv/bin/poetry export --with dev --without-hashes --format=requirements.txt --output=requirements_tmp.txt
+	PYTHONPATH= ./venv/bin/python3 -m pip install --upgrade -r requirements_tmp.txt
+	PYTHONPATH= ./venv/bin/python3 -m pip freeze > $@
+	@echo ">> Venv prepared."
 
 .PHONY: veryclean
 veryclean: clean
