@@ -182,11 +182,11 @@ class IPInfo:
                         config_path = yaml_file
                     else:
                         logger.print_err(
-                            f"Can't find {json_file} or {yaml_file}. Please refer to the IPM directory structure (IP name {self.ip_name} might be wrong)."
+                            f"Can't find {json_file} or {yaml_file}. Please refer to the IPM directory structure (IP name {ip_name} might be wrong)."
                         )
                         return False
 
-                    if config_path.endswith('.json'):
+                    if config_path.endswith(".json"):
                         with open(config_path) as config_file:
                             data = json.load(config_file)
                     else:
@@ -209,11 +209,11 @@ class IPRoot:
 
     def __post_init__(self):
         pathlib.Path(self.path).mkdir(parents=True, exist_ok=True)
-        gitignore_path = os.path.join(self.path, '.gitignore')
-        with open(gitignore_path, 'w') as gitignore_file:
-            gitignore_file.write('*\n')
-            gitignore_file.write('!dependencies.json\n')
-            gitignore_file.write('!.gitignore\n')
+        gitignore_path = os.path.join(self.path, ".gitignore")
+        with open(gitignore_path, "w") as gitignore_file:
+            gitignore_file.write("*\n")
+            gitignore_file.write("!dependencies.json\n")
+            gitignore_file.write("!.gitignore\n")
 
     @property
     def dependencies_path(self) -> str:
@@ -445,10 +445,11 @@ class IPRoot:
 
 
 def get_terminal_width():
-        try:
-            return os.get_terminal_size().columns
-        except OSError:
-            return 80  # Default width if terminal size can't be determined
+    try:
+        return os.get_terminal_size().columns
+    except OSError:
+        return 80  # Default width if terminal size can't be determined
+
 
 @dataclass
 class IP:
@@ -613,8 +614,12 @@ class IP:
                             "License": value["license"],
                             "Width (um)": value["release"][versions]["width"],
                             "Height (um)": value["release"][versions]["height"],
-                            "Voltage (v)": ",".join(value["release"][versions]["supply_voltage"]),
-                            "Clk freq (MHz)": value["release"][versions]["clock_freq_mhz"]
+                            "Voltage (v)": ",".join(
+                                value["release"][versions]["supply_voltage"]
+                            ),
+                            "Clk freq (MHz)": value["release"][versions][
+                                "clock_freq_mhz"
+                            ],
                         }
                     if local:
                         data_dict = {
@@ -630,7 +635,7 @@ class IP:
                             "Width (um)": value["info"]["width"],
                             "Height (um)": value["info"]["height"],
                             # "Voltage (v)": ",".join(value["info"]["supply_voltage"]),
-                            "Clk freq (MHz)": value["info"]["clock_freq_mhz"]
+                            "Clk freq (MHz)": value["info"]["clock_freq_mhz"],
                         }
 
                     for col_name, _, _ in included_columns:
@@ -643,7 +648,6 @@ class IP:
             logger.print_info(f"Total number of IPs: {len(ip_list)}")
         else:
             logger.print_err("No IPs found")
-
 
     def download_tarball(self, dest_path, no_verify_hash=False):
         """downloads the release tarball
@@ -1070,11 +1074,11 @@ def list_verified_ips(category=None, technology=None):
     # Check if the request was successful
     if response.status_code == 200:
         # Parse the HTML content of the webpage
-        soup = BeautifulSoup(response.content, 'html.parser')
+        soup = BeautifulSoup(response.content, "html.parser")
         platform_ips = []
-        links = soup.find_all('a')
+        links = soup.find_all("a")
         for link in links:
-            href = link.get('href')
+            href = link.get("href")
             if "/design_catalog/ip_block/" in href:
                 text = link.text
                 if "View Details" not in text and "\n\n" not in text:
@@ -1086,11 +1090,15 @@ def list_verified_ips(category=None, technology=None):
                 if ip_data["category"] == category:
                     ip_list.append({ip_name: ip_data})
             elif technology and not category:
-                if ip_data["technology"] == technology or ip_data["technology"] == "n/a":
+                if (
+                    ip_data["technology"] == technology
+                    or ip_data["technology"] == "n/a"
+                ):
                     ip_list.append({ip_name: ip_data})
             elif technology and category:
                 if ip_data["category"] == category and (
-                    ip_data["technology"] == technology or ip_data["technology"] == "n/a"
+                    ip_data["technology"] == technology
+                    or ip_data["technology"] == "n/a"
                 ):
                     ip_list.append({ip_name: ip_data})
             else:
@@ -1123,6 +1131,7 @@ def list_installed_ips(ipm_root):
     check_for_updates(logger)
     ip_data = IPInfo.get_installed_ip_info(ipm_root)
     IP.create_table(ip_data, local=True, extended=True)
+
 
 def update_ips(ipm_root, ip_root=None, ip_to_update=None):
     """checks if the ips installed have newer versions
@@ -1166,9 +1175,7 @@ def update_ips(ipm_root, ip_root=None, ip_to_update=None):
                         f"IP {ip_name} is the newest version [magenta]{version}[/magenta]."
                     )
     else:
-        logger.print_warn(
-            f"No IPs in your project to be updated."
-        )
+        logger.print_warn("No IPs in your project to be updated.")
 
 
 def check_ips(ipm_root, update=False, ip_root=None):
