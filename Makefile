@@ -1,8 +1,7 @@
 all: dist
-
 .PHONY: dist
-dist: venv/created
-	./venv/bin/python3 setup.py sdist bdist_wheel
+dist: venv/manifest.txt
+	./venv/bin/poetry build
 
 .PHONY: lint
 lint: venv/manifest.txt
