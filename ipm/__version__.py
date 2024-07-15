@@ -18,7 +18,7 @@ import importlib.metadata
 
 def __get_version():
     try:
-        return importlib.metadata.version(__package__ or __name__)
+        return importlib.metadata.version("ipmgr")
     except importlib.metadata.PackageNotFoundError:
         import re
 
