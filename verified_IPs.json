@@ -3352,7 +3352,7 @@
         "release": {
             "v1.0.0": {
                 "date": "9-1-2023",
-                "status": "Implemented",
+                "maturity": "Implemented",
                 "bus": [
                     "n/a"
                 ],
