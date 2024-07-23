@@ -3336,5 +3336,34 @@
                 "sha256": "c37aa1bf6f8a5e1965227a1ac84292070838bdf117feab321a6113445ae2bed8"
             }
         }
+    },
+    "EF_DACSCA1001": {
+        "description": "10-Bit Rail-to- Rail Digital-Analog-Converter",
+        "repo": "github.com/efabless/EF_DACSCA1001",
+        "author": "Efabless",
+        "email": "purchase_ip@efabless.com",
+        "owner": "Efabless Corp",
+        "category": "mixed",
+        "technology": "sky130",
+        "license": "APACHE 2.0",
+        "tags": [
+            "Analog comparator"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "9-1-2023",
+                "status": "Implemented",
+                "bus": [
+                    "n/a"
+                ],
+                "type": "hard",
+                "width": "0.365",
+                "height": "0.168",
+                "cell_count": "0",
+                "clock_freq_mhz": "n/a",
+                "supply_voltage": ["3.3V , 1.8V"],
+                "sha256": "85a9eae487e255f83bafa63d6065fa1be33373bb4b5e9d7856bb1691e69cf3b7"
+            }
+        }
     }
 }
