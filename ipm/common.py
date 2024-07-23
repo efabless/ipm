@@ -486,10 +486,6 @@ class IP:
         elif version not in releases:
             raise RuntimeError(f"Version {version} of {ip_name} not found in IP index")
         release = releases[version]
-        if release["status"] != "verified":
-            raise RuntimeError(
-                f"{ip_name}@{version} is not verified and cannot be used."
-            )
         repo: str = meta["repo"]
         if repo.startswith("github.com/"):
             repo = repo[len("github.com/") :]
@@ -902,12 +898,13 @@ def change_dir_to_readonly(dir):
         directory_name: The name of the directory to check.
     """
     for file_name in os.listdir(dir):
-        file_path = os.path.join(dir, file_name)
-        if os.path.isfile(file_path):
-            if os.access(file_path, os.W_OK):
-                os.chmod(file_path, 0o400)
-        else:
-            change_dir_to_readonly(file_path)
+        if "ipm_package.json" not in file_name:
+            file_path = os.path.join(dir, file_name)
+            if os.path.isfile(file_path):
+                if os.access(file_path, os.W_OK):
+                    os.chmod(file_path, 0o400)
+            else:
+                change_dir_to_readonly(file_path)
 
 
 def get_latest_version(data):
