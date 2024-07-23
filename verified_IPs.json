@@ -1107,7 +1107,7 @@
             }
         }
     },
-    "DFFRAM128x32": {
+    "EF_DFFRAM128x32": {
         "description": "512 bytes (128x32) DFFRAM hardened using OpenLane",
         "repo": "github.com/efabless/OL-DFFRAM",
         "author": "Mohamed Shalan",
@@ -1156,7 +1156,7 @@
             }
         }
     },
-    "DFFRAM256x32": {
+    "EF_DFFRAM256x32": {
         "description": "1kbyte (256x32) DFFRAM hardened using OpenLane",
         "repo": "github.com/efabless/OL-DFFRAM",
         "author": "Mohamed Shalan",
@@ -1221,7 +1221,7 @@
             }
         }
     },
-    "DFFRAM512x32": {
+    "EF_DFFRAM512x32": {
         "description": "2kbyte (512x32) DFFRAM hardened using OpenLane",
         "repo": "github.com/efabless/OL-DFFRAM",
         "author": "Mohamed Shalan",
@@ -3309,7 +3309,7 @@
         }
     },
     "EF_R2RVC02": {
-        "description": " Rail-Rail Dual Channel Voltage Comparator, Dual Power Supply.",
+        "description": "Rail-Rail Dual Channel Voltage Comparator, Dual Power Supply.",
         "repo": "github.com/efabless/EF_R2RVC02",
         "author": "Efabless",
         "email": "purchase_ip@efabless.com",
@@ -3332,7 +3332,10 @@
                 "height": "0.0995",
                 "cell_count": "0",
                 "clock_freq_mhz": "n/a",
-                "supply_voltage": ["3.3V , 1.8V"],
+                "supply_voltage": [
+                    "3.3",
+                    "1.8"
+                ],
                 "sha256": "c37aa1bf6f8a5e1965227a1ac84292070838bdf117feab321a6113445ae2bed8"
             }
         }
@@ -3347,7 +3350,7 @@
         "technology": "sky130",
         "license": "APACHE 2.0",
         "tags": [
-            "Analog comparator"
+            "Digital Analog Converter"
         ],
         "release": {
             "v1.0.0": {
@@ -3361,7 +3364,10 @@
                 "height": "0.168",
                 "cell_count": "0",
                 "clock_freq_mhz": "n/a",
-                "supply_voltage": ["3.3V , 1.8V"],
+                "supply_voltage": [
+                    "3.3",
+                    "1.8"
+                ],
                 "sha256": "089fb983e1f42ed95ce9f3592b3a5252f046c31cd0b8346590e13598c2fc2d6d"
             }
         }
