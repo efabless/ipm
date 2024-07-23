@@ -31,7 +31,7 @@
     // hard/soft
     "type": "hard",
     // np (not proven), fpga (proven), silicon (proven), 
-    "status": "silicon",
+    "maturity": "silicon",
     // width and height in mm
     "width": "0.25",
     "height": "0.2"

@@ -175,7 +175,7 @@ Your ```<ip>.json``` file should look like:
             "<APB|AHBL|WB|generic>"
         ],
         "type": "<hard|soft|firm|hybrid",
-        "status": "<Verified|FPGA Validated|SI Validated|Production Ready>",
+        "maturity": "<Verified|FPGA Validated|SI Validated|Production Ready>",
         "cell_count": "<number of cells in ip>",
         "width": "<width of IP in um>",
         "height": "<height of IP in um>",
