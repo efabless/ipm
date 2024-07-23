@@ -4,6 +4,7 @@ on:
   push:
     paths-ignore:
       - 'versions.py'
+      - 'verified_IPs.json'
     branches:
       - main
 
