@@ -15,7 +15,7 @@
         "release": {
             "v1.0.0": {
                 "date": "4-01-2023",
-                "maturity": "verified",
+                "maturity": "Implemented",
                 "bus": [
                     "AHBL",
                     "WB"
@@ -99,7 +99,7 @@
             },
             "v1.0.3": {
                 "date": "4-01-2023",
-                "maturity": "verified",
+                "maturity": "Integrated",
                 "bus": [
                     "AHBL",
                     "WB"
@@ -116,7 +116,7 @@
             },
             "v1.0.4": {
                 "date": "07-05-2024",
-                "maturity": "verified",
+                "maturity": "Implemented",
                 "bus": [
                     "AHBL"
                 ],
@@ -260,7 +260,7 @@
             },
             "v1.1.6": {
                 "date": "20-5-2024",
-                "maturity": "verified",
+                "maturity": "Integrated",
                 "bus": [
                     "generic"
                 ],
@@ -293,7 +293,7 @@
         "release": {
             "v1.0.0": {
                 "date": "3-18-2023",
-                "maturity": "verified",
+                "maturity": "Integrated",
                 "bus": [
                     "generic"
                 ],
@@ -343,7 +343,7 @@
             },
             "v1.0.1": {
                 "date": "3-18-2023",
-                "maturity": "verified",
+                "maturity": "Integrated",
                 "bus": [
                     "generic"
                 ],
@@ -569,7 +569,7 @@
             },
             "v1.0.9": {
                 "date": "09-07-2024",
-                "maturity": "verified",
+                "maturity": "Integrated",
                 "bus": [
                     "generic"
                 ],
@@ -715,7 +715,7 @@
             },
             "v1.0.2": {
                 "date": "1-01-2020",
-                "maturity": "verified",
+                "maturity": "Integrated",
                 "bus": [
                     "AHBL"
                 ],
@@ -748,7 +748,7 @@
         "release": {
             "v1.0.0": {
                 "date": "30-8-2023",
-                "maturity": "verified",
+                "maturity": "Integrated",
                 "bus": [
                     "generic"
                 ],
@@ -764,7 +764,7 @@
             },
             "v1.0.1": {
                 "date": "08-5-2024",
-                "maturity": "verified",
+                "maturity": "Implemented",
                 "bus": [
                     "generic"
                 ],
@@ -797,7 +797,7 @@
         "release": {
             "v1.0.0": {
                 "date": "30-8-2023",
-                "maturity": "verified",
+                "maturity": "Integrated",
                 "bus": [
                     "generic"
                 ],
@@ -813,7 +813,7 @@
             },
             "v1.0.1": {
                 "date": "08-5-2023",
-                "maturity": "verified",
+                "maturity": "Implemented",
                 "bus": [
                     "generic"
                 ],
@@ -862,7 +862,7 @@
             },
             "v1.0.1": {
                 "date": "9-05-2023",
-                "maturity": "verified",
+                "maturity": "Implemented",
                 "bus": [
                     "generic"
                 ],
@@ -896,7 +896,7 @@
         "release": {
             "v1.0.0": {
                 "date": "1-9-2023",
-                "maturity": "verified",
+                "maturity": "Implemented",
                 "bus": [
                     "generic"
                 ],
@@ -913,7 +913,7 @@
             },
             "v1.0.1": {
                 "date": "1-9-2023",
-                "maturity": "verified",
+                "maturity": "Implemented",
                 "bus": [
                     "generic"
                 ],
@@ -930,7 +930,7 @@
             },
             "v1.0.2": {
                 "date": "1-9-2023",
-                "maturity": "verified",
+                "maturity": "Implemented",
                 "bus": [
                     "generic"
                 ],
@@ -1011,7 +1011,7 @@
             },
             "v1.0.3": {
                 "date": "20-05-2024",
-                "maturity": "verified",
+                "maturity": "Integrated",
                 "bus": [
                     "generic"
                 ],
@@ -1445,7 +1445,7 @@
             },
             "v2.0.7": {
                 "date": "11-06-2024",
-                "maturity": "verified",
+                "maturity": "Integrated",
                 "bus": [
                     "generic"
                 ],
@@ -1542,7 +1542,7 @@
             },
             "v1.0.4": {
                 "date": "09-07-2024",
-                "maturity": "verified",
+                "maturity": "Integrated",
                 "bus": [
                     "generic"
                 ],
@@ -2239,7 +2239,7 @@
             },
             "v1.0.9": {
                 "date": "29-10-2023",
-                "maturity": "verified",
+                "maturity": "Integrated",
                 "bus": [
                     "generic"
                 ],
@@ -2255,7 +2255,7 @@
             },
             "v1.0.10": {
                 "date": "20-5-2024",
-                "maturity": "verified",
+                "maturity": "Implemented",
                 "bus": [
                     "generic"
                 ],
@@ -2528,7 +2528,7 @@
             },
             "v1.1.10": {
                 "date": "09-07-2024",
-                "maturity": "verified",
+                "maturity": "Integrated",
                 "bus": [
                     "generic"
                 ],
@@ -2562,7 +2562,7 @@
         "release": {
             "v1.0.0": {
                 "date": "3-18-2023",
-                "maturity": "verified",
+                "maturity": "Integrated",
                 "bus": [
                     "generic"
                 ],
@@ -2611,7 +2611,7 @@
             },
             "v1.0.1": {
                 "date": "3-18-2023",
-                "maturity": "verified",
+                "maturity": "Integrated",
                 "bus": [
                     "generic"
                 ],
@@ -2789,7 +2789,7 @@
             },
             "v1.0.8": {
                 "date": "09-07-2024",
-                "maturity": "verified",
+                "maturity": "Integrated",
                 "bus": [
                     "APB"
                 ],
@@ -2953,7 +2953,7 @@
             },
             "v1.0.8": {
                 "date": "08-07-2024",
-                "maturity": "verified",
+                "maturity": "Integrated",
                 "bus": [
                     "generic"
                 ],
@@ -3114,7 +3114,7 @@
             },
             "v1.0.8": {
                 "date": "09-07-2024",
-                "maturity": "verified",
+                "maturity": "Integrated",
                 "bus": [
                     "generic"
                 ],
@@ -3178,7 +3178,7 @@
             },
             "v1.1.1": {
                 "date": "28-05-2024",
-                "maturity": "verified",
+                "maturity": "Integrated",
                 "bus": [
                     "generic"
                 ],
@@ -3260,7 +3260,7 @@
             },
             "v1.0.1": {
                 "date": "24-06-2024",
-                "maturity": "verified",
+                "maturity": "Integrated",
                 "bus": [
                     "generic"
                 ],
@@ -3292,7 +3292,7 @@
         "release": {
             "v1.0.0": {
                 "date": "01-07-2024",
-                "maturity": "verified",
+                "maturity": "Integrated",
                 "bus": [
                     "generic"
                 ],
