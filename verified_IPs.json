@@ -2802,6 +2802,22 @@
                     "n/a"
                 ],
                 "sha256": "bc666974033ed0733055ce88567318198fedebabd9eb421ad2b06bdcd698fcae"
+            },
+            "v1.0.9": {
+                "date": "29-07-2024",
+                "status": "verified",
+                "bus": [
+                    "APB"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "0",
+                "clock_freq_mhz": "n/a",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "af3f7edda708786872b886879d952e9a2421d0afc8192950aadf3d0d6068e51c"
             }
         }
     },
