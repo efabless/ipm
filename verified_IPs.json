@@ -2805,7 +2805,7 @@
             },
             "v1.0.9": {
                 "date": "29-07-2024",
-                "status": "verified",
+                "maturity": "Integrated",
                 "bus": [
                     "APB"
                 ],
