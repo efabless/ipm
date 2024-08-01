@@ -173,13 +173,13 @@ def rm(ip_root, ip, ipm_root):
         rm_ip_from_project(ip, ip_root, ipm_root)
 
 
-@click.command("check")
-@opt_ipm_root
-def check_cmd(ipm_root):
-    """Check for new versions of all installed IPs or a specific IP."""
-    valid = check_ipm_directory(ipm_root)
-    if valid:
-        check_ips(ipm_root)
+# @click.command("check")
+# @opt_ipm_root
+# def check_cmd(ipm_root):
+#     """Check for new versions of all installed IPs or a specific IP."""
+#     valid = check_ipm_directory(ipm_root)
+#     if valid:
+#         check_ips(ipm_root)
 
 
 @click.command("update")
@@ -196,13 +196,13 @@ def update_cmd(ipm_root, ip_root, ip):
         update_ips(ipm_root, ip_root=ip_root, ip_to_update=ip)
 
 
-@click.command("package-check", hidden=True)
-@click.option("--name", required=True, help="Provide IP name")
-@click.option("--version", required=True, help="Provide IP version")
-@click.option("--url", required=True, help="Provide IP url")
-@opt_ipm_root
-def package_check_cmd(ipm_root, name, version, url):
-    """Check packaged IP."""
-    valid = check_ipm_directory(ipm_root)
-    if valid:
-        package_check(ipm_root, name, version, url)
+# @click.command("package-check", hidden=True)
+# @click.option("--name", required=True, help="Provide IP name")
+# @click.option("--version", required=True, help="Provide IP version")
+# @click.option("--url", required=True, help="Provide IP url")
+# @opt_ipm_root
+# def package_check_cmd(ipm_root, name, version, url):
+#     """Check packaged IP."""
+#     valid = check_ipm_directory(ipm_root)
+#     if valid:
+#         package_check(ipm_root, name, version, url)
