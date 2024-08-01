@@ -1,6 +1,6 @@
 all: dist
 .PHONY: dist
-dist: venv/manifest.txt
+dist: veryclean venv/manifest.txt
 	./venv/bin/poetry build
 
 .PHONY: lint
@@ -23,6 +23,10 @@ venv/manifest.txt: ./pyproject.toml
 veryclean: clean
 veryclean:
 	rm -rf venv/
+
+.PHONY: update_package
+update_package: dist
+	python3 -m twine upload dist/* 
 
 .PHONY: clean
 clean:
