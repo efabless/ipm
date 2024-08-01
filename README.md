@@ -1,90 +1,115 @@
-# ipm
-IPM is an open-source IPs Package Manager; it is meant to provide a mean for distributing high quality open-source IPs.
-
-## ACCESS TO PRIVATE REPOS
-**This is temporary step until IPM is publicly announced and IPs are all public**
-
-### Create Github Token
-To create a Personal Github Token [Follow this link](https://github.com/settings/tokens), make sure to check the boxes `repo`, `workflow` and `write:packages`.
-
-### Export Github Token
-```bash
-export GITHUB_TOKEN=<your_github_token>
-```
-
-### Give Github Access to ssh public key
-Generate your public ssh key on your machine, then [Follow this link](https://github.com/settings/keys) to add it to your github account.
+# IPM
+IPM is an open-source ChipIgnite Program IPs Package Manager; it is meant to provide a mean for distributing high quality IPs. IPM is tied to the IPs that can be found in [Efabless Market Place](https://platform.efabless.com/design_catalog/ip_block).
 
 ## Installation
 
-1.	Clone the IPM GH repository 
+IPM is now on PyPi, you can install it using this command:
+
 ```bash
 pip install ipmgr
-``` 
-2.	To verify it is working run: 
+```
+
+To verify it is working run: 
+
 ```bash
 ipm --version
 ``` 
 
-## Usage
+# Usage
 
-### Listing all Verified IPs
+## List all available IPs
+You can do that by visiting the [Efabless Market Place](https://platform.efabless.com/design_catalog/ip_block), Or using this command
 ```bash
 ipm ls-remote
 ``` 
-Lists all verified IPs supported by IPM, and verified by efabless, it shows the primary details about the IPs.
 
-### Getting more info about an IP
+## Get more info about a specific IP from the CLI
 ```bash
 ipm info <ip_name>
 ```
-Gives more details about a specific IP.
 
-### Listing Installed IPs
+## Install IP
 ```bash
-ipm ls
+ipm install <IP_NAME> [OPTIONS]
 ``` 
-Lists all locally installed IPs on the machine.
+**Options:**
 
-### Installing an IP
+  `--version`   Install IP with a specific version
+
+  `--ip-root`   IP installation path [default: `{PWD}/ip`]
+
+  `--ipm-root`  Path to the IPM root where the IPs will reside  [default: `~/.ipm`]
+
+  `--help`          Show this message and exit
+
+> [!NOTE]  
+> IPM installs the IPs in a shared directory `ipm-root` which is by default set to `~/.ipm`, then it will create a symlink to `ip-root` which is by default set to `{PWD}/ip`.
+
+> [!TIP]  
+> IPM will create a `dependencies.json` file under `ip-root`, which will have all the IPs that you used in your project. Push this file to your repo in order to have a reproducible project.
+
+## Install IPs from dependencies file
 ```bash
-ipm install <ip_name> [OPTIONS]
+ipm install-dep [OPTIONS]
 ``` 
-Installs the IP by default in `{PWD}/ip`, you can also specify the ip installation directory using `--ip-root`. The user must provide a valid `ip_name`, to check all available IPs run `ipm ls-remote`. 
-To install a specific version of the IP you can specify it using `--version <version>`
-While IPM is installing the IP, if the IP's bus is `generic` it will create bus wrappers for `AHBL`, `APB`, `WB` and will create firmware `fw`, using [bus wrapper generator tool](https://github.com/efabless/bus_wrapper_gen)
+**Options:**
 
-### Installing IPs from dependencies file
+  `--ip-root`    IP path [default: `{PWD}/ip/dependencies.json`]
+
+  `--ipm-root`  Path to the IPM root where the IPs will reside  [default: `~/.ipm`]
+
+  `--help`           Show this message and exit
+> [!NOTE]
+> This will download the IPs in the `dependencies.json`, with the same versions that it used inside the file
+
+## Uninstalling IPs
 ```bash
-ipm install-dep <ip_name> [OPTIONS]
+ipm uninstall <IP_NAME> [OPTIONS]
 ``` 
-Installs IPs specified in a dependencies file, by default it looks in `{PWD}/ip/dependencies.json`. You can specify the dependencies file location using `--ip-root`
+**Options:**
 
-### Uninstalling an IP
-```bash
-ipm uninstall <ip_name>
-``` 
-Uninstalls a locally installed IP. The user must provide a valid installed ```ip_name```, to check all installed IPs run ```ipm ls```. It is advised to always use this function when you wish to remove an IP. If you deleted the folder manually or renamed it this function may face errors
+  `--version`     Uninstall IP with a specific version
 
-### Remove IP from project
+  `-f, --force` Forces the uninstall
+
+  `--ipm-root`   Path to the IPM root where the IPs will reside  [default: `~/.ipm`]
+
+  `--help`            Show this message and exit
+> [!TIP]
+> It is advised to use this command rather than deleting the IP manually
+
+## Remove IP from project
 ```bash
-ipm rm <ip_name>
+ipm rm <IP_NAME> [OPTIONS]
 ```
-Removes the IP from the project, but doesn't uninstall it from the machine, to uninstall from machine use `ipm uninstall`, it is advised to `rm` from project before uninstalling.
+**Options:**
 
-### Checking for Updates
-```bash
-ipm check [OPTIONS]
-``` 
-Checks if there are newer versions available for the installed IPs. The function by default checks all the installed IPs for updates.
+  `--ipm-root`  Path to the IPM root where the IPs are installed  [default: `~/.ipm`]
 
-### Updating Installed IP
+  `--ip-root`      IP path [default: `{PWD}/ip`]
+
+  `--help`             Show this message and exit
+
+## Update IP
 ```bash
-ipm update [OPTIONS]
+ipm update [IP_NAME][OPTIONS]
 ``` 
-Updates the IP if an update is available.
+**Options:**
+
+  `--ipm-root`  Path to the IPM root where the IPs will reside  [default: `~/.ipm`]
+
+  `--ip-root`    IP path [default: `{PWD}/ip`]
+
+  `--help`           Show this message and exit
+
+> [!NOTE]
+> If an IP_NAME is provided it will only update this IP, if not it will update all installed IPs
 
 ## Adding your IP to IPM
+
+> [!CAUTION]
+> The next part is a WIP, and for now only Efabless can add IPs to IPM and the market place. If you are interested in adding your own IP please contact Efabess.
+
 To add your own IP to our package manager, you should follow these steps:
 
 ### 1. Package your IP with the following folder structure:
