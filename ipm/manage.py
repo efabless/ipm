@@ -202,6 +202,9 @@ def update_cmd(ipm_root, ip_root, ip):
     default=os.getcwd(),
     help="IP path",
 )
-def check_ip_cmd(ip_root):
+@click.option(
+    "--ip-name", required=False, help="IP name"
+)
+def check_ip_cmd(ip_root, ip_name):
     """Checks IPs for usability with IPM."""
-    check_ip(ip_root)
+    check_ip(ip_root, ip_name)

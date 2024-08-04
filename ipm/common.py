@@ -1218,11 +1218,14 @@ def update_ips(ipm_root, ip_root=None, ip_to_update=None):
     else:
         logger.print_warn("No IPs in your project to be updated.")
 
-def check_ip(ip_root):
+def check_ip(ip_root, ip_name=None):
     logger = Logger()
 
     # Step 1: check Yaml file
-    yaml_info_file = os.path.join(ip_root, f"{os.path.basename(ip_root)}.yaml")
+    if not ip_name:
+        yaml_info_file = os.path.join(ip_root, f"{os.path.basename(ip_root)}.yaml")
+    else:
+        yaml_info_file = os.path.join(ip_root, f"{ip_name}.yaml")
     logger.print_step("[STEP 1]: Check if Yaml file exists")
     if os.path.exists(yaml_info_file):
         logger.print_success(f"Yaml file exists at {yaml_info_file}")
@@ -1232,7 +1235,7 @@ def check_ip(ip_root):
     
     # Step 2: Check content of Yaml file
     logger.print_step("[STEP 2]: Check content of Yaml file")
-    checker = Checks(ip_root, os.path.basename(ip_root))
+    checker = Checks(ip_root, ip_name)
     if checker.check_yaml():
         logger.print_success("Yaml content check passed")
     else:
