@@ -22,20 +22,41 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y jq
         pip install ipmgr
-
+        - name: Create results file
+        run: echo "" > results.txt
+  
     - name: Read and process JSON
       id: process_json
       run: |
         # Extract IP names and their latest version
         jq -r 'to_entries[] | "\(.key) \(.value.release | keys_unsorted | .[0])"' verified_IPs.json > ip_versions.txt
-  
+
     - name: Install and verify IPs
       run: |
         # Loop through each IP and version
         while read -r NAME VERSION; do
           echo "Processing $NAME with version $VERSION"
-          ipm install "$NAME"
-          ipm check-ip --ip-root ~/.ipm/"$NAME"/"$VERSION" --ip-name "$NAME"
+          if ipm install "$NAME"; then
+            cd "$NAME"
+            if ipm check-ip --ip-root ~/.ipm/"$NAME"/"$VERSION" --ip-name "$NAME"; then
+              echo "$NAME: PASSED" >> ../results.txt
+            else
+              echo "$NAME: FAILED during check-ip" >> ../results.txt
+            fi
+            cd ..
+          else
+            echo "$NAME: FAILED during install" >> results.txt
+          fi
         done < ip_versions.txt
+
+    - name: Output results
+      run: cat results.txt
+
+    - name: Fail job if any IP failed
+      run: |
+        if grep -q "FAILED" results.txt; then
+          echo "Some IPs failed. See results above."
+          exit 1
+        fi
 
       shell: bash
