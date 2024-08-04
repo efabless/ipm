@@ -39,9 +39,9 @@ jobs:
           echo "Processing $NAME with version $VERSION"
           if ipm install "$NAME"; then
             if ipm check-ip --ip-root ~/.ipm/"$NAME"/"$VERSION" --ip-name "$NAME"; then
-              echo "$NAME: PASSED" >> ../results.txt
+              echo "$NAME: PASSED" >> results.txt
             else
-              echo "$NAME: FAILED during check-ip" >> ../results.txt
+              echo "$NAME: FAILED during check-ip" >> results.txt
             fi
           else
             echo "$NAME: FAILED during install" >> results.txt
