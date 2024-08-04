@@ -21,7 +21,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y jq
-        pip install ipmgr
+        pip install ipmgr --upgrade --no-cache-dir
 
     - name: Create results file
       run: echo "" > results.txt
