@@ -30,7 +30,7 @@ jobs:
       id: process_json
       run: |
         # Extract IP names and their latest version
-        jq -r 'to_entries[] | "\(.key) \(.value.release | keys_unsorted | .[0])"' verified_IPs.json > ip_versions.txt
+        jq -r 'to_entries[] | "\(.key) \(.value.release | keys | last)"' verified_IPs.json > ip_versions.txt
 
     - name: Install and verify IPs
       run: |
