@@ -25,7 +25,7 @@ jobs:
 
     - name: Create results file
       run: echo "" > results.txt
-  
+
     - name: Read and process JSON
       id: process_json
       run: |
@@ -38,10 +38,15 @@ jobs:
         while read -r NAME VERSION; do
           echo "Processing $NAME with version $VERSION"
           if ipm install "$NAME"; then
-            if ipm check-ip --ip-root ~/.ipm/"$NAME"/"$VERSION" --ip-name "$NAME"; then
+            # Redirect both stdout and stderr to a log file
+            if ipm check-ip --ip-root ~/.ipm/"$NAME"/"$VERSION" --ip-name "$NAME" > check_ip.log 2>&1; then
               echo "$NAME: PASSED" >> results.txt
             else
+              # Capture the last 10 lines of the log to determine the failure step
+              FAILURE_LOG=$(tail -n 10 check_ip.log)
               echo "$NAME: FAILED during check-ip" >> results.txt
+              echo "$NAME failure details:" >> results.txt
+              echo "$FAILURE_LOG" >> results.txt
             fi
           else
             echo "$NAME: FAILED during install" >> results.txt
