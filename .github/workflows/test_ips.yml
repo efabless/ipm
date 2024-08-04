@@ -1,0 +1,40 @@
+name: Verify and Install IPs
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  verify_install:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install jq
+        pip install ipmgr
+
+    - name: Read and process JSON
+      id: process_json
+      run: |
+        # Read the names from the JSON file
+        IP_NAMES=$(jq -r 'keys | .[]' verified_IPs.json)
+
+        # Run commands for each IP name
+        for NAME in $IP_NAMES; do
+          echo "Processing $NAME"
+          ipm install "$NAME"
+          cd ip/"$NAME"
+          ipm check-ip
+          cd -
+        done
+
+      shell: bash
