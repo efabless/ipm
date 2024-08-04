@@ -19,22 +19,25 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install jq
+        sudo apt-get update
+        sudo apt-get install -y jq
         pip install ipmgr
 
     - name: Read and process JSON
       id: process_json
       run: |
-        # Read the names from the JSON file
-        IP_NAMES=$(jq -r 'keys | .[]' verified_IPs.json)
-
-        # Run commands for each IP name
-        for NAME in $IP_NAMES; do
-          echo "Processing $NAME"
+        # Extract IP names and their latest version
+        jq -r 'to_entries[] | "\(.key) \(.value.release | keys_unsorted | .[0])"' verified_IPs.json > ip_versions.txt
+  
+    - name: Install and verify IPs
+      run: |
+        # Loop through each IP and version
+        while read -r NAME VERSION; do
+          echo "Processing $NAME with version $VERSION"
           ipm install "$NAME"
-          cd ip/"$NAME"
-          ipm check-ip
-          cd -
-        done
+          cd "$NAME"
+          ipm check-ip --ip-root ~/.ipm/"$NAME"/"$VERSION" --ip-name "$NAME"
+          cd ..
+        done < ip_versions.txt
 
       shell: bash
