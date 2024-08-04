@@ -35,9 +35,7 @@ jobs:
         while read -r NAME VERSION; do
           echo "Processing $NAME with version $VERSION"
           ipm install "$NAME"
-          cd "$NAME"
           ipm check-ip --ip-root ~/.ipm/"$NAME"/"$VERSION" --ip-name "$NAME"
-          cd ..
         done < ip_versions.txt
 
       shell: bash
