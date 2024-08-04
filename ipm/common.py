@@ -779,8 +779,16 @@ class Checks:
             bool: True if can be accessed, False if failed to access
         """
 
-        repo_response = GitHubSession().get(url)
-        return (repo_response.status_code // 100) == 2
+        logger = Logger()
+        if not url.startswith(('http://', 'https://')):
+            url = 'https://' + url
+
+        try:
+            repo_response = GitHubSession().get(url)
+            return (repo_response.status_code // 100) == 2
+        except Exception as e:
+            logger.print_err(f"Failed to access URL: {url}. Error: {str(e)}")
+            return False
 
     def check_yaml(self):
         """checks the json if it has all the variables needed
