@@ -14,6 +14,7 @@
 # limitations under the License.
 import os
 import json
+import re
 import shutil
 import tarfile
 import tempfile
@@ -759,21 +760,14 @@ class IP:
 
 
 class Checks:
-    def __init__(self, ipm_root, ip_name, version, gh_url) -> None:
-        if gh_url.startswith("https"):
-            self.gh_url = gh_url
-        else:
-            self.gh_url = f"https://{gh_url}"
-        self.release_tag_url = f"{self.gh_url}/releases/tag/{version}"
-        self.release_tarball_url = (
-            f"{self.gh_url}/releases/download/{version}/{version}.tar.gz"
-        )
-        self.package_check_path = os.path.join(ipm_root, f"{ip_name}_pre-check")
-        if os.path.exists(self.package_check_path):
-            shutil.rmtree(self.package_check_path)
+    def __init__(self, ip_root, ip_name, version=None, category=None, maturity=None, technology=None, type=None) -> None:
         self.version = version
-        self.ipm_root = ipm_root
         self.ip_name = ip_name
+        self.category= category
+        self.maturity= maturity
+        self.technology = technology
+        self.type = type
+        self.ip_root = ip_root
 
     def check_url(self, url):
         """checks if url can be accessed
@@ -788,61 +782,73 @@ class Checks:
         repo_response = GitHubSession().get(url)
         return (repo_response.status_code // 100) == 2
 
-    def download_check_tarball(self):
-        """downloads the tarball of package checker"""
-        ip = IP(self.ip_name, ipm_root=self.ipm_root, version=self.version)
-        ip.download_tarball(
-            self.package_check_path,
-            no_verify_hash=True,
-        )
-
-    def check_json(self):
+    def check_yaml(self):
         """checks the json if it has all the variables needed
 
         Returns:
             bool: True if all json fields exist, False if they don't
         """
         logger = Logger()
-        json_path = f"{self.package_check_path}/{self.ip_name}.json"
-        if not os.path.exists(json_path):
+        yaml_path = f"{self.ip_root}/{self.ip_name}.yaml"
+        if not os.path.exists(yaml_path):
             logger.print_err(
-                f"Can't find {json_path} please refer to the ipm directory structure (IP name {self.ip_name} might be wrong)"
+                f"Can't find {yaml_path} please refer to the ipm directory structure (IP name {self.ip_name} might be wrong)"
             )
             return False
-        json_fields = [
+        yaml_fields = [
             "name",
+            "description",
             "repo",
-            "version",
+            "owner",
+            "license",
             "author",
             "email",
+            "version",
             "date",
-            "type",
             "category",
+            "tags",
+            "bus",
+            "type",
             "maturity",
             "width",
             "height",
             "technology",
-            "tags",
-            "cell_count",
+            "digital_supply_voltage",
+            "analog_supply_voltage",
             "clock_freq_mhz",
-            "license",
+            "cell_count"
         ]
         flag = True
-        with open(json_path) as json_file:
-            json_decoded = json.load(json_file)
+        with open(yaml_path) as json_file:
+            data = yaml.safe_load(json_file)
+            info = data.get("info", {})
 
-        if self.ip_name != json_decoded["name"]:
+        if self.ip_name != info["name"]:
             logger.print_err(
-                f"The given IP name {self.ip_name} is not the same as the one in json file"
+                f"The given IP name {self.ip_name} is not the same as the one in yaml file"
+            )
+            flag = False
+        
+        if not self.check_url(info['repo']):
+            logger.print_err(
+                f"The repo {info['repo']} is incorrect"
             )
             flag = False
 
-        for field in json_fields:
-            if field not in json_decoded.keys():
+        for field in yaml_fields:
+            if field not in info:
                 logger.print_err(
-                    f"The field '{field}' was not included in the {self.ip_name}.json file"
+                    f"The field '{field}' was not included in the {self.ip_name}.yaml file"
                 )
                 flag = False
+        
+        if flag:
+            self.gh_url = info['repo']
+            self.version = info['version']
+            self.maturity = info['maturity']
+            self.category = info['category']
+            self.technology = info['technology']
+            self.type = info['type']
 
         return flag
 
@@ -853,13 +859,9 @@ class Checks:
             bool: True if hierarchy is correct, False if it is not
         """
         logger = Logger()
-        json_path = f"{self.package_check_path}/{self.ip_name}.json"
-        ip_path = f"{self.package_check_path}"
         common_dirs = ["verify/beh_model", "fw", "hdl/rtl/bus_wrapper"]
-        with open(json_path) as json_file:
-            data = json.load(json_file)
         # check the folder hierarchy
-        if data["type"] == "hard":
+        if self.type == "hard":
             ipm_dirs = [
                 "hdl/gl",
                 "timing/lib",
@@ -868,27 +870,69 @@ class Checks:
                 "layout/gds",
                 "layout/lef",
             ]
-        elif data["type"] == "soft" and data["category"] == "digital":
-            ipm_dirs = ["hdl/rtl/design", "verify/utb", "pnr"]
-        if data["category"] == "analog":
+        elif self.type == "soft" and self.category == "digital":
+            ipm_dirs = ["verify/utb"]
+        if self.category == "analog":
             ipm_dirs = ["spice"]
         ipm_dirs = ipm_dirs + common_dirs
-        ipm_files = [f"{self.ip_name}.json", "readme.md", "doc/datasheet.pdf"]
+        ipm_files = [f"{self.ip_name}.yaml", "README.md", "doc/datasheet.pdf"]
         flag = True
         for dirs in ipm_dirs:
-            if not os.path.exists(os.path.join(ip_path, dirs)):
+            if not os.path.exists(os.path.join(self.ip_root, dirs)):
                 logger.print_err(
-                    f"The directory {dirs} cannot be found under {ip_path} please refer to the ipm directory structure"
+                    f"The directory {dirs} cannot be found under {self.ip_root} please refer to the ipm directory structure"
                 )
                 flag = False
 
         for files in ipm_files:
-            if not os.path.exists(os.path.join(ip_path, files)):
+            if not os.path.exists(os.path.join(self.ip_root, files)):
                 logger.print_err(
-                    f"The file {files} cannot be found under {ip_path} please refer to the ipm directory structure"
+                    f"The file {files} cannot be found under {self.ip_root} please refer to the ipm directory structure"
                 )
                 flag = False
         return flag
+    
+    def read_readme(self, file_path):
+        """Reads the content of a README file."""
+        with open(file_path, 'r', encoding='utf-8') as file:
+            return file.read()
+
+    def has_minimum_word_count(self, content, min_words=100):
+        """Checks if the content has at least min_words words."""
+        words = content.split()
+        return len(words) >= min_words
+
+    def check_required_sections(self, content, sections):
+        """Checks if the content includes specific sections and returns any missing ones."""
+        missing_sections = []
+        for section in sections:
+            if not re.search(rf'^\s*#*\s*{re.escape(section)}', content, re.MULTILINE | re.IGNORECASE):
+                missing_sections.append(section)
+        return missing_sections
+
+    def analyze_readme(self):
+        """Analyzes the README file for significant documentation."""
+        file_path = os.path.join(self.ip_root, "README.md")
+        content = self.read_readme(file_path)
+        logger = Logger()
+        # Check if README has significant content
+        if not self.has_minimum_word_count(content):
+            logger.print_err(f"The README file does not meet the minimum word count requirement.")
+            return False
+        
+        # Define required sections
+        required_sections = [
+            "Overview", "Installation", "Features", "Block Diagram", 
+            "Pin Description", "Specifications", "Timing Diagram", "Tapeout History"
+        ]
+        
+        # Check for missing sections
+        missing_sections = self.check_required_sections(content, required_sections)
+        if missing_sections:
+            logger.print_err(f"The README file is missing the following sections: {', '.join(missing_sections)}")
+            return False
+        
+        return True
 
 
 def change_dir_to_readonly(dir):
@@ -1174,80 +1218,39 @@ def update_ips(ipm_root, ip_root=None, ip_to_update=None):
     else:
         logger.print_warn("No IPs in your project to be updated.")
 
-
-def check_ips(ipm_root, update=False, ip_root=None):
-    """checks if the ips installed have newer versions
-
-    Args:
-        ipm_root (str): path to common installation path
-        update (bool, optional): if True, will check and update. Defaults to False.
-        ip_root (str, optional): path to the project ip dict. Defaults to None.
-    """
+def check_ip(ip_root):
     logger = Logger()
-    check_for_updates(logger)
-    installed_ips = IPInfo.get_installed_ips(ipm_root)
-    for ips in installed_ips:
-        for ip_name, ip_version in ips.items():
-            verified_ip_info = IPInfo.get_verified_ip_info(ip_name)
-            version = get_latest_version(verified_ip_info["release"])
-            if version not in ip_version:
-                if update:
-                    logger.print_info(
-                        f"Updating IP {ip_name} to [magenta]{version}[/magenta]…"
-                    )
-                    install_ip(ip_name, version, ip_root, ipm_root)
-                else:
-                    logger.print_info(
-                        f"IP {ip_name} has a newer version [magenta]{version}[/magenta], to update use command ipm update"
-                    )
-            else:
-                logger.print_info(
-                    f"IP {ip_name} is the newest version [magenta]{version}[/magenta]."
-                )
 
-
-def package_check(ipm_root, ip, version, gh_repo):
-    """checks that the remote package of an ip is ready for submission to ipm
-
-    Args:
-        ipm_root (str): path to common installation path
-        ip (str): ip name to check
-        version (str): version of ip to check
-        gh_repo (str): url to github repo (MINUS the scheme)
-    """
-    checker = Checks(ipm_root, ip, version, gh_repo)
-    logger = Logger()
-    check_for_updates(logger)
-
-    logger.print_step("[STEP 1]: Checking the Github repo")
-    if not checker.check_url(checker.gh_url):
-        logger.print_err(f"Github repo {gh_repo} does not exist")
+    # Step 1: check Yaml file
+    yaml_info_file = os.path.join(ip_root, f"{os.path.basename(ip_root)}.yaml")
+    logger.print_step("[STEP 1]: Check if Yaml file exists")
+    if os.path.exists(yaml_info_file):
+        logger.print_success(f"Yaml file exists at {yaml_info_file}")
+    else:
+        logger.print_err(f"Can't find Yaml file at {yaml_info_file}")
         exit(1)
-
-    logger.print_step(f"[STEP 2]: Checking for the release with the tag {version}")
-    if not checker.check_url(checker.release_tag_url):
-        logger.print_err(
-            f"There is no release tagged {version} in the Github repo {gh_repo}"
-        )
+    
+    # Step 2: Check content of Yaml file
+    logger.print_step("[STEP 2]: Check content of Yaml file")
+    checker = Checks(ip_root, os.path.basename(ip_root))
+    if checker.check_yaml():
+        logger.print_success("Yaml content check passed")
+    else:
+        logger.print_err("Yaml content check failed")
         exit(1)
-
-    logger.print_step(
-        f"[STEP 3]: Checking Checking for the tarball named {version}.tar.gz"
-    )
-    if not checker.check_url(checker.release_tarball_url):
-        logger.print_err(
-            f"The tarball '{version}.tar.gz' was not found in the release tagged {version} in the GH repo {gh_repo}"
-        )
+    
+    # Step 3: Check Hierarchy
+    logger.print_step("[STEP 3]: Check IP hierarchy")
+    if checker.check_hierarchy():
+        logger.print_success("Hierarchy check passed")
+    else:
+        logger.print_err("Hierarchy check failed")
         exit(1)
-
-    checker.download_check_tarball()
-    logger.print_step("[STEP 4]: Checking the JSON file content")
-    if not checker.check_json():
+    
+    # Step 3: Check README
+    logger.print_step("[STEP 4]: check README documentation")
+    if checker.analyze_readme():
+        logger.print_success("The README file contains significant documentation.")
+    else:
+        logger.print_err("The README is missing documentation")
         exit(1)
-
-    logger.print_step("[STEP 5]: Checking the hierarchy of the directory")
-    if not checker.check_hierarchy():
-        exit(1)
-
-    logger.print_success("IP pre-check was successful you can now submit your IP")
-    shutil.rmtree(checker.package_check_path)

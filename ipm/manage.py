@@ -18,14 +18,13 @@ import click
 from .common import (
     check_ip_root_dir,
     check_ipm_directory,
-    check_ips,
     install_ip,
     install_using_dep_file,
     list_installed_ips,
     list_ip_info,
     list_verified_ips,
     opt_ipm_root,
-    package_check,
+    check_ip,
     rm_ip_from_project,
     uninstall_ip,
     update_ips,
@@ -196,13 +195,13 @@ def update_cmd(ipm_root, ip_root, ip):
         update_ips(ipm_root, ip_root=ip_root, ip_to_update=ip)
 
 
-# @click.command("package-check", hidden=True)
-# @click.option("--name", required=True, help="Provide IP name")
-# @click.option("--version", required=True, help="Provide IP version")
-# @click.option("--url", required=True, help="Provide IP url")
-# @opt_ipm_root
-# def package_check_cmd(ipm_root, name, version, url):
-#     """Check packaged IP."""
-#     valid = check_ipm_directory(ipm_root)
-#     if valid:
-#         package_check(ipm_root, name, version, url)
+@click.command("check-ip", hidden=True)
+@click.option(
+    "--ip-root",
+    required=False,
+    default=os.getcwd(),
+    help="IP path",
+)
+def check_ip_cmd(ip_root):
+    """Checks IPs for usability with IPM."""
+    check_ip(ip_root)
