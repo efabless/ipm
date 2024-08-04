@@ -25,7 +25,7 @@ jobs:
 
     - name: Create results file
       run: echo "" > results.txt
-
+  
     - name: Read and process JSON
       id: process_json
       run: |
@@ -37,24 +37,35 @@ jobs:
         # Loop through each IP and version
         while read -r NAME VERSION; do
           echo "Processing $NAME with version $VERSION"
+          echo "=== Processing $NAME (Version: $VERSION) ===" >> results.txt
           if ipm install "$NAME"; then
             # Redirect both stdout and stderr to a log file
             if ipm check-ip --ip-root ~/.ipm/"$NAME"/"$VERSION" --ip-name "$NAME" > check_ip.log 2>&1; then
               echo "$NAME: PASSED" >> results.txt
+              echo "Status: PASSED" >> results.txt
             else
               # Capture the last 10 lines of the log to determine the failure step
               FAILURE_LOG=$(tail -n 10 check_ip.log)
               echo "$NAME: FAILED during check-ip" >> results.txt
-              echo "$NAME failure details:" >> results.txt
+              echo "Status: FAILED during check-ip" >> results.txt
+              echo "Failure Details:" >> results.txt
               echo "$FAILURE_LOG" >> results.txt
             fi
           else
             echo "$NAME: FAILED during install" >> results.txt
+            echo "Status: FAILED during install" >> results.txt
           fi
+          echo "============================================" >> results.txt
         done < ip_versions.txt
 
     - name: Output results
       run: cat results.txt
+
+    - name: Upload results artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ip-check-results
+        path: results.txt
 
     - name: Fail job if any IP failed
       run: |
