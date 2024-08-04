@@ -22,8 +22,9 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y jq
         pip install ipmgr
-        - name: Create results file
-        run: echo "" > results.txt
+
+    - name: Create results file
+      run: echo "" > results.txt
   
     - name: Read and process JSON
       id: process_json
