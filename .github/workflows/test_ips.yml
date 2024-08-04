@@ -38,13 +38,11 @@ jobs:
         while read -r NAME VERSION; do
           echo "Processing $NAME with version $VERSION"
           if ipm install "$NAME"; then
-            cd "$NAME"
             if ipm check-ip --ip-root ~/.ipm/"$NAME"/"$VERSION" --ip-name "$NAME"; then
               echo "$NAME: PASSED" >> ../results.txt
             else
               echo "$NAME: FAILED during check-ip" >> ../results.txt
             fi
-            cd ..
           else
             echo "$NAME: FAILED during install" >> results.txt
           fi
