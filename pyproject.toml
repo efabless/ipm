@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ipmgr"
-version = "1.0.10"
+version = "1.0.11"
 description = "Package manager for Open Source ASIC IPs"
 authors = ["Efabless Corporation <marwan.abbas@efabless.com>"]
 readme = "README.md"

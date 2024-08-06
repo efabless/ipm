@@ -189,6 +189,11 @@ def rm(ip_root, ip, ipm_root):
 )
 def update_cmd(ipm_root, ip_root, ip):
     """Check for new versions of all installed IPs in project or a specific IP."""
+    update(ipm_root, ip_root, ip)
+
+
+def update(ipm_root, ip_root, ip):
+    """Check for new versions of all installed IPs in project or a specific IP."""
     valid = check_ipm_directory(ipm_root)
     valid_ip_dir = check_ip_root_dir(ip_root)
     if valid and valid_ip_dir:

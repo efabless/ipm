@@ -13,4 +13,4 @@
 # limitations under the License.
 from .__version__ import __version__
 
-from .manage import install, ls, ls_remote, info, install_deps
+from .manage import install, ls, ls_remote, info, install_deps, update, rm, uninstall
