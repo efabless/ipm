@@ -867,9 +867,14 @@ class Checks:
             bool: True if hierarchy is correct, False if it is not
         """
         logger = Logger()
-        common_dirs = ["verify/beh_model", "fw", "hdl/rtl/bus_wrapper"]
+        if self.maturity.lower() == "unqualified" or self.maturity.lower() == "defined":
+            common_dirs = []
+        elif self.maturity.lower() == "implemented":
+            common_dirs = ["hdl/rtl/bus_wrapper"]
+        else:
+            common_dirs = ["verify/beh_model", "fw", "hdl/rtl/bus_wrapper"]
         # check the folder hierarchy
-        if self.type == "hard":
+        if self.type == "hard" and (self.maturity.lower() != "unqualified" or self.maturity.lower() != "defined"):
             ipm_dirs = [
                 "hdl/gl",
                 "timing/lib",
@@ -878,9 +883,9 @@ class Checks:
                 "layout/gds",
                 "layout/lef",
             ]
-        elif self.type == "soft" and self.category == "digital":
+        elif self.type == "soft" and self.category == "digital" and (self.maturity.lower() != "unqualified" or self.maturity.lower() != "defined" or self.maturity.lower() != "implemented"):
             ipm_dirs = ["verify/utb"]
-        if self.category == "analog":
+        if self.category == "analog" and (self.maturity.lower() != "unqualified" or self.maturity.lower() != "defined"):
             ipm_dirs = ["spice"]
         ipm_dirs = ipm_dirs + common_dirs
         ipm_files = [f"{self.ip_name}.yaml", "README.md", "doc/datasheet.pdf"]
