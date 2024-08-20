@@ -872,7 +872,7 @@ class Checks:
         elif self.maturity.lower() == "implemented":
             common_dirs = ["hdl/rtl/bus_wrapper"]
         else:
-            common_dirs = ["verify/beh_model", "fw", "hdl/rtl/bus_wrapper"]
+            common_dirs = ["fw", "hdl/rtl/bus_wrapper"]
         # check the folder hierarchy
         if self.type == "hard" and (self.maturity.lower() != "unqualified" or self.maturity.lower() != "defined"):
             ipm_dirs = [
@@ -886,7 +886,7 @@ class Checks:
         elif self.type == "soft" and self.category == "digital" and (self.maturity.lower() != "unqualified" or self.maturity.lower() != "defined" or self.maturity.lower() != "implemented"):
             ipm_dirs = ["verify/utb"]
         if self.category == "analog" and (self.maturity.lower() != "unqualified" or self.maturity.lower() != "defined"):
-            ipm_dirs = ["spice"]
+            ipm_dirs = ["spice", "verify/beh_model"]
         ipm_dirs = ipm_dirs + common_dirs
         ipm_files = [f"{self.ip_name}.yaml", "README.md", "doc/datasheet.pdf"]
         flag = True
@@ -1137,9 +1137,17 @@ def list_verified_ips(category=None, technology=None):
                 text = link.text
                 if "View Details" not in text and "\n\n" not in text:
                     platform_ips.append(text)
+        # print(platform_ips)
 
     for ip_name, ip_data in verified_ips.items():
+        # print(ip_name.upper())
+        if ip_name.upper() == "EF_SRAM_1024X32":
+            if "EF_SRAM_1024X32" in platform_ips:
+                print("good")
+            else:
+                print("bad")
         if ip_name.upper() in platform_ips:
+            # print(ip_name.upper())
             if category and not technology:
                 if ip_data["category"] == category:
                     ip_list.append({ip_name: ip_data})
