@@ -2866,6 +2866,22 @@
                     "n/a"
                 ],
                 "sha256": "ab5c35ad5baaab573f40d98389d463d134335951b046d74e08f217cc08561e37"
+            },
+            "v1.0.12": {
+                "date": "11-08-2024",
+                "maturity": "Integrated",
+                "bus": [
+                    "APB"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "0",
+                "clock_freq_mhz": "n/a",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "ba0136da95985486027133270a4e9164d03535586a9677af91bf828a3c02efda"
             }
         }
     },
