@@ -824,6 +824,22 @@
                     "n/a"
                 ],
                 "sha256": "b609bc529fd48f7e19e80b70a733d744e81972877cdf8cb52a43fca82e250a65"
+            },
+            "v1.0.9": {
+                "date": "10-09-2024",
+                "maturity": "Integrated",
+                "bus": [
+                    "AHBL"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "850",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "b73570b8866d70b4e2da24d460ad8990c446706d86f97ec99e304b52532b9861"
             }
         }
     },
