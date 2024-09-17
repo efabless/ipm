@@ -289,6 +289,22 @@
                     "n/a"
                 ],
                 "sha256": "6678df8ec61a856054f9331cac9e9835a840becd82edb415828f9024dc716dd5"
+            },
+            "v1.1.7": {
+                "date": "17-09-2024",
+                "maturity": "Integrated",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "1590",
+                "clock_freq_mhz": "277",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "0c0069205a5d509e081405f214435661005e0b5302f00b6409ca4e4269e172d8"
             }
         }
     },
@@ -598,6 +614,22 @@
                     "n/a"
                 ],
                 "sha256": "99eeac11891c724de6d754bfb8fec0dcf33ce21d09ee392cd4179283552f4331"
+            },
+            "v1.0.10": {
+                "date": "17-09-2024",
+                "maturity": "Integrated",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "72",
+                "clock_freq_mhz": "1666",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "fe07bef6d34517f365a5d75df8f8d82f51906cc30fd5c70313a41cbbdc18ea2c"
             }
         }
     },
@@ -1683,6 +1715,22 @@
                     "n/a"
                 ],
                 "sha256": "c7307fe97a08176805ea7d9760c229cc2eabb8eb809af04d3f555a7ae5ac0da1"
+            },
+            "v1.0.5": {
+                "date": "17-09-2024",
+                "maturity": "Integrated",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "200",
+                "clock_freq_mhz": "100",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "756ab2834af173ba3132b80c25f58e69de76b17f5412aeb1eeb8a2439bf51022"
             }
         }
     },
@@ -2701,6 +2749,22 @@
                     "n/a"
                 ],
                 "sha256": "9d46260cecb07376bec0289ea5163dac7a72e71cbd9903c68a2404e77b40020f"
+            },
+            "v1.1.13": {
+                "date": "17-09-2024",
+                "maturity": "Integrated",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "2661",
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "aa8f8455931c7420c082cfef8c54db5f7081d6d332cfe2c107babef4a2768140"
             }
         }
     },
@@ -3058,6 +3122,22 @@
                     "n/a"
                 ],
                 "sha256": "ba0136da95985486027133270a4e9164d03535586a9677af91bf828a3c02efda"
+            },
+            "v1.0.13": {
+                "date": "17-09-2024",
+                "maturity": "Integrated",
+                "bus": [
+                    "APB"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "0",
+                "clock_freq_mhz": "n/a",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "cefebe3cba29f765909533e33f53fdaea6cbd16f5fabb3365c75507e6c997553"
             }
         }
     },
@@ -3222,6 +3302,22 @@
                     "n/a"
                 ],
                 "sha256": "a2e28b8f48c2238381753b2df7b34808887d26844af5d1bf5d69195ab9486995"
+            },
+            "v1.0.9": {
+                "date": "17-09-2024",
+                "maturity": "Integrated",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "797",
+                "clock_freq_mhz": "163",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "398f069a8c39a9d07c0171db015daf932c521009584cb81d77a025713ef88a2d"
             }
         }
     },
@@ -3399,6 +3495,22 @@
                     "n/a"
                 ],
                 "sha256": "cc6a6cbf0c15dc175a0e1f7eb3cf738c415ccbdadea3df71fcb2208be0b7ae09"
+            },
+            "v1.0.10": {
+                "date": "17-09-2024",
+                "maturity": "Integrated",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "0",
+                "clock_freq_mhz": "0",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "62e7b99405c0977a24c72a0bc7d0e653dbfda19dd88a11e2cb48592cf0e33bb8"
             }
         }
     },
