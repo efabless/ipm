@@ -1,4 +1,32 @@
 {
+    "IP_Utilities": {
+        "description": "A set of utilities that can be used to develop digital IPs in Verilog HDL",
+        "repo": "github.com/efabless/IP_Utilities",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Efabless Corp.",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "Apache 2.0",
+        "tags": [
+            "fifo",
+            "clock mux"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "30-09-2024",
+                "bus": [
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "c0ae31fb4252e40d4237623558d70e0fee1239e1c29f1e2ff906f1763f2aa690"
+            }
+        }
+    },
     "EF_PSRAM_CTRL": {
         "description": "A Controller for Quad I/O SPI PSRAM",
         "repo": "github.com/efabless/EF_PSRAM_CTRL",
