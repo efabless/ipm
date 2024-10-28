@@ -1295,7 +1295,7 @@
             }
         }
     },
-    "EF_DFFRAM128x32": {
+    "DFFRAM128x32": {
         "description": "512 bytes (128x32) DFFRAM hardened using OpenLane",
         "repo": "github.com/efabless/OL-DFFRAM",
         "author": "Mohamed Shalan",
@@ -1344,7 +1344,7 @@
             }
         }
     },
-    "EF_DFFRAM256x32": {
+    "DFFRAM256x32": {
         "description": "1kbyte (256x32) DFFRAM hardened using OpenLane",
         "repo": "github.com/efabless/OL-DFFRAM",
         "author": "Mohamed Shalan",
@@ -1409,7 +1409,7 @@
             }
         }
     },
-    "EF_DFFRAM512x32": {
+    "DFFRAM512x32": {
         "description": "2kbyte (512x32) DFFRAM hardened using OpenLane",
         "repo": "github.com/efabless/OL-DFFRAM",
         "author": "Mohamed Shalan",
