@@ -1647,7 +1647,7 @@
                 ],
                 "sha256": "f26096778d3e596067ac944e87cc40be25c73228e3ef2cf227ce2db833b341fd"
             },
-            "v2.0.7": {
+            "v2.0.8": {
                 "date": "2024-10-29",
                 "maturity": "Integrated",
                 "bus": [
