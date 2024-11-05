@@ -333,6 +333,22 @@
                     "n/a"
                 ],
                 "sha256": "0c0069205a5d509e081405f214435661005e0b5302f00b6409ca4e4269e172d8"
+            },
+            "v1.1.8": {
+                "date": "4-11-2024",
+                "maturity": "Integrated",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "1590",
+                "clock_freq_mhz": "277",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "23d908170beb4161e592dde1cb79d6f1583fa6327779d5790b41538101a6f8fe"
             }
         }
     },
@@ -471,7 +487,7 @@
     },
     "EF_GPIO8": {
         "description": "A generic GPIO peripheral.",
-        "repo": "github.com/efabless/EF_GPIO",
+        "repo": "github.com/efabless/EF_GPIO8",
         "author": "Mohamed Shalan",
         "email": "mshalan@efabless.com",
         "owner": "Efabless Corp.",
@@ -658,6 +674,22 @@
                     "n/a"
                 ],
                 "sha256": "fe07bef6d34517f365a5d75df8f8d82f51906cc30fd5c70313a41cbbdc18ea2c"
+            },
+            "v1.0.11": {
+                "date": "4-11-2024",
+                "maturity": "Integrated",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "72",
+                "clock_freq_mhz": "1666",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "ce99f2ff3dc6ab0f65188eb7439c8126bfa80d5697732cd08d1e39d7fdd3fb27"
             }
         }
     },
@@ -2809,6 +2841,22 @@
                     "n/a"
                 ],
                 "sha256": "aa8f8455931c7420c082cfef8c54db5f7081d6d332cfe2c107babef4a2768140"
+            },
+            "v1.1.14": {
+                "date": "4-11-2024",
+                "maturity": "Integrated",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "2661",
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "e8909c59e0c8add4d18bfa69ea95c5041085775bb8a08a76150d830203ce8e86"
             }
         }
     },
@@ -3182,6 +3230,22 @@
                     "n/a"
                 ],
                 "sha256": "cefebe3cba29f765909533e33f53fdaea6cbd16f5fabb3365c75507e6c997553"
+            },
+            "v1.0.14": {
+                "date": "4-11-2024",
+                "maturity": "Integrated",
+                "bus": [
+                    "APB"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "0",
+                "clock_freq_mhz": "n/a",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "133062fb706a73deea9799d001ecb037cdb6465669c1f42acccf27d77fb303a1"
             }
         }
     },
@@ -3378,6 +3442,22 @@
                     "n/a"
                 ],
                 "sha256": "0ae18f31c35424aaa36b9b4d9576fa7cef69543623caa49f291ef2cb912316fe"
+            },
+            "v1.0.11": {
+                "date": "4-11-2024",
+                "maturity": "Integrated",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "797",
+                "clock_freq_mhz": "163",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "5e5044b5137ae383b21f14228dd51a444f11893406ea40d0f1f48634a99255d2"
             }
         }
     },
@@ -3571,6 +3651,22 @@
                     "n/a"
                 ],
                 "sha256": "62e7b99405c0977a24c72a0bc7d0e653dbfda19dd88a11e2cb48592cf0e33bb8"
+            },
+            "v1.0.11": {
+                "date": "4-11-2024",
+                "maturity": "Integrated",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "0",
+                "clock_freq_mhz": "0",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "553312189f52ca8d73e4739117d4d9e0c320277de4bbdfda000d070c94c5adf1"
             }
         }
     },
