@@ -1029,6 +1029,22 @@
                     "n/a"
                 ],
                 "sha256": "7c0c22ee3f3f39181d4a54f6a4f3debd8e71706afb9a09c2d7b7edbda3ba1044"
+            },
+            "v1.0.2": {
+                "date": "12-11-2024",
+                "maturity": "Implemented",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "0",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "57770d6b90b6e1298ba8569f84d8ace762e360fd06d6bbedccf2a76879a56646"
             }
         }
     },
@@ -1078,6 +1094,22 @@
                     "n/a"
                 ],
                 "sha256": "a317a6481c75fefaa8bf78f51e11fc84a3055e2145e747ad0a542d92b3796f30"
+            },
+            "v1.0.2": {
+                "date": "12-11-2023",
+                "maturity": "Implemented",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "0",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "32c2f33d198a1bdbac5a03aa8a0328146ca58b37b7f63f5f9473e2b0473aa600"
             }
             
         }
