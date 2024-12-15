@@ -33,7 +33,9 @@ from .common import (
 
 @click.command("install")
 @click.argument("ip")
-@click.option("--version", required=False, help="Install IP with a specific version")
+@click.option("--version", required=False, help="Install a specific version")
+@click.option("--include-drafts", is_flag=True, help="Allow installing draft versions")
+@click.option("--local-file", required=False, help="Path to local verified_IPs.json")
 @click.option(
     "--ip-root",
     required=False,
@@ -41,9 +43,9 @@ from .common import (
     help="IP installation path",
 )
 @opt_ipm_root
-def install_cmd(ip, ip_root, ipm_root=None, version=None):
-    """Install one of the verified IPs locally"""
-    install(ip, ipm_root, version=version, ip_root=ip_root)
+def install_cmd(ip, ip_root, ipm_root=None, version=None, include_drafts=False, local_file=None):
+    """Install one of the verified IPs locally."""
+    install(ip, ipm_root, version=version, ip_root=ip_root, include_drafts=include_drafts, local_file=local_file)
 
 
 def install(
@@ -51,12 +53,14 @@ def install(
     ipm_root=None,
     version=None,
     ip_root=None,
+    include_drafts=False,
+    local_file=None,
 ):
     """Install one of the verified IPs locally"""
     # valid = check_ipm_directory(ipm_root)
     valid_ip_dir = check_ip_root_dir(ip_root)
     if valid_ip_dir:
-        install_ip(ipm_root=ipm_root, ip_name=ip, ip_root=ip_root, version=version)
+        install_ip(ipm_root=ipm_root, ip_name=ip, ip_root=ip_root, version=version, include_drafts=include_drafts, local_file=local_file)
 
 
 @click.command("uninstall")

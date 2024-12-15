@@ -177,34 +177,47 @@ class IPInfo:
     cache: ClassVar[Optional[dict]] = None
 
     @classmethod
-    def get_verified_ip_info(Self, ip_name=None):
-        """get ip info from remote verified backend
+    def get_verified_ip_info(Self, ip_name=None, include_drafts=False, local_file=None):
+        """Get IP info from remote or local verified backend.
 
         Args:
-            ip_name (str, optional): name of the ip. Defaults to None.
+            ip_name (str, optional): Name of the IP. Defaults to None.
+            include_drafts (bool): Whether to include draft releases. Defaults to False.
+            local_file (str, optional): Path to a local verified_IPs.json file. Defaults to None.
 
         Returns:
-            dict: info of ip
+            dict: Info of the IP.
         """
         logger = Logger()
         data = Self.cache
-        session = GitHubSession()
-        if data is None:
-            resp = session.get(VERIFIED_JSON_FILE_URL)
-            session.throw_status(resp, "download IP release index")
 
-            data = resp.json()
-            if os.getenv("IPM_DEBUG_USE_LOCAL_VERIFIED_IPS", "0") == "1":
-                local = os.path.join(
-                    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-                    "verified_IPs.json",
-                )
-                data = json.load(open(local, encoding="utf8"))
-            Self.cache = data
+        # Check for a local verified_IPs.json file
+        if local_file and os.path.exists(local_file):
+            logger.print_info(f"Using local verified_IPs.json at {local_file}")
+            with open(local_file, "r") as f:
+                data = json.load(f)
+        else:
+            session = GitHubSession()
+            if data is None:
+                resp = session.get(VERIFIED_JSON_FILE_URL)
+                session.throw_status(resp, "download IP release index")
+                data = resp.json()
+                Self.cache = data
 
         if ip_name:
             if ip_name in data:
-                return data[ip_name]
+                ip_info = data[ip_name]
+                releases = ip_info.get("release", {})
+
+                # Filter for non-draft releases if include_drafts is False
+                if not include_drafts:
+                    releases = {
+                        version: info
+                        for version, info in releases.items()
+                        if not info.get("draft", False)
+                    }
+
+                return {**ip_info, "release": releases}
             else:
                 logger.print_err(f"IP {ip_name} not found in the release list.")
                 exit(1)
@@ -549,33 +562,47 @@ class IP:
         ip_name: str,
         version: Optional[str],
         ipm_root: Optional[str],
-        ip_root: Optional[str]
+        ip_root: Optional[str],
+        include_drafts=False,
+        local_file=None,
     ):
-        """
-        Finds an IP in the release index and returns it as a :class:`IP` object.
-
-        If an IP or version are not found, a ``RuntimeError`` is raised.
+        """Finds an IP in the release index and returns it as an IP object.
 
         Args:
-            ip_name (str): The name/id of the IP
-            version (str | None): The version of the IP. If omitted, the latest will be fetched.
-            ipm_root (str | None): The IPM root to associate with this IP for installation and such.
+            ip_name (str): The name of the IP.
+            version (str, optional): The version of the IP. Defaults to None.
+            include_drafts (bool): Whether to include draft releases. Defaults to False.
+            local_file (str, optional): Path to a local verified_IPs.json file. Defaults to None.
 
         Returns:
-            IP: The IP object generated
+            IP: The IP object generated.
         """
-        meta = IPInfo.get_verified_ip_info(ip_name)
+        meta = IPInfo.get_verified_ip_info(ip_name, include_drafts, local_file=local_file)
         releases = meta["release"]
+
         if version is None:
-            version = get_latest_version(releases)
-        elif version not in releases:
+            filtered_releases = {}
+            if include_drafts:
+                # Include all releases, regardless of the "draft" status
+                for v, info in releases.items():
+                    filtered_releases[v] = info
+            else:
+                # Include only non-draft releases
+                for v, info in releases.items():
+                    if not info.get("draft", False):  # Default to False if "draft" key is missing
+                        filtered_releases[v] = info
+            
+            version = get_latest_version(filtered_releases)
+
+        if version not in releases:
             raise RuntimeError(f"Version {version} of {ip_name} not found in IP index")
+
         release = releases[version]
-        repo: str = meta["repo"]
+        repo = meta["repo"]
         if repo.startswith("github.com/"):
             repo = repo[len("github.com/") :]
-        ip = Self(ip_name, version, repo, ipm_root, release.get("sha256", None), ip_root)
-        return ip
+
+        return Self(ip_name, version, repo, ipm_root, release.get("sha256", None), ip_root)
 
     # ---
     @property
@@ -1080,7 +1107,7 @@ def get_latest_version(data):
     return last_key
 
 
-def install_ip(ip_name, version, ip_root, ipm_root):
+def install_ip(ip_name, version, ip_root, ipm_root, include_drafts, local_file):
     """installs the ip tarball
 
     Args:
@@ -1095,7 +1122,7 @@ def install_ip(ip_name, version, ip_root, ipm_root):
     root = IPRoot(ipm_root, ip_root)
 
     try:
-        ip = IP.find_verified_ip(ip_name, version, ipm_root, ipm_root)
+        ip = IP.find_verified_ip(ip_name, version, ipm_root, ip_root, include_drafts, local_file)
         root.try_add(ip)
     except RuntimeError as e:
         logger.print_err(e)
