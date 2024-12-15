@@ -41,51 +41,59 @@ from .common import (
     help="IP installation path",
 )
 @opt_ipm_root
-def install_cmd(ip, ip_root, ipm_root, version=None):
+def install_cmd(ip, ip_root, ipm_root=None, version=None):
     """Install one of the verified IPs locally"""
     install(ip, ipm_root, version=version, ip_root=ip_root)
 
 
 def install(
     ip,
-    ipm_root,
+    ipm_root=None,
     version=None,
     ip_root=None,
 ):
     """Install one of the verified IPs locally"""
-    valid = check_ipm_directory(ipm_root)
+    # valid = check_ipm_directory(ipm_root)
     valid_ip_dir = check_ip_root_dir(ip_root)
-    if valid and valid_ip_dir:
+    if valid_ip_dir:
         install_ip(ipm_root=ipm_root, ip_name=ip, ip_root=ip_root, version=version)
 
 
 @click.command("uninstall")
 @click.argument("ip")
-@click.option("--version", required=False, help="Install IP with a specific version")
 @click.option(
-    "-f",
-    "--force",
-    is_flag=True,
-    # Translation of the line below: "if (!value) { ctx.abort() }"
-    callback=lambda ctx, _, value: value or ctx.abort(),
-    expose_value=False,
-    prompt="Uninstalling this IP may break all projects depending on it.\nIf you want to remove it from just one project, try 'ipm rm'.\nProceed?",
+    "--ip-root",
+    required=False,
+    default=os.path.join(os.getcwd(), "ip"),
+    help="IP installation path",
 )
+@click.option("--version", required=False, help="Install IP with a specific version")
+# @click.option(
+#     "-f",
+#     "--force",
+#     is_flag=True,
+#     # Translation of the line below: "if (!value) { ctx.abort() }"
+#     callback=lambda ctx, _, value: value or ctx.abort(),
+#     expose_value=False,
+#     prompt="Uninstalling this IP may break all projects depending on it.\nIf you want to remove it from just one project, try 'ipm rm'.\nProceed?",
+# )
 @opt_ipm_root
-def uninstall_cmd(ip, ipm_root, version=None):
+def uninstall_cmd(ip, ipm_root, ip_root, version=None):
     """Uninstall local IP"""
-    uninstall(ip, ipm_root, version=version)
+    uninstall(ip, ipm_root, ip_root, version=version)
 
 
 def uninstall(
     ip,
     ipm_root,
+    ip_root,
     version=None,
 ):
     """Uninstall local IP"""
-    valid = check_ipm_directory(ipm_root)
-    if valid:
-        uninstall_ip(ipm_root=ipm_root, ip_name=ip, version=version)
+    # valid = check_ipm_directory(ipm_root)
+    valid_ip_dir = check_ip_root_dir(ip_root)
+    if valid_ip_dir:
+        uninstall_ip(ipm_root=ipm_root, ip_name=ip, ip_root=ip_root, version=version)
 
 
 @click.command("ls-remote")
@@ -122,17 +130,21 @@ def info(ip):
 
 
 @click.command("ls")
-@opt_ipm_root
-def ls_cmd(ipm_root):
+# @opt_ipm_root
+@click.option(
+    "--ip-root", required=False, default=os.path.join(os.getcwd(), "ip"), help="IP path"
+)
+def ls_cmd(ip_root):
     """Lists all locally installed IPs"""
-    ls(ipm_root)
+    ls(ip_root)
 
 
-def ls(ipm_root):
+def ls(ip_root):
     """Lists all locally installed IPs"""
-    valid = check_ipm_directory(ipm_root)
-    if valid:
-        list_installed_ips(ipm_root)
+    # valid = check_ipm_directory(ipm_root)
+    valid_ip_dir = check_ip_root_dir(ip_root)
+    if valid_ip_dir:
+        list_installed_ips(ip_root)
 
 
 @click.command("install-dep")
@@ -147,9 +159,9 @@ def install_deps_cmd(ip_root, ipm_root):
 
 def install_deps(ip_root, ipm_root):
     """Install verified IPs from dependencies json file"""
-    valid = check_ipm_directory(ipm_root)
+    # valid = check_ipm_directory(ipm_root)
     valid_ip_dir = check_ip_root_dir(ip_root)
-    if valid and valid_ip_dir:
+    if valid_ip_dir:
         install_using_dep_file(ip_root, ipm_root)
 
 
@@ -194,9 +206,9 @@ def update_cmd(ipm_root, ip_root, ip):
 
 def update(ipm_root, ip_root, ip):
     """Check for new versions of all installed IPs in project or a specific IP."""
-    valid = check_ipm_directory(ipm_root)
+    # valid = check_ipm_directory(ipm_root)
     valid_ip_dir = check_ip_root_dir(ip_root)
-    if valid and valid_ip_dir:
+    if valid_ip_dir:
         update_ips(ipm_root, ip_root=ip_root, ip_to_update=ip)
 
 

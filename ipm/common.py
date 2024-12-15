@@ -51,7 +51,7 @@ def opt_ipm_root(function: Callable):
     function = click.option(
         "--ipm-root",
         required=False,
-        default=os.getenv("IPM_ROOT") or IPM_DEFAULT_HOME,
+        default=os.getenv("IPM_ROOT") or None,
         help="Path to the IPM root where the IPs will reside",
         show_default=True,
     )(function)
@@ -212,63 +212,71 @@ class IPInfo:
             return data
 
     @staticmethod
-    def get_installed_ips(ipm_root):
+    def get_installed_ips(ip_root):
         """gets all installed ips under ipm_root
 
         Args:
-            ipm_root (str): path to ipm_root
+            ip_root (str): Path to the IPM root where the IPs are installed.
 
         Returns:
-            list: list of all installed ips
+            list: List of installed IP names.
         """
-        installed_ips = []
-        for root, directories, files in os.walk(ipm_root):
-            ip_names = directories
-            break
-        for ips in ip_names:
-            for root, directories, files in os.walk(os.path.join(ipm_root, ips)):
-                installed_ips.append({ips: directories})
-                break
-        return installed_ips
+        logger = Logger()
+        dependencies_file = os.path.join(ip_root, "dependencies.json")
+        
+        if not os.path.exists(dependencies_file):
+            logger.print_err(
+                f"'dependencies.json' not found at {dependencies_file}. "
+                "This could mean either no IPs are installed in your project or you are not in the project root."
+            )
+            return []  # Return an empty list if the file doesn't exist
+
+        with open(dependencies_file, "r", encoding="utf8") as f:
+            dependencies_data = json.load(f)
+
+        # Extract the IP names
+        ip_objects = dependencies_data.get("IP", [])
+        ip_names = [list(ip.keys())[0] for ip in ip_objects]  # Get the key (name) from each dictionary
+
+        return ip_names
 
     @staticmethod
-    def get_installed_ip_info(ipm_root):
+    def get_installed_ip_info(ip_root):
         """gets the info of the installed ips from <ip>.json
 
         Args:
-            ipm_root (str): path to ipm_root
+            ip_root (str): path to ip_root
 
         Returns:
             list: list of dicts of all installed ips and their data
         """
         logger = Logger()
-        installed_ips = IPInfo.get_installed_ips(ipm_root)
+        installed_ips = IPInfo.get_installed_ips(ip_root)
         installed_ips_arr = []
-        for ips in installed_ips:
-            for ip_name, ip_version in ips.items():
-                for version in ip_version:
-                    json_file = f"{ipm_root}/{ip_name}/{version}/{ip_name}.json"
-                    yaml_file = f"{ipm_root}/{ip_name}/{version}/{ip_name}.yaml"
-                    config_path = None
-                    if os.path.exists(json_file):
-                        config_path = json_file
-                    elif os.path.exists(yaml_file):
-                        config_path = yaml_file
-                    else:
-                        logger.print_err(
-                            f"Can't find {json_file} or {yaml_file}. Please refer to the IPM directory structure (IP name {ip_name} might be wrong)."
-                        )
-                        return False
+        for ip_name in installed_ips:
+            # for ip_name in ips:
+            json_file = f"{ip_root}/{ip_name}/{ip_name}.json"
+            yaml_file = f"{ip_root}/{ip_name}/{ip_name}.yaml"
+            config_path = None
+            if os.path.exists(json_file):
+                config_path = json_file
+            elif os.path.exists(yaml_file):
+                config_path = yaml_file
+            else:
+                logger.print_err(
+                    f"Can't find {json_file} or {yaml_file}. Please refer to the IPM directory structure (IP name {ip_name} might be wrong)."
+                )
+                return False
 
-                    if config_path.endswith(".json"):
-                        with open(config_path) as config_file:
-                            data = json.load(config_file)
-                    else:
-                        with open(config_path) as config_file:
-                            data = yaml.safe_load(config_file)
-                    # with open(json_file) as f:
-                    #     data = json.load(f)
-                    installed_ips_arr.append({data["info"]["name"]: data})
+            if config_path.endswith(".json"):
+                with open(config_path) as config_file:
+                    data = json.load(config_file)
+            else:
+                with open(config_path) as config_file:
+                    data = yaml.safe_load(config_file)
+            # with open(json_file) as f:
+            #     data = json.load(f)
+            installed_ips_arr.append({data["info"]["name"]: data})
         return installed_ips_arr
 
 
@@ -416,7 +424,7 @@ class IPRoot:
         ip_category = dependencies_object["IP"]
         for ips in ip_category:
             for ip_name, ip_version in ips.items():
-                final[ip_name] = IP.find_verified_ip(ip_name, ip_version, self.ipm_root)
+                final[ip_name] = IP.find_verified_ip(ip_name, ip_version, self.ipm_root, self.path)
         return final
 
     def update_paths(
@@ -449,12 +457,13 @@ class IPRoot:
     def _install_ip(self, ip: "IP", depth: int = 0):
         ip.install(depth)
         path_in_ip_root = os.path.join(self.path, ip.ip_name)
-        if os.path.exists(path_in_ip_root):
-            os.unlink(path_in_ip_root)
-        os.symlink(
-            ip.path_in_ipm_root,
-            path_in_ip_root,
-        )
+        if self.ipm_root:
+            if os.path.exists(path_in_ip_root):
+                os.unlink(path_in_ip_root)
+            os.symlink(
+                ip.path_in_ipm_root,
+                path_in_ip_root,
+            )
 
     def _get_symlinked_ips(self) -> Iterable[Tuple[str, str]]:
         for element in os.listdir(self.path):
@@ -503,7 +512,7 @@ class IPRoot:
                             logger.print_info(f"{indent(depth+1)}* Already fetched.")
                     else:
                         dependency = IP.find_verified_ip(
-                            dep_name, dep_version, self.ipm_root
+                            dep_name, dep_version, self.ipm_root, self.path
                         )
                         self._install_ip(dependency, depth + 1)
                         so_far[dep_name] = (dependency, requester)
@@ -532,6 +541,7 @@ class IP:
     repo: str
     ipm_root: Optional[str] = None
     sha256: Optional[str] = None
+    ip_root: Optional[str] = None
 
     @classmethod
     def find_verified_ip(
@@ -539,6 +549,7 @@ class IP:
         ip_name: str,
         version: Optional[str],
         ipm_root: Optional[str],
+        ip_root: Optional[str]
     ):
         """
         Finds an IP in the release index and returns it as a :class:`IP` object.
@@ -563,7 +574,7 @@ class IP:
         repo: str = meta["repo"]
         if repo.startswith("github.com/"):
             repo = repo[len("github.com/") :]
-        ip = Self(ip_name, version, repo, ipm_root, release.get("sha256", None))
+        ip = Self(ip_name, version, repo, ipm_root, release.get("sha256", None), ip_root)
         return ip
 
     # ---
@@ -576,6 +587,8 @@ class IP:
         ipmr = self.ipm_root
         if ipmr is not None:
             return os.path.join(ipmr, self.ip_name, self.version)
+        else:
+            return os.path.join(self.ip_root, self.ip_name)
 
     def install(self, depth: int = 0):
         if self.path_in_ipm_root is None:
@@ -584,10 +597,10 @@ class IP:
         logger = Logger()
         if not os.path.isdir(self.path_in_ipm_root):
             logger.print_info(
-                f"{indent(depth)}* Installing IP [cyan]{self.full_name}[/cyan] at {self.ipm_root}…"
+                f"{indent(depth)}* Installing IP [cyan]{self.full_name}[/cyan] at {self.path_in_ipm_root}…"
             )
             self.download_tarball(self.path_in_ipm_root)
-            change_dir_to_readonly(self.ipm_root)
+            # change_dir_to_readonly(self.ipm_root)
 
     @property
     def installed(self):
@@ -1082,14 +1095,14 @@ def install_ip(ip_name, version, ip_root, ipm_root):
     root = IPRoot(ipm_root, ip_root)
 
     try:
-        ip = IP.find_verified_ip(ip_name, version, ipm_root)
+        ip = IP.find_verified_ip(ip_name, version, ipm_root, ipm_root)
         root.try_add(ip)
     except RuntimeError as e:
         logger.print_err(e)
         exit(-1)
 
 
-def uninstall_ip(ip_name, version, ipm_root):
+def uninstall_ip(ip_name, version, ipm_root, ip_root):
     """uninstalls the ip tarball from an ipm root
 
     Args:
@@ -1101,7 +1114,7 @@ def uninstall_ip(ip_name, version, ipm_root):
     check_for_updates(logger)
 
     try:
-        ip = IP.find_verified_ip(ip_name, version, ipm_root)
+        ip = IP.find_verified_ip(ip_name, version, ipm_root, ip_root)
         if not ip.installed:
             logger.print_info("Nothing to uninstall.")
         else:
@@ -1262,7 +1275,7 @@ def list_ip_info(ip_name):
     IP.create_table(ip_list, "all", True)
 
 
-def list_installed_ips(ipm_root):
+def list_installed_ips(ip_root):
     """creates a table of all locally installed ips
 
     Args:
@@ -1270,7 +1283,7 @@ def list_installed_ips(ipm_root):
     """
     logger = Logger()
     check_for_updates(logger)
-    ip_data = IPInfo.get_installed_ip_info(ipm_root)
+    ip_data = IPInfo.get_installed_ip_info(ip_root)
     IP.create_table(ip_data, local=True, extended=True)
 
 
@@ -1309,7 +1322,7 @@ def update_ips(ipm_root, ip_root=None, ip_to_update=None):
                     logger.print_info(
                         f"Updating IP {ip_name} to [magenta]{version}[/magenta]…"
                     )
-                    ip = IP.find_verified_ip(ip_name, version, ipm_root)
+                    ip = IP.find_verified_ip(ip_name, version, ipm_root, ip_root)
                     root.try_add(ip)
                 else:
                     logger.print_info(
