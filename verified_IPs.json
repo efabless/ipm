@@ -23,7 +23,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "c0ae31fb4252e40d4237623558d70e0fee1239e1c29f1e2ff906f1763f2aa690"
+                "sha256": "c0ae31fb4252e40d4237623558d70e0fee1239e1c29f1e2ff906f1763f2aa690",
+                "draft": false
             }
         }
     },
@@ -56,7 +57,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "1a2530d23671d2fcfa711eb829b3018be30d6392da6b4936f1341366c5074e2a"
+                "sha256": "1a2530d23671d2fcfa711eb829b3018be30d6392da6b4936f1341366c5074e2a",
+                "draft": false
             }
         }
     },
@@ -89,7 +91,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "242120c67a172f6ff549e10770e8f12d317eda0e7dc2cd5d75cc1eb9ea5b7c8c"
+                "sha256": "242120c67a172f6ff549e10770e8f12d317eda0e7dc2cd5d75cc1eb9ea5b7c8c",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "4-01-2023",
@@ -106,7 +109,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "85cb2c2ca2d843f59fd7118cef477e2d8b5104a92d8a2308b54f55e369a10f8f"
+                "sha256": "85cb2c2ca2d843f59fd7118cef477e2d8b5104a92d8a2308b54f55e369a10f8f",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "4-01-2023",
@@ -123,7 +127,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "82f3819a519a66bd0713a649bb85456338b90796d484c2a80884d89cc2f6b6f0"
+                "sha256": "82f3819a519a66bd0713a649bb85456338b90796d484c2a80884d89cc2f6b6f0",
+                "draft": false
             },
             "v1.0.3": {
                 "date": "4-01-2023",
@@ -140,7 +145,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "da50e1b58d426bf4146775ede2757a3a173211fb93d9572fdcaa3fff0c5b4ef5"
+                "sha256": "da50e1b58d426bf4146775ede2757a3a173211fb93d9572fdcaa3fff0c5b4ef5",
+                "draft": false
             },
             "v1.0.4": {
                 "date": "07-05-2024",
@@ -156,7 +162,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "b5c5f2b72cea9c93d6188e594404b488e6411c9acd551b528024393322031be6"
+                "sha256": "b5c5f2b72cea9c93d6188e594404b488e6411c9acd551b528024393322031be6",
+                "draft": false
             },
             "v1.0.5": {
                 "date": "07-05-2024",
@@ -172,7 +179,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "34659055f3fbf1e9a930ccb901d93b29a5b55724a4fc537a5b5da3ece57860c4"
+                "sha256": "34659055f3fbf1e9a930ccb901d93b29a5b55724a4fc537a5b5da3ece57860c4",
+                "draft": false
             },
             "v1.0.6": {
                 "date": "5-11-2024",
@@ -188,7 +196,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "f02a6c1753c36941fe125db44da58c0ac2f75741498904ce642246a776d46510"
+                "sha256": "f02a6c1753c36941fe125db44da58c0ac2f75741498904ce642246a776d46510",
+                "draft": false
             },
             "v1.0.7": {
                 "date": "8-11-2024",
@@ -204,7 +213,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "17b9c15f92ff1bbfd153acb438a23daf59443ae2dcefdae8c2e7b0e5d377f99a"
+                "sha256": "17b9c15f92ff1bbfd153acb438a23daf59443ae2dcefdae8c2e7b0e5d377f99a",
+                "draft": false
             },
             "v1.0.8": {
                 "date": "27-11-2024",
@@ -220,7 +230,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "98dd74a3263a468e557852b035a051ed6cd0590c6303e910295a54e2af834d9b"
+                "sha256": "98dd74a3263a468e557852b035a051ed6cd0590c6303e910295a54e2af834d9b",
+                "draft": false
             }
         }
     },
@@ -252,7 +263,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "ca1e8118e4420260237f7b7f81a8cab01b4020f3458f6a1634ffca3538e1d253"
+                "sha256": "ca1e8118e4420260237f7b7f81a8cab01b4020f3458f6a1634ffca3538e1d253",
+                "draft": false
             },
             "v1.1.0": {
                 "date": "15-4-2024",
@@ -268,7 +280,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "6d15efb722dca3c7a7085b9c67ef0e6aba1dee2c5654a32e5adcc1f521890805"
+                "sha256": "6d15efb722dca3c7a7085b9c67ef0e6aba1dee2c5654a32e5adcc1f521890805",
+                "draft": false
             },
             "v1.1.1": {
                 "date": "07-5-2024",
@@ -284,7 +297,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "6d15efb722dca3c7a7085b9c67ef0e6aba1dee2c5654a32e5adcc1f521890805"
+                "sha256": "6d15efb722dca3c7a7085b9c67ef0e6aba1dee2c5654a32e5adcc1f521890805",
+                "draft": false
             },
             "v1.1.2": {
                 "date": "12-5-2024",
@@ -300,7 +314,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "66d0c6c38812a4f7dc6eb0e6026d5a6e04a4239d90065d91a1315e9cd964b7ed"
+                "sha256": "66d0c6c38812a4f7dc6eb0e6026d5a6e04a4239d90065d91a1315e9cd964b7ed",
+                "draft": false
             },
             "v1.1.3": {
                 "date": "20-5-2024",
@@ -316,7 +331,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "87cc3e08b380460e5f945d551e496012057af2a2006ff406faccf5357b270f8b"
+                "sha256": "87cc3e08b380460e5f945d551e496012057af2a2006ff406faccf5357b270f8b",
+                "draft": false
             },
             "v1.1.4": {
                 "date": "20-5-2024",
@@ -332,7 +348,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "7c09e4d49b50b68539d5f4e71036fc916c53aaaac2b9e0316f473c5ec5205e23"
+                "sha256": "7c09e4d49b50b68539d5f4e71036fc916c53aaaac2b9e0316f473c5ec5205e23",
+                "draft": false
             },
             "v1.1.5": {
                 "date": "20-5-2024",
@@ -348,7 +365,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "0a6850e5ecdc17ca726c8d7ce5f56f602fc31cb991f92c201e1ae99d5d0337f8"
+                "sha256": "0a6850e5ecdc17ca726c8d7ce5f56f602fc31cb991f92c201e1ae99d5d0337f8",
+                "draft": false
             },
             "v1.1.6": {
                 "date": "20-5-2024",
@@ -364,7 +382,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "6678df8ec61a856054f9331cac9e9835a840becd82edb415828f9024dc716dd5"
+                "sha256": "6678df8ec61a856054f9331cac9e9835a840becd82edb415828f9024dc716dd5",
+                "draft": false
             },
             "v1.1.7": {
                 "date": "17-09-2024",
@@ -380,7 +399,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "0c0069205a5d509e081405f214435661005e0b5302f00b6409ca4e4269e172d8"
+                "sha256": "0c0069205a5d509e081405f214435661005e0b5302f00b6409ca4e4269e172d8",
+                "draft": false
             },
             "v1.1.8": {
                 "date": "4-11-2024",
@@ -396,7 +416,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "23d908170beb4161e592dde1cb79d6f1583fa6327779d5790b41538101a6f8fe"
+                "sha256": "23d908170beb4161e592dde1cb79d6f1583fa6327779d5790b41538101a6f8fe",
+                "draft": false
             }
         }
     },
@@ -429,7 +450,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "47d1cdf641b3cb9e72ab4864df685997984c92d7a7b93122bd294483b3edebd4"
+                "sha256": "47d1cdf641b3cb9e72ab4864df685997984c92d7a7b93122bd294483b3edebd4",
+                "draft": false
             }
         }
     },
@@ -463,7 +485,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "a7e1cb939c5003a5aaa28ef5a8391326f95a9f77e8cc529ae5fc56bbc9957f56"
+                "sha256": "a7e1cb939c5003a5aaa28ef5a8391326f95a9f77e8cc529ae5fc56bbc9957f56",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "3-18-2023",
@@ -479,7 +502,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "64cee8c74e4fd81b5e8e2a4563c5a326376cbfe4de1deceb2b2f888a33fa15f9"
+                "sha256": "64cee8c74e4fd81b5e8e2a4563c5a326376cbfe4de1deceb2b2f888a33fa15f9",
+                "draft": false
             }
         }
     },
@@ -513,7 +537,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "01021201bd084a8e08d5185a8a88db70866c0ee0770189eaf6393c0d4a851030"
+                "sha256": "01021201bd084a8e08d5185a8a88db70866c0ee0770189eaf6393c0d4a851030",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "1-01-2020",
@@ -529,7 +554,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "b69c5329a6d04b7efdd012c4a63b07a778bc376f392b365ff10531c93b7111d4"
+                "sha256": "b69c5329a6d04b7efdd012c4a63b07a778bc376f392b365ff10531c93b7111d4",
+                "draft": false
             }
         }
     },
@@ -561,7 +587,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "9662615f7cfdd64e62d8ffb414da868fe9dcf912e993bdd69c228abc415c59ca"
+                "sha256": "9662615f7cfdd64e62d8ffb414da868fe9dcf912e993bdd69c228abc415c59ca",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "15-4-2024",
@@ -577,7 +604,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "3ddf432a9df47e3358f277d403d198013efcbbe15b713ea42285fd2980ea38e3"
+                "sha256": "3ddf432a9df47e3358f277d403d198013efcbbe15b713ea42285fd2980ea38e3",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "07-5-2024",
@@ -593,7 +621,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "043b00fbe98b044fdd7ba541b37378e31c855fcaa72f6b07fa78ef2e57ea779b"
+                "sha256": "043b00fbe98b044fdd7ba541b37378e31c855fcaa72f6b07fa78ef2e57ea779b",
+                "draft": false
             },
             "v1.0.3": {
                 "date": "12-5-2024",
@@ -609,7 +638,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "50eeedb552b53b75fb3347412fc18e5dd0a3f59f1174c89e138558899504518a"
+                "sha256": "50eeedb552b53b75fb3347412fc18e5dd0a3f59f1174c89e138558899504518a",
+                "draft": false
             },
             "v1.0.4": {
                 "date": "16-5-2024",
@@ -625,7 +655,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "ed658bbf85961737a3e8da4bb48d9f0a686e76768d754576076e237e024215ca"
+                "sha256": "ed658bbf85961737a3e8da4bb48d9f0a686e76768d754576076e237e024215ca",
+                "draft": false
             },
             "v1.0.5": {
                 "date": "20-5-2024",
@@ -641,7 +672,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "1dc02e7e687852ad9cad54a481f13fde19f8ff653ecc21832f12bdbe1ce4f0c3"
+                "sha256": "1dc02e7e687852ad9cad54a481f13fde19f8ff653ecc21832f12bdbe1ce4f0c3",
+                "draft": false
             },
             "v1.0.6": {
                 "date": "08-07-2024",
@@ -657,7 +689,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "d3a0221560e1bc14dbb204575384d1d676946d72782b9934f83cb476665a97e2"
+                "sha256": "d3a0221560e1bc14dbb204575384d1d676946d72782b9934f83cb476665a97e2",
+                "draft": false
             },
             "v1.0.7": {
                 "date": "08-07-2024",
@@ -673,7 +706,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "519f58001beaac1fb70dc89872a724f32292b0980a468c4287c88af041bb31a0"
+                "sha256": "519f58001beaac1fb70dc89872a724f32292b0980a468c4287c88af041bb31a0",
+                "draft": false
             },
             "v1.0.8": {
                 "date": "08-07-2024",
@@ -689,7 +723,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "83ae4fbc3a97480db5d41ea118b0ceb3a232e1ee916208bae98e8ae8f1900855"
+                "sha256": "83ae4fbc3a97480db5d41ea118b0ceb3a232e1ee916208bae98e8ae8f1900855",
+                "draft": false
             },
             "v1.0.9": {
                 "date": "09-07-2024",
@@ -705,7 +740,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "99eeac11891c724de6d754bfb8fec0dcf33ce21d09ee392cd4179283552f4331"
+                "sha256": "99eeac11891c724de6d754bfb8fec0dcf33ce21d09ee392cd4179283552f4331",
+                "draft": false
             },
             "v1.0.10": {
                 "date": "17-09-2024",
@@ -721,7 +757,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "fe07bef6d34517f365a5d75df8f8d82f51906cc30fd5c70313a41cbbdc18ea2c"
+                "sha256": "fe07bef6d34517f365a5d75df8f8d82f51906cc30fd5c70313a41cbbdc18ea2c",
+                "draft": false
             },
             "v1.0.11": {
                 "date": "4-11-2024",
@@ -737,7 +774,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "ce99f2ff3dc6ab0f65188eb7439c8126bfa80d5697732cd08d1e39d7fdd3fb27"
+                "sha256": "ce99f2ff3dc6ab0f65188eb7439c8126bfa80d5697732cd08d1e39d7fdd3fb27",
+                "draft": false
             }
         }
     },
@@ -769,7 +807,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "9662615f7cfdd64e62d8ffb414da868fe9dcf912e993bdd69c228abc415c59ca"
+                "sha256": "9662615f7cfdd64e62d8ffb414da868fe9dcf912e993bdd69c228abc415c59ca",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "15-4-2024",
@@ -785,7 +824,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "3ddf432a9df47e3358f277d403d198013efcbbe15b713ea42285fd2980ea38e3"
+                "sha256": "3ddf432a9df47e3358f277d403d198013efcbbe15b713ea42285fd2980ea38e3",
+                "draft": false
             }
         }
     },
@@ -820,7 +860,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "22b72af83175b3a461376dece62f056b16193a55addf4638e8e3b6f5471c36c4"
+                "sha256": "22b72af83175b3a461376dece62f056b16193a55addf4638e8e3b6f5471c36c4",
+                "draft": false
             }
         }
     },
@@ -851,7 +892,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "d2d219f948d9f8e412d8c6b511b16cefc59fbf9ff942f6a967a81c7be1001b5d"
+                "sha256": "d2d219f948d9f8e412d8c6b511b16cefc59fbf9ff942f6a967a81c7be1001b5d",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "1-01-2020",
@@ -867,7 +909,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "636bfd6832b64984743fd4d28cfd539b9704613ec4719fb1c9e090d9bbd8e57d"
+                "sha256": "636bfd6832b64984743fd4d28cfd539b9704613ec4719fb1c9e090d9bbd8e57d",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "1-01-2020",
@@ -883,7 +926,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "0048a1004a2014cb2ee5e56ebc6a29bd627aafd7a1d1e09bce764ff13eaf9b58"
+                "sha256": "0048a1004a2014cb2ee5e56ebc6a29bd627aafd7a1d1e09bce764ff13eaf9b58",
+                "draft": false
             },
             "v1.0.3": {
                 "date": "2-09-2024",
@@ -899,7 +943,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "324f907062b323574b9e6338ff0f3eeb0adb04109d81c297eefff855e2a77436"
+                "sha256": "324f907062b323574b9e6338ff0f3eeb0adb04109d81c297eefff855e2a77436",
+                "draft": false
             },
             "v1.0.4": {
                 "date": "8-09-2024",
@@ -915,7 +960,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "a891ee70d7d8cd44893129c9470f529924bd79e198f107ad56ddde4ef1333428"
+                "sha256": "a891ee70d7d8cd44893129c9470f529924bd79e198f107ad56ddde4ef1333428",
+                "draft": false
             },
             "v1.0.5": {
                 "date": "8-09-2024",
@@ -931,7 +977,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "ee35da4f50f7c2010eb12fcbd4758db3847006a390f458a1384e5231e840b74e"
+                "sha256": "ee35da4f50f7c2010eb12fcbd4758db3847006a390f458a1384e5231e840b74e",
+                "draft": false
             },
             "v1.0.6": {
                 "date": "8-09-2024",
@@ -947,7 +994,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "6ac04f5a2fcec722ef3e45468a84b66e894b985965ffac8b2ddda97ccadac877"
+                "sha256": "6ac04f5a2fcec722ef3e45468a84b66e894b985965ffac8b2ddda97ccadac877",
+                "draft": false
             },
             "v1.0.7": {
                 "date": "8-09-2024",
@@ -963,7 +1011,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "3f4d197b4ef7bb58965be5829dd19d3ff55705a4e1b7e61539ef92881ec9a978"
+                "sha256": "3f4d197b4ef7bb58965be5829dd19d3ff55705a4e1b7e61539ef92881ec9a978",
+                "draft": false
             },
             "v1.0.8": {
                 "date": "9-09-2024",
@@ -979,7 +1028,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "b609bc529fd48f7e19e80b70a733d744e81972877cdf8cb52a43fca82e250a65"
+                "sha256": "b609bc529fd48f7e19e80b70a733d744e81972877cdf8cb52a43fca82e250a65",
+                "draft": false
             },
             "v1.0.9": {
                 "date": "10-09-2024",
@@ -995,7 +1045,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "b73570b8866d70b4e2da24d460ad8990c446706d86f97ec99e304b52532b9861"
+                "sha256": "b73570b8866d70b4e2da24d460ad8990c446706d86f97ec99e304b52532b9861",
+                "draft": false
             }
         }
     },
@@ -1028,7 +1079,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "049eca0a8e378a24a2381f04c28b3136ea97cd6590e37a6b4550abf0496404a4"
+                "sha256": "049eca0a8e378a24a2381f04c28b3136ea97cd6590e37a6b4550abf0496404a4",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "08-5-2024",
@@ -1044,7 +1096,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "7c0c22ee3f3f39181d4a54f6a4f3debd8e71706afb9a09c2d7b7edbda3ba1044"
+                "sha256": "7c0c22ee3f3f39181d4a54f6a4f3debd8e71706afb9a09c2d7b7edbda3ba1044",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "12-11-2024",
@@ -1060,7 +1113,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "57770d6b90b6e1298ba8569f84d8ace762e360fd06d6bbedccf2a76879a56646"
+                "sha256": "57770d6b90b6e1298ba8569f84d8ace762e360fd06d6bbedccf2a76879a56646",
+                "draft": false
             }
         }
     },
@@ -1093,7 +1147,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "6028a72d11626e6b8d0f805adecdae01366370adfb6e139a254d332f73bd508a"
+                "sha256": "6028a72d11626e6b8d0f805adecdae01366370adfb6e139a254d332f73bd508a",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "08-5-2023",
@@ -1109,7 +1164,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "a317a6481c75fefaa8bf78f51e11fc84a3055e2145e747ad0a542d92b3796f30"
+                "sha256": "a317a6481c75fefaa8bf78f51e11fc84a3055e2145e747ad0a542d92b3796f30",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "12-11-2023",
@@ -1125,7 +1181,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "32c2f33d198a1bdbac5a03aa8a0328146ca58b37b7f63f5f9473e2b0473aa600"
+                "sha256": "32c2f33d198a1bdbac5a03aa8a0328146ca58b37b7f63f5f9473e2b0473aa600",
+                "draft": false
             }
             
         }
@@ -1158,7 +1215,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "925b0ad94a6b26a2aff3daf693c1cd2d1de252f6e9dac959477ddff894f36e38"
+                "sha256": "925b0ad94a6b26a2aff3daf693c1cd2d1de252f6e9dac959477ddff894f36e38",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "9-05-2023",
@@ -1174,7 +1232,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "6c06df55321188fbf173897126877a205cd4eb16444815628419669ae9339d22"
+                "sha256": "6c06df55321188fbf173897126877a205cd4eb16444815628419669ae9339d22",
+                "draft": false
             }
         }
     },
@@ -1209,7 +1268,8 @@
                     "3.3",
                     "1.8"
                 ],
-                "sha256": "6c80a3f343a88fe307c384d4fa79055362a4387ad31245ba75db32883882fa38"
+                "sha256": "6c80a3f343a88fe307c384d4fa79055362a4387ad31245ba75db32883882fa38",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "1-9-2023",
@@ -1226,7 +1286,8 @@
                     "3.3",
                     "1.8"
                 ],
-                "sha256": "a4e2d1cffd156108aa2bfaba4a4522eb064901c0805e152bd34f0761b28eb723"
+                "sha256": "a4e2d1cffd156108aa2bfaba4a4522eb064901c0805e152bd34f0761b28eb723",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "1-9-2023",
@@ -1243,7 +1304,8 @@
                     "3.3",
                     "1.8"
                 ],
-                "sha256": "fbf5cf3ac68b646b8c671572cfb9e00b8a4bb0fe922d464de20fd0c1e5173651"
+                "sha256": "fbf5cf3ac68b646b8c671572cfb9e00b8a4bb0fe922d464de20fd0c1e5173651",
+                "draft": false
             }
         }
     },
@@ -1275,7 +1337,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "96555872fbff7a03173f274756826af57c82c04acd29574218c613d456e4d752"
+                "sha256": "96555872fbff7a03173f274756826af57c82c04acd29574218c613d456e4d752",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "9-01-2023",
@@ -1291,7 +1354,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "1adb4fff94642e61f5423331bcf8e7d2e552fb630dbb9d1f952fd79113bdd864"
+                "sha256": "1adb4fff94642e61f5423331bcf8e7d2e552fb630dbb9d1f952fd79113bdd864",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "9-01-2023",
@@ -1307,7 +1371,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "1c0c6ba6c8ce2227d0bf070e9bf97d05d9a8af9052f10bad223302ef67b34358"
+                "sha256": "1c0c6ba6c8ce2227d0bf070e9bf97d05d9a8af9052f10bad223302ef67b34358",
+                "draft": false
             },
             "v1.0.3": {
                 "date": "20-05-2024",
@@ -1323,7 +1388,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "5bdffca9208b970f97f15fce736dd52f8fae8e6ff1eb65ba696789bb63754cf9"
+                "sha256": "5bdffca9208b970f97f15fce736dd52f8fae8e6ff1eb65ba696789bb63754cf9",
+                "draft": false
             }
         }
     },
@@ -1355,7 +1421,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "477010c1f12233f7389be4250c17aec6645b47dbe18dd983a49f2cb542114174"
+                "sha256": "477010c1f12233f7389be4250c17aec6645b47dbe18dd983a49f2cb542114174",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "7-30-2023",
@@ -1371,7 +1438,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "498000adb5aec957101f2d06844a18289c06afb6caa11a796c47c5eeb78ff254"
+                "sha256": "498000adb5aec957101f2d06844a18289c06afb6caa11a796c47c5eeb78ff254",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "7-30-2023",
@@ -1387,7 +1455,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "d869a796dc1dd11c43b4a1bb21e3c41d79bbbd3453e928ca75092bbaaa923ce0"
+                "sha256": "d869a796dc1dd11c43b4a1bb21e3c41d79bbbd3453e928ca75092bbaaa923ce0",
+                "draft": false
             },
             "v1.0.3": {
                 "date": "7-30-2023",
@@ -1403,7 +1472,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "5a9b23707271895bba6470c69d8c50a0c2ed5cbbc3ffdb2ad0649fdb328d4e8d"
+                "sha256": "5a9b23707271895bba6470c69d8c50a0c2ed5cbbc3ffdb2ad0649fdb328d4e8d",
+                "draft": false
             }
         }
     },
@@ -1436,7 +1506,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "c7d12110cbea1d99ce624a1a6ea2743b20a42d11b0b3150b98a5ad6167674812"
+                "sha256": "c7d12110cbea1d99ce624a1a6ea2743b20a42d11b0b3150b98a5ad6167674812",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "7-30-2023",
@@ -1452,7 +1523,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "ddefce8e60076b893e748284f9c0d384c43b61ca4122fe31c298cfee38ef4661"
+                "sha256": "ddefce8e60076b893e748284f9c0d384c43b61ca4122fe31c298cfee38ef4661",
+                "draft": false
             }
         }
     },
@@ -1485,7 +1557,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "0f7cbf35b5bb18ee287d384f20303d516827f0d060b8fb3a668f90526a63d144"
+                "sha256": "0f7cbf35b5bb18ee287d384f20303d516827f0d060b8fb3a668f90526a63d144",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "7-30-2023",
@@ -1501,7 +1574,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "366be61e4b8a44467acae892e5a22e8885380e7d1d0f984619bff6d50c8e9912"
+                "sha256": "366be61e4b8a44467acae892e5a22e8885380e7d1d0f984619bff6d50c8e9912",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "7-30-2023",
@@ -1517,7 +1591,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "cfa665103a66f044a410ceebb2fb5593b394230bda797e931eb1bdc966eea49b"
+                "sha256": "cfa665103a66f044a410ceebb2fb5593b394230bda797e931eb1bdc966eea49b",
+                "draft": false
             }
         }
     },
@@ -1550,7 +1625,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "08e8908e7604f5a17233ee09c536abcb8b159c13a462b348e65ba454de25a145"
+                "sha256": "08e8908e7604f5a17233ee09c536abcb8b159c13a462b348e65ba454de25a145",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "7-30-2023",
@@ -1566,7 +1642,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "794ceeafa4244c94f09672800bf1d831063efc9e9b20ff8f6339569e94de351c"
+                "sha256": "794ceeafa4244c94f09672800bf1d831063efc9e9b20ff8f6339569e94de351c",
+                "draft": false
             }
         }
     },
@@ -1597,7 +1674,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "e00c042e1b369081acb19ed473fe391415719f3c25a1fdb7f6e58a1d9c26fb2f"
+                "sha256": "e00c042e1b369081acb19ed473fe391415719f3c25a1fdb7f6e58a1d9c26fb2f",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "3-30-2023",
@@ -1613,7 +1691,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "dd95e2a556462946799fb1cc14e743aa5574da23448df4d3df2afac5faaddc0c"
+                "sha256": "dd95e2a556462946799fb1cc14e743aa5574da23448df4d3df2afac5faaddc0c",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "3-30-2023",
@@ -1629,7 +1708,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "20548704b3510b98f228f3e0dc9096a5f1e2ec64c64c05a93483a803dfbb3ecc"
+                "sha256": "20548704b3510b98f228f3e0dc9096a5f1e2ec64c64c05a93483a803dfbb3ecc",
+                "draft": false
             },
             "v2.0.0": {
                 "date": "5-11-2023",
@@ -1645,7 +1725,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "c075993d1660ab3b49a608186eaf3affc2168b897285929db2b93346710cddf5"
+                "sha256": "c075993d1660ab3b49a608186eaf3affc2168b897285929db2b93346710cddf5",
+                "draft": false
             },
             "v2.0.1": {
                 "date": "5-11-2023",
@@ -1661,7 +1742,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "96709f376a79d5801ce70d49e88514922c5b725cb99544ec06c5cccab3c01cca"
+                "sha256": "96709f376a79d5801ce70d49e88514922c5b725cb99544ec06c5cccab3c01cca",
+                "draft": false
             },
             "v2.0.2": {
                 "date": "26-05-2024",
@@ -1677,7 +1759,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "5cdd4940035ea191a4c451646cb5e1d20926d7f71cd38aef5c3663a26c3268e3"
+                "sha256": "5cdd4940035ea191a4c451646cb5e1d20926d7f71cd38aef5c3663a26c3268e3",
+                "draft": false
             },
             "v2.0.3": {
                 "date": "26-05-2024",
@@ -1693,7 +1776,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "554f481197534c20b08810ab652a1f2c04ae3c3a1d3154bbc9aeff9ad5cf4a28"
+                "sha256": "554f481197534c20b08810ab652a1f2c04ae3c3a1d3154bbc9aeff9ad5cf4a28",
+                "draft": false
             },
             "v2.0.4": {
                 "date": "11-06-2024",
@@ -1709,7 +1793,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "677933063f81b9fc60c0233fdcf3386bd4bce02266d53155b4e1e6954b49cc35"
+                "sha256": "677933063f81b9fc60c0233fdcf3386bd4bce02266d53155b4e1e6954b49cc35",
+                "draft": false
             },
             "v2.0.5": {
                 "date": "11-06-2024",
@@ -1725,7 +1810,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "8df72cef82f1aa78d4086de3959e924f2248d6fb0f2bca9440ae16193ce0a5e7"
+                "sha256": "8df72cef82f1aa78d4086de3959e924f2248d6fb0f2bca9440ae16193ce0a5e7",
+                "draft": false
             },
             "v2.0.6": {
                 "date": "11-06-2024",
@@ -1741,7 +1827,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "e5b76f0a0d718ee845c2be2032f1b0e3c81ec17b4d779080f27f2b9647b998e9"
+                "sha256": "e5b76f0a0d718ee845c2be2032f1b0e3c81ec17b4d779080f27f2b9647b998e9",
+                "draft": false
             },
             "v2.0.7": {
                 "date": "11-06-2024",
@@ -1757,7 +1844,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "f26096778d3e596067ac944e87cc40be25c73228e3ef2cf227ce2db833b341fd"
+                "sha256": "f26096778d3e596067ac944e87cc40be25c73228e3ef2cf227ce2db833b341fd",
+                "draft": false
             },
             "v2.0.8": {
                 "date": "2024-10-29",
@@ -1773,7 +1861,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "edd042fc282e7a1dd8c82a0fbbe42ad798f8bbf44f42e553f70eb666280fae39"
+                "sha256": "edd042fc282e7a1dd8c82a0fbbe42ad798f8bbf44f42e553f70eb666280fae39",
+                "draft": false
             }
         }
     },
@@ -1806,7 +1895,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "e8c2c675cb7c723a0183487853f4fd42a30a1b0dabd8d84d53ac752700da7c38"
+                "sha256": "e8c2c675cb7c723a0183487853f4fd42a30a1b0dabd8d84d53ac752700da7c38",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "1-1-2020",
@@ -1822,7 +1912,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "f5d30f66f762a5f558708fc79c14f6a6a66f72374bb4490f35b1f13b3f52a5d5"
+                "sha256": "f5d30f66f762a5f558708fc79c14f6a6a66f72374bb4490f35b1f13b3f52a5d5",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "1-1-2020",
@@ -1838,7 +1929,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "1edfe6b5245d4db23e4f5e9e906a650bf5e71998b4935a47839e453d98361a2a"
+                "sha256": "1edfe6b5245d4db23e4f5e9e906a650bf5e71998b4935a47839e453d98361a2a",
+                "draft": false
             },
             "v1.0.3": {
                 "date": "1-1-2020",
@@ -1854,7 +1946,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "977a743ab64681761fe1c82bb164a67079239c6c6ab0db85dbf7f1370aa6a2e3"
+                "sha256": "977a743ab64681761fe1c82bb164a67079239c6c6ab0db85dbf7f1370aa6a2e3",
+                "draft": false
             },
             "v1.0.4": {
                 "date": "09-07-2024",
@@ -1870,7 +1963,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "c7307fe97a08176805ea7d9760c229cc2eabb8eb809af04d3f555a7ae5ac0da1"
+                "sha256": "c7307fe97a08176805ea7d9760c229cc2eabb8eb809af04d3f555a7ae5ac0da1",
+                "draft": false
             },
             "v1.0.5": {
                 "date": "17-09-2024",
@@ -1886,7 +1980,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "756ab2834af173ba3132b80c25f58e69de76b17f5412aeb1eeb8a2439bf51022"
+                "sha256": "756ab2834af173ba3132b80c25f58e69de76b17f5412aeb1eeb8a2439bf51022",
+                "draft": false
             }
         }
     },
@@ -1918,7 +2013,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "4aca6a5e5ca1e66341a9b3de6b47908098fa1cf40e406fd9f505474ab0bfe22b"
+                "sha256": "4aca6a5e5ca1e66341a9b3de6b47908098fa1cf40e406fd9f505474ab0bfe22b",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "1-1-2023",
@@ -1934,7 +2030,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "f63b1d5ad049f131f762879ab275a6970e13f110ac9c59a04d87db053f78bd53"
+                "sha256": "f63b1d5ad049f131f762879ab275a6970e13f110ac9c59a04d87db053f78bd53",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "1-1-2023",
@@ -1950,7 +2047,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "e64d7b64a20275f0a47eb0d324887a28404989f9310cb1d00893c35f756a60fa"
+                "sha256": "e64d7b64a20275f0a47eb0d324887a28404989f9310cb1d00893c35f756a60fa",
+                "draft": false
             }
         }
     },
@@ -1983,7 +2081,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "2f9a0dcba3424bb6f6df19eada827faf3ad7a71dc20651909080758b021be418"
+                "sha256": "2f9a0dcba3424bb6f6df19eada827faf3ad7a71dc20651909080758b021be418",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "1-11-2023",
@@ -1999,7 +2098,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "2baaba8674281ecf22a2aaba56dbe8cdd08e18e07a6be04828355edc9c5eb03c"
+                "sha256": "2baaba8674281ecf22a2aaba56dbe8cdd08e18e07a6be04828355edc9c5eb03c",
+                "draft": false
             }
         }
     },
@@ -2032,7 +2132,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "c256db40f6aa609119255b99b84d444ab4769d93b0140a9de395c89b745a365c"
+                "sha256": "c256db40f6aa609119255b99b84d444ab4769d93b0140a9de395c89b745a365c",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "1-11-2023",
@@ -2063,7 +2164,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "1c8ab3b803edb98bcd1268f14339c6f51aadede852886ea129e71519ff67d86d"
+                "sha256": "1c8ab3b803edb98bcd1268f14339c6f51aadede852886ea129e71519ff67d86d",
+                "draft": false
             }
         }
     },
@@ -2095,7 +2197,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "dc6d3a161ab75fc98c279223587844c349ad95263896f4591afa2c21441340fe"
+                "sha256": "dc6d3a161ab75fc98c279223587844c349ad95263896f4591afa2c21441340fe",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "1-11-2023",
@@ -2111,7 +2214,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "5ba3c918b470117b650321d23cb3d0d6fbc8c1a1eaf1241ebb18b52a72549730"
+                "sha256": "5ba3c918b470117b650321d23cb3d0d6fbc8c1a1eaf1241ebb18b52a72549730",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "1-11-2023",
@@ -2127,7 +2231,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "9e7b5afe891165cfa9ab7cae7f6e68f6fbde7df655156b0ee12a1179155d99c5"
+                "sha256": "9e7b5afe891165cfa9ab7cae7f6e68f6fbde7df655156b0ee12a1179155d99c5",
+                "draft": false
             }
         }
     },
@@ -2160,7 +2265,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "b30bb85358c3b78cb01536dae8c3f9dffa6c63969665a8729e2dc94c4fe1b6d3"
+                "sha256": "b30bb85358c3b78cb01536dae8c3f9dffa6c63969665a8729e2dc94c4fe1b6d3",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "1-11-2023",
@@ -2177,7 +2283,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "704e976caa2972f5ddf028987e93c83ace70243c2901d80775267c3e2fc91fc6"
+                "sha256": "704e976caa2972f5ddf028987e93c83ace70243c2901d80775267c3e2fc91fc6",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "1-11-2023",
@@ -2194,7 +2301,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "92303d05a941ab75d0d211c8ebbe50610dd601819e4b46c818225a4cee3d3e75"
+                "sha256": "92303d05a941ab75d0d211c8ebbe50610dd601819e4b46c818225a4cee3d3e75",
+                "draft": false
             },
             "v1.0.3": {
                 "date": "1-11-2023",
@@ -2211,7 +2319,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "f57f1c9d9e61c4ba12bc79cd33161672521be3794da24bd6732fb1fd5e0d4af3"
+                "sha256": "f57f1c9d9e61c4ba12bc79cd33161672521be3794da24bd6732fb1fd5e0d4af3",
+                "draft": false
             },
             "v1.0.4": {
                 "date": "1-11-2023",
@@ -2228,7 +2337,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "660a4890b2d8d1a03a4592d8b7e79e3ab8aff57da7016743427e9e0c573da0fd"
+                "sha256": "660a4890b2d8d1a03a4592d8b7e79e3ab8aff57da7016743427e9e0c573da0fd",
+                "draft": false
             }
         }
     },
@@ -2260,7 +2370,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "183cc4abf3bd320101be9052740f5f3378207a8d49deae62518cba8ceb99ece6"
+                "sha256": "183cc4abf3bd320101be9052740f5f3378207a8d49deae62518cba8ceb99ece6",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "1-11-2023",
@@ -2276,7 +2387,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "1b6c32c6b7ce9bcad56f7aeda42a1425bc0abc4dc899a2b7aa0c733e4b086905"
+                "sha256": "1b6c32c6b7ce9bcad56f7aeda42a1425bc0abc4dc899a2b7aa0c733e4b086905",
+                "draft": false
             }
         }
     },
@@ -2308,7 +2420,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "1d56619e22024b47905a8cf619db4d15da1daf8aafb6bc56849b5b48fd48551c"
+                "sha256": "1d56619e22024b47905a8cf619db4d15da1daf8aafb6bc56849b5b48fd48551c",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "1-11-2023",
@@ -2324,7 +2437,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "b870677fe4a8aceb0e5f31ffe24b52013302ee214c14a1636c36f58d58468d19"
+                "sha256": "b870677fe4a8aceb0e5f31ffe24b52013302ee214c14a1636c36f58d58468d19",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "1-11-2023",
@@ -2340,7 +2454,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "66d7e33f01ac775959696a07a51ee500bc92d7bac36b6563e81ed6ce89286e91"
+                "sha256": "66d7e33f01ac775959696a07a51ee500bc92d7bac36b6563e81ed6ce89286e91",
+                "draft": false
             },
             "v1.0.3": {
                 "date": "1-11-2023",
@@ -2356,7 +2471,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "d5381495dda1fceafc68d8dbf9fb71f3cf595dd46bfe903961c970babb766c49"
+                "sha256": "d5381495dda1fceafc68d8dbf9fb71f3cf595dd46bfe903961c970babb766c49",
+                "draft": false
             }
         }
     },
@@ -2389,7 +2505,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "04be802dc7b6142564a48d0ffe32f3dcfa9da745508f09565794f67b1155efe1"
+                "sha256": "04be802dc7b6142564a48d0ffe32f3dcfa9da745508f09565794f67b1155efe1",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "1-1-2021",
@@ -2405,7 +2522,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "7f6c0a981d9ce920d5cbb6cfef3b53ed3c5d39283bd4d7704e73e0bca2b24add"
+                "sha256": "7f6c0a981d9ce920d5cbb6cfef3b53ed3c5d39283bd4d7704e73e0bca2b24add",
+                "draft": false
             }
         }
     },
@@ -2439,7 +2557,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "155d3290be9b1e5ad2f20391950e4884a30928893b1c73d5cab997181c758471"
+                "sha256": "155d3290be9b1e5ad2f20391950e4884a30928893b1c73d5cab997181c758471",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "29-10-2023",
@@ -2455,7 +2574,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "f754a0b07a03c58db03c899a017a6c30b2af266ccb4f3a7e04ec71ce021dc36f"
+                "sha256": "f754a0b07a03c58db03c899a017a6c30b2af266ccb4f3a7e04ec71ce021dc36f",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "29-10-2023",
@@ -2471,7 +2591,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "dddebd4b219fc4088664e1f7bab96b38eb347e2a837b04a6f7195aa0d79c06ed"
+                "sha256": "dddebd4b219fc4088664e1f7bab96b38eb347e2a837b04a6f7195aa0d79c06ed",
+                "draft": false
             },
             "v1.0.3": {
                 "date": "29-10-2023",
@@ -2487,7 +2608,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "22ce76cae96c389282ecab6a284f40150b640f96b17fc7b6885fe2258abd9e04"
+                "sha256": "22ce76cae96c389282ecab6a284f40150b640f96b17fc7b6885fe2258abd9e04",
+                "draft": false
             },
             "v1.0.4": {
                 "date": "29-10-2023",
@@ -2503,7 +2625,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "1a96f7d49692d07437c5968e4a358710d630bcd0f8fd923be53fdfcbf9076414"
+                "sha256": "1a96f7d49692d07437c5968e4a358710d630bcd0f8fd923be53fdfcbf9076414",
+                "draft": false
             },
             "v1.0.5": {
                 "date": "29-10-2023",
@@ -2519,7 +2642,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "bf8d1ac7f3b3d913a943578a061e4c1dcd983ef00fba45a98244e9b0acd27f46"
+                "sha256": "bf8d1ac7f3b3d913a943578a061e4c1dcd983ef00fba45a98244e9b0acd27f46",
+                "draft": false
             },
             "v1.0.6": {
                 "date": "29-10-2023",
@@ -2535,7 +2659,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "7bc51616f6284ada137048d487e59064bc4977f767655f1f173388a851f9ca7d"
+                "sha256": "7bc51616f6284ada137048d487e59064bc4977f767655f1f173388a851f9ca7d",
+                "draft": false
             },
             "v1.0.7": {
                 "date": "29-10-2023",
@@ -2551,7 +2676,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "0701c7521c6f9488fa8642ed6296cb54940b9fa18325264ba2581aaae98fb560"
+                "sha256": "0701c7521c6f9488fa8642ed6296cb54940b9fa18325264ba2581aaae98fb560",
+                "draft": false
             },
             "v1.0.8": {
                 "date": "29-10-2023",
@@ -2567,7 +2693,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "fd3a4833996757a1e372b45a9f04f8f199252ad3da9c38ade90dd0989c672b1c"
+                "sha256": "fd3a4833996757a1e372b45a9f04f8f199252ad3da9c38ade90dd0989c672b1c",
+                "draft": false
             },
             "v1.0.9": {
                 "date": "29-10-2023",
@@ -2583,7 +2710,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "5e114f0d577539bcd2646171e33fbc54367d7f2abc5f81c63b88c62a9957a8fb"
+                "sha256": "5e114f0d577539bcd2646171e33fbc54367d7f2abc5f81c63b88c62a9957a8fb",
+                "draft": false
             },
             "v1.0.10": {
                 "date": "20-5-2024",
@@ -2599,7 +2727,8 @@
                 "supply_voltage": [
                     "1.8"
                 ],
-                "sha256": "8988a02bcc8c21fa24c62a2fa2f9fe9faf666ffa8abe07e640dba04444bd8383"
+                "sha256": "8988a02bcc8c21fa24c62a2fa2f9fe9faf666ffa8abe07e640dba04444bd8383",
+                "draft": false
             }
         }
     },
@@ -2632,7 +2761,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "fddac95afd9890fcb5d74e4a9ed7e42f3036cf429dd04063ac1d10b0a401f5fb"
+                "sha256": "fddac95afd9890fcb5d74e4a9ed7e42f3036cf429dd04063ac1d10b0a401f5fb",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "11-05-2023",
@@ -2648,7 +2778,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "7fd0be886c0497319764242c8d15b6a996b19df0c805621e6c913717720c8b09"
+                "sha256": "7fd0be886c0497319764242c8d15b6a996b19df0c805621e6c913717720c8b09",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "11-05-2023",
@@ -2664,7 +2795,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "457090fb155db5332e4a96cdfde8347e2824c412dbaf9d18ffb62cc800cbd78c"
+                "sha256": "457090fb155db5332e4a96cdfde8347e2824c412dbaf9d18ffb62cc800cbd78c",
+                "draft": false
             },
             "v1.0.3": {
                 "date": "11-05-2023",
@@ -2680,7 +2812,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "42ff37e4530d9ceae677d2e5380501416e526fe1c87422fbfc61a5b29ff173db"
+                "sha256": "42ff37e4530d9ceae677d2e5380501416e526fe1c87422fbfc61a5b29ff173db",
+                "draft": false
             },
             "v1.0.4": {
                 "date": "11-05-2023",
@@ -2696,7 +2829,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "f94d7b1dd4f857f88236f5d7aa125f94906278925f98943f4251bb4d490f7349"
+                "sha256": "f94d7b1dd4f857f88236f5d7aa125f94906278925f98943f4251bb4d490f7349",
+                "draft": false
             },
             "v1.1.0": {
                 "date": "07-05-2024",
@@ -2712,7 +2846,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "da4efe37e36e6976c5445100965ee51db36cd8c449a9fb13f9ffc2660d99e30f"
+                "sha256": "da4efe37e36e6976c5445100965ee51db36cd8c449a9fb13f9ffc2660d99e30f",
+                "draft": false
             },
             "v1.1.1": {
                 "date": "07-05-2024",
@@ -2728,7 +2863,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "da4efe37e36e6976c5445100965ee51db36cd8c449a9fb13f9ffc2660d99e30f"
+                "sha256": "da4efe37e36e6976c5445100965ee51db36cd8c449a9fb13f9ffc2660d99e30f",
+                "draft": false
             },
             "v1.1.2": {
                 "date": "12-05-2024",
@@ -2744,7 +2880,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "26c4175ddc73a3dc70e16d734c85edc5d8bd92247e6de093fa4b0dd2ef3c13e1"
+                "sha256": "26c4175ddc73a3dc70e16d734c85edc5d8bd92247e6de093fa4b0dd2ef3c13e1",
+                "draft": false
             },
             "v1.1.3": {
                 "date": "20-05-2024",
@@ -2760,7 +2897,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "dae8c4e35aa77222b97c351ade262c419701c724e3a219220945dea0bd0d34df"
+                "sha256": "dae8c4e35aa77222b97c351ade262c419701c724e3a219220945dea0bd0d34df",
+                "draft": false
             },
             "v1.1.4": {
                 "date": "20-05-2024",
@@ -2776,7 +2914,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "a48c24865fe00494a48767dac760aac515a22365080c0829850cc4fd546b55ff"
+                "sha256": "a48c24865fe00494a48767dac760aac515a22365080c0829850cc4fd546b55ff",
+                "draft": false
             },
             "v1.1.5": {
                 "date": "27-06-2024",
@@ -2792,7 +2931,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "5ad8e4ffe2d5ac903988de0f5c048d595bd43e5a0da3aa8a018e4ae91b2e3e17"
+                "sha256": "5ad8e4ffe2d5ac903988de0f5c048d595bd43e5a0da3aa8a018e4ae91b2e3e17",
+                "draft": false
             },
             "v1.1.6": {
                 "date": "07-07-2024",
@@ -2808,7 +2948,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "d2d2af9837e84e5228fd6169a2df889861d8441e6a51cf9a6c883da09ec5f7db"
+                "sha256": "d2d2af9837e84e5228fd6169a2df889861d8441e6a51cf9a6c883da09ec5f7db",
+                "draft": false
             },
             "v1.1.7": {
                 "date": "07-07-2024",
@@ -2824,7 +2965,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "a23911da0a09e29615d508b29e2be6f27033ca3752e96db4f5d44492dce68b24"
+                "sha256": "a23911da0a09e29615d508b29e2be6f27033ca3752e96db4f5d44492dce68b24",
+                "draft": false
             },
             "v1.1.8": {
                 "date": "08-07-2024",
@@ -2840,7 +2982,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "74e0af4dd80cbddfc0fc631184d4c6df48430388985b8664c61a834b0bc67c6f"
+                "sha256": "74e0af4dd80cbddfc0fc631184d4c6df48430388985b8664c61a834b0bc67c6f",
+                "draft": false
             },
             "v1.1.9": {
                 "date": "08-07-2024",
@@ -2856,7 +2999,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "47222db4bd2d6bdfb39bfc3e6975dd73e3f456ad0afe2a7c9038e414248dd7ea"
+                "sha256": "47222db4bd2d6bdfb39bfc3e6975dd73e3f456ad0afe2a7c9038e414248dd7ea",
+                "draft": false
             },
             "v1.1.10": {
                 "date": "09-07-2024",
@@ -2872,7 +3016,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "7710ba2050c6b381b1662e74df3cb3b2f78e9a6493b418e4a9cec5c7607cf9c2"
+                "sha256": "7710ba2050c6b381b1662e74df3cb3b2f78e9a6493b418e4a9cec5c7607cf9c2",
+                "draft": false
             },
             "v1.1.11": {
                 "date": "09-07-2024",
@@ -2888,7 +3033,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "70f44ad583dc295c82d65f1d5d81deba7eb67ad8a0bfe14ebd2244094fdd3c1a"
+                "sha256": "70f44ad583dc295c82d65f1d5d81deba7eb67ad8a0bfe14ebd2244094fdd3c1a",
+                "draft": false
             },
             "v1.1.12": {
                 "date": "09-07-2024",
@@ -2904,7 +3050,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "9d46260cecb07376bec0289ea5163dac7a72e71cbd9903c68a2404e77b40020f"
+                "sha256": "9d46260cecb07376bec0289ea5163dac7a72e71cbd9903c68a2404e77b40020f",
+                "draft": false
             },
             "v1.1.13": {
                 "date": "17-09-2024",
@@ -2920,7 +3067,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "aa8f8455931c7420c082cfef8c54db5f7081d6d332cfe2c107babef4a2768140"
+                "sha256": "aa8f8455931c7420c082cfef8c54db5f7081d6d332cfe2c107babef4a2768140",
+                "draft": false
             },
             "v1.1.14": {
                 "date": "4-11-2024",
@@ -2936,7 +3084,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "e8909c59e0c8add4d18bfa69ea95c5041085775bb8a08a76150d830203ce8e86"
+                "sha256": "e8909c59e0c8add4d18bfa69ea95c5041085775bb8a08a76150d830203ce8e86",
+                "draft": false
             }
         }
     },
@@ -2970,7 +3119,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "30b3a2e918cba43a82aa75a4c73adb60409eb90ab99be1a3a4b93611fbff73d9"
+                "sha256": "30b3a2e918cba43a82aa75a4c73adb60409eb90ab99be1a3a4b93611fbff73d9",
+                "draft": false
             }
         }
     },
@@ -3019,7 +3169,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "7e28fa27debc922781a55d48118cdd599debbf681601f5c7864a858e67ea50d3"
+                "sha256": "7e28fa27debc922781a55d48118cdd599debbf681601f5c7864a858e67ea50d3",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "7-8-2024",
@@ -3035,7 +3186,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "e732fd1eb46f33ae56fe1c67f5c5d772e2312fd44fd4bcaedbab2e6e058f962d"
+                "sha256": "e732fd1eb46f33ae56fe1c67f5c5d772e2312fd44fd4bcaedbab2e6e058f962d",
+                "draft": false
             },
             "v1.0.3": {
                 "date": "7-8-2024",
@@ -3051,7 +3203,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "714024f1c7801725a82036684d05067e9291cb2b87b7bcbc455f652a5dab348d"
+                "sha256": "714024f1c7801725a82036684d05067e9291cb2b87b7bcbc455f652a5dab348d",
+                "draft": false
             }
         }
     },
@@ -3084,7 +3237,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "3a66b985451588b27761ad4cb1d037bf2b5c573d1985bd9f64d208a94f86fa8d"
+                "sha256": "3a66b985451588b27761ad4cb1d037bf2b5c573d1985bd9f64d208a94f86fa8d",
+                "draft": false
             }
         }
     },
@@ -3117,7 +3271,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "74c936849bee2b74f60f3cc59896608699ee6b0ada9078cf14032ce434f0fbd3"
+                "sha256": "74c936849bee2b74f60f3cc59896608699ee6b0ada9078cf14032ce434f0fbd3",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "19-05-2024",
@@ -3133,7 +3288,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "3b7fc8ab06d450e00fd2c4ec1c9d6e10a6b15e7f4ad976988e68f2e1efac2971"
+                "sha256": "3b7fc8ab06d450e00fd2c4ec1c9d6e10a6b15e7f4ad976988e68f2e1efac2971",
+                "draft": false
             },
             "v1.0.3": {
                 "date": "23-05-2024",
@@ -3149,7 +3305,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "fbbbad690b04e2f56efc0e27f26b2c762650b8f6de499882b94184b2df9c52c2"
+                "sha256": "fbbbad690b04e2f56efc0e27f26b2c762650b8f6de499882b94184b2df9c52c2",
+                "draft": false
             },
             "v1.0.4": {
                 "date": "07-07-2024",
@@ -3165,7 +3322,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "5d76fbe32378428cd99d99dbc9aea6fa51b5dc0c825dc5ccabb5ea77db9990f0"
+                "sha256": "5d76fbe32378428cd99d99dbc9aea6fa51b5dc0c825dc5ccabb5ea77db9990f0",
+                "draft": false
             },
             "v1.0.5": {
                 "date": "08-07-2024",
@@ -3181,7 +3339,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "781a1948c55042b0c75af011b2563222816f7e61ddd10c7bc9431f118ee82f70"
+                "sha256": "781a1948c55042b0c75af011b2563222816f7e61ddd10c7bc9431f118ee82f70",
+                "draft": false
             },
             "v1.0.6": {
                 "date": "08-07-2024",
@@ -3197,7 +3356,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "8838e0482db1e41dabbaa20f9b3162c0a538279e5d38c61cea66c7f2938cb476"
+                "sha256": "8838e0482db1e41dabbaa20f9b3162c0a538279e5d38c61cea66c7f2938cb476",
+                "draft": false
             },
             "v1.0.7": {
                 "date": "09-07-2024",
@@ -3213,7 +3373,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "44c985f780c1b8c5aeefbd0679833841885da7a6ee1b461ee1dbfc68bce45505"
+                "sha256": "44c985f780c1b8c5aeefbd0679833841885da7a6ee1b461ee1dbfc68bce45505",
+                "draft": false
             },
             "v1.0.8": {
                 "date": "09-07-2024",
@@ -3229,7 +3390,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "bc666974033ed0733055ce88567318198fedebabd9eb421ad2b06bdcd698fcae"
+                "sha256": "bc666974033ed0733055ce88567318198fedebabd9eb421ad2b06bdcd698fcae",
+                "draft": false
             },
             "v1.0.9": {
                 "date": "29-07-2024",
@@ -3245,7 +3407,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "af3f7edda708786872b886879d952e9a2421d0afc8192950aadf3d0d6068e51c"
+                "sha256": "af3f7edda708786872b886879d952e9a2421d0afc8192950aadf3d0d6068e51c",
+                "draft": false
             },
             "v1.0.10": {
                 "date": "4-08-2024",
@@ -3261,7 +3424,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "644edbed4a4cb8aa4a27cdb67115314a2bc1bd7e1b7b46428b2c827f4f7cda44"
+                "sha256": "644edbed4a4cb8aa4a27cdb67115314a2bc1bd7e1b7b46428b2c827f4f7cda44",
+                "draft": false
             },
             "v1.0.11": {
                 "date": "11-08-2024",
@@ -3277,7 +3441,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "ab5c35ad5baaab573f40d98389d463d134335951b046d74e08f217cc08561e37"
+                "sha256": "ab5c35ad5baaab573f40d98389d463d134335951b046d74e08f217cc08561e37",
+                "draft": false
             },
             "v1.0.12": {
                 "date": "11-08-2024",
@@ -3293,7 +3458,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "ba0136da95985486027133270a4e9164d03535586a9677af91bf828a3c02efda"
+                "sha256": "ba0136da95985486027133270a4e9164d03535586a9677af91bf828a3c02efda",
+                "draft": false
             },
             "v1.0.13": {
                 "date": "17-09-2024",
@@ -3309,7 +3475,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "cefebe3cba29f765909533e33f53fdaea6cbd16f5fabb3365c75507e6c997553"
+                "sha256": "cefebe3cba29f765909533e33f53fdaea6cbd16f5fabb3365c75507e6c997553",
+                "draft": false
             },
             "v1.0.14": {
                 "date": "4-11-2024",
@@ -3325,7 +3492,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "133062fb706a73deea9799d001ecb037cdb6465669c1f42acccf27d77fb303a1"
+                "sha256": "133062fb706a73deea9799d001ecb037cdb6465669c1f42acccf27d77fb303a1",
+                "draft": false
             }
         }
     },
@@ -3361,7 +3529,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "4a1a007d5c9b7a708d873c381af038cd21ffde416e0fd0fc3799fb153e828972"
+                "sha256": "4a1a007d5c9b7a708d873c381af038cd21ffde416e0fd0fc3799fb153e828972",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "07-05-2024",
@@ -3377,7 +3546,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "74c936849bee2b74f60f3cc59896608699ee6b0ada9078cf14032ce434f0fbd3"
+                "sha256": "74c936849bee2b74f60f3cc59896608699ee6b0ada9078cf14032ce434f0fbd3",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "12-05-2024",
@@ -3393,7 +3563,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "0f798302337f2ec0ebcf36c90bf4c47e288c79ec319693a614143980b3bf9384"
+                "sha256": "0f798302337f2ec0ebcf36c90bf4c47e288c79ec319693a614143980b3bf9384",
+                "draft": false
             },
             "v1.0.3": {
                 "date": "19-05-2024",
@@ -3409,7 +3580,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "f5ad43edfbe5dcda26835e076587009173c227d34f9f267c744c3c26b32de34d"
+                "sha256": "f5ad43edfbe5dcda26835e076587009173c227d34f9f267c744c3c26b32de34d",
+                "draft": false
             },
             "v1.0.4": {
                 "date": "27-05-2024",
@@ -3425,7 +3597,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "99511f2fdd9c1d0870745448539ab9eb68034949831f1685312e9632da3452f7"
+                "sha256": "99511f2fdd9c1d0870745448539ab9eb68034949831f1685312e9632da3452f7",
+                "draft": false
             },
             "v1.0.5": {
                 "date": "27-06-2024",
@@ -3441,7 +3614,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "1c049aefbb5d8baef9da62794b9179c8492599598796f0afe6df27521eff5eb7"
+                "sha256": "1c049aefbb5d8baef9da62794b9179c8492599598796f0afe6df27521eff5eb7",
+                "draft": false
             },
             "v1.0.6": {
                 "date": "08-07-2024",
@@ -3457,7 +3631,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "c2a9a0d7ce689b22de02a58e68a9ab17537bedc005b6573ebf04e167bb7a7862"
+                "sha256": "c2a9a0d7ce689b22de02a58e68a9ab17537bedc005b6573ebf04e167bb7a7862",
+                "draft": false
             },
             "v1.0.7": {
                 "date": "08-07-2024",
@@ -3473,7 +3648,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "d70b6e633d14ea5aa4f5413eb8828de88c5b15b127b435a3902323e0fd7a0446"
+                "sha256": "d70b6e633d14ea5aa4f5413eb8828de88c5b15b127b435a3902323e0fd7a0446",
+                "draft": false
             },
             "v1.0.8": {
                 "date": "08-07-2024",
@@ -3489,7 +3665,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "a2e28b8f48c2238381753b2df7b34808887d26844af5d1bf5d69195ab9486995"
+                "sha256": "a2e28b8f48c2238381753b2df7b34808887d26844af5d1bf5d69195ab9486995",
+                "draft": false
             },
             "v1.0.9": {
                 "date": "17-09-2024",
@@ -3505,7 +3682,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "398f069a8c39a9d07c0171db015daf932c521009584cb81d77a025713ef88a2d"
+                "sha256": "398f069a8c39a9d07c0171db015daf932c521009584cb81d77a025713ef88a2d",
+                "draft": false
             },
             "v1.0.10": {
                 "date": "8-10-2024",
@@ -3521,7 +3699,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "0ae18f31c35424aaa36b9b4d9576fa7cef69543623caa49f291ef2cb912316fe"
+                "sha256": "0ae18f31c35424aaa36b9b4d9576fa7cef69543623caa49f291ef2cb912316fe",
+                "draft": false
             },
             "v1.0.11": {
                 "date": "4-11-2024",
@@ -3537,7 +3716,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "5e5044b5137ae383b21f14228dd51a444f11893406ea40d0f1f48634a99255d2"
+                "sha256": "5e5044b5137ae383b21f14228dd51a444f11893406ea40d0f1f48634a99255d2",
+                "draft": false
             }
         }
     },
@@ -3570,7 +3750,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "b2a30027cad5c2e17ccc2452fdc3ac959e274313025cfc3a46cb8f1fb1f1c168"
+                "sha256": "b2a30027cad5c2e17ccc2452fdc3ac959e274313025cfc3a46cb8f1fb1f1c168",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "09-05-2024",
@@ -3586,7 +3767,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "b2a30027cad5c2e17ccc2452fdc3ac959e274313025cfc3a46cb8f1fb1f1c168"
+                "sha256": "b2a30027cad5c2e17ccc2452fdc3ac959e274313025cfc3a46cb8f1fb1f1c168",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "14-05-2024",
@@ -3602,7 +3784,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "15c47413dd1c199d3c4e2d5355e9e1f3364eca7da19da22eb8cdd39c69ed86da"
+                "sha256": "15c47413dd1c199d3c4e2d5355e9e1f3364eca7da19da22eb8cdd39c69ed86da",
+                "draft": false
             },
             "v1.0.3": {
                 "date": "19-05-2024",
@@ -3618,7 +3801,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "0715c965f03e0f7e58470c52ddfd0561d00c684638ad202ff5539be13eeb38e2"
+                "sha256": "0715c965f03e0f7e58470c52ddfd0561d00c684638ad202ff5539be13eeb38e2",
+                "draft": false
             },
             "v1.0.4": {
                 "date": "20-05-2024",
@@ -3634,7 +3818,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "1f423f62a8ce42822e59533fe979b238a5f7e13d86fb30c108d90d0f0aac7c8f"
+                "sha256": "1f423f62a8ce42822e59533fe979b238a5f7e13d86fb30c108d90d0f0aac7c8f",
+                "draft": false
             },
             "v1.0.5": {
                 "date": "27-06-2024",
@@ -3650,7 +3835,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "95657e8317de38624a47f7c340117f5a434835f0e88ce28ec04e5612c7ce9ade"
+                "sha256": "95657e8317de38624a47f7c340117f5a434835f0e88ce28ec04e5612c7ce9ade",
+                "draft": false
             },
             "v1.0.6": {
                 "date": "08-07-2024",
@@ -3666,7 +3852,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "3a59770344dcb4c6c5db611c4a08093ec2db1796123ab553895ced00d134e772"
+                "sha256": "3a59770344dcb4c6c5db611c4a08093ec2db1796123ab553895ced00d134e772",
+                "draft": false
             },
             "v1.0.7": {
                 "date": "08-07-2024",
@@ -3682,7 +3869,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "83e6e24433ee11a25a68af2ef9a15612f0ce8e4a03c3436d6ddeadf681a83cc7"
+                "sha256": "83e6e24433ee11a25a68af2ef9a15612f0ce8e4a03c3436d6ddeadf681a83cc7",
+                "draft": false
             },
             "v1.0.8": {
                 "date": "09-07-2024",
@@ -3698,7 +3886,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "3bdfc35ba2ec097af687a7136d737bb41de50b114cee5776f1e4b36bffdaf04a"
+                "sha256": "3bdfc35ba2ec097af687a7136d737bb41de50b114cee5776f1e4b36bffdaf04a",
+                "draft": false
             },
             "v1.0.9": {
                 "date": "04-08-2024",
@@ -3714,7 +3903,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "cc6a6cbf0c15dc175a0e1f7eb3cf738c415ccbdadea3df71fcb2208be0b7ae09"
+                "sha256": "cc6a6cbf0c15dc175a0e1f7eb3cf738c415ccbdadea3df71fcb2208be0b7ae09",
+                "draft": false
             },
             "v1.0.10": {
                 "date": "17-09-2024",
@@ -3730,7 +3920,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "62e7b99405c0977a24c72a0bc7d0e653dbfda19dd88a11e2cb48592cf0e33bb8"
+                "sha256": "62e7b99405c0977a24c72a0bc7d0e653dbfda19dd88a11e2cb48592cf0e33bb8",
+                "draft": false
             },
             "v1.0.11": {
                 "date": "4-11-2024",
@@ -3746,7 +3937,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "3f015970ff3b33a71f3382aea8fcc69637d5367eeacd13b7ee31268e9b2e0603"
+                "sha256": "3f015970ff3b33a71f3382aea8fcc69637d5367eeacd13b7ee31268e9b2e0603",
+                "draft": false
             }
         }
     },
@@ -3778,7 +3970,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "0ead93b6dbc18eba9206641d110d6520f0ca25dd3d0804680b01c7a2d84bc386"
+                "sha256": "0ead93b6dbc18eba9206641d110d6520f0ca25dd3d0804680b01c7a2d84bc386",
+                "draft": false
             },
             "v1.1.0": {
                 "date": "22-05-2024",
@@ -3794,7 +3987,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "908558ba89a646eff8da25960ffabfc1c07deec68d4ff7f0ca1bc938dd402d6b"
+                "sha256": "908558ba89a646eff8da25960ffabfc1c07deec68d4ff7f0ca1bc938dd402d6b",
+                "draft": false
             },
             "v1.1.1": {
                 "date": "28-05-2024",
@@ -3810,7 +4004,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "62b4fb4c4eb6710661bf40d1c04d3cafd479637471a680ba912f5f9faca0b371"
+                "sha256": "62b4fb4c4eb6710661bf40d1c04d3cafd479637471a680ba912f5f9faca0b371",
+                "draft": false
             },
             "v1.1.2": {
                 "date": "19-06-2024",
@@ -3826,7 +4021,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "6e7cbc4bcd4a308db87d04f73c05942ffe3a5fbf5ff56a9d7c137e0efb9ecff1"
+                "sha256": "6e7cbc4bcd4a308db87d04f73c05942ffe3a5fbf5ff56a9d7c137e0efb9ecff1",
+                "draft": false
             },
             "v1.2.0": {
                 "date": "24-10-2024",
@@ -3842,7 +4038,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "91f637ebb374982361ff0c0d598188889ce0b7ae8243425d493de32c3184e389"
+                "sha256": "91f637ebb374982361ff0c0d598188889ce0b7ae8243425d493de32c3184e389",
+                "draft": false
             },
             "v1.2.1": {
                 "date": "30-10-2024",
@@ -3858,7 +4055,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "9905888039d9e6bafb426a47f87a23ae73cf4e849ea27c493b3e7a6e3697c0bc"
+                "sha256": "9905888039d9e6bafb426a47f87a23ae73cf4e849ea27c493b3e7a6e3697c0bc",
+                "draft": false
             }
         }
     },
@@ -3891,7 +4089,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "260abb86f6f8fd9648307b36f9b850d7311a4dd2a9c9426bf9080b0494d36404"
+                "sha256": "260abb86f6f8fd9648307b36f9b850d7311a4dd2a9c9426bf9080b0494d36404",
+                "draft": false
             }
         }
     },
@@ -3924,7 +4123,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "c6eb75972157dcea590ff8985071ccf90755d892501933307b3393f201f93d13"
+                "sha256": "c6eb75972157dcea590ff8985071ccf90755d892501933307b3393f201f93d13",
+                "draft": false
             },
             "v1.0.1": {
                 "date": "24-06-2024",
@@ -3940,7 +4140,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "0dbc072495e67a2ea9fb12e9468d248d60d364aeb69a4a6b220dd53d2acf273a"
+                "sha256": "0dbc072495e67a2ea9fb12e9468d248d60d364aeb69a4a6b220dd53d2acf273a",
+                "draft": false
             },
             "v1.0.2": {
                 "date": "24-06-2024",
@@ -3956,7 +4157,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "63e62f853dacd81cb841e57b9ebce4709dc817cf26c422c7c19c7315aaf4db06"
+                "sha256": "63e62f853dacd81cb841e57b9ebce4709dc817cf26c422c7c19c7315aaf4db06",
+                "draft": false
             },
             "v1.0.3": {
                 "date": "21-08-2024",
@@ -3972,7 +4174,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "44612b3f8ed4ccce45cbef7605ff43c49511ae6d787bd54a7183f1e34eb0e0ec"
+                "sha256": "44612b3f8ed4ccce45cbef7605ff43c49511ae6d787bd54a7183f1e34eb0e0ec",
+                "draft": false
             },
             "v1.0.4": {
                 "date": "1-09-2024",
@@ -3988,7 +4191,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "fbd9c91baf284ca7ae9a6a3da3a38f40f8001ebd5bd00539aff8637c98d9db66"
+                "sha256": "fbd9c91baf284ca7ae9a6a3da3a38f40f8001ebd5bd00539aff8637c98d9db66",
+                "draft": false
             }
         }
     },
@@ -4020,7 +4224,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "65001f81511dd7d7a51ae2d4d7648632ff1c8d3c5e848022cb0dee05f2a7be21"
+                "sha256": "65001f81511dd7d7a51ae2d4d7648632ff1c8d3c5e848022cb0dee05f2a7be21",
+                "draft": false
             }
         }
     },
@@ -4052,7 +4257,8 @@
                     "3.3",
                     "1.8"
                 ],
-                "sha256": "c37aa1bf6f8a5e1965227a1ac84292070838bdf117feab321a6113445ae2bed8"
+                "sha256": "c37aa1bf6f8a5e1965227a1ac84292070838bdf117feab321a6113445ae2bed8",
+                "draft": false
             }
         }
     },
@@ -4084,7 +4290,8 @@
                     "3.3",
                     "1.8"
                 ],
-                "sha256": "089fb983e1f42ed95ce9f3592b3a5252f046c31cd0b8346590e13598c2fc2d6d"
+                "sha256": "089fb983e1f42ed95ce9f3592b3a5252f046c31cd0b8346590e13598c2fc2d6d",
+                "draft": false
             }
         }
     }
