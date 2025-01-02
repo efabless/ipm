@@ -1887,6 +1887,22 @@
                     "n/a"
                 ],
                 "sha256": "756ab2834af173ba3132b80c25f58e69de76b17f5412aeb1eeb8a2439bf51022"
+            },
+            "v1.0.6": {
+                "date": "2-1-2025",
+                "maturity": "Integrated",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "200",
+                "clock_freq_mhz": "100",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "f2b319f407c5e8f2ffa2aabc56f37cf97d0fc5726fa3c7d3a80f59f72b9522d5"
             }
         }
     },
