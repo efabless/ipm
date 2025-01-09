@@ -4103,5 +4103,33 @@
                 "sha256": "089fb983e1f42ed95ce9f3592b3a5252f046c31cd0b8346590e13598c2fc2d6d"
             }
         }
+    },
+    "EF_IP_UTIL": {
+        "description": "A set of utilities that can be used to develop digital IPs in Verilog HDL",
+        "repo": "github.com/efabless/EF_IP_UTIL",
+        "author": "Mohamed Shalan",
+        "email": "mshalan@efabless.com",
+        "owner": "Efabless Corp.",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "Apache 2.0",
+        "tags": [
+            "fifo",
+            "clock mux"
+        ],
+        "release": {
+            "v1.0.0": {
+                "date": "2025-1-9",
+                "bus": [
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "18d85e5ec07882261c9ec43730b0c4829db5069b624b2a18ce0d4a5eeed61b5e"
+            }
+        }
     }
 }
