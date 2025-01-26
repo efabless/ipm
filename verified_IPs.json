@@ -3924,6 +3924,22 @@
                     "n/a"
                 ],
                 "sha256": "260abb86f6f8fd9648307b36f9b850d7311a4dd2a9c9426bf9080b0494d36404"
+            },
+            "v1.1.0": {
+                "date": "2025-01-23",
+                "maturity": "verified",
+                "bus": [
+                "AHBL"
+                ],
+                "type": "soft",
+                "width": "",
+                "height": "",
+                "cell_count": "N/A",
+                "clock_freq_mhz": "N/A",
+                "supply_voltage": [
+                "n/a"
+                ],
+                "sha256": "58a7943b6ee4dc2080c3531f8603b1f9c49bed54ef9969fd0fbe500d7e770551"
             }
         }
     },
