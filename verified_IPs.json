@@ -2,8 +2,8 @@
     "IP_Utilities": {
         "description": "A set of utilities that can be used to develop digital IPs in Verilog HDL",
         "repo": "github.com/efabless/IP_Utilities",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "owner": "Efabless Corp.",
         "category": "digital",
         "technology": "n/a",
@@ -30,8 +30,8 @@
     "EF_PSRAM_CTRL": {
         "description": "A Controller for Quad I/O SPI PSRAM",
         "repo": "github.com/efabless/EF_PSRAM_CTRL",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "owner": "Efabless Corp.",
         "category": "digital",
         "technology": "n/a",
@@ -63,8 +63,8 @@
     "EF_PSRAM_CTRL_V2": {
         "description": "A Controller for Quad I/O SPI PSRAM",
         "repo": "github.com/efabless/EF_PSRAM_CTRL_V2",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "owner": "Efabless Corp.",
         "category": "digital",
         "technology": "n/a",
@@ -227,8 +227,8 @@
     "EF_UART": {
         "description": "UART with a programmable baud rate generator and RX/TX FIFOs",
         "repo": "github.com/efabless/EF_UART",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "owner": "Efabless Corp.",
         "category": "digital",
         "technology": "n/a",
@@ -419,8 +419,8 @@
     "EF_PWM32": {
         "description": "A 32-bit dual channel PWM generator with a clock divider.",
         "repo": "github.com/efabless/EF_PWM32",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "owner": "Efabless Corp.",
         "category": "digital",
         "technology": "n/a",
@@ -452,8 +452,8 @@
     "EF_TCC32": {
         "description": "A 32-bit Timer/Counter/Capture peripheral.",
         "repo": "github.com/efabless/EF_TCC32",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "owner": "Efabless Corp.",
         "category": "digital",
         "technology": "n/a",
@@ -502,9 +502,9 @@
     "MS_CLK_RST": {
         "description": "All digital Clock and Reset Manager.",
         "repo": "github.com/efabless/MS_CLK_RST",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
-        "owner": "Mohamed Shalan",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
+        "owner": "Efabless Corp.",
         "category": "digital",
         "technology": "sky130A",
         "license": "APACHE 2.0",
@@ -552,8 +552,8 @@
     "EF_GPIO8": {
         "description": "A generic GPIO peripheral.",
         "repo": "github.com/efabless/EF_GPIO8",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "owner": "Efabless Corp.",
         "category": "digital",
         "technology": "n/a",
@@ -754,14 +754,30 @@
                     "n/a"
                 ],
                 "sha256": "ce99f2ff3dc6ab0f65188eb7439c8126bfa80d5697732cd08d1e39d7fdd3fb27"
+            },
+            "v1.1.0": {
+                "date": "23-01-2024",
+                "maturity": "Integrated",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "72",
+                "clock_freq_mhz": "1666",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "b4e6edc163cec7f7cf29490cffbbda31fe98d1a00b49887cee63a6cb9f79990a"
             }
         }
     },
     "EF_GPIO": {
         "description": "A generic GPIO peripheral.",
         "repo": "github.com/efabless/EF_GPIO",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "owner": "Efabless Corp.",
         "category": "digital",
         "technology": "n/a",
@@ -808,9 +824,9 @@
     "MS_SPI_XIP_CACHE": {
         "description": "AHB-Lite SPI Flash memory controller with direct mapped cache and support for XiP.",
         "repo": "github.com/efabless/MS_SPI_XIP_CACHE",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
-        "owner": "Mohamed Shalan",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
+        "owner": "Efabless Corp.",
         "category": "digital",
         "technology": "n/a",
         "license": "APACHE 2.0",
@@ -843,9 +859,9 @@
     "MS_DMAC_AHBL": {
         "description": "Direct Memory Access Controller (DMAC) with AHB-lite bus interface.",
         "repo": "github.com/efabless/MS_DMAC_AHBL",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
-        "owner": "Mohamed Shalan",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
+        "owner": "Efabless Corp.",
         "category": "digital",
         "technology": "n/a",
         "license": "APACHE 2.0",
@@ -1015,6 +1031,39 @@
             }
         }
     },
+    "EF_AES": {
+        "description": "Verilog implementation of the symmetric block cipher AES (Advanced Encryption Standard) as specified in NIST FIPS 197. This implementation supports 128 and 256 bit keys.",
+        "repo": "github.com/efabless/EF_AES",
+        "author": "Joachim Strombergson",
+        "email": "",
+        "owner": "secworks",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "MIT",
+        "tags": [
+            "accelerator",
+            "AES",
+            "security"
+        ],
+        "release": {
+            "v1.1.0": {
+                "date": "23-01-2025",
+                "maturity": "Integrated",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "0",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "32846c7cccc1ca3c4e59792a2d1cb14078ca9b44ef27a8d9afa4eb23cfa2fe4e"
+            }
+        }
+    },
     "SW_AES": {
         "description": "Verilog implementation of the symmetric block cipher AES (Advanced Encryption Standard) as specified in NIST FIPS 197. This implementation supports 128 and 256 bit keys.",
         "repo": "github.com/efabless/SW_AES",
@@ -1077,6 +1126,39 @@
                     "n/a"
                 ],
                 "sha256": "57770d6b90b6e1298ba8569f84d8ace762e360fd06d6bbedccf2a76879a56646"
+            }
+        }
+    },
+    "EF_SHA256": {
+        "description": "Hardware implementation of the SHA-256 cryptographic hash function.",
+        "repo": "github.com/efabless/EF_SHA256",
+        "author": "Joachim Strombergson",
+        "email": "",
+        "owner": "secworks",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "MIT",
+        "tags": [
+            "accelerator",
+            "SHA256",
+            "security"
+        ],
+        "release": {
+            "v1.1.0": {
+                "date": "23-01-2025",
+                "maturity": "Integrated",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "0",
+                "clock_freq_mhz": "40",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "6b0f58460193efc5e6f3b98873b07917d8f3086d17c10b4db72621d13aa64917"
             }
         }
     },
@@ -1149,8 +1231,8 @@
     "EF_ACMP_DI": {
         "description": "A digital interface for the EF_R2RVC02 analog comparator",
         "repo": "github.com/efabless/EF_ACMP_DI",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "owner": "Efabless Corp.",
         "category": "ams",
         "technology": "n/a",
@@ -1266,8 +1348,8 @@
     "EF_Q7_UNIT": {
         "description": "Accelerators for NNoM framework.",
         "repo": "github.com/efabless/EF_Q7_UNIT",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "owner": "Efabless Corp.",
         "category": "digital",
         "technology": "n/a",
@@ -1346,8 +1428,8 @@
     "EF_ADCS1008A": {
         "description": "A digital controller for 8 Channel 10-bit SAR ADC.",
         "repo": "github.com/efabless/EF_ADC1008A",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "owner": "Efabless Corp.",
         "category": "ams",
         "technology": "n/a",
@@ -1426,8 +1508,8 @@
     "DFFRAM128x32": {
         "description": "512 bytes (128x32) DFFRAM hardened using OpenLane",
         "repo": "github.com/efabless/OL-DFFRAM",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "owner": "AUCOHL",
         "category": "digital",
         "technology": "sky130",
@@ -1475,8 +1557,8 @@
     "DFFRAM256x32": {
         "description": "1kbyte (256x32) DFFRAM hardened using OpenLane",
         "repo": "github.com/efabless/OL-DFFRAM",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "owner": "AUCOHL",
         "category": "digital",
         "technology": "sky130",
@@ -1540,8 +1622,8 @@
     "DFFRAM512x32": {
         "description": "2kbyte (512x32) DFFRAM hardened using OpenLane",
         "repo": "github.com/efabless/OL-DFFRAM",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "owner": "AUCOHL",
         "category": "digital",
         "technology": "sky130",
@@ -1589,8 +1671,8 @@
     "EF_PIN_MUX": {
         "description": "Pin Multiplexing Fabric; 32 pins x four functions per pin.",
         "repo": "github.com/efabless/EF_PIN_MUX",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "owner": "Efabless Corp.",
         "category": "digital",
         "technology": "n/a",
@@ -1793,12 +1875,45 @@
             }
         }
     },
+    "EF_WDT32": {
+        "description": "A 32-bit Watchdog Timer",
+        "repo": "github.com/efabless/EF_WDT32",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
+        "owner": "Efabless Corp.",
+        "category": "digital",
+        "technology": "n/a",
+        "license": "APACHE 2.0",
+        "tags": [
+            "peripheral",
+            "timer",
+            "wdt"
+        ],
+        "release": {
+            "v1.1.0": {
+                "date": "23-01-2025",
+                "maturity": "Implemented",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "200",
+                "clock_freq_mhz": "100",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "dd538d26ac4284a907955e96b76e72427453c4e18802d3f41514ff6b0177f9a5"
+            }
+        }
+    },
     "MS_WDT32": {
         "description": "A 32-bit Watchdog Timer",
         "repo": "github.com/efabless/MS_WDT32",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
-        "owner": "Mohamed Shalan",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
+        "owner": "Efabless Corp.",
         "category": "digital",
         "technology": "n/a",
         "license": "APACHE 2.0",
@@ -1925,9 +2040,9 @@
     "rosc_sky130": {
         "description": "A standard cell based ring oscillator with enable and trim.",
         "repo": "github.com/efabless/rosc_sky130",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
-        "owner": "Mohamed Shalan",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
+        "owner": "Efabless Corp.",
         "category": "digital",
         "technology": "sky130",
         "license": "APACHE 2.0",
@@ -2639,8 +2754,8 @@
         "description": "I2S receiver with a FIFO",
         "repo": "github.com/efabless/EF_I2S",
         "owner": "Efabless Corp.",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "category": "digital",
         "technology": "n/a",
         "license": "APACHE 2.0",
@@ -2969,6 +3084,22 @@
                     "n/a"
                 ],
                 "sha256": "e8909c59e0c8add4d18bfa69ea95c5041085775bb8a08a76150d830203ce8e86"
+            },
+            "v1.2.0": {
+                "date": "23-01-2025",
+                "maturity": "Integrated",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0",
+                "height": "0",
+                "cell_count": "2661",
+                "clock_freq_mhz": "10",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "cbf36ed323c5eba5f4daceebbe5f5ab5bfe5e52fa4c3d3c6c4a9327a55822746"
             }
         }
     },
@@ -3009,8 +3140,8 @@
     "usb_cdc_wrapper": {
         "description": "Bus wrapper for usb cdc which utilizes fifo",
         "repo": "github.com/efabless/usb_cdc_wrapper",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "owner": "Efabless Corp.",
         "category": "digital",
         "technology": "n/a",
@@ -3123,8 +3254,8 @@
     "EF_I2C": {
         "description": "I2C master controller with an APB interface",
         "repo": "github.com/efabless/EF_I2C",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "owner": "Efabless Corp",
         "category": "digital",
         "technology": "n/a",
@@ -3358,14 +3489,30 @@
                     "n/a"
                 ],
                 "sha256": "133062fb706a73deea9799d001ecb037cdb6465669c1f42acccf27d77fb303a1"
+            },
+            "v1.1.0": {
+                "date": "23-01-2025",
+                "maturity": "Integrated",
+                "bus": [
+                    "APB"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "0",
+                "clock_freq_mhz": "n/a",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "7e6a2e3effd1459c5332d94408352e3d34e71e54ea07f715201c889cb309f078"
             }
         }
     },
     "EF_TMR32": {
         "description": "A 32-bit timer and PWM generator",
         "repo": "github.com/efabless/EF_TMR32",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "owner": "Efabless Corp",
         "category": "digital",
         "technology": "n/a",
@@ -3570,14 +3717,30 @@
                     "n/a"
                 ],
                 "sha256": "5e5044b5137ae383b21f14228dd51a444f11893406ea40d0f1f48634a99255d2"
+            },
+            "v1.1.0": {
+                "date": "23-01-2025",
+                "maturity": "Integrated",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "797",
+                "clock_freq_mhz": "163",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "3372c8b613c50a29f9dd68267578fd24a205ce233a64dded9e6d6b0c08c16f88"
             }
         }
     },
     "EF_SPI": {
         "description": "SPI master controller with receive and transmit FIFOs.",
         "repo": "github.com/efabless/EF_SPI",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "owner": "Efabless Corp",
         "category": "digital",
         "technology": "n/a",
@@ -3779,6 +3942,22 @@
                     "n/a"
                 ],
                 "sha256": "3f015970ff3b33a71f3382aea8fcc69637d5367eeacd13b7ee31268e9b2e0603"
+            },
+            "v1.1.0": {
+                "date": "23-01-2025",
+                "maturity": "Integrated",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "0",
+                "clock_freq_mhz": "0",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "87b0f284b7b78b1bf3daefe1abc13f21825479e9b0aa13689fe5f565ddf2f3c0"
             }
         }
     },
@@ -3897,8 +4076,8 @@
     "EF_QSPI_FLASH_WRITER": {
         "description": "A Quad SPI Flash Writer used to program flash. It can be used along with flash controller to program the flash then read from it.",
         "repo": "github.com/efabless/EF_QSPI_FLASH_WRITER",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "owner": "Efabless Corp",
         "category": "digital",
         "technology": "n/a",
@@ -3946,8 +4125,8 @@
     "EF_QSPI_XIP_CTRL": {
         "description": "A QSPI XiP Flash COntroller with a parameterized Direct-Mapped Cache.",
         "repo": "github.com/efabless/EF_QSPI_XIP_CTRL",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "owner": "Efabless Corp",
         "category": "digital",
         "technology": "n/a",
@@ -4037,6 +4216,22 @@
                     "n/a"
                 ],
                 "sha256": "fbd9c91baf284ca7ae9a6a3da3a38f40f8001ebd5bd00539aff8637c98d9db66"
+            },
+            "v1.1.0": {
+                "date": "23-01-2025",
+                "maturity": "Integrated",
+                "bus": [
+                    "generic"
+                ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "0",
+                "clock_freq_mhz": "0",
+                "supply_voltage": [
+                    "n/a"
+                ],
+                "sha256": "b574708a588156c28d46ada367745aa7ff42108259e69ccf9fffc0d492ec21fa"
             }
         }
     },
@@ -4139,8 +4334,8 @@
     "EF_IP_UTIL": {
         "description": "A set of utilities that can be used to develop digital IPs in Verilog HDL",
         "repo": "github.com/efabless/EF_IP_UTIL",
-        "author": "Mohamed Shalan",
-        "email": "mshalan@efabless.com",
+        "author": "Efabless Corp.",
+        "email": "ip_admin@efabless.com",
         "owner": "Efabless Corp.",
         "category": "digital",
         "technology": "n/a",
