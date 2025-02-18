@@ -3121,7 +3121,7 @@
     },
     "usb_cdc": {
         "description": "An implementation of the Full Speed (12Mbit/s) USB communications device class",
-        "repo": "github.com/efabless/EF_IPs",
+        "repo": "github.com/efabless/usb_cdc",
         "author": "ulixxe",
         "email": "",
         "owner": "ulixxe",
