@@ -335,7 +335,7 @@ class IPRoot:
                 json_decoded = json.load(json_file)
         return json_decoded
 
-    def try_add(self, ip: "IP"):
+    def try_add(self, ip: "IP", include_drafts=False, local_file=None):
         """
         Attempts to add the IP ``ip`` to this IP root, by adding it to the
         dependencies object and calling :meth:`update_paths`\\.
@@ -371,7 +371,7 @@ class IPRoot:
 
         try:
             logger.print_info("* Updating IP root…")
-            self.update_paths(dependencies_object)
+            self.update_paths(dependencies_object, include_drafts, local_file)
         except Exception as e:
             logger.print_err("* An exception occurred, attempting to roll back…")
             try:
@@ -384,7 +384,7 @@ class IPRoot:
             json.dump(dependencies_object, json_file)
         logger.print_success(f"* Added {ip.full_name} to {self.dependencies_path}.")
 
-    def try_remove(self, ip: "IP"):
+    def try_remove(self, ip: "IP", include_drafts=False, local_file=None):
         """
         Attempts to add the IP ``ip`` to this IP root, by adding it to the
         dependencies object and calling :meth:`update_paths`\\.
@@ -414,7 +414,7 @@ class IPRoot:
 
         try:
             logger.print_info("* Updating IP root…")
-            self.update_paths(dependencies_object)
+            self.update_paths(dependencies_object, include_drafts, local_file)
         except Exception as e:
             logger.print_err("* An exception occurred, attempting to roll back…")
             try:
@@ -443,6 +443,8 @@ class IPRoot:
     def update_paths(
         self,
         dependency_dict: Optional[dict] = None,
+        include_drafts=False,
+        local_file=None
     ):
         """
         Updates the paths of this IP root based on the dependency object, i.e.,
@@ -461,6 +463,8 @@ class IPRoot:
         deps = self._resolve_dependencies(
             self.dependencies_path,
             dependency_dict,
+            include_drafts=include_drafts,
+            local_file=local_file
         )
         deps_by_name = {ip.ip_name: ip for ip in deps}
         for element, path in self._get_symlinked_ips():
@@ -493,6 +497,8 @@ class IPRoot:
         self,
         requester: str,
         dependency_dict: dict,
+        include_drafts=False,
+        local_file=None
     ):
         logger = Logger()
         so_far: Dict[str, Tuple["IP", str]] = {}
@@ -525,7 +531,7 @@ class IPRoot:
                             logger.print_info(f"{indent(depth+1)}* Already fetched.")
                     else:
                         dependency = IP.find_verified_ip(
-                            dep_name, dep_version, self.ipm_root, self.path
+                            dep_name, dep_version, self.ipm_root, self.path, include_drafts, local_file
                         )
                         self._install_ip(dependency, depth + 1)
                         so_far[dep_name] = (dependency, requester)
@@ -701,7 +707,6 @@ class IP:
         for ips in ip_list:
             for key, value in ips.items():
                 version_list = []
-                table_list = []
                 if not local:
                     if not version:
                         version_list.append(get_latest_version(value["release"]))
@@ -711,6 +716,7 @@ class IP:
                 else:
                     version_list.append(value["info"]["version"])
                 for versions in version_list:
+                    table_list = []
                     if not local:
                         data_dict = {
                             "IP Name": key,
@@ -1173,7 +1179,7 @@ def rm_ip_from_project(ip_name, ip_root, ipm_root):
         exit(-1)
 
 
-def install_using_dep_file(ip_root, ipm_root):
+def install_using_dep_file(ip_root, ipm_root, include_drafts=False, local_file=None):
     """install the ip from the dependencies file, assuming the dependencies file is under ip_root
 
     Args:
@@ -1186,7 +1192,7 @@ def install_using_dep_file(ip_root, ipm_root):
 
     try:
         if os.path.exists(root.dependencies_path):
-            root.update_paths()
+            root.update_paths(include_drafts=include_drafts, local_file=local_file)
         else:
             raise RuntimeError(f"{root.dependencies_path} not found.")
     except RuntimeError as e:
@@ -1263,7 +1269,7 @@ def list_verified_ips(category=None, technology=None):
             if "/design_catalog/ip_block/" in href:
                 text = link.text
                 if "View Details" not in text and "\n\n" not in text:
-                    platform_ips.append(text)
+                    platform_ips.append(text.upper())
 
     for ip_name, ip_data in verified_ips.items():
         if ip_name.upper() in platform_ips:
@@ -1314,7 +1320,7 @@ def list_installed_ips(ip_root):
     IP.create_table(ip_data, local=True, extended=True)
 
 
-def update_ips(ipm_root, ip_root=None, ip_to_update=None):
+def update_ips(ipm_root, ip_root=None, ip_to_update=None, include_drafts=False, local_file=None):
     """checks if the ips installed have newer versions
 
     Args:
@@ -1343,13 +1349,13 @@ def update_ips(ipm_root, ip_root=None, ip_to_update=None):
             for ip_name, ip_version in ips.items():
                 if ip_to_update and ip_name != ip_to_update:
                     continue  # Skip IPs that do not match the update_ip argument
-                verified_ip_info = IPInfo.get_verified_ip_info(ip_name)
+                verified_ip_info = IPInfo.get_verified_ip_info(ip_name, include_drafts, local_file)
                 version = get_latest_version(verified_ip_info["release"])
                 if version not in ip_version:
                     logger.print_info(
                         f"Updating IP {ip_name} to [magenta]{version}[/magenta]…"
                     )
-                    ip = IP.find_verified_ip(ip_name, version, ipm_root, ip_root)
+                    ip = IP.find_verified_ip(ip_name, version, ipm_root, ip_root, include_drafts, local_file)
                     root.try_add(ip)
                 else:
                     logger.print_info(
