@@ -450,7 +450,7 @@
                 "supply_voltage": [
                 "n/a"
                 ],
-                "draft": true,
+                "draft": false,
                 "sha256": "7ad01219548c1b0ca70cd83d023f81e9d3cfd4e43ca4c219e3672bc7939f56d8"
             }
         }
