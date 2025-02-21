@@ -33,7 +33,9 @@ from .common import (
 
 @click.command("install")
 @click.argument("ip")
-@click.option("--version", required=False, help="Install IP with a specific version")
+@click.option("--version", required=False, help="Install a specific version")
+@click.option("--include-drafts", is_flag=True, help="Allow installing draft versions")
+@click.option("--local-file", required=False, help="Path to local verified_IPs.json")
 @click.option(
     "--ip-root",
     required=False,
@@ -41,51 +43,61 @@ from .common import (
     help="IP installation path",
 )
 @opt_ipm_root
-def install_cmd(ip, ip_root, ipm_root, version=None):
-    """Install one of the verified IPs locally"""
-    install(ip, ipm_root, version=version, ip_root=ip_root)
+def install_cmd(ip, ip_root, ipm_root=None, version=None, include_drafts=False, local_file=None):
+    """Install one of the verified IPs locally."""
+    install(ip, ipm_root, version=version, ip_root=ip_root, include_drafts=include_drafts, local_file=local_file)
 
 
 def install(
     ip,
-    ipm_root,
+    ipm_root=None,
     version=None,
     ip_root=None,
+    include_drafts=False,
+    local_file=None,
 ):
     """Install one of the verified IPs locally"""
-    valid = check_ipm_directory(ipm_root)
+    # valid = check_ipm_directory(ipm_root)
     valid_ip_dir = check_ip_root_dir(ip_root)
-    if valid and valid_ip_dir:
-        install_ip(ipm_root=ipm_root, ip_name=ip, ip_root=ip_root, version=version)
+    if valid_ip_dir:
+        install_ip(ipm_root=ipm_root, ip_name=ip, ip_root=ip_root, version=version, include_drafts=include_drafts, local_file=local_file)
 
 
 @click.command("uninstall")
 @click.argument("ip")
-@click.option("--version", required=False, help="Install IP with a specific version")
 @click.option(
-    "-f",
-    "--force",
-    is_flag=True,
-    # Translation of the line below: "if (!value) { ctx.abort() }"
-    callback=lambda ctx, _, value: value or ctx.abort(),
-    expose_value=False,
-    prompt="Uninstalling this IP may break all projects depending on it.\nIf you want to remove it from just one project, try 'ipm rm'.\nProceed?",
+    "--ip-root",
+    required=False,
+    default=os.path.join(os.getcwd(), "ip"),
+    help="IP installation path",
 )
+@click.option("--version", required=False, help="Install IP with a specific version")
+# @click.option(
+#     "-f",
+#     "--force",
+#     is_flag=True,
+#     # Translation of the line below: "if (!value) { ctx.abort() }"
+#     callback=lambda ctx, _, value: value or ctx.abort(),
+#     expose_value=False,
+#     prompt="Uninstalling this IP may break all projects depending on it.\nIf you want to remove it from just one project, try 'ipm rm'.\nProceed?",
+# )
 @opt_ipm_root
-def uninstall_cmd(ip, ipm_root, version=None):
+def uninstall_cmd(ip, ipm_root, ip_root, version=None):
     """Uninstall local IP"""
-    uninstall(ip, ipm_root, version=version)
+    uninstall(ip, ipm_root, ip_root, version=version)
 
 
 def uninstall(
     ip,
     ipm_root,
+    ip_root,
     version=None,
 ):
     """Uninstall local IP"""
-    valid = check_ipm_directory(ipm_root)
-    if valid:
-        uninstall_ip(ipm_root=ipm_root, ip_name=ip, version=version)
+    # valid = check_ipm_directory(ipm_root)
+    valid_ip_dir = check_ip_root_dir(ip_root)
+    if valid_ip_dir:
+        uninstall_ip(ipm_root=ipm_root, ip_name=ip, ip_root=ip_root, version=version)
 
 
 @click.command("ls-remote")
@@ -121,39 +133,45 @@ def info(ip):
     list_ip_info(ip)
 
 
-@click.command("ls")
-@opt_ipm_root
-def ls_cmd(ipm_root):
+@click.command("ls", hidden=True)
+# @opt_ipm_root
+@click.option(
+    "--ip-root", required=False, default=os.path.join(os.getcwd(), "ip"), help="IP path"
+)
+def ls_cmd(ip_root):
     """Lists all locally installed IPs"""
-    ls(ipm_root)
+    ls(ip_root)
 
 
-def ls(ipm_root):
+def ls(ip_root):
     """Lists all locally installed IPs"""
-    valid = check_ipm_directory(ipm_root)
-    if valid:
-        list_installed_ips(ipm_root)
+    # valid = check_ipm_directory(ipm_root)
+    valid_ip_dir = check_ip_root_dir(ip_root)
+    if valid_ip_dir:
+        list_installed_ips(ip_root)
 
 
 @click.command("install-dep")
 @click.option(
     "--ip-root", required=False, default=os.path.join(os.getcwd(), "ip"), help="IP path"
 )
+@click.option("--include-drafts", is_flag=True, help="Allow installing draft versions")
+@click.option("--local-file", required=False, help="Path to local verified_IPs.json")
 @opt_ipm_root
-def install_deps_cmd(ip_root, ipm_root):
+def install_deps_cmd(ip_root, ipm_root, include_drafts=False, local_file=None):
     """Install verified IPs from dependencies json file"""
-    install_deps(ip_root, ipm_root)
+    install_deps(ip_root, ipm_root, include_drafts, local_file)
 
 
-def install_deps(ip_root, ipm_root):
+def install_deps(ip_root, ipm_root, include_drafts=False, local_file=None):
     """Install verified IPs from dependencies json file"""
-    valid = check_ipm_directory(ipm_root)
+    # valid = check_ipm_directory(ipm_root)
     valid_ip_dir = check_ip_root_dir(ip_root)
-    if valid and valid_ip_dir:
-        install_using_dep_file(ip_root, ipm_root)
+    if valid_ip_dir:
+        install_using_dep_file(ip_root, ipm_root, include_drafts, local_file)
 
 
-@click.command("rm")
+@click.command("rm", hidden=True)
 @opt_ipm_root
 @click.argument("ip")
 @click.option(
@@ -187,17 +205,19 @@ def rm(ip_root, ip, ipm_root):
 @click.option(
     "--ip-root", required=False, default=os.path.join(os.getcwd(), "ip"), help="IP path"
 )
-def update_cmd(ipm_root, ip_root, ip):
+@click.option("--include-drafts", is_flag=True, help="Allow installing draft versions")
+@click.option("--local-file", required=False, help="Path to local verified_IPs.json")
+def update_cmd(ipm_root, ip_root, ip, include_drafts=False, local_file=None):
     """Check for new versions of all installed IPs in project or a specific IP."""
-    update(ipm_root, ip_root, ip)
+    update(ipm_root, ip_root, ip, include_drafts, local_file)
 
 
-def update(ipm_root, ip_root, ip):
+def update(ipm_root, ip_root, ip, include_drafts=False, local_file=None):
     """Check for new versions of all installed IPs in project or a specific IP."""
-    valid = check_ipm_directory(ipm_root)
+    # valid = check_ipm_directory(ipm_root)
     valid_ip_dir = check_ip_root_dir(ip_root)
-    if valid and valid_ip_dir:
-        update_ips(ipm_root, ip_root=ip_root, ip_to_update=ip)
+    if valid_ip_dir:
+        update_ips(ipm_root, ip_root=ip_root, ip_to_update=ip, include_drafts=include_drafts, local_file=local_file)
 
 
 @click.command("check-ip", hidden=True)
