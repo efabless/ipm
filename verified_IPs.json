@@ -420,38 +420,38 @@
                 "draft": false
             },
             "v1.2.0": {
-            "date": "2025-01-23",
-            "maturity": "verified",
-            "bus": [
-                "generic"
+                "date": "2025-01-23",
+                "maturity": "verified",
+                "bus": [
+                    "generic"
+                    ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "1590",
+                "clock_freq_mhz": "277",
+                "supply_voltage": [
+                "n/a"
                 ],
-            "type": "soft",
-            "width": "0.0",
-            "height": "0.0",
-            "cell_count": "1590",
-            "clock_freq_mhz": "277",
-            "supply_voltage": [
-            "n/a"
-            ],
-            "sha256": "5aa0372ffd22f5367ab4bc8be1095f5797af725eae147724390811ecdfc65a85",
-            "draft": false
+                "sha256": "5aa0372ffd22f5367ab4bc8be1095f5797af725eae147724390811ecdfc65a85",
+                "draft": false
             },
             "v1.3.0": {
-            "date": "09-02-2025",
-            "maturity": "verified",
-            "bus": [
-                "generic"
+                "date": "09-02-2025",
+                "maturity": "verified",
+                "bus": [
+                    "generic"
+                    ],
+                "type": "soft",
+                "width": "0.0",
+                "height": "0.0",
+                "cell_count": "1590",
+                "clock_freq_mhz": "277",
+                "supply_voltage": [
+                "n/a"
                 ],
-            "type": "soft",
-            "width": "0.0",
-            "height": "0.0",
-            "cell_count": "1590",
-            "clock_freq_mhz": "277",
-            "supply_voltage": [
-            "n/a"
-            ],
-            "sha256": "7ad01219548c1b0ca70cd83d023f81e9d3cfd4e43ca4c219e3672bc7939f56d8"
-            "draft": false
+                "sha256": "7ad01219548c1b0ca70cd83d023f81e9d3cfd4e43ca4c219e3672bc7939f56d8",
+                "draft": false
             }
         }
     },
@@ -1130,7 +1130,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "32846c7cccc1ca3c4e59792a2d1cb14078ca9b44ef27a8d9afa4eb23cfa2fe4e"
+                "sha256": "32846c7cccc1ca3c4e59792a2d1cb14078ca9b44ef27a8d9afa4eb23cfa2fe4e",
+                "draft": false
             }
         }
     },
@@ -1231,7 +1232,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "6b0f58460193efc5e6f3b98873b07917d8f3086d17c10b4db72621d13aa64917"
+                "sha256": "6b0f58460193efc5e6f3b98873b07917d8f3086d17c10b4db72621d13aa64917",
+                "draft": false
             }
         }
     },
@@ -2012,7 +2014,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "d3579be976cd462d7edddff9a196dac78f11a675367f55fd581f9d040fc90672"
+                "sha256": "d3579be976cd462d7edddff9a196dac78f11a675367f55fd581f9d040fc90672",
+                "draft": false
             }
         }
     },
@@ -2130,7 +2133,8 @@
                 "supply_voltage": [
                     "n/a"
                 ],
-                "sha256": "756ab2834af173ba3132b80c25f58e69de76b17f5412aeb1eeb8a2439bf51022"
+                "sha256": "756ab2834af173ba3132b80c25f58e69de76b17f5412aeb1eeb8a2439bf51022",
+                "draft": false
             },
             "v1.0.6": {
                 "date": "2-1-2025",
